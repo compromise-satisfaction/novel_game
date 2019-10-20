@@ -16,22 +16,22 @@ function Load(width,height){
       scene.addChild(Title);
 
       var Beginning = new Label();
-      Beginning.font  = "200px monospace";
+      Beginning.font  = "60px monospace";
       Beginning.color = 'black';
       Beginning.x = 0;
-      Beginning.y = 900;
+      Beginning.y = 960;
       Beginning.width = 1600;
-      Beginning.height = 200;
+      Beginning.height = 60;
       Beginning.text = ("▶ 最初から");
       scene.addChild(Beginning);
 
       var Continuation = new Label();
-      Continuation.font  = "200px monospace";
+      Continuation.font  = "60px monospace";
       Continuation.color = 'black';
       Continuation.x = 0;
-      Continuation.y = 1100;
+      Continuation.y = 1040;
       Continuation.width = 1600;
-      Continuation.height = 200;
+      Continuation.height = 60;
       Continuation.text = ("▶ 続きから");
       scene.addChild(Continuation);
 
@@ -102,7 +102,7 @@ function Load(width,height){
       Enter.color = 'black';
       Enter.x = width-180;
       Enter.y = height-65;
-      Enter.width = 180;
+      Enter.width = 1600;
       Enter.height = 60;
       Enter.text = ("進む ▶");
       scene.addChild(Enter);
@@ -112,7 +112,7 @@ function Load(width,height){
       Return.color = 'black';
       Return.x = 0;
       Return.y = height-65;
-      Return.width = 180;
+      Return.width = 1600;
       Return.height = 60;
       Return.text = ("◀ 戻る");
       scene.addChild(Return);
