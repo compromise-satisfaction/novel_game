@@ -2,10 +2,23 @@ enchant()
 function Load(width,height){
   var core = new Core(width, height);
   core.preload("image/Title.png");
-  core.preload("image/背景/1.png");
+  for (var i = 0; i <= 1; i++){
+    core.preload("image/背景/"+i+".png");
+  }
   core.preload("image/キャラ/1.png");
   core.fps = 10;
   core.onload = function(){
+
+    function Scene_loads(Number){
+      switch (Number) {
+        case 0:
+        core.replaceScene(MainScene(0,1,0,true,1,0,true,"セラ","とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。"));
+          break;
+        default:
+          break;
+      }
+    }
+
     var TitleScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
@@ -36,7 +49,7 @@ function Load(width,height){
       scene.addChild(Continuation);
 
       Beginning.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene(1,1,0,true,1,0,true,"未知の決闘者","とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。"));
+        Scene_loads(0);
       });
 
       Continuation.addEventListener('touchstart',function(e){
@@ -124,7 +137,6 @@ function Load(width,height){
       Return.addEventListener('touchstart',function(e){
         core.replaceScene(MainScene(1,1,0,false,1,0,false,"天の声","無し"));
       });
-
       return scene;
     };
     core.replaceScene(TitleScene());  // ゲームの_rootSceneをスタートシーンに置き換える
