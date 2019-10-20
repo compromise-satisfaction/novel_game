@@ -36,16 +36,16 @@ function Load(width,height){
       scene.addChild(Continuation);
 
       Beginning.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene(1,1,1,1,1));
+        core.replaceScene(MainScene(1,1,0,true,1,0,true,"未知の決闘者","とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。"));
       });
 
       Continuation.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene(1,1,1,1,1));
+        core.replaceScene(MainScene(1,1,0,true,1,0,true,"セラ","とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。"));
       });
 
       return scene;
     };
-    var MainScene = function(B_Number,C1_Number,C1_frame,C2_Number,C2_frame){
+    var MainScene = function(B_Number,C1_Number,C1_frame,C1_fadeIn,C2_Number,C2_frame,C2_fadeIn,C_name_text,C_text){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite(1600,900);
@@ -59,8 +59,10 @@ function Load(width,height){
       Character1.x = 0;
       Character1.y = 0;
       Character1.frame = C1_frame;
-      Character1.opacity = 0;
-      Character1.tl.fadeIn(20);
+      if(C1_fadeIn){
+        Character1.opacity = 0;
+        Character1.tl.fadeIn(20);
+      }
       scene.addChild(Character1);
 
       var Character2 = new Sprite(800,900);
@@ -68,18 +70,31 @@ function Load(width,height){
       Character2.x = 800;
       Character2.y = 0;
       Character2.frame = C2_frame;
-      Character2.opacity = 0;
-      Character2.tl.fadeIn(20);
+      if(C2_fadeIn){
+        Character2.opacity = 0;
+        Character2.tl.fadeIn(20);
+      }
       scene.addChild(Character2);
+
+      var C_name = new Label();
+      C_name.font  = "60px monospace";
+      C_name.color = 'black';
+      C_name.x = 0;
+      C_name.y = 960;
+      C_name.width = 1600;
+      C_name.height = 60;
+      C_name.text = "【" + C_name_text + "】";
+      if(C_name.text == "【】") C_name.text = "";
+      scene.addChild(C_name);
 
       var Text = new Label();
       Text.font  = "60px monospace";
       Text.color = 'black';
       Text.x = 0;
-      Text.y = 900;
+      Text.y = 1020;
       Text.width = 1600;
       Text.height = 1600;
-      Text.text = ("【未知の決闘者】\n");
+      Text.text = C_text;
       scene.addChild(Text);
 
       var Enter = new Label();
@@ -103,11 +118,11 @@ function Load(width,height){
       scene.addChild(Return);
 
       Enter.addEventListener('touchstart',function(e){
-        console.log("最初から");
+        core.replaceScene(MainScene(1,1,0,false,1,0,false,"","テスト"));
       });
 
       Return.addEventListener('touchstart',function(e){
-        console.log("続きから");
+        core.replaceScene(MainScene(1,1,0,false,1,0,false,"天の声","無し"));
       });
 
       return scene;
