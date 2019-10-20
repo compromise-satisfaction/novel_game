@@ -58,6 +58,8 @@ function Load(width,height){
       Character1.image = core.assets["image/キャラ/"+ Number +".png"];
       Character1.x = 0;
       Character1.y = 0;
+      Character1.opacity = 0;
+      Character1.tl.fadeIn(20);
       scene.addChild(Character1);
 
       var Enter = new Label();
