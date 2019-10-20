@@ -2,7 +2,8 @@ enchant()
 function Load(width,height){
   var core = new Core(width, height);
   core.preload("image/Title.png");
-  core.preload("image/1.png");
+  core.preload("image/背景/1.png");
+  core.preload("image/キャラ/1.png");
   core.fps = 10;
   core.onload = function(){
     var TitleScene = function(){
@@ -35,22 +36,29 @@ function Load(width,height){
       scene.addChild(Continuation);
 
       Beginning.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene());
+        core.replaceScene(MainScene(1));
       });
 
       Continuation.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene());
+        core.replaceScene(MainScene(1));
       });
 
       return scene;
     };
-    var MainScene = function(){
+    var MainScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
-      var Title = new Sprite(1600,900);
-      Title.image = core.assets["image/1.png"];
-      Title.x = 0;
-      Title.y = 0;
-      scene.addChild(Title);
+
+      var Background = new Sprite(1600,900);
+      Background.image = core.assets["image/背景/"+ Number +".png"];
+      Background.x = 0;
+      Background.y = 0;
+      scene.addChild(Background);
+
+      var Character1 = new Sprite(800,900);
+      Character1.image = core.assets["image/キャラ/"+ Number +".png"];
+      Character1.x = 0;
+      Character1.y = 0;
+      scene.addChild(Character1);
 
       var Enter = new Label();
       Enter.font  = "200px monospace";
