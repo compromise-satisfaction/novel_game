@@ -6,13 +6,31 @@ function Load(width,height){
     core.preload("image/背景/"+i+".png");
   }
   core.preload("image/キャラ/1.png");
-  core.fps = 10;
+  core.fps = 100;
   core.onload = function(){
 
     function Scene_loads(Number){
+      //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 前のシーン 次のシーン
       switch (Number) {
         case 0:
-        core.replaceScene(MainScene(0,1,0,true,1,0,true,"セラ","とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。"));
+        var Name = "";
+        var Line = "とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。";
+        core.replaceScene(MainScene(0,1,1,1,false,1,1,1,false,1,1,1,false,Name,Line,false,1,1));
+          break;
+        case 1:
+        var Name = "未知の決闘者";
+        var Line = "1人";
+        core.replaceScene(MainScene(1,1,1,false,false,1,1,false,false,1,1,true,true,Name,Line,true,0,2));
+          break;
+        case 2:
+        var Name = "未知の決闘者";
+        var Line = "2人";
+        core.replaceScene(MainScene(1,1,1,true,true,1,1,false,true,1,1,false,false,Name,Line,true,1,3));
+          break;
+        case 3:
+        var Name = "未知の決闘者";
+        var Line = "3人";
+        core.replaceScene(MainScene(1,1,1,false,true,1,1,false,true,1,1,true,true,Name,Line,true,2,0));
           break;
         default:
           break;
@@ -53,41 +71,52 @@ function Load(width,height){
       });
 
       Continuation.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene(1,1,0,true,1,0,true,"セラ","とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。"));
+        Scene_loads(1);
       });
 
       return scene;
     };
-    var MainScene = function(B_Number,C1_Number,C1_frame,C1_fadeIn,C2_Number,C2_frame,C2_fadeIn,C_name_text,C_text){
+    var MainScene = function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite(1600,900);
-      Background.image = core.assets["image/背景/"+ B_Number +".png"];
+      Background.image = core.assets["image/背景/"+ a +".png"];
       Background.x = 0;
       Background.y = 0;
       scene.addChild(Background);
 
       var Character1 = new Sprite(800,900);
-      Character1.image = core.assets["image/キャラ/"+ C1_Number +".png"];
+      Character1.image = core.assets["image/キャラ/"+ b +".png"];
       Character1.x = 0;
       Character1.y = 0;
-      Character1.frame = C1_frame;
-      if(C1_fadeIn){
+      Character1.frame = c;
+      if(d){
         Character1.opacity = 0;
-        Character1.tl.fadeIn(20);
+        Character1.tl.fadeIn(15);
       }
-      scene.addChild(Character1);
+      if(e) scene.addChild(Character1);
 
       var Character2 = new Sprite(800,900);
-      Character2.image = core.assets["image/キャラ/"+ C2_Number +".png"];
+      Character2.image = core.assets["image/キャラ/"+ f +".png"];
       Character2.x = 800;
       Character2.y = 0;
-      Character2.frame = C2_frame;
-      if(C2_fadeIn){
+      Character2.frame = g;
+      if(h){
         Character2.opacity = 0;
         Character2.tl.fadeIn(20);
       }
-      scene.addChild(Character2);
+      if(i) scene.addChild(Character2);
+
+      var Character3 = new Sprite(800,900);
+      Character3.image = core.assets["image/キャラ/"+ j +".png"];
+      Character3.x = 400;
+      Character3.y = 0;
+      Character3.frame = k;
+      if(l){
+        Character3.opacity = 0;
+        Character3.tl.fadeIn(20);
+      }
+      if(m) scene.addChild(Character3);
 
       var C_name = new Label();
       C_name.font  = "60px monospace";
@@ -96,7 +125,7 @@ function Load(width,height){
       C_name.y = 960;
       C_name.width = 1600;
       C_name.height = 60;
-      C_name.text = "【" + C_name_text + "】";
+      C_name.text = "【" + n + "】";
       if(C_name.text == "【】") C_name.text = "";
       scene.addChild(C_name);
 
@@ -107,7 +136,7 @@ function Load(width,height){
       Text.y = 1020;
       Text.width = 1600;
       Text.height = 1600;
-      Text.text = C_text;
+      Text.text = o;
       scene.addChild(Text);
 
       var Enter = new Label();
@@ -128,15 +157,16 @@ function Load(width,height){
       Return.width = 1600;
       Return.height = 60;
       Return.text = ("◀ 戻る");
-      scene.addChild(Return);
-
-      Enter.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene(1,1,0,false,1,0,false,"","テスト"));
-      });
+      if(p) scene.addChild(Return);
 
       Return.addEventListener('touchstart',function(e){
-        core.replaceScene(MainScene(1,1,0,false,1,0,false,"天の声","無し"));
+        Scene_loads(q);
       });
+
+      Enter.addEventListener('touchstart',function(e){
+        Scene_loads(r);
+      });
+
       return scene;
     };
     core.replaceScene(TitleScene());  // ゲームの_rootSceneをスタートシーンに置き換える
