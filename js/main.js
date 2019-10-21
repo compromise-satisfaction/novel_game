@@ -20,35 +20,39 @@ function Load(width,height){
       window.localStorage.setItem("surname","若辻");
     }
     else var Data = true;
+
     function Scene_loads(Number){
+      var Surname = window.localStorage.getItem("surname");
+      var S_name = window.localStorage.getItem("name");
+      var Name = "";
+      var Line = "";
       if(Number=="セーブ読み込み") Number = window.localStorage.getItem("Scene")*1;
       //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 前のシーン 今のシーン 次のシーン
       switch (Number) {
         case 0:
         window.localStorage.setItem("syoken","false");
         Data = true;
-        var Name = window.localStorage.getItem("surname") + " " + window.localStorage.getItem("name");
-        var Line = "とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。";
+        Name = Surname + " " + S_name;
+        Line = "とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。";
         core.replaceScene(MainScene(0,1,1,1,false,1,1,1,false,1,1,1,false,Name,Line,false,0,0,1));
           break;
         case 1:
-        var Name = "";
-        var Line = "0人";
-        core.replaceScene(MainScene(1,1,1,false,false,1,1,false,false,1,1,false,false,Name,Line,true,0,Number,2));
+        Line = "0人";
+        core.replaceScene(MainScene(1,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,true,0,Number,2));
           break;
         case 2:
-        var Name = "a";
-        var Line = "1人";
-        core.replaceScene(MainScene(1,1,1,false,false,1,1,false,false,1,1,true,true,Name,Line,true,1,Number,3));
+        Name = "a";
+        Line = "1人";
+        core.replaceScene(MainScene(1,0,0,false,false,0,0,false,false,1,1,true,true,Name,Line,true,1,Number,3));
           break;
         case 3:
-        var Name = "b";
-        var Line = "2人";
-        core.replaceScene(MainScene(1,1,1,true,true,1,1,false,true,1,1,false,false,Name,Line,true,2,Number,4));
+        Name = "b";
+        Line = "2人";
+        core.replaceScene(MainScene(1,1,1,true,true,1,1,false,true,0,0,false,false,Name,Line,true,2,Number,4));
           break;
         case 4:
-        var Name = "c";
-        var Line = "3人";
+        Name = "c";
+        Line = "3人";
         core.replaceScene(MainScene(1,1,1,false,true,1,1,false,true,1,1,true,true,Name,Line,true,3,Number,5));
           break;
         case "タイトルに戻る":
