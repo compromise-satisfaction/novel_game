@@ -8,7 +8,7 @@ function Load(width,height){
   for (var i = 0; i <= 1; i++){
     core.preload("image/背景/"+i+".png");
   }
-  for (var i = 0; i <= 1; i++){
+  for (var i = 0; i <= 3; i++){
     core.preload("image/キャラ/"+i+".png");
   }
   core.fps = 100;
@@ -43,17 +43,17 @@ function Load(width,height){
         case 2:
         Name = "a";
         Line = "1人";
-        core.replaceScene(MainScene(1,0,0,false,false,0,0,false,false,1,1,true,true,Name,Line,true,1,Number,3));
+        core.replaceScene(MainScene(1,0,0,false,false,0,0,false,false,1,0,true,true,Name,Line,true,1,Number,3));
           break;
         case 3:
         Name = "b";
         Line = "2人";
-        core.replaceScene(MainScene(1,1,1,true,true,1,1,false,true,0,0,false,false,Name,Line,true,2,Number,4));
+        core.replaceScene(MainScene(1,2,0,true,true,1,0,false,true,0,0,false,false,Name,Line,true,2,Number,4));
           break;
         case 4:
         Name = "c";
         Line = "3人";
-        core.replaceScene(MainScene(1,1,1,false,true,1,1,false,true,1,1,true,true,Name,Line,true,3,Number,5));
+        core.replaceScene(MainScene(1,2,0,false,true,1,0,false,true,3,0,true,true,Name,Line,true,3,Number,5));
           break;
         case "タイトルに戻る":
           core.replaceScene(TitleScene());
