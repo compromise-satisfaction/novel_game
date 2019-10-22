@@ -15,7 +15,7 @@ function Load(width,height){
   core.onload = function(){
     if(window.localStorage.getItem("syoken")!="false"){
       var Data = false;
-      window.localStorage.setItem("sex","男");
+      window.localStorage.setItem("gender","男");
       window.localStorage.setItem("name","俛人");
       window.localStorage.setItem("surname","若辻");
     }
@@ -462,7 +462,7 @@ function Load(width,height){
 
       var Round = new Sprite(60,60);
       Round.image = core.assets["image/Round.png"];
-      if(window.localStorage.getItem("sex")=="女"){
+      if(window.localStorage.getItem("gender")=="女"){
         Round.x = Text10.x;
         Round.y = Text10.y;
       }
@@ -520,12 +520,12 @@ function Load(width,height){
         window.localStorage.setItem("surname",S_Input._element.value);
         window.localStorage.setItem("name",S_Input2._element.value);
         if(Round.x == Text9.x){
-          window.localStorage.setItem("sex","男");
+          window.localStorage.setItem("gender","男");
           if(S_Input._element.value=="") window.localStorage.setItem("surname","若辻");
           if(S_Input2._element.value=="") window.localStorage.setItem("name","俛人");
         }
         else{
-          window.localStorage.setItem("sex","女");
+          window.localStorage.setItem("gender","女");
           if(S_Input._element.value=="") window.localStorage.setItem("surname","防人");
           if(S_Input2._element.value=="") window.localStorage.setItem("name","玲奈");
         }
