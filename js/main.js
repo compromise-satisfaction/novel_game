@@ -24,8 +24,8 @@ function Load(width,height){
     function Scene_loads(Number){
       var Surname = window.localStorage.getItem("surname");
       var S_name = window.localStorage.getItem("name");
-      var Name = "";
-      var Line = "";
+      var Name = "？？？";
+      var Line = "…";
       if(Number=="セーブ読み込み") Number = window.localStorage.getItem("Scene")*1;
       //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 前のシーン 今のシーン 次のシーン
       switch (Number) {
@@ -37,22 +37,16 @@ function Load(width,height){
         core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,false,0,Number,1));
           break;
         case 1:
-        Line = "0人";
-        core.replaceScene(MainScene(1,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,true,0,Number,2));
+        Line = "暗闇なら違和感なく出すことができますね。";
+        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,3,1,true,true,Name,Line,true,0,Number,2));
           break;
         case 2:
-        Name = "a";
-        Line = "1人";
-        core.replaceScene(MainScene(1,0,0,false,false,0,0,false,false,3,0,true,true,Name,Line,true,1,Number,3));
+        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,3,0,true,true,Name,Line,true,1,Number,3));
           break;
         case 3:
-        Name = "b";
-        Line = "2人";
         core.replaceScene(MainScene(1,3,0,true,true,3,0,false,true,0,0,false,false,Name,Line,true,2,Number,4));
           break;
         case 4:
-        Name = "c";
-        Line = "3人";
         core.replaceScene(MainScene(1,3,0,false,true,3,0,false,true,3,0,true,true,Name,Line,true,3,Number,5));
           break;
         case "タイトルに戻る":
