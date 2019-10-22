@@ -8,7 +8,7 @@ function Load(width,height){
   for (var i = 0; i <= 1; i++){
     core.preload("image/背景/"+i+".png");
   }
-  for (var i = 0; i <= 3; i++){
+  for (var i = 0; i <= 1; i++){
     core.preload("image/キャラ/"+i+".png");
   }
   core.fps = 100;
@@ -20,54 +20,57 @@ function Load(width,height){
       window.localStorage.setItem("surname","若辻");
     }
     else var Data = true;
-
     function Scene_loads(Number){
       var Surname = window.localStorage.getItem("surname");
       var S_name = window.localStorage.getItem("name");
       var Name = "？？？";
       var Line = "…";
       if(Number=="セーブ読み込み") Number = window.localStorage.getItem("Scene")*1;
-      //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 前のシーン 今のシーン 次のシーン
       switch (Number) {
         case 0:
-        window.localStorage.setItem("syoken","false");
-        Data = true;
-        Name = Surname + " " + S_name;
-        Line = "とりあえずどれくらいテキストが入力できるか確かめておく必要がありそうですな。結構いけますよコレ。改行の仕方がよくわからないんだが空白でごまかせばいけそうではあるな。";
-        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,false,0,Number,1));
+        Name = "";
+        Line = "ここに説明を入れる。";
+        //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 設定が出来る 前のシーン 今のシーン 次のシーン
+        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,false,false,0,Number,"ゲームオーバー"));
           break;
         case 1:
+        Data = true;
+        window.localStorage.setItem("syoken","false");
         Line = "暗闇なら違和感なく出すことができますね。";
-        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,3,1,true,true,Name,Line,true,0,Number,2));
+        //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 設定が出来る 前のシーン 今のシーン 次のシーン
+        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,1,1,true,true,Name,Line,false,true,0,Number,2));
           break;
         case 2:
-        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,3,0,true,true,Name,Line,true,1,Number,3));
+        //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 設定が出来る 前のシーン 今のシーン 次のシーン
+        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,1,0,true,true,Name,Line,true,true,1,Number,3));
           break;
         case 3:
-        core.replaceScene(MainScene(1,3,0,true,true,3,0,false,true,0,0,false,false,Name,Line,true,2,Number,4));
+        //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 設定が出来る 前のシーン 今のシーン 次のシーン
+        core.replaceScene(MainScene(1,1,0,true,true,1,0,false,true,0,0,false,false,Name,Line,true,true,2,Number,4));
           break;
         case 4:
-        core.replaceScene(MainScene(1,3,0,false,true,3,0,false,true,3,0,true,true,Name,Line,true,3,Number,5));
+        //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 設定が出来る 前のシーン 今のシーン 次のシーン
+        core.replaceScene(MainScene(1,1,0,false,true,1,0,false,true,1,0,true,true,Name,Line,true,true,3,Number,5));
           break;
         case "タイトルに戻る":
           core.replaceScene(TitleScene());
           break;
         case "ゲームオーバー":
-        //背景 (キャラNumber キャラframe キャラ存在)*3
         var C1 = "タイトルに戻る";
-        var C2 = "セーブ地点に戻る";
+        var C2 = "セーブ読み込み";
         if(window.localStorage.getItem("Save")=="マニュアル") var M = true;
         else var M = false;
-        core.replaceScene(ChoiceScene(0,0,0,false,0,0,false,0,0,false,C1,true,C2,M,C1,false,C1,false,"タイトルに戻る","セーブ読み込み",0,0,0));
+        //背景 (キャラNumber キャラframe キャラ存在)*3 (選択肢テキスト 選択肢存在) *4 (移動先シーン) *4 現在のシーン
+        core.replaceScene(ChoiceScene(0,0,0,false,0,0,false,0,0,false,C1,true,C2,M,C1,false,C1,false,C1,C2,0,0,"ゲームオーバー"));
           break;
         default:
         var Name = "";
         var Line = "ここから先はできていません。";
-        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,false,0,0,"ゲームオーバー",0));
+        //背景 (キャラNumber キャラframe キャラフェードイン キャラ存在)*3 キャラネーム テキスト 戻れる 設定が出来る 前のシーン 今のシーン 次のシーン
+        core.replaceScene(MainScene(0,0,0,false,false,0,0,false,false,0,0,false,false,Name,Line,false,false,0,0,"ゲームオーバー"));
           break;
       }
     }
-
     var TitleScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
@@ -84,7 +87,7 @@ function Load(width,height){
       Beginning.y = 960;
       Beginning.width = 1600;
       Beginning.height = 60;
-      Beginning.text = ("▶ 最初から");
+      Beginning.text = "▶ 最初から";
       scene.addChild(Beginning);
 
       var Continuation = new Label();
@@ -94,20 +97,36 @@ function Load(width,height){
       Continuation.y = 1040;
       Continuation.width = 1600;
       Continuation.height = 60;
-      Continuation.text = ("▶ 続きから");
-      if(Data) scene.addChild(Continuation);
+      Continuation.text = "▶ 説明";
+      if(Data) Continuation.text = "▶ 続きから";
+      scene.addChild(Continuation);
+
+      var Explanation = new Label();
+      Explanation.font  = "60px monospace";
+      Explanation.color = 'black';
+      Explanation.x = 0;
+      Explanation.y = 1120;
+      Explanation.width = 1600;
+      Explanation.height = 60;
+      Explanation.text = "▶ 説明";
+      if(Data) scene.addChild(Explanation);
 
       Beginning.addEventListener('touchstart',function(e){
-        Scene_loads(0);
+        Scene_loads(1);
       });
 
       Continuation.addEventListener('touchstart',function(e){
-        Scene_loads("セーブ読み込み");
+        if(Continuation.text == "▶ 説明") Scene_loads(0);
+        else Scene_loads("セーブ読み込み");
+      });
+
+      Explanation.addEventListener('touchstart',function(e){
+        Scene_loads(0);
       });
 
       return scene;
     };
-    var MainScene = function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s){
+    var MainScene = function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite(1600,900);
@@ -182,7 +201,7 @@ function Load(width,height){
       Settings.x = 640;
       Settings.y = height-65;
       Settings.frame = 1;
-      scene.addChild(Settings);
+      if(q) scene.addChild(Settings);
 
       var Enter = new Sprite(320,60);
       Enter.image = core.assets["image/Buttons.png"];
@@ -192,17 +211,17 @@ function Load(width,height){
       scene.addChild(Enter);
 
       Return.addEventListener('touchstart',function(e){
-        if(window.localStorage.getItem("Save")!="マニュアル") window.localStorage.setItem("Scene",q);
-        Scene_loads(q);
+        if(window.localStorage.getItem("Save")!="マニュアル"&&q) window.localStorage.setItem("Scene",r);
+        Scene_loads(r);
       });
 
       Settings.addEventListener('touchstart',function(e){
-        core.pushScene(SettingScene(r));
+        core.pushScene(SettingScene(s));
       });
 
       Enter.addEventListener('touchstart',function(e){
-        if(window.localStorage.getItem("Save")!="マニュアル") window.localStorage.setItem("Scene",s);
-        Scene_loads(s);
+        if(window.localStorage.getItem("Save")!="マニュアル"&&q) window.localStorage.setItem("Scene",t);
+        Scene_loads(t);
       });
 
       return scene;
@@ -282,25 +301,25 @@ function Load(width,height){
       Settings.x = 640;
       Settings.y = height-65;
       Settings.frame = 1;
-      scene.addChild(Settings);
+      if(w!="ゲームオーバー") scene.addChild(Settings);
 
       C1.addEventListener('touchstart',function(e){
-        if(window.localStorage.getItem("Save")!="マニュアル") window.localStorage.setItem("Scene",s);
+        if(window.localStorage.getItem("Save")!="マニュアル"&w!="ゲームオーバー") window.localStorage.setItem("Scene",s);
         Scene_loads(s);
       });
 
       C2.addEventListener('touchstart',function(e){
-        if(window.localStorage.getItem("Save")!="マニュアル") window.localStorage.setItem("Scene",t);
+        if(window.localStorage.getItem("Save")!="マニュアル"&w!="ゲームオーバー") window.localStorage.setItem("Scene",t);
         Scene_loads(t);
       });
 
       C3.addEventListener('touchstart',function(e){
-        if(window.localStorage.getItem("Save")!="マニュアル") window.localStorage.setItem("Scene",u);
+        if(window.localStorage.getItem("Save")!="マニュアル"&w!="ゲームオーバー") window.localStorage.setItem("Scene",u);
         Scene_loads(u);
       });
 
       C4.addEventListener('touchstart',function(e){
-        if(window.localStorage.getItem("Save")!="マニュアル") window.localStorage.setItem("Scene",v);
+        if(window.localStorage.getItem("Save")!="マニュアル"&w!="ゲームオーバー") window.localStorage.setItem("Scene",v);
         Scene_loads(v);
       });
 
