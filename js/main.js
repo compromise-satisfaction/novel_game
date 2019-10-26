@@ -1,20 +1,20 @@
 enchant()
+
 function Load(width,height){
   var core = new Core(width, height);
+  core.preload("sound.wav");
   core.preload("image/Round.png");
   core.preload("image/Title.png");
+  core.preload("image/white.png");
   core.preload("image/Buttons.png");
+  core.preload("image/Trophies.png");
   core.preload("image/Background.png");
-  core.preload("image/背景/white.png");
-  core.preload("image/背景/Transparent.png");
-  core.preload("image/トロフィー/sound.wav");
-  core.preload("image/トロフィー/Trophies.png");
-  core.preload("image/トロフィー/Trophies_image.png");
+  core.preload("image/Characters.png");
+  core.preload("image/Transparent.png");
+  core.preload("image/Trophies_image.png");
+
   for (var i = 0; i <= 7; i++){
     core.preload("image/背景/"+i+".png");
-  }
-  for (var i = 0; i <= 1; i++){
-    core.preload("image/キャラ/"+i+".png");
   }
   core.fps = 100;
   core.onload = function(){
@@ -43,90 +43,108 @@ function Load(width,height){
         }
         else if(Datas[17]!=false) Datas[11] = Number-1;
       }
-      else var Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","…",Number-1,0,Number,0,Number+1,false,0];
-      //(背景,背景時間,(キャラ番号,ポーズ番号,時間)*3,名前,文章,戻る1,戻る2,設定,スキップ,次のシーン,トロフィー,トロフィー画像
+      else var Datas = [0,0,0,0,0,0,0,0,"？？？","…",Number-1,0,Number,0,Number+1,false,0];
+      //(背景,背景時間,(キャラ番号,時間)*3,名前,文章,戻る1,戻る2,設定,スキップ,次のシーン,トロフィー,トロフィー画像
       //(背景,左,frame,中,frame,右,frame,C1,C2,C3,C4,1,2,3,4,前,一番前,現在)
       var Datas_c = [0,false,0,false,0,false,0,false,false,false,false,0,0,Number,0,0,0,0];
       if(Number=="セーブ読み込み"){
         var Datas = window.localStorage.getItem("datas").split(",");
-        if(Datas.length==20){
+        if(Datas.length==17){
           //(背景,背景時間,(キャラ番号,ポーズ番号,時間)*3,名前,文章,戻る1,戻る2,設定,スキップ,次のシーン,トロフィー,トロフィー画像
-          for (var i = 0; i <20 ; i++){
-            if(i==11||i==12) continue;
+          for (var i = 0; i <17 ; i++){
+            if(i==8||i==9) continue;
             if(Datas[i]=="false") Datas[i] = false;
-            else if(i!=18) Datas[i] = Datas[i]*1;
+            else if(i!=15) Datas[i] = Datas[i]*1;
           }
-          if(Datas[15]!=false) Number = Datas[15];
+          if(Datas[12]!=false) Number = Datas[12];
         }
-        else Number = Datas[17]*1;
+        else Number = Datas[14]*1;
+        console.log(Datas);
         Flag = window.localStorage.getItem("flag").split(",");
         for (var i = 0; i < Flag.length; i++){
           if(Flag[i]=="true") Flag[i] = true;
           else Flag[i] = false;
         }
       }
-      if(Datas.length==20){
-        Datas[4] = 0;
+      if(Datas.length==17){
+        Datas[3] = 0;
+        Datas[5] = 0;
         Datas[7] = 0;
-        Datas[10] = 0;
-        if(Datas[15]!=false) Datas[15] = Number;
+        if(Datas[12]!=false) Datas[12] = Number;
       }
       switch (Number) {
         case -7:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","ホレ。",Number+1,-1,0,0,"ゲームオーバー","説明用",0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","ホレ。",Number+1,-1,0,0,"ゲームオーバー","説明用",0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case -6:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","試しにならしてみようかね。",Number+1,-1,0,0,Number-1,false,0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","試しにならしてみようかね。",Number+1,-1,0,0,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case -5:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","個人的にトロフィー機能がお気に入り。",Number+1,-1,0,-7,Number-1,false,0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","個人的にトロフィー機能がお気に入り。",Number+1,-1,0,-7,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case -4:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","…………説明いる？",Number+1,-1,0,-7,Number-1,false,0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","…………説明いる？",Number+1,-1,0,-7,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case -3:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","………",Number+1,-1,0,-7,Number-1,false,0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","………",Number+1,-1,0,-7,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case -2:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","……",Number+1,0,0,-7,Number-1,false,0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","……",Number+1,0,0,-7,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case -1:
-        Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","…",Number+1,0,0,-7,Number-1,false,0];
+        Datas = [0,0,0,0,0,0,0,0,"？？？","…",Number+1,0,0,-7,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
         case 1:
           Flag = [false,false];
           window.localStorage.setItem("name","");
           window.localStorage.setItem("surname","");
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","…",Number-1,0,Number,4,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？","…",Number-1,0,Number,4,Number+1,false,0];
+          /*Datas[0] = result[0].背景ナンバー;
+          Datas[1] = result[0].背景が現れるまでの時間;
+          Datas[2] = result[0].左のキャラナンバー;
+          Datas[3] = result[0].左のキャラが現れるまでの時間;
+          Datas[4] = result[0].真ん中のキャラナンバー;
+          Datas[5] = result[0].真ん中のキャラが現れるまでの時間;
+          Datas[6] = result[0].右のキャラナンバー;
+          Datas[7] = result[0].右のキャラが現れるまでの時間;
+          Datas[8] = result[0].名前;
+          Datas[9] = result[0].文章;
+          Datas[10] = result[0].戻るボタンで飛ぶシーン;
+          Datas[11] = result[0].戻るボタン2で飛ぶシーン;
+          Datas[12] = result[0].現在のシーン;
+          Datas[13] = result[0].スキップボタンで飛ぶシーン;
+          Datas[14] = result[0].次のボタンで飛ぶシーン;
+          Datas[15] = result[0].トロフィー;
+          Datas[16] = result[0].トロフィー画像ナンバー;*/
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 2:
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","やあ。お待たせ。",Number-1,0,Number,4,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？","やあ。お待たせ。",Number-1,0,Number,4,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 3:
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","まずはキミの事を教えてもらおう。",Number-1,1,Number,0,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？","まずはキミの事を教えてもらおう。",Number-1,1,Number,0,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 4:
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","設定を開いて君の事を設定してくれ。",Number-1,1,Number,0,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？","設定を開いて君の事を設定してくれ。",Number-1,1,Number,0,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 5:
           var Next = 7;
           if(Gender=="男") Next = 6;
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","そうか、"+Surname+" "+Name+"というんだな。",0,0,Number,15,Next,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？","そうか、"+Surname+" "+Name+"というんだな。",0,0,Number,15,Next,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 6:
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？","…なんだ 男か。 つまらん。",Number-1,0,Number,15,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？","…なんだ 男か。 つまらん。",Number-1,0,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 7:
@@ -138,7 +156,7 @@ function Load(width,height){
             Modoru = 5;
             Text = "えー、これから"+Name+"の物語が始まる。";
           }
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？",Text,Before,Modoru,Number,15,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？",Text,Before,Modoru,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 8:
@@ -146,69 +164,69 @@ function Load(width,height){
           if(Gender=="男"){
             Text = "せいぜい死なないように気を付けることだ。"
           }
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"？？？",Text,Number-1,5,Number,15,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"？？？",Text,Number-1,5,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 9:
           var Text = "…";
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 10:
           var Text = "……";
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 11:
           var Text = "………";
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 12:
           var Text = "…………";
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+          Datas = [0,0,1,1000,0,0,1,1000,"",Text,Number-1,5,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 13:
           var Text = "……………";
-          Datas = [1,100,false,0,0,false,0,0,false,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+          Datas = [1,100,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 14:
           var Text = "朝だ。";
-          Datas = [1,0,false,0,0,false,0,0,false,0,0,"",Text,Number-1,5,Number,0,Number+1,false,0];
+          Datas = [1,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,0,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 15:
-          //(背景,左,frame,中,frame,右,frame,C1,C2,C3,C4,1,2,3,4,前,一番前,現在)
-          var C1 = "調べる";
-          var C2 = "学校へ行く";
+          //(背景,左,中,右,C1,C2,C3,C4,1,2,3,4,前,一番前,現在)
+          var C1 = "学校へ行く";
+          var C2 = "調べる";
           var C3 = false;
           var C4 = false;
-          Datas = [1, 0, false, 0, 0, false, 0, 0, false, 0, 0, "", "朝だ。", 14, 5, 14, 0, 15, false, 0];
-          Datas_c = [Datas[0],Datas[2],Datas[3],Datas[5],Datas[6],Datas[8],Datas[9],C1,C2,C3,C4,0,16,0,0,Datas[13],Datas[14],Number];
+          Datas = [1,0,0,0,0,0,0,0,"","朝だ。",13,5,14,0,15,false,0];
+          Datas_c = [Datas[0],Datas[2],Datas[4],Datas[6],C1,C2,C3,C4,16,0,0,0,Datas[12],Datas[11],Number];
           core.replaceScene(ChoiceScene(Datas_c,Datas,Flag));
           break;
         case 16:
           var Text = "(遅くなってしまった。急がないと遅刻するぞ。)";
-          Datas = [2,0,false,0,0,false,0,0,false,0,0,Name,Text,0,0,Number,20,Number+1,false,0];
+          Datas = [2,0,0,0,0,0,0,0,Name,Text,0,0,Number,20,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 17:
           var Text = "(ドシ～ン)";
-          Datas = [0,0,false,0,0,false,0,0,false,0,0,"",Text,Number-1,0,Number,20,Number+1,false,0];
+          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,0,Number,20,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 18:
           var T_Name = "女の子";
           var Text = "いたたたたた";
-          Datas = [3,0,false,0,0,false,0,0,false,0,0,T_Name,Text,Number-1,16,Number,20,Number+1,false,0];
+          Datas = [3,0,0,0,0,0,0,0,T_Name,Text,Number-1,16,Number,20,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 19:
           var T_Name = "女の子";
           var Text = "もう！どこ見て歩いてんのよ。";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,Number-1,16,Number,0,Number+1,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,Number-1,16,Number,0,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 20:
@@ -221,21 +239,21 @@ function Load(width,height){
             var C3 = "金を渡す";
             var C4 = "調べる";
           }
-          Datas = [4, 0, false, 0, 0, false, 0, 0, false, 0, 0, "女の子", "もう！どこ見て歩いてんのよ。", 19, 16, 19, 0, 20, false, 0];
-          Datas_c = [Datas[0],Datas[2],Datas[3],Datas[5],Datas[6],Datas[8],Datas[9],C1,C2,C3,C4,31,23,26,0,Datas[13],Datas[14],Number];
+          Datas = [4,0,0,0,0,0,0,0,"女の子","もう！どこ見て歩いてんのよ。",18,16,19,0,20,false,0];
+          Datas_c = [Datas[0],Datas[2],Datas[4],Datas[6],C1,C2,C3,C4,31,23,26,0,Datas[12],Datas[11],Number];
           core.replaceScene(ChoiceScene(Datas_c,Datas,Flag));
           break;
         case 21:
           if(Gender=="女"){
             var T_Name = "女の子";
             var Text = "…可哀そうに。";
-            Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,33,false,0];
+            Datas = [4,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,33,false,0];
             core.replaceScene(MainScene(Datas,Return,Flag));
           }
           else{
             var T_Name = "女の子";
             var Text = "きゃあ！痴漢！ お巡りさーん！";
-            Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,25,false,0];
+            Datas = [4,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,25,false,0];
             core.replaceScene(MainScene(Datas,Return,Flag));
           }
           break;
@@ -244,112 +262,107 @@ function Load(width,height){
             Flag[0] = false;
             var T_Name = Name;
             var Text = "やっぱり金は戻しておこう。";
-            Datas = [5,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,15,false,0];
+            Datas = [5,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,15,false,0];
             core.replaceScene(MainScene(Datas,Return,Flag));
           }
           else{
             Flag[0] = true;
             var T_Name = Name;
             var Text = "財布だ。金を貰っておこう。";
-            Datas = [5,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,15,false,0];
+            Datas = [5,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,15,false,0];
             core.replaceScene(MainScene(Datas,Return,Flag));
           }
           break;
         case 23:
           var T_Name = "女の子";
           var Text = "私を捨てるなんてひどいじゃない！";
-          Datas = [6,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,24,"通り魔",0];
+          Datas = [6,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,24,"通り魔",0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 24:
           var T_Name = "死亡エンド";
           var Text = "ゲームオーバー";
-          Datas = [6,0,false,0,0,false,0,0,false,0,0,T_Name,Text,23,0,Number,0,Text,false,0];
+          Datas = [6,0,0,0,0,0,0,0,T_Name,Text,23,0,Number,0,Text,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 25:
           var T_Name = "死刑エンド";
           var Text = "ゲームオーバー";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,21,0,Number,0,Text,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,21,0,Number,0,Text,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 26:
           var T_Name = Name;
           var Text = "ごめん！これで許して！";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,27,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,27,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 27:
           var T_Name = "女の子";
           var Text = "わーい！これで新しい漁船が買える！";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,26,0,Number,0,28,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,26,0,Number,0,28,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 28:
           var T_Name = Name;
           var Text = "それじゃあ急ぐから！";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,27,26,Number,0,29,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,27,26,Number,0,29,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 29:
           var T_Name = "女の子";
           var Text = "逃がさん。";
-          Datas = [6,0,false,0,0,false,0,0,false,0,0,T_Name,Text,28,26,Number,0,30,false,0];
+          Datas = [6,0,0,0,0,0,0,0,T_Name,Text,28,26,Number,0,30,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 30:
           var T_Name = "結局死亡エンド";
           var Text = "ゲームオーバー";
-          Datas = [6,0,false,0,0,false,0,0,false,0,0,T_Name,Text,29,26,Number,0,Text,false,0];
+          Datas = [6,0,0,0,0,0,0,0,T_Name,Text,29,26,Number,0,Text,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 31:
           var T_Name = Name;
           var Text = "大丈夫かい？";
-          Datas = [7,0,false,0,0,false,0,0,false,0,0,T_Name,Text,0,0,Number,0,32,false,0];
+          Datas = [7,0,0,0,0,0,0,0,T_Name,Text,0,0,Number,0,32,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 32:
           var T_Name = "マグロルート";
           var Text = "マグロとなり後日食用としてさばかれました。";
-          Datas = [7,0,false,0,0,false,0,0,false,0,0,T_Name,Text,31,0,Number,0,"ゲームオーバー",false,0];
+          Datas = [7,0,0,0,0,0,0,0,T_Name,Text,31,0,Number,0,"ゲームオーバー",false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 33:
           var T_Name = "";
           var Text = "何故か同情されたようだ。";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,21,0,Number,0,Number+1,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,21,0,Number,0,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 34:
           var T_Name = "女の子";
           var Text = "いいわ。許してあげる。";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,Number-1,0,Number,0,Number+1,false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,Number-1,0,Number,0,Number+1,false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case 35:
           var T_Name = "";
           var Text = "生存に成功！";
-          Datas = [4,0,false,0,0,false,0,0,false,0,0,T_Name,Text,Number-1,0,Number,0,"ゲームオーバー",false,0];
+          Datas = [4,0,0,0,0,0,0,0,T_Name,Text,Number-1,0,Number,0,"ゲームオーバー",false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
         case "タイトルに戻る":
           core.replaceScene(TitleScene());
           break;
         case "ゲームオーバー":
-          //(背景,左,frame,中,frame,右,frame,C1,C2,C3,C4,1,2,3,4,前,一番前,現在)
-          Datas = [0,false,0,false,0,false,0,"タイトルに戻る",false,false,false,"タイトルに戻る","セーブ読み込み",0,0,0,0,Number];
-          if(window.localStorage.getItem("Save")=="マニュアル") Datas[8] = "セーブ読み込み";
+          //(背景,左,中,右,C1,C2,C3,C4,1,2,3,4,前,一番前,現在)
+          Datas = [0,0,0,0,"タイトルに戻る",0,0,0,"タイトルに戻る","セーブ読み込み",0,0,0,0,Number];
+          if(window.localStorage.getItem("Save")=="マニュアル") Datas[5] = "セーブ読み込み";
           core.replaceScene(ChoiceScene(Datas,Flag));
           break;
         default:
-          Datas[11] = "";//名前
-          Datas[12] = "ここから先はできていません。";
-          Datas[13] = false;//Backbutton1非表示
-          Datas[14] = false;//Backbutton2非表示
-          Datas[15] = false;//Settingbutton非表示
-          Datas[16] = false;//Skipbutton非表示
-          Datas[17] = "ゲームオーバー";//次のシーン
+          //(背景,背景時間,(キャラ番号,時間)*3,名前,文章,戻る1,戻る2,設定,スキップ,次のシーン,トロフィー,トロフィー画像
+          Datas = [0,0,0,0,0,0,0,0,"","ここから先はできていません。",0,0,0,0,"ゲームオーバー",false,0];
           core.replaceScene(MainScene(Datas,Return,Flag));
           break;
       }
@@ -429,8 +442,7 @@ function Load(width,height){
     };
     var MainScene = function(Datas,Return,Flag){
       var scene = new Scene();                                // 新しいシーンを作る
-
-      if(window.localStorage.getItem("Save")!="マニュアル"&&Datas[15]!=false&&Datas[15]!=1){
+      if(window.localStorage.getItem("Save")!="マニュアル"&&Datas[12]!=false&&Datas[12]!=1){
         console.log(Flag);
         window.localStorage.setItem("flag",Flag);
         window.localStorage.setItem("datas",Datas);
@@ -448,53 +460,54 @@ function Load(width,height){
 
       if(Datas[2]!=false){
         var Character1 = new Sprite(800,900);
-        Character1.image = core.assets["image/キャラ/"+ Datas[2] +".png"];
+        Character1.image = core.assets["image/Characters.png"];
         Character1.x = 0;
         Character1.y = 0;
-        Character1.frame = Datas[3];
-        if(Datas[4]!=0&&Return!=true){
+        Character1.frame = Datas[2];
+        if(Datas[3]!=0&&Return!=true){
           Character1.opacity = 0;
-          Character1.tl.fadeIn(Datas[4]);
+          Character1.tl.fadeIn(Datas[3]);
         }
         scene.addChild(Character1);
       }//キャラ左
 
-      if(Datas[8]!=false){
+      if(Datas[6]!=false){
         var Character3 = new Sprite(800,900);
-        Character3.image = core.assets["image/キャラ/"+ Datas[8] +".png"];
+        Character3.image = core.assets["image/Characters.png"];
         Character3.x = 800;
         Character3.y = 0;
-        Character3.frame = Datas[9];
-        if(Datas[10]!=0&&Return!=true){
+        Character3.frame = Datas[6];
+        if(Datas[7]!=0&&Return!=true){
           Character3.opacity = 0;
-          Character3.tl.fadeIn(Datas[10]);
+          Character3.tl.fadeIn(Datas[7]);
         }
         scene.addChild(Character3);
       }//キャラ右
 
-      if(Datas[5]!=false){
+      if(Datas[4]!=false){
         var Character2 = new Sprite(800,900);
-        Character2.image = core.assets["image/キャラ/"+ Datas[5] +".png"];
+        Character2.image = core.assets["image/Characters.png"];
         Character2.x = 400;
         Character2.y = 0;
-        Character2.frame = Datas[6];
-        if(Datas[7]!=0&&Return!=true){
+        Character2.frame = Datas[4];
+        if(Datas[5]!=0&&Return!=true){
           Character2.opacity = 0;
-          Character2.tl.fadeIn(Datas[7]);
+          Character2.tl.fadeIn(Datas[5]);
         }
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      var C_name = new Label();
-      C_name.font  = "60px monospace";
-      C_name.color = 'black';
-      C_name.x = 0;
-      C_name.y = 960;
-      C_name.width = 1600;
-      C_name.height = 60;
-      C_name.text = "【" + Datas[11] + "】";
-      if(C_name.text == "【】") C_name.text = "";
-      scene.addChild(C_name);//キャラ名
+      if(Datas[8]!=""){
+        var C_name = new Label();
+        C_name.font  = "60px monospace";
+        C_name.color = 'black';
+        C_name.x = 0;
+        C_name.y = 960;
+        C_name.width = 1600;
+        C_name.height = 60;
+        C_name.text = "【" + Datas[8] + "】";
+        scene.addChild(C_name);//キャラ名
+      }
 
       var Text = new Label();
       Text.font  = "60px monospace";
@@ -503,10 +516,10 @@ function Load(width,height){
       Text.y = 1040;
       Text.width = 1480;
       Text.height = 800;
-      Text.text = Datas[12];
+      Text.text = Datas[9];
       scene.addChild(Text);//テキスト
 
-      if(Datas[13]!=false){
+      if(Datas[10]!=false){
         var Return1 = new Sprite(320,60);
         Return1.image = core.assets["image/Buttons.png"];
         Return1.x = 0;
@@ -514,11 +527,11 @@ function Load(width,height){
         Return1.frame = 0;
         scene.addChild(Return1);
         Return1.addEventListener('touchstart',function(e){
-          Scene_loads(Datas[13],Datas,true,Flag);
+          Scene_loads(Datas[10],Datas,true,Flag);
         });
       } //戻る1
 
-      if(Datas[14]!=false){
+      if(Datas[11]!=false){
         var Return2 = new Sprite(320,60);
         Return2.image = core.assets["image/Buttons.png"];
         Return2.x = 320;
@@ -526,11 +539,11 @@ function Load(width,height){
         Return2.frame = 1;
         scene.addChild(Return2);
         Return2.addEventListener('touchstart',function(e){
-          Scene_loads(Datas[14],Datas,true,Flag);
+          Scene_loads(Datas[11],Datas,true,Flag);
         });
       }//戻る2
 
-      if(Datas[15]!=false){
+      if(Datas[12]!=false){
         var Settings = new Sprite(320,60);
         Settings.image = core.assets["image/Buttons.png"];
         Settings.x = 640;
@@ -543,7 +556,7 @@ function Load(width,height){
         });
       }//設定
 
-      if(Datas[16]!=false){
+      if(Datas[13]!=false){
         var Enter1 = new Sprite(320,60);
         Enter1.image = core.assets["image/Buttons.png"];
         Enter1.x = 960;
@@ -551,7 +564,7 @@ function Load(width,height){
         Enter1.frame = 3;
         scene.addChild(Enter1);
         Enter1.addEventListener('touchstart',function(e){
-          Scene_loads(Datas[16],Datas,false,Flag);
+          Scene_loads(Datas[13],Datas,false,Flag);
         });
       }//スキップ
 
@@ -560,27 +573,27 @@ function Load(width,height){
       Enter2.x = 1280;
       Enter2.y = height-65;
       Enter2.frame = 4;
-      if(Datas[17]!=5) scene.addChild(Enter2);
+      if(Datas[14]!=5) scene.addChild(Enter2);
       Enter2.addEventListener('touchstart',function(e){
-        Scene_loads(Datas[17],Datas,false,Flag);
+        Scene_loads(Datas[14],Datas,false,Flag);
       });//進む
 
-      if(Datas[18]!=false){
-        if(window.localStorage.getItem(Datas[18])==undefined){
-          if(Datas[15]!=false) window.localStorage.setItem(Datas[18],"獲得！");
+      if(Datas[15]!=false){
+        if(window.localStorage.getItem(Datas[15])==undefined){
+          if(Datas[12]!=false) window.localStorage.setItem(Datas[15],"獲得！");
           var Time = 0;
           var Trophies = new Sprite(443,113);
-          Trophies.image = core.assets["image/トロフィー/Trophies.png"];
+          Trophies.image = core.assets["image/Trophies.png"];
           Trophies.x = width-463;
           Trophies.y = 20;
           Trophies.opacity = 0;
           Trophies.tl.fadeIn(5);
           scene.addChild(Trophies);
           var Trophies_image = new Sprite(88,85);
-          Trophies_image.image = core.assets["image/トロフィー/Trophies_image.png"];
+          Trophies_image.image = core.assets["image/Trophies_image.png"];
           Trophies_image.x = width-453;
           Trophies_image.y = 35;
-          Trophies_image.frame = Datas[19];
+          Trophies_image.frame = Datas[16];
           Trophies_image.opacity = 0;
           Trophies_image.tl.fadeIn(5);
           scene.addChild(Trophies_image);
@@ -593,9 +606,9 @@ function Load(width,height){
           Trophies_text.height = 30;
           Trophies_text.opacity = 0;
           Trophies_text.tl.fadeIn(5);
-          Trophies_text.text = Datas[18];
+          Trophies_text.text = Datas[15];
           scene.addChild(Trophies_text);
-          core.assets["image/トロフィー/sound.wav"].play();
+          core.assets["sound.wav"].play();
           Trophies.addEventListener("enterframe",function(){
             Time++;
             if(Time==50){
@@ -611,7 +624,7 @@ function Load(width,height){
     var ChoiceScene = function(Datas,Datas_M,Flag){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      if(window.localStorage.getItem("Save")!="マニュアル"&Datas[17]!="ゲームオーバー"){
+      if(window.localStorage.getItem("Save")!="マニュアル"&Datas[14]!="ゲームオーバー"){
         console.log(Flag);
         window.localStorage.setItem("flag",Flag);
         window.localStorage.setItem("datas",Datas);
@@ -624,32 +637,32 @@ function Load(width,height){
 
       if(Datas[1]!=false){
         var Character1 = new Sprite(800,900);
-        Character1.image = core.assets["image/キャラ/"+ Datas[1] +".png"];
+        Character1.image = core.assets["image/Characters.png"];
         Character1.x = 0;
         Character1.y = 0;
-        Character1.frame = Datas[2];
+        Character1.frame = Datas[1];
         scene.addChild(Character1);
       }//キャラ左
 
-      if(Datas[5]!=false){
+      if(Datas[3]!=false){
         var Character3 = new Sprite(800,900);
-        Character3.image = core.assets["image/キャラ/"+ Datas[5] +".png"];
+        Character3.image = core.assets["image/Characters.png"];
         Character3.x = 800;
         Character3.y = 0;
-        Character3.frame = Datas[6];
+        Character3.frame = Datas[3];
         scene.addChild(Character3);
       }//キャラ右
 
-      if(Datas[3]!=false){
+      if(Datas[2]!=false){
         var Character2 = new Sprite(800,900);
-        Character2.image = core.assets["image/キャラ/"+ Datas[3] +".png"];
+        Character2.image = core.assets["image/Characters.png"];
         Character2.x = 400;
         Character2.y = 0;
-        Character2.frame = Datas[4];
+        Character2.frame = Datas[2];
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      if(Datas[7]!=false){
+      if(Datas[4]!=false){
         var C1 = new Label();
         C1.font  = "60px monospace";
         C1.color = 'black';
@@ -657,15 +670,15 @@ function Load(width,height){
         C1.y = 960;
         C1.width = 1600;
         C1.height = 60;
-        C1.text = "▶ " + Datas[7];
+        C1.text = "▶ " + Datas[4];
         scene.addChild(C1);
         C1.addEventListener('touchstart',function(e){
           if(C1.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
-          else Scene_loads(Datas[11],false,false,Flag);
+          else Scene_loads(Datas[8],false,false,Flag);
         });
       }
 
-      if(Datas[8]!=false){
+      if(Datas[5]!=false){
         var C2 = new Label();
         C2.font  = "60px monospace";
         C2.color = 'black';
@@ -673,15 +686,15 @@ function Load(width,height){
         C2.y = 1060;
         C2.width = 1600;
         C2.height = 60;
-        C2.text = "▶ " + Datas[8];
+        C2.text = "▶ " + Datas[5];
         scene.addChild(C2);
         C2.addEventListener('touchstart',function(e){
           if(C2.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
-          else Scene_loads(Datas[12],false,false,Flag);
+          else Scene_loads(Datas[9],false,false,Flag);
         });
       }
 
-      if(Datas[9]!=false){
+      if(Datas[6]!=false){
         var C3 = new Label();
         C3.font  = "60px monospace";
         C3.color = 'black';
@@ -689,15 +702,15 @@ function Load(width,height){
         C3.y = 1160;
         C3.width = 1600;
         C3.height = 60;
-        C3.text = "▶ " + Datas[9];
+        C3.text = "▶ " + Datas[6];
         scene.addChild(C3);
         C3.addEventListener('touchstart',function(e){
           if(C3.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
-          else Scene_loads(Datas[13],false,false,Flag);
+          else Scene_loads(Datas[10],false,false,Flag);
         });
       }
 
-      if(Datas[10]!=false){
+      if(Datas[7]!=false){
         var C4 = new Label();
         C4.font  = "60px monospace";
         C4.color = 'black';
@@ -705,15 +718,15 @@ function Load(width,height){
         C4.y = 1260;
         C4.width = 1600;
         C4.height = 60;
-        C4.text = "▶ " + Datas[10];
+        C4.text = "▶ " + Datas[7];
         scene.addChild(C4);
         C4.addEventListener('touchstart',function(e){
           if(C4.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
-          else Scene_loads(Datas[14],false,false,Flag);
+          else Scene_loads(Datas[11],false,false,Flag);
         });
       }
 
-      if(Datas[15]!=false){
+      if(Datas[12]!=false){
         var Return1 = new Sprite(320,60);
         Return1.image = core.assets["image/Buttons.png"];
         Return1.x = 0;
@@ -721,11 +734,11 @@ function Load(width,height){
         Return1.frame = 0;
         scene.addChild(Return1);
         Return1.addEventListener('touchstart',function(e){
-          Scene_loads(Datas[15],Datas_M,true,Flag);
+          Scene_loads(Datas[12],Datas_M,true,Flag);
         });
       } //戻る1
 
-      if(Datas[16]!=false){
+      if(Datas[13]!=false){
         var Return2 = new Sprite(320,60);
         Return2.image = core.assets["image/Buttons.png"];
         Return2.x = 320;
@@ -733,11 +746,11 @@ function Load(width,height){
         Return2.frame = 1;
         scene.addChild(Return2);
         Return2.addEventListener('touchstart',function(e){
-          Scene_loads(Datas[16],Datas_M,true,Flag);
+          Scene_loads(Datas[13],Datas_M,true,Flag);
         });
       }//戻る2
 
-      if(Datas[17]!="ゲームオーバー"){
+      if(Datas[14]!="ゲームオーバー"){
         var Settings = new Sprite(320,60);
         Settings.image = core.assets["image/Buttons.png"];
         Settings.x = 640;
@@ -957,7 +970,7 @@ function Load(width,height){
           console.log(Flag);
           window.localStorage.setItem("flag",Flag);
           window.localStorage.setItem("datas",Datas);
-          core.assets["image/トロフィー/sound.wav"].play();
+          core.assets["sound.wav"].play();
           scene.addChild(Text5);
         }
         return;
@@ -988,7 +1001,7 @@ function Load(width,height){
           if(S_Input._element.value=="") window.localStorage.setItem("surname","湊");
           if(S_Input2._element.value=="") window.localStorage.setItem("name","みお");
         }
-        core.assets["image/トロフィー/sound.wav"].play();
+        core.assets["sound.wav"].play();
         scene.addChild(Text12);
         return;
       });
@@ -1056,14 +1069,14 @@ function Load(width,height){
       scene.addChild(Background);
 
       var Background2 = new Sprite(1600,900);
-      Background2.image = core.assets["image/背景/white.png"];
+      Background2.image = core.assets["image/white.png"];
       Background2.x = 0;
       Background2.y = 900;
       scene.addChild(Background2);
 
       if(Datas[5]!=false){
         var Background3 = new Sprite(Datas[1],Datas[2]);
-        Background3.image = core.assets["image/背景/Transparent.png"];
+        Background3.image = core.assets["image/Transparent.png"];
         Background3.x = Datas[3];
         Background3.y = Datas[4];
         scene.addChild(Background3);
@@ -1078,7 +1091,7 @@ function Load(width,height){
 
       if(Datas[11]!=false){
         var Background4 = new Sprite(Datas[7],Datas[8]);
-        Background4.image = core.assets["image/背景/Transparent.png"];
+        Background4.image = core.assets["image/Transparent.png"];
         Background4.x = Datas[9];
         Background4.y = Datas[10];
         scene.addChild(Background4);
@@ -1093,7 +1106,7 @@ function Load(width,height){
 
       if(Datas[17]!=false){
         var Background5 = new Sprite(Datas[13],Datas[14]);
-        Background5.image = core.assets["image/背景/Transparent.png"];
+        Background5.image = core.assets["image/Transparent.png"];
         Background5.x = Datas[15];
         Background5.y = Datas[16];
         scene.addChild(Background5);
@@ -1108,7 +1121,7 @@ function Load(width,height){
 
       if(Datas[23]!=false){
         var Background6 = new Sprite(Datas[19],Datas[20]);
-        Background6.image = core.assets["image/背景/Transparent.png"];
+        Background6.image = core.assets["image/Transparent.png"];
         Background6.x = Datas[21];
         Background6.y = Datas[22];
         scene.addChild(Background6);
@@ -1140,7 +1153,7 @@ function Load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite(1600,900);
-      Background.image = core.assets["image/背景/white.png"];
+      Background.image = core.assets["image/white.png"];
       Background.x = 0;
       Background.y = 900;
       scene.addChild(Background);

@@ -20,6 +20,8 @@ function resetScreen(gameWidth,gameHeight){
   //enchantjs-stageの画面サイズを計算
   var width = gameWidth * scale;
   var height = gameHeight * scale;
+  console.log(height);
+
 /*
   //enchantjs-stageの画面サイズを計算
   var width = window.innerWidth;
@@ -65,7 +67,9 @@ function resetScreen(gameWidth,gameHeight){
   return {"scale":scale,"left":left,"top":top};
 }
 //初期設定
+
 $(function(){
+
   //ゲーム内の画面サイズ
   var gameWidth = 1600;
   var gameHeight = 1600;
