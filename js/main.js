@@ -72,6 +72,89 @@ function Load(width,height){
         Datas[7] = 0;
         if(Datas[12]!=false) Datas[12] = Number;
       }
+      var Result = core.Scene_datas;
+      for (var i = 0; i < Result.length; i++){
+        if(Number == Result[i].現在のシーン){
+          Result[i].文章 = Result[i].文章.replace(/\(苗字\)/g,Surname);
+          Result[i].文章 = Result[i].文章.replace(/\(名前\)/g,Name);
+          switch (i) {
+            case 1:
+              Flag = [false,false];
+              window.localStorage.setItem("name","");
+              window.localStorage.setItem("surname","");
+              break;
+            case 5:
+              Result[i].次のボタンで飛ぶシーン = 7;
+              if(Gender=="男") Result[i].次のボタンで飛ぶシーン = 6;
+              break;
+            case 7:
+              Result[i].戻るボタンで飛ぶシーン = 5;
+              Result[i].戻るボタン2で飛ぶシーン = 0;
+              Result[i].文章 = Name+"ちゃん！これから君の物語が始まる！";
+              if(Gender=="男"){
+                Result[i].戻るボタンで飛ぶシーン = 6;
+                Result[i].戻るボタン2で飛ぶシーン = 5;
+                Result[i].文章 = "えー、これから"+Name+"の物語が始まる。";
+              }
+              break;
+            case 8:
+              Result[i].文章 = "レッツゴー！";
+              if(Gender=="男"){
+                Result[i].文章 = "せいぜい死なないように気を付けることだ。"
+              }
+              break;
+            case 9:
+              var Text = "…";
+              Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+              core.replaceScene(MainScene(Datas,Return,Flag));
+              break;
+            case 10:
+              var Text = "……";
+              Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+              core.replaceScene(MainScene(Datas,Return,Flag));
+              break;
+            case 11:
+              var Text = "………";
+              Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+              core.replaceScene(MainScene(Datas,Return,Flag));
+              break;
+            case 12:
+              var Text = "…………";
+              Datas = [0,0,1,1000,0,0,1,1000,"",Text,Number-1,5,Number,15,Number+1,false,0];
+              core.replaceScene(MainScene(Datas,Return,Flag));
+              break;
+            case 13:
+              var Text = "……………";
+              Datas = [1,100,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
+              core.replaceScene(MainScene(Datas,Return,Flag));
+              break;
+            case 14:
+              var Text = "朝だ。";
+              Datas = [1,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,0,Number+1,false,0];
+              core.replaceScene(MainScene(Datas,Return,Flag));
+              break;
+          }
+          Datas[0] = Result[i].背景ナンバー;
+          Datas[1] = Result[i].背景が現れるまでの時間;
+          Datas[2] = Result[i].左のキャラナンバー;
+          Datas[3] = Result[i].左のキャラが現れるまでの時間;
+          Datas[4] = Result[i].真ん中のキャラナンバー;
+          Datas[5] = Result[i].真ん中のキャラが現れるまでの時間;
+          Datas[6] = Result[i].右のキャラナンバー;
+          Datas[7] = Result[i].右のキャラが現れるまでの時間;
+          Datas[8] = Result[i].名前;
+          Datas[9] = Result[i].文章;
+          Datas[10] = Result[i].戻るボタンで飛ぶシーン;
+          Datas[11] = Result[i].戻るボタン2で飛ぶシーン;
+          Datas[12] = Result[i].現在のシーン;
+          Datas[13] = Result[i].スキップボタンで飛ぶシーン;
+          Datas[14] = Result[i].次のボタンで飛ぶシーン;
+          Datas[15] = Result[i].トロフィー;
+          Datas[16] = Result[i].トロフィー画像ナンバー;
+          core.replaceScene(MainScene(Datas,Return,Flag));
+          return;
+        }
+      }
       switch (Number) {
         case -7:
         Datas = [0,0,0,0,0,0,0,0,"？？？","ホレ。",Number+1,-1,0,0,"ゲームオーバー","説明用",0];
@@ -101,102 +184,6 @@ function Load(width,height){
         Datas = [0,0,0,0,0,0,0,0,"？？？","…",Number+1,0,0,-7,Number-1,false,0];
         core.replaceScene(MainScene(Datas,Return,Flag));
         break;
-        case 1:
-          Flag = [false,false];
-          window.localStorage.setItem("name","");
-          window.localStorage.setItem("surname","");
-          Datas = [0,0,0,0,0,0,0,0,"？？？","…",Number-1,0,Number,4,Number+1,false,0];
-          /*Datas[0] = result[0].背景ナンバー;
-          Datas[1] = result[0].背景が現れるまでの時間;
-          Datas[2] = result[0].左のキャラナンバー;
-          Datas[3] = result[0].左のキャラが現れるまでの時間;
-          Datas[4] = result[0].真ん中のキャラナンバー;
-          Datas[5] = result[0].真ん中のキャラが現れるまでの時間;
-          Datas[6] = result[0].右のキャラナンバー;
-          Datas[7] = result[0].右のキャラが現れるまでの時間;
-          Datas[8] = result[0].名前;
-          Datas[9] = result[0].文章;
-          Datas[10] = result[0].戻るボタンで飛ぶシーン;
-          Datas[11] = result[0].戻るボタン2で飛ぶシーン;
-          Datas[12] = result[0].現在のシーン;
-          Datas[13] = result[0].スキップボタンで飛ぶシーン;
-          Datas[14] = result[0].次のボタンで飛ぶシーン;
-          Datas[15] = result[0].トロフィー;
-          Datas[16] = result[0].トロフィー画像ナンバー;*/
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 2:
-          Datas = [0,0,0,0,0,0,0,0,"？？？","やあ。お待たせ。",Number-1,0,Number,4,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 3:
-          Datas = [0,0,0,0,0,0,0,0,"？？？","まずはキミの事を教えてもらおう。",Number-1,1,Number,0,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 4:
-          Datas = [0,0,0,0,0,0,0,0,"？？？","設定を開いて君の事を設定してくれ。",Number-1,1,Number,0,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 5:
-          var Next = 7;
-          if(Gender=="男") Next = 6;
-          Datas = [0,0,0,0,0,0,0,0,"？？？","そうか、"+Surname+" "+Name+"というんだな。",0,0,Number,15,Next,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 6:
-          Datas = [0,0,0,0,0,0,0,0,"？？？","…なんだ 男か。 つまらん。",Number-1,0,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 7:
-          var Before = 5;
-          var Modoru = 0;
-          var Text = Name+"ちゃん！これから君の物語が始まる！";
-          if(Gender=="男"){
-            Before = 6;
-            Modoru = 5;
-            Text = "えー、これから"+Name+"の物語が始まる。";
-          }
-          Datas = [0,0,0,0,0,0,0,0,"？？？",Text,Before,Modoru,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 8:
-          var Text = "レッツゴー！";
-          if(Gender=="男"){
-            Text = "せいぜい死なないように気を付けることだ。"
-          }
-          Datas = [0,0,0,0,0,0,0,0,"？？？",Text,Number-1,5,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 9:
-          var Text = "…";
-          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 10:
-          var Text = "……";
-          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 11:
-          var Text = "………";
-          Datas = [0,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 12:
-          var Text = "…………";
-          Datas = [0,0,1,1000,0,0,1,1000,"",Text,Number-1,5,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 13:
-          var Text = "……………";
-          Datas = [1,100,0,0,0,0,0,0,"",Text,Number-1,5,Number,15,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
-        case 14:
-          var Text = "朝だ。";
-          Datas = [1,0,0,0,0,0,0,0,"",Text,Number-1,5,Number,0,Number+1,false,0];
-          core.replaceScene(MainScene(Datas,Return,Flag));
-          break;
         case 15:
           //(背景,左,中,右,C1,C2,C3,C4,1,2,3,4,前,一番前,現在)
           var C1 = "学校へ行く";
