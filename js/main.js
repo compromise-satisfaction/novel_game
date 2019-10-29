@@ -12,6 +12,7 @@ function Load(width,height){
   core.preload("image/Characters.png");
   core.preload("image/Transparent.png");
   core.preload("image/Trophies_image.png");
+  core.preload("https://i.gyazo.com/thumb/1000/fb8ce4d4710488cc27d086bdaeb3868d-jpg.jpg");
 
   for (var i = 0; i <= 7; i++){
     core.preload("image/背景/"+i+".png");
@@ -165,7 +166,7 @@ function Load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Title = new Sprite(1600,900);
-      Title.image = core.assets["image/Title.png"];
+      Title.image = core.assets["https://i.gyazo.com/thumb/1000/fb8ce4d4710488cc27d086bdaeb3868d-jpg.jpg"];
       Title.x = 0;
       Title.y = 0;
       scene.addChild(Title);
