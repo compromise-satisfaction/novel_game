@@ -205,13 +205,6 @@ function Load(width,height){
         }
       }
       switch(Number){
-        case 5:
-        var C1 = "扇風機だ。クーラーが欲しい。";
-        var C2 = "ゴミ箱は何も入ってない。";
-        var C3 = "画質が悪くてわかりにくいが、7月～8月のカレンダーだ。扇風機もあるし間違いないだろう。";
-        var Datas = [1,197,383,143,483,Name,C1,114,132,776,605,Name,C2,166,199,999,320,Name,C3,171,75,539,229,"シーンロード",1];
-        core.pushScene(InspectScene(Datas,Flag));
-        break;
         case 4:
         var C2 = "かなりイキのいいカジキだ。カジキマグロとも呼ばれるがマグロではないらしい。これで刺されたら死ぬだろうな。";
         var C3 = "怒っているようだ。";
