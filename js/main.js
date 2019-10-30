@@ -13,7 +13,6 @@ function Load(width,height){
   core.preload("image/Transparent.png");
   core.preload("image/Trophies_image.png");
   core.preload("https://i.gyazo.com/thumb/1000/fb8ce4d4710488cc27d086bdaeb3868d-jpg.jpg");
-
   for (var i = 0; i <= 7; i++){
     core.preload("image/背景/"+i+".png");
   }

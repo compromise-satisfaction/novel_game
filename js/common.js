@@ -114,7 +114,7 @@ $(function(){
         },);
     }
   })
-
+/*
   new Vue({
     el: '#app',
     mounted () {
@@ -125,10 +125,10 @@ $(function(){
         .then(result4 => {
           var game = enchant.Core.instance;
           game.image_datas = result4;
-          console.log("背景画像読み込み");
+          console.log("画像url読み込み");
         },);
     }
-  })
+  })*/
 
   //ゲーム内の画面サイズ
   var gameWidth = 1600;
