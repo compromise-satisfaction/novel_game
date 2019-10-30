@@ -73,29 +73,53 @@ function Load(width,height){
         Datas[7] = 0;
         if(Datas[12]!=false) Datas[12] = Number;
       }
-      var Result = core.Scene_datas;
-      for (var i = 0; i < Result.length; i++){
-        if(Number == Result[i].現在のシーン){
-          Result[i].文章 = Result[i].文章.replace(/\(苗字\)/g,Surname);
-          Result[i].文章 = Result[i].文章.replace(/\(名前\)/g,Name);
-          Datas[0] = Result[i].背景ナンバー;
-          Datas[1] = Result[i].背景が現れるまでの時間;
-          Datas[2] = Result[i].左のキャラナンバー;
-          Datas[3] = Result[i].左のキャラが現れるまでの時間;
-          Datas[4] = Result[i].真ん中のキャラナンバー;
-          Datas[5] = Result[i].真ん中のキャラが現れるまでの時間;
-          Datas[6] = Result[i].右のキャラナンバー;
-          Datas[7] = Result[i].右のキャラが現れるまでの時間;
-          Datas[8] = Result[i].名前;
-          Datas[9] = Result[i].文章;
-          Datas[10] = Result[i].戻るボタンで飛ぶシーン;
-          Datas[11] = Result[i].戻るボタン2で飛ぶシーン;
-          Datas[12] = Result[i].現在のシーン;
-          Datas[13] = Result[i].スキップボタンで飛ぶシーン;
-          Datas[14] = Result[i].次のボタンで飛ぶシーン;
-          Datas[15] = Result[i].トロフィー;
-          Datas[16] = Result[i].トロフィー画像ナンバー;
+      var Result1 = core.Mainscene_datas;
+      var Result2 = core.Choicescene_datas;
+      var Result3 = core.Inspectscene_datas;
+      var Result4 = core.image_datas;
+      for (var i = 0; i < Result1.length; i++){
+        if(Number == Result1[i].現在のシーン){
+          Result1[i].文章 = Result1[i].文章.replace(/\(苗字\)/g,Surname);
+          Result1[i].文章 = Result1[i].文章.replace(/\(名前\)/g,Name);
+          Result1[i].名前 = Result1[i].名前.replace(/\(苗字\)/g,Surname);
+          Result1[i].名前 = Result1[i].名前.replace(/\(名前\)/g,Name);
+          Datas[0] = Result1[i].背景ネーム;
+          Datas[1] = Result1[i].背景が現れるまでの時間;
+          Datas[2] = Result1[i].左のキャラナンバー;
+          Datas[3] = Result1[i].左のキャラが現れるまでの時間;
+          Datas[4] = Result1[i].真ん中のキャラナンバー;
+          Datas[5] = Result1[i].真ん中のキャラが現れるまでの時間;
+          Datas[6] = Result1[i].右のキャラナンバー;
+          Datas[7] = Result1[i].右のキャラが現れるまでの時間;
+          Datas[8] = Result1[i].名前;
+          Datas[9] = Result1[i].文章;
+          Datas[10] = Result1[i].戻るボタンで飛ぶシーン;
+          Datas[11] = Result1[i].戻るボタン2で飛ぶシーン;
+          Datas[12] = Result1[i].現在のシーン;
+          Datas[13] = Result1[i].スキップボタンで飛ぶシーン;
+          Datas[14] = Result1[i].次のボタンで飛ぶシーン;
+          Datas[15] = Result1[i].トロフィー;
+          Datas[16] = Result1[i].トロフィー画像ナンバー;
           core.replaceScene(MainScene(Datas,Return,Flag));
+          return;
+        }
+        if(Number == Result2[i].現在のシーン){
+          Datas[0] = Result2[i].背景ネーム;
+          Datas[1] = Result2[i].左のキャラナンバー;
+          Datas[2] = Result2[i].真ん中のキャラナンバー;
+          Datas[3] = Result2[i].右のキャラナンバー;
+          Datas[4] = Result2[i].選択肢1;
+          Datas[5] = Result2[i].選択肢2;
+          Datas[6] = Result2[i].選択肢3;
+          Datas[7] = Result2[i].選択肢4;
+          Datas[8] = Result2[i].選択肢1ボタンで飛ぶシーン;
+          Datas[9] = Result2[i].選択肢2ボタンで飛ぶシーン;
+          Datas[10] = Result2[i].選択肢3ボタンで飛ぶシーン;
+          Datas[11] = Result2[i].選択肢4ボタンで飛ぶシーン;
+          Datas[12] = Result2[i].戻るボタンで飛ぶシーン;
+          Datas[13] = Result2[i].戻るボタン2で飛ぶシーン;
+          Datas[14] = Result2[i].現在のシーン;
+          core.replaceScene(ChoiceScene(Datas,false,Flag));
           return;
         }
       }
@@ -145,13 +169,47 @@ function Load(width,height){
       }
     }
     function Inspect_loads(Number,Flag){
-      Name = window.localStorage.getItem("name");
+      var Result3 = core.Inspectscene_datas;
+      var Result4 = core.image_datas;
+      var Name = window.localStorage.getItem("name");
+      var Datas = [];
+      for (var i = 0; i < Result3.length; i++){
+        if(Number == Result3[i].シーンナンバー){
+          Datas[0] = Result3[i].背景;
+          Datas[1] = Result3[i].幅1;
+          Datas[2] = Result3[i].高1;
+          Datas[3] = Result3[i].x1;
+          Datas[4] = Result3[i].y1;
+          Datas[5] = Result3[i].名前1;
+          Datas[6] = Result3[i].テキスト1;
+          Datas[7] = Result3[i].幅2;
+          Datas[8] = Result3[i].高2;
+          Datas[9] = Result3[i].x2;
+          Datas[10] = Result3[i].y2;
+          Datas[11] = Result3[i].名前2;
+          Datas[12] = Result3[i].テキスト2;
+          Datas[13] = Result3[i].幅3;
+          Datas[14] = Result3[i].高3;
+          Datas[15] = Result3[i].x3;
+          Datas[16] = Result3[i].y3;
+          Datas[17] = Result3[i].名前3;
+          Datas[18] = Result3[i].テキスト3;
+          Datas[19] = Result3[i].幅4;
+          Datas[20] = Result3[i].高4;
+          Datas[21] = Result3[i].x4;
+          Datas[22] = Result3[i].y4;
+          Datas[23] = Result3[i].名前4;
+          Datas[24] = Result3[i].テキスト4;
+          core.pushScene(InspectScene(Datas,Flag));
+          return;
+        }
+      }
       switch(Number){
-        case 1:
+        case 5:
         var C1 = "扇風機だ。クーラーが欲しい。";
         var C2 = "ゴミ箱は何も入ってない。";
         var C3 = "画質が悪くてわかりにくいが、7月～8月のカレンダーだ。扇風機もあるし間違いないだろう。";
-        var Datas = [Number,197,383,143,483,Name,C1,114,132,776,605,Name,C2,166,199,999,320,Name,C3,171,75,539,229,"シーンロード",22,0,0,0,0];
+        var Datas = [1,197,383,143,483,Name,C1,114,132,776,605,Name,C2,166,199,999,320,Name,C3,171,75,539,229,"シーンロード",1];
         core.pushScene(InspectScene(Datas,Flag));
         break;
         case 4:
@@ -450,7 +508,7 @@ function Load(width,height){
         C1.text = "▶ " + Datas[4];
         scene.addChild(C1);
         C1.addEventListener('touchstart',function(e){
-          if(C1.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
+          if(C1.text == "▶ 調べる") Inspect_loads(Datas[14],Flag);
           else Scene_loads(Datas[8],false,false,Flag);
         });
       }
@@ -466,7 +524,7 @@ function Load(width,height){
         C2.text = "▶ " + Datas[5];
         scene.addChild(C2);
         C2.addEventListener('touchstart',function(e){
-          if(C2.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
+          if(C2.text == "▶ 調べる") Inspect_loads(Datas[14],Flag);
           else Scene_loads(Datas[9],false,false,Flag);
         });
       }
@@ -482,7 +540,7 @@ function Load(width,height){
         C3.text = "▶ " + Datas[6];
         scene.addChild(C3);
         C3.addEventListener('touchstart',function(e){
-          if(C3.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
+          if(C3.text == "▶ 調べる") Inspect_loads(Datas[14],Flag);
           else Scene_loads(Datas[10],false,false,Flag);
         });
       }
@@ -498,7 +556,7 @@ function Load(width,height){
         C4.text = "▶ " + Datas[7];
         scene.addChild(C4);
         C4.addEventListener('touchstart',function(e){
-          if(C4.text == "▶ 調べる") Inspect_loads(Datas[0],Flag);
+          if(C4.text == "▶ 調べる") Inspect_loads(Datas[14],Flag);
           else Scene_loads(Datas[11],false,false,Flag);
         });
       }

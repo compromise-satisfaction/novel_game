@@ -79,7 +79,53 @@ $(function(){
         .then(res => res.json())
         .then(result => {
           var game = enchant.Core.instance;
-          game.Scene_datas = result;
+          game.Mainscene_datas = result;
+          console.log("メインシーン読み込み");
+        },);
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    mounted () {
+      fetch(
+        'https://script.google.com/macros/s/AKfycbz5xZcLyjNApHZ-vi1ItPDjD7r54rCjpqpVzCuAIZsGOvxaVE4/exec',
+      )
+        .then(res => res.json())
+        .then(result2 => {
+          var game = enchant.Core.instance;
+          game.Choicescene_datas = result2;
+          console.log("選択肢シーン読み込み");
+        },);
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    mounted () {
+      fetch(
+        'https://script.google.com/macros/s/AKfycbwjsrYuGix6buuM-Hg0_LROiVGXn-4SJAYFiWXSWE6eeCZJHi8/exec',
+      )
+        .then(res => res.json())
+        .then(result3 => {
+          var game = enchant.Core.instance;
+          game.Inspectscene_datas = result3;
+          console.log("調べるシーン読み込み");
+        },);
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    mounted () {
+      fetch(
+        'https://script.google.com/macros/s/AKfycbwjsrYuGix6buuM-Hg0_LROiVGXn-4SJAYFiWXSWE6eeCZJHi8/exec',
+      )
+        .then(res => res.json())
+        .then(result4 => {
+          var game = enchant.Core.instance;
+          game.image_datas = result4;
+          console.log("背景画像読み込み");
         },);
     }
   })
