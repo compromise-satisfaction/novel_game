@@ -4,7 +4,7 @@ function Load(width,height){
   var core = new Core(width, height);
   core.preload("sound.wav");
   core.preload("image/Round.png");
-  core.preload("image/Title.png");
+  core.preload("image/title.png");
   core.preload("image/white.png");
   core.preload("image/Buttons.png");
   core.preload("image/Trophies.png");
@@ -12,7 +12,6 @@ function Load(width,height){
   core.preload("image/Characters.png");
   core.preload("image/Transparent.png");
   core.preload("image/Trophies_image.png");
-  core.preload("https://i.gyazo.com/thumb/1000/fb8ce4d4710488cc27d086bdaeb3868d-jpg.jpg");
   for (var i = 0; i <= 7; i++){
     core.preload("image/背景/"+i+".png");
   }
@@ -75,14 +74,11 @@ function Load(width,height){
       var Result1 = core.Mainscene_datas;
       var Result2 = core.Choicescene_datas;
       var Result3 = core.Inspectscene_datas;
-      var Result4 = core.image_datas;
       for (var i = 0; i < Result1.length; i++){
         if(Number == Result1[i].現在のシーン){
-          Result1[i].文章 = Result1[i].文章.replace(/\(苗字\)/g,Surname);
-          Result1[i].文章 = Result1[i].文章.replace(/\(名前\)/g,Name);
-          Result1[i].名前 = Result1[i].名前.replace(/\(苗字\)/g,Surname);
-          Result1[i].名前 = Result1[i].名前.replace(/\(名前\)/g,Name);
-          Datas[0] = Result1[i].背景ネーム;
+          Result1[i].文章 = Result1[i].文章.replace(/\(苗字\)/g,Surname).replace(/\(名前\)/g,Name);;
+          Result1[i].名前 = Result1[i].名前.replace(/\(苗字\)/g,Surname).replace(/\(名前\)/g,Name);;
+          Datas[0] = Result1[i].背景ナンバー;
           Datas[1] = Result1[i].背景が現れるまでの時間;
           Datas[2] = Result1[i].左のキャラナンバー;
           Datas[3] = Result1[i].左のキャラが現れるまでの時間;
@@ -102,8 +98,10 @@ function Load(width,height){
           core.replaceScene(MainScene(Datas,Return,Flag));
           return;
         }
+      }
+      for (var i = 0; i < Result2.length; i++){
         if(Number == Result2[i].現在のシーン){
-          Datas[0] = Result2[i].背景ネーム;
+          Datas[0] = Result2[i].背景ナンバー;
           Datas[1] = Result2[i].左のキャラナンバー;
           Datas[2] = Result2[i].真ん中のキャラナンバー;
           Datas[3] = Result2[i].右のキャラナンバー;
@@ -169,11 +167,14 @@ function Load(width,height){
     }
     function Inspect_loads(Number,Flag){
       var Result3 = core.Inspectscene_datas;
-      var Result4 = core.image_datas;
       var Name = window.localStorage.getItem("name");
       var Datas = [];
       for (var i = 0; i < Result3.length; i++){
         if(Number == Result3[i].シーンナンバー){
+          Result3[i].名前1 = Result3[i].名前1.replace(/\(名前\)/g,Name);
+          Result3[i].名前2 = Result3[i].名前2.replace(/\(名前\)/g,Name);
+          Result3[i].名前3 = Result3[i].名前3.replace(/\(名前\)/g,Name);
+          Result3[i].名前4 = Result3[i].名前4.replace(/\(名前\)/g,Name);
           Datas[0] = Result3[i].背景;
           Datas[1] = Result3[i].幅1;
           Datas[2] = Result3[i].高1;
@@ -203,20 +204,12 @@ function Load(width,height){
           return;
         }
       }
-      switch(Number){
-        case 4:
-        var C2 = "かなりイキのいいカジキだ。カジキマグロとも呼ばれるがマグロではないらしい。これで刺されたら死ぬだろうな。";
-        var C3 = "怒っているようだ。";
-        var Datas = [Number,290,123,325,645,"シーンロード",21,1413,461,73,25,Name,C2,227,249,371,209,Name,C3];
-        core.pushScene(InspectScene(Datas,Flag));
-        break;
-      }
     }
     var TitleScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Title = new Sprite(1600,900);
-      Title.image = core.assets["https://i.gyazo.com/thumb/1000/fb8ce4d4710488cc27d086bdaeb3868d-jpg.jpg"];
+      Title.image = core.assets["image/title.png"];
       Title.x = 0;
       Title.y = 0;
       scene.addChild(Title);

@@ -114,7 +114,7 @@ $(function(){
         },);
     }
   })
-/*
+
   new Vue({
     el: '#app',
     mounted () {
@@ -128,7 +128,7 @@ $(function(){
           console.log("画像url読み込み");
         },);
     }
-  })*/
+  })
 
   //ゲーム内の画面サイズ
   var gameWidth = 1600;
