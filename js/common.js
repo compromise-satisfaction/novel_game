@@ -74,65 +74,28 @@ $(function(){
     el: '#app',
     mounted () {
       fetch(
-        'https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec',
+        /*
+        //*
+        'https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec',
+        /*/
+        "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec",
+        //*/
       )
         .then(res => res.json())
         .then(result => {
           var game = enchant.Core.instance;
-          game.Mainscene_datas = result;
-          console.log("メインシーン読み込み");
-        },);
-    }
-  })
-
-  new Vue({
-    el: '#app',
-    mounted () {
-      fetch(
-        'https://script.google.com/macros/s/AKfycbz5xZcLyjNApHZ-vi1ItPDjD7r54rCjpqpVzCuAIZsGOvxaVE4/exec',
-      )
-        .then(res => res.json())
-        .then(result2 => {
-          var game = enchant.Core.instance;
-          game.Choicescene_datas = result2;
-          console.log("選択肢シーン読み込み");
-        },);
-    }
-  })
-
-  new Vue({
-    el: '#app',
-    mounted () {
-      fetch(
-        'https://script.google.com/macros/s/AKfycbwjsrYuGix6buuM-Hg0_LROiVGXn-4SJAYFiWXSWE6eeCZJHi8/exec',
-      )
-        .then(res => res.json())
-        .then(result3 => {
-          var game = enchant.Core.instance;
-          game.Inspectscene_datas = result3;
-          console.log("調べるシーン読み込み");
-        },);
-    }
-  })
-
-  new Vue({
-    el: '#app',
-    mounted () {
-      fetch(
-        'https://script.google.com/macros/s/AKfycbwjsrYuGix6buuM-Hg0_LROiVGXn-4SJAYFiWXSWE6eeCZJHi8/exec',
-      )
-        .then(res => res.json())
-        .then(result4 => {
-          var game = enchant.Core.instance;
-          game.image_datas = result4;
-          console.log("画像url読み込み");
+          game.scene_datas = result;
         },);
     }
   })
 
   //ゲーム内の画面サイズ
-  var gameWidth = 1600;
-  var gameHeight = 1600;
+  var gameWidth = 1072;
+  var gameWidth = 1072/4;
+  var gameWidth = 405;
+  var gameHeight = 1560;
+  var gameHeight = 1560/4;
+  var gameHeight = 600;
   //回転時の処理
   var orientationChange = function(){
     //画面サイズ設定
