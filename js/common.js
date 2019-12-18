@@ -74,12 +74,7 @@ $(function(){
     el: '#app',
     mounted () {
       fetch(
-        /*
-        //*
-        'https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec',
-        /*/
         "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec",
-        //*/
       )
         .then(res => res.json())
         .then(result => {
@@ -118,7 +113,7 @@ $(function(){
   //余白部分をドラッグすることによるスクロールを無効にする
   //$("#base").on("touchstart",function(event){event.preventDefault();});
   //ゲームを実行する
-  Load(gameWidth,gameHeight);
+  Images(gameWidth,gameHeight);
   //初回時のスクリーン設定
   orientationChange();
 });
