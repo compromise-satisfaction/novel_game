@@ -839,7 +839,7 @@ function Load(width,height,DATAS){
         Text[i] = new Texts("|>続きから");
       }
       Text[i] = new Texts("|>説明");
-      Text[i] = new Texts("|>デバック用");
+      //Text[i] = new Texts("|>デバック用");
 
       for (var i = 0; i < Text.length; i++){
         Text[i].addEventListener('touchstart',function(e){
