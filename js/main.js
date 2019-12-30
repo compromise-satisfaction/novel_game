@@ -846,7 +846,7 @@ function Load(width,height,DATAS){
           Label.call(this);
           this.font  = (width/20)+"px monospace";
           this.color = 'black';
-          if(a=="|>データ初期化") this.x = width-(width/2.5);
+          if(a=="◆ データ初期化") this.x = width-(width/2.5);
           else{
             this.x = 0;
             Numbers += (width/20)+(width/25);
@@ -862,22 +862,22 @@ function Load(width,height,DATAS){
 
       var Text = [];
 
-      Text[i] = new Texts("|>最初から");
+      Text[i] = new Texts("◆ 最初から");
       if(Data){
-        Text[i] = new Texts("|>データ初期化");
-        Text[i] = new Texts("|>続きから");
+        Text[i] = new Texts("◆ データ初期化");
+        Text[i] = new Texts("◆ 続きから");
       }
-      Text[i] = new Texts("|>説明");
-      Text[i] = new Texts("|>デバック用");
+      Text[i] = new Texts("◆ 説明");
+      //Text[i] = new Texts("◆ デバック用");
 
       for (var i = 0; i < Text.length; i++){
         Text[i].addEventListener('touchstart',function(e){
           if(Data) Load_Datas();
-          if(this.text == "|>最初から") Scene_loads("最初から",false,false);
-          if(this.text == "|>続きから") Scene_loads("セーブ読み込み",false,false);
-          if(this.text == "|>説明") Scene_loads("説明",false,false);
-          if(this.text == "|>デバック用") Scene_loads("デバック",false,false);
-          if(this.text == "|>データ初期化"){
+          if(this.text == "◆ 最初から") Scene_loads("最初から",false,false);
+          if(this.text == "◆ 続きから") Scene_loads("セーブ読み込み",false,false);
+          if(this.text == "◆ 説明") Scene_loads("説明",false,false);
+          if(this.text == "◆ デバック用") Scene_loads("デバック",false,false);
+          if(this.text == "◆ データ初期化"){
             game.pushScene(ClearScene());
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
@@ -1687,15 +1687,15 @@ function Load(width,height,DATAS){
           this.y = Numbers;
           this.width = width;
           this.height = (width/20);
-          this.text = "|>" + a;
+          this.text = "◆ " + a;
           scene.addChild(this);
           if(have(a)){
             this.text += " ✓";
             this.color = "red";
           }
           this.addEventListener('touchstart',function(e){
-            if(this.text == "|>調べる") Inspect_loads(Datas[6],false);
-            else if (this.text == "|>つきつける"){
+            if(this.text == "◆ 調べる") Inspect_loads(Datas[6],false);
+            else if (this.text == "◆ つきつける"){
               game.pushScene(ItemScene(Datas[6],"日常"));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
@@ -2004,18 +2004,18 @@ function Load(width,height,DATAS){
 
       var Text = [];
 
-      Text[0] = new Texts("|>設定を閉じる");
-      Text[1] = new Texts("|>タイトルに戻る");
-      Text[2] = new Texts("|>サウンド設定");
-      Text[3] = new Texts("|>セーブデータ読み込み");
-      Text[4] = new Texts("|>セーブ方法の切り替え");
+      Text[0] = new Texts("◆ 設定を閉じる");
+      Text[1] = new Texts("◆ タイトルに戻る");
+      Text[2] = new Texts("◆ サウンド設定");
+      Text[3] = new Texts("◆ セーブデータ読み込み");
+      Text[4] = new Texts("◆ セーブ方法の切り替え");
       if(Flag[8]) Text[5] = new Texts("現在はオートセーブです。");
-      else Text[5] = new Texts("|>セーブする");
+      else Text[5] = new Texts("◆ セーブする");
       Text[6] = new Texts("");
       Text[7] = new Texts("性別");
       Text[8] = new Texts("苗字");
       Text[9] = new Texts("名前");
-      Text[10] = new Texts("|>設定する");
+      Text[10] = new Texts("◆ 設定する");
       Text[11] = new Texts("");
 
       var Man = new Label();
@@ -2101,7 +2101,7 @@ function Load(width,height,DATAS){
               case "セーブ方法の切り替え":
               if(Flag[8]){
                 Flag[8] = false;
-                Text[5].text = "|>セーブする";
+                Text[5].text = "◆ セーブする";
               }
               else{
                 Flag[8] = true;
@@ -2230,7 +2230,7 @@ function Load(width,height,DATAS){
       Text1.y = (height/8);
       Text1.width = width;
       Text1.height = (width/20);
-      Text1.text = "|>戻る";
+      Text1.text = "◆ 戻る";
       scene.addChild(Text1);
 
       var Text2 = new Label();
@@ -2283,7 +2283,7 @@ function Load(width,height,DATAS){
       for (var i = 0; i < Text.length; i++){
         Text[i].addEventListener('touchstart',function(e){
           if(this.color=="black"){
-            this.text = "|>" + this.text;
+            this.text = "◆ " + this.text;
             this.color = "red";
             Text2.text = this.syousai;
           }
@@ -2352,7 +2352,7 @@ function Load(width,height,DATAS){
       Text.y = (width/16*9)+(width/20)*1;
       Text.width = width;
       Text.height = (width/20);
-      Text.text = "|>戻る";
+      Text.text = "◆ 戻る";
       scene.addChild(Text);
       Text.addEventListener('touchstart',function(e){
         if(Flag[4].length>5){
@@ -2536,7 +2536,7 @@ function Load(width,height,DATAS){
       Text1.y = (width/6);
       Text1.width = width;
       Text1.height = (width/20);
-      Text1.text = "|>閉じる";
+      Text1.text = "◆ 閉じる";
       scene.addChild(Text1);
 
       var Text2 = new Label();
@@ -2546,7 +2546,7 @@ function Load(width,height,DATAS){
       Text2.y = (width/6);
       Text2.width = width;
       Text2.height = (width/20);
-      Text2.text = "|>設定を開く";
+      Text2.text = "◆ 設定を開く";
 
       var Text21 = new Label();
       Text21.font  = (width/20)+"px monospace";
@@ -2555,14 +2555,14 @@ function Load(width,height,DATAS){
       Text21.y = (width/6);
       Text21.width = width;
       Text21.height = (width/20);
-      Text21.text = "|>人物";
+      Text21.text = "◆ 人物";
       scene.addChild(Text21);
 
       var Text3 = new Label();
       Text3.font  = (width/20)+"px monospace";
       Text3.color = 'black';
-      if(Ig) Text3.x = (width/1.6);
-      else Text3.x = (width/1.3);
+      if(Ig) Text3.x = (width/1.7);
+      else Text3.x = (width/1.6);
       Text3.y = (width/4) + ((width/20)+(width/25)*14);
       Text3.width = width;
       Text3.height = (width/20);
@@ -2611,7 +2611,7 @@ function Load(width,height,DATAS){
       var Text8 = new Label();
       Text8.font  = (width/20)+"px monospace";
       Text8.color = 'black';
-      Text8.x = (width/1.3);
+      Text8.x = (width/1.4);
       Text8.y = (width/4) + ((width/20)+(width/25)*10);
       Text8.width = width;
       Text8.height = (width/20);
@@ -2624,7 +2624,7 @@ function Load(width,height,DATAS){
       Text9.y = (width/4) + ((width/20)+(width/25)*14);
       Text9.width = width;
       Text9.height = (width/20);
-      Text9.text = "<|前";
+      Text9.text = "◆ 前";
 
       var Text10 = new Label();
       Text10.font  = (width/20)+"px monospace";
@@ -2633,7 +2633,7 @@ function Load(width,height,DATAS){
       Text10.y = (width/4) + ((width/20)+(width/25)*14);
       Text10.width = width;
       Text10.height = (width/20);
-      Text10.text = "|>次";
+      Text10.text = "次 ◆";
 
       if(Number.length>1){
         if(Number.substring(0,2)=="使う") Text3.text = "未表示";
@@ -2699,7 +2699,7 @@ function Load(width,height,DATAS){
           Image[Item_Number] = new Item_image(a[2]);
           if(a[3]){
             if(a[3]=="停止") this.text6 = "■ 停止";
-            else this.text6 = "|>" + a[3];
+            else this.text6 = "◆ " + a[3];
             this.syousai = a[4];
           }
           else this.text6 = "";
@@ -2728,7 +2728,7 @@ function Load(width,height,DATAS){
       });
 
       Text2.addEventListener('touchstart',function(e){
-        if(Text2.text=="|>設定を開く"){
+        if(Text2.text=="◆ 設定を開く"){
           game.pushScene(SettingScene(Number));
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
@@ -2745,7 +2745,7 @@ function Load(width,height,DATAS){
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
-        if(this.text=="|>使う") Scene_loads(Number,true,"使う"+Choice_Item);
+        if(this.text=="◆ 使う") Scene_loads(Number,true,"使う"+Choice_Item);
         else{
           if(Ig==Choice_Item||(Ig!="日常"&&(Choice_Item=="強欲な壺")||Choice_Item=="ヒントカード")){
             if(Choice_Item=="ヒントカード"){
@@ -2772,7 +2772,7 @@ function Load(width,height,DATAS){
 
       Text8.addEventListener('touchstart',function(e){
         if(this.text=="") return;
-        else if(this.text=="|>再生"){
+        else if(this.text=="◆ 再生"){
           Sound_ON(Choice_Item,true);
           for (var i = 0; i < Item_Flag.length; i++) {
             if(Item_Flag[i][0]==Choice_Item) break;
@@ -2789,13 +2789,13 @@ function Load(width,height,DATAS){
           game.popScene();
           console.log("Scene数",Scene_kazu);
         }
-        else if(this.text=="|>調べる"){
+        else if(this.text=="◆ 調べる"){
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
           Inspect_loads(Number,Choice_Item);
         }
-        else if(this.text=="|>遊ぶ"){
+        else if(this.text=="◆ 遊ぶ"){
           OASOBI = true;
           game.popScene();
           game.pushScene(ReversiScene());
@@ -2836,10 +2836,10 @@ function Load(width,height,DATAS){
           if(this.color=="black"){
             scene.addChild(Image[this.image_number]);
             Choice_Item = this.text;
-            this.text = "|>" + this.text;
+            this.text = "◆ " + this.text;
             this.color = "red";
-            if(Ig) Text3.text = "|>つきつける";
-            //else Text3.text = "|>使う";//使うを非表示
+            if(Ig) Text3.text = "◆ つきつける";
+            //else Text3.text = "◆ 使う";//使うを非表示
             Text4.text = this.text2;
             Text5.text = this.text3;
             Text6.text = this.text4;
@@ -2891,7 +2891,7 @@ function Load(width,height,DATAS){
       Text1.y = (width/6);
       Text1.width = width;
       Text1.height = (width/20);
-      Text1.text = "|>閉じる";
+      Text1.text = "◆ 閉じる";
       scene.addChild(Text1);
 
       var Text2 = new Label();
@@ -2901,7 +2901,7 @@ function Load(width,height,DATAS){
       Text2.y = (width/6);
       Text2.width = width;
       Text2.height = (width/20);
-      Text2.text = "|>設定を開く";
+      Text2.text = "◆ 設定を開く";
 
       var Text21 = new Label();
       Text21.font  = (width/20)+"px monospace";
@@ -2910,14 +2910,14 @@ function Load(width,height,DATAS){
       Text21.y = (width/6);
       Text21.width = width;
       Text21.height = (width/20);
-      Text21.text = "|>持物";
+      Text21.text = "◆ 持物";
       scene.addChild(Text21);
 
       var Text3 = new Label();
       Text3.font  = (width/20)+"px monospace";
       Text3.color = 'black';
-      if(Ig) Text3.x = (width/1.6);
-      else Text3.x = (width/1.3);
+      if(Ig) Text3.x = (width/1.7);
+      else Text3.x = (width/1.6);
       Text3.y = (width/4) + ((width/20)+(width/25)*14);
       Text3.width = width;
       Text3.height = (width/20);
@@ -2966,7 +2966,7 @@ function Load(width,height,DATAS){
       var Text8 = new Label();
       Text8.font  = (width/20)+"px monospace";
       Text8.color = 'black';
-      Text8.x = (width/1.3);
+      Text8.x = (width/1.4);
       Text8.y = (width/4) + ((width/20)+(width/25)*10);
       Text8.width = width;
       Text8.height = (width/20);
@@ -2979,7 +2979,7 @@ function Load(width,height,DATAS){
       Text9.y = (width/4) + ((width/20)+(width/25)*14);
       Text9.width = width;
       Text9.height = (width/20);
-      Text9.text = "<|前";
+      Text9.text = "◆ 前";
 
       var Text10 = new Label();
       Text10.font  = (width/20)+"px monospace";
@@ -2988,7 +2988,7 @@ function Load(width,height,DATAS){
       Text10.y = (width/4) + ((width/20)+(width/25)*14);
       Text10.width = width;
       Text10.height = (width/20);
-      Text10.text = "|>次";
+      Text10.text = "次 ◆";
 
       if(Number.length>1){
         if(Number.substring(0,2)=="使う") Text3.text = "未表示";
@@ -3053,7 +3053,7 @@ function Load(width,height,DATAS){
           Image[Character_Number] = new Character_image(a[2]);
           if(a[3]){
             if(a[3]=="停止") this.text6 = "■ 停止";
-            else this.text6 = "|>" + a[3];
+            else this.text6 = "◆ " + a[3];
             this.syousai = a[4];
           }
           else this.text6 = "";
@@ -3082,7 +3082,7 @@ function Load(width,height,DATAS){
       });
 
       Text2.addEventListener('touchstart',function(e){
-        if(Text2.text=="|>設定を開く"){
+        if(Text2.text=="◆ 設定を開く"){
           game.pushScene(SettingScene(Number));
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
@@ -3099,7 +3099,7 @@ function Load(width,height,DATAS){
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
-        if(this.text=="|>使う") Scene_loads(Number,true,"使う"+Choice_Character);
+        if(this.text=="◆ 使う") Scene_loads(Number,true,"使う"+Choice_Character);
         else{
           if(Ig==Choice_Character){
             game.pushScene(PopScene(Number,"異議あり！"));
@@ -3118,7 +3118,7 @@ function Load(width,height,DATAS){
 
       Text8.addEventListener('touchstart',function(e){
         if(this.text=="") return;
-        else if(this.text=="|>再生"){
+        else if(this.text=="◆ 再生"){
           Sound_ON(Choice_Character,true);
           for (var i = 0; i < Character_Flag.length; i++) {
             if(Character_Flag[i][0]==Choice_Character) break;
@@ -3136,7 +3136,7 @@ function Load(width,height,DATAS){
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
         }
-        else if(this.text=="|>調べる"){
+        else if(this.text=="◆ 調べる"){
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3178,9 +3178,9 @@ function Load(width,height,DATAS){
           if(this.color=="black"){
             scene.addChild(Image[this.image_number]);
             Choice_Character = this.text;
-            this.text = "|>" + this.text;
+            this.text = "◆ " + this.text;
             this.color = "red";
-            if(Ig) Text3.text = "|>つきつける";
+            if(Ig) Text3.text = "◆ つきつける";
             else Text3.text = "";
             Text4.text = this.text2;
             Text5.text = this.text3;
@@ -3244,7 +3244,7 @@ function Load(width,height,DATAS){
 
       var Text = [];
 
-      Text[0] = new Texts("|>閉じる");
+      Text[0] = new Texts("◆ 閉じる");
 
       if(Number.length==11){
         var Video = new Entity()
@@ -3267,21 +3267,21 @@ function Load(width,height,DATAS){
 
       for (var i = 1; i < Text.length; i++) {
         Text[i].addEventListener('touchstart',function(e){
-          if(this.text=="|>次のページ"){
+          if(this.text=="◆ 次のページ"){
             Pages3 += 13;
             for (var i = 1; i < Text.length; i++) {
               if(S_Text[Pages3+i]) Text[i].text = S_Text[Pages3+i];
               else Text[i].text = "";
             }
           }
-          else if(this.text=="|>前のページ"){
+          else if(this.text=="◆ 前のページ"){
             Pages3 -= 13;
             for (var i = 1; i < Text.length; i++) {
               if(S_Text[Pages3+i]) Text[i].text = S_Text[Pages3+i];
               else Text[i].text = "";
             }
           }
-          else if(this.text=="|>最初のページ"){
+          else if(this.text=="◆ 最初のページ"){
             Pages3 = -1;
             for (var i = 1; i < 14; i++) {
               if(S_Text[Pages3+i]) Text[i].text = S_Text[Pages3+i];
@@ -3320,7 +3320,7 @@ function Load(width,height,DATAS){
       Text1.y = (height/8);
       Text1.width = width;
       Text1.height = (width/20);
-      Text1.text = "|>戻る";
+      Text1.text = "◆ 戻る";
       scene.addChild(Text1);
 
       var Numbers = (height/4);
@@ -3338,7 +3338,7 @@ function Load(width,height,DATAS){
           this.width = width;
           this.height = (width/20);
           this.c = Text_Number;
-          this.text = "|>"+a;
+          this.text = "◆ "+a;
           scene.addChild(this);
           Text2[Text_Number] = new Texts2(Flag[Text_Number]);
         }
@@ -3441,8 +3441,8 @@ function Load(width,height,DATAS){
       var Text = [];
 
       Text[0] = new Texts("データを初期化する？");
-      Text[1] = new Texts("|>はい");
-      Text[2] = new Texts("|>いいえ");
+      Text[1] = new Texts("◆ はい");
+      Text[2] = new Texts("◆ いいえ");
 
       Text[1].addEventListener('touchstart',function(e){
         game.popScene();
