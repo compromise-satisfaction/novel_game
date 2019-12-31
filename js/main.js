@@ -5,6 +5,8 @@ var GAS = [
   "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec"//シーン
 ];
 
+//function ALL(){
+
 function Images(width,height){
   fetch(
     GAS[0],
@@ -800,7 +802,7 @@ function Load(width,height,DATAS){
     var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
     for (var i = 0; i < DATAS.length; i++) {
       if(DATAS[i].Number=="調べる"+Number){
-        Inspect = [Image_conversion(DATAS[i].type),DATAS[i].Datas0,DATAS[i].Datas1,DATAS[i].Datas2,DATAS[i].Datas3,DATAS[i].Datas4,DATAS[i].Datas5,DATAS[i].Datas6,DATAS[i].Datas7,DATAS[i].Datas8,DATAS[i].Datas9];
+        Inspect = [Image_conversion(DATAS[i].type),DATAS[i].Datas0,DATAS[i].Datas1,DATAS[i].Datas2,DATAS[i].Datas3,DATAS[i].Datas4,DATAS[i].Datas5,DATAS[i].Datas6,DATAS[i].Datas7,DATAS[i].Datas8,DATAS[i].Datas9,DATAS[i].Datas10,DATAS[i].Datas11,DATAS[i].Datas12,DATAS[i].Datas13,DATAS[i].Datas14];
         break;
       }
     }
