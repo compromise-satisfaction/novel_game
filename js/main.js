@@ -1256,7 +1256,7 @@ function Load(width,height,DATAS){
           this.color = 'black';
           this.x = (width/50);
           this.y = Numbers;
-          this.width = width;
+          this.width = width*2;
           this.height = (width/20);
           this.text = a;
           if(a.substring(0,1)=="("&&a.substring(a.length-1)==")") this.color = "blue";
@@ -1271,7 +1271,6 @@ function Load(width,height,DATAS){
       }
 
       var Time = 0;
-      var Time2 = 0;
       var k = 0;
       var Text_defined = true;
 
@@ -1297,38 +1296,18 @@ function Load(width,height,DATAS){
         }
         Time ++;
         if(s){
-          Time2 ++;
-          if(Time2==19){
+          if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
-            if(k==6) k = 0;
-            Time2 = 0;
-            if(Datas[8].substring(0,1)=="("){
-              Text[k].text = " ";
-              Time2 ++;
-            }
-            if(Datas[8].substring(0,1)=="「"){
-              if(Datas[8].substring(Time-2,Time-1)!="」"){
-                Text[k].text = "　";
-                Time2 ++;
-              }
-            }
-          }
-          if(Datas[8].substring(Time-1,Time)=="↓"||Time2==19){
-            if(Time2>1) k++;
-            Time2 = 0;
             if(Datas[8].substring(0,1)=="("){
               Text[k].color = "blue";
               Text[k].text = " ";
-              Time2 ++;
             }
             if(Datas[8].substring(0,1)=="("){
               Text[k].text = " ";
-              Time2 ++;
             }
             if(Datas[8].substring(0,1)=="「"){
               if(Datas[8].substring(Time-2,Time-1)!="」"){
                 Text[k].text = "　";
-                Time2 ++;
               }
             }
           }
@@ -1418,11 +1397,10 @@ function Load(width,height,DATAS){
         Enter1.addEventListener('touchstart',function(e){
           if(Text_defined){
             Text_defined = false;
-            for (var i = 0; i <6; i++) {
+            for (var i = 0; i < 6; i++) {
               Text[i].text = "";
             }
             Time = 0;
-            Time2 = 0;
             k = 0;
             for (var i = 0; i < Datas[8].length+1; i++) {
               T_D();
@@ -2423,7 +2401,7 @@ function Load(width,height,DATAS){
           this.color = 'blue';
           this.x = (width/50);
           this.y = Numbers;
-          this.width = width;
+          this.width = width*2;
           this.height = (width/20);
           this.text = a;
           if(a.substring(0,1)=="("&&a.substring(a.length-1)==")") this.color = "blue";
@@ -2433,58 +2411,22 @@ function Load(width,height,DATAS){
 
       var Text =[];
 
-      for (var i = 0; i <6; i++) {
+      for (var i = 0; i < 6; i++) {
         Text[i] = new Texts("");
       }
 
       var Time = 0;
-      var Time2 = 0;
       var k = 0;
       var Text_defined = true;
 
       function T_D(){
         var s = true;
-        if(b.substring(Time,Time+1)=="→"){
-          s = false;
-        }
         Time ++;
         if(s){
-          Time2 ++;
-          if(Time2==19){
+          if(b.substring(Time-1,Time)=="↓"){
             k++;
-            Time2 = 0;
-            if(b.substring(0,1)=="("){
-              Text[k].text = " ";
-              Time2 ++;
-            }
-            if(b.substring(0,1)=="「"){
-              if(b.substring(Time-2,Time-1)!="」"){
-                Text[k].text = "　";
-                Time2 ++;
-              }
-            }
-          }
-          if(b.substring(Time-1,Time)=="↓"||Time2==19){
-            if(Time2>1) k++;
-            Time2 = 0;
-            if(b.substring(0,1)=="("){
-              Text[k].color = "blue";
-              Text[k].text = " ";
-              Time2 ++;
-            }
-            if(b.substring(0,1)=="("){
-              Text[k].text = " ";
-              Time2 ++;
-            }
-            if(b.substring(0,1)=="「"){
-              if(b.substring(Time-2,Time-1)!="」"){
-                Text[k].text = "　";
-                Time2 ++;
-              }
-            }
           }
           else if(b.substring(Time-1,Time)!=""){
-            if(Text[k].text.substring(0,1)=="("||Text[k].text.substring(0,1)==" ") Text[k].color = "blue";
             Text[k].text = Text[k].text+b.substring(Time-1,Time);
           }
           else if(b.substring(Time-1,Time)==""){
@@ -2537,6 +2479,17 @@ function Load(width,height,DATAS){
       })
 
       Enter1.addEventListener('touchstart',function(e){
+        if(Text_defined){
+          Text_defined = false;
+          for (var i = 0; i < 6; i++) {
+            Text[i].text = "";
+          }
+          Time = 0;
+          k = 0;
+          for (var i = 0; i < b.length+1; i++) {
+            T_D();
+          }
+        }
         if(Item.x>X_0+width/2-width/4){
           Item.x = X_0 + width/2 -width/4;
         }
