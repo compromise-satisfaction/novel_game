@@ -1,11 +1,25 @@
 enchant()
 
+switch (GitHub_type) {
+case "referee":
 var GAS = [
-  "https://script.google.com/macros/s/AKfycbwpfQNI_EdtFjQdekQERjNaYXxvRWACZMulrCXUBsC1ZayUn5A/exec",//画像
-  "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec"//シーン
+"https://script.google.com/macros/s/AKfycbzcY3aEn2ovKGtc9HA87smGV34KDo52qHVGTq395_9iqVylKPSg/exec",//画像
+"https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec"//シーン
 ];
-
-//function ALL(){
+break;
+case "Share":
+var GAS = [
+"https://script.google.com/macros/s/AKfycbydKeSrgciGcfdx1HbW5TXagCujRHYARr-pIrw2BzwsRq5H-U0/exec",//画像
+"https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec"//シーン
+];
+break;
+case "novel_game":
+var GAS = [
+"https://script.google.com/macros/s/AKfycbwpfQNI_EdtFjQdekQERjNaYXxvRWACZMulrCXUBsC1ZayUn5A/exec",//画像
+"https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec"//シーン
+];
+break;
+}
 
 function Images(width,height){
   fetch(
@@ -188,6 +202,7 @@ function Load(width,height,DATAS){
     }
 
     function post(value){
+      return;
       if(Flag[1]=="セーブしない") return;
       //*
       fetch(GAS[1],
@@ -196,7 +211,6 @@ function Load(width,height,DATAS){
           body: value
         }
       )
-      return;
       //*/
       var form = document.createElement('form');
       var request = document.createElement('input');
@@ -870,7 +884,26 @@ function Load(width,height,DATAS){
         Text[i] = new Texts("◆ 続きから");
       }
       Text[i] = new Texts("◆ 説明");
-      //Text[i] = new Texts("◆ デバック用");
+      if(Data){
+        Flag = window.localStorage.getItem("Flag").split(",");
+        if(Flag[1]=="不動"&&Flag[0]=="遊星") Text[i] = new Texts("◆ デバック用");
+        else {
+          fetch("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec",
+            {
+              method: 'POST',
+              body: GitHub_type
+            }
+          )
+        }
+      }
+      else{
+        fetch("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec",
+          {
+            method: 'POST',
+            body: GitHub_type
+          }
+        )
+      }
 
       for (var i = 0; i < Text.length; i++){
         Text[i].addEventListener('touchstart',function(e){
