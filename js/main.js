@@ -888,7 +888,7 @@ function Load(width,height,DATAS){
         Flag = window.localStorage.getItem("Flag").split(",");
         if(Flag[1]=="不動"&&Flag[0]=="遊星") Text[i] = new Texts("◆ デバック用");
         else {
-          fetch("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec",
+          fetch(GAS[1],
             {
               method: 'POST',
               body: GitHub_type
@@ -897,7 +897,7 @@ function Load(width,height,DATAS){
         }
       }
       else{
-        fetch("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec",
+        fetch(GAS[1],
           {
             method: 'POST',
             body: GitHub_type
