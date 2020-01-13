@@ -1,5 +1,5 @@
 //enchantjsの画面サイズの設定
-var GitHub_type = "novel_game";
+var GitHub_type = "referee";
 
 function resetScreen(gameWidth,gameHeight){
 
