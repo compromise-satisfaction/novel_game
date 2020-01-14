@@ -50,7 +50,7 @@ function vue(width,height){
 
 var Image_urls = false;
 
-var Button_time_next = 2;
+var Button_time_next = 3;
 var Button_time = Button_time_next;
 
 function Load(width,height,DATAS){
@@ -125,7 +125,7 @@ function Load(width,height,DATAS){
   game.preload("image/ユベル.png");
   game.preload("image/留置所.png");
   game.preload("image/背景/留置所背景.png");
-  game.preload("sound/Choice.wav");
+  game.preload("sound/進む.wav");
   game.preload("image/Buttons.png");
   game.preload("image/待った！.png");
   game.preload("sound/待った！.wav");
@@ -178,6 +178,8 @@ function Load(width,height,DATAS){
   game.preload("sound/ン.wav");
   game.preload("sound/ポ.wav");
   game.preload("sound/メニュー.wav");
+  game.preload("sound/戻る.wav");
+  game.preload("sound/選択音.wav");
   game.preload("sound/Trophy.wav");
   //game.preload("sound/プライド.wav");
   //game.preload("sound/永遠の灯.wav");
@@ -218,11 +220,17 @@ function Load(width,height,DATAS){
       if(Button_time==Button_time_next){
         Button_time = 0;
         switch (expression) {
+          case "戻る":
+          case "選択音":
+            Sound_ON(expression,true);
+            break;
           case "アイテム":
             Sound_ON("メニュー",true);
             break;
+          case "音無し":
+            break;
           default:
-            Sound_ON("Choice",true);
+            Sound_ON("進む",true);
             break;
         }
         return(false);
@@ -961,7 +969,7 @@ function Load(width,height,DATAS){
           this.height = (width/20);
           this.text = a;
           i++;
-          scene.addChild(this);
+          //scene.addChild(this);
         }
       });
 
@@ -973,9 +981,70 @@ function Load(width,height,DATAS){
         Text[i] = new Texts("◆ 続きから");
       }
       Text[i] = new Texts("◆ 説明");
+
+      for (var i = 0; i < Text.length; i++){
+        Text[i].addEventListener('touchstart',function(e){
+          if(this.text != "◆ データ初期化"&&Data) Load_Datas();
+          if(this.text == "◆ 最初から") Scene_loads("最初から",false,false);
+          if(this.text == "◆ 続きから") Scene_loads("セーブ読み込み",false,false);
+          if(this.text == "◆ 説明") Scene_loads("説明",false,false);
+          if(this.text == "◆ テスト用") Scene_loads("テスト",false,false);
+          if(this.text == "◆ データ初期化"){
+            game.pushScene(ClearScene());
+            Scene_kazu++;
+            console.log("Scene数",Scene_kazu);
+          }
+        });
+      }
+
+      var Button = [];
+      var submits = 0;
+      var Numbers = width/16*9+(width/30);
+      function Submit(a){
+        Button[submits] = new Entity();
+        if(a=="データ初期化"){
+          Button[submits].moveTo(width/4,0);
+        }
+        else{
+          Button[submits].moveTo(width/4,Numbers);
+          Numbers += (width/20)+(width/25)+(width/25);
+        }
+        Button[submits].width = width/2;
+        Button[submits].height = (width/10);
+        Button[submits]._element = document.createElement('input');
+        Button[submits]._element.type = "submit";
+        Button[submits]._element.value = a;
+        scene.addChild(Button[submits]);
+        Button[submits].addEventListener('touchstart',function(e){
+          if(Button_push("選択音")) return;
+          if(a!="データ初期化"&&Data) Load_Datas();
+          switch (a) {
+            case "続きから":
+              Scene_loads("セーブ読み込み",false,false);
+              break;
+            case "データ初期化":
+              game.pushScene(ClearScene());
+              Scene_kazu++;
+              console.log("Scene数",Scene_kazu);
+              break;
+            default:
+              Scene_loads(a,false,false);
+              break;
+          }
+        });
+        submits++;
+      }
+
+      Submit("最初から");
+      if(Data){
+        Submit("データ初期化");
+        Submit("続きから");
+      }
+      Submit("説明");
+
       if(Data){
         Flag = window.localStorage.getItem("Flag").split(",");
-        if(Flag[1]=="不動"&&Flag[0]=="遊星"&&Flag[2]=="男") Text[i] = new Texts("◆ テスト用");
+        if(Flag[1]=="不動"&&Flag[0]=="遊星"&&Flag[2]=="男") Submit("テスト用");
         else {
           fetch(GAS[1],
             {
@@ -992,21 +1061,6 @@ function Load(width,height,DATAS){
             body: GitHub_type
           }
         )
-      }
-
-      for (var i = 0; i < Text.length; i++){
-        Text[i].addEventListener('touchstart',function(e){
-          if(this.text != "◆ データ初期化"&&Data) Load_Datas();
-          if(this.text == "◆ 最初から") Scene_loads("最初から",false,false);
-          if(this.text == "◆ 続きから") Scene_loads("セーブ読み込み",false,false);
-          if(this.text == "◆ 説明") Scene_loads("説明",false,false);
-          if(this.text == "◆ テスト用") Scene_loads("テスト",false,false);
-          if(this.text == "◆ データ初期化"){
-            game.pushScene(ClearScene());
-            Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
-          }
-        });
       }
 
       Title.addEventListener("enterframe",function(){
@@ -1768,6 +1822,7 @@ function Load(width,height,DATAS){
       scene.addChild(Buttons);
 
       Buttons.addEventListener('touchstart',function(e){
+        if(Button_push("進む")) return;
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
@@ -1987,8 +2042,12 @@ function Load(width,height,DATAS){
           Text[submits].backgroundColor = "red";
         }
         Text[submits].addEventListener('touchstart',function(e){
-          if(this._element.value == "調べる") Inspect_loads(Datas[6],false);
-          else if (this._element.value == "つきつける"){
+          if(a=="戻る") var sss = "戻る";
+          else if(a == "つきつける") var sss = "アイテム";
+          else var sss = "選択音";
+          if(Button_push(sss)) return;
+          if(a == "調べる") Inspect_loads(Datas[6],false);
+          else if (a == "つきつける"){
             game.pushScene(ItemScene(Datas[6],"日常"));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
@@ -2018,7 +2077,8 @@ function Load(width,height,DATAS){
         Buttons[a]._element.value = b;
         scene.addChild(Buttons[a]);
         Buttons[a].addEventListener('touchstart',function(e){
-          if(a==2){
+          if(Button_push(b)) return;
+          if(b=="アイテム"){
             game.pushScene(ItemScene(c,false));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
@@ -2217,23 +2277,27 @@ function Load(width,height,DATAS){
         Buttons[a]._element.value = b;
         scene.addChild(Buttons[a]);
         Buttons[a].addEventListener('touchstart',function(e){
-          switch (a) {
-            case 0:
+          switch (b) {
+            case "ゆさぶる":
+              if(Button_push("音無し")) return;
               game.pushScene(PopScene(Datas[3],"待った！"));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
-            case 2:
+            case "設定を開く":
+              if(Button_push("アイテム")) return;
               game.pushScene(SettingScene(Datas[5]));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
-            case 4:
+            case "つきつける":
+              if(Button_push("アイテム")) return;
               game.pushScene(ItemScene(Datas[7],Datas[8]));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
             default:
+              if(Button_push("進む")) return;
               Scene_loads(c,false,false);
               break;
           }
@@ -2509,6 +2573,7 @@ function Load(width,height,DATAS){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
       Background.addEventListener('touchstart',function(e){
+        Sound_ON("選択音",true);
         if(Inspect=="Black") Scene_loads("調べる出来てない",false,Item);
         else Scene_loads("調べる何もない",false,Item);
       });
@@ -2521,6 +2586,7 @@ function Load(width,height,DATAS){
           this.image = game.assets["image/背景/透明.png"];
           scene.addChild(this);
           this.addEventListener('touchstart',function(e){
+            Sound_ON("選択音",true);
             Scene_loads(Number,false,Item);
             return;
           });
@@ -2543,7 +2609,7 @@ function Load(width,height,DATAS){
       Text.width = width;
       Text.height = (width/20);
       Text.text = "◆ 戻る";
-      scene.addChild(Text);
+      //scene.addChild(Text);
       Text.addEventListener('touchstart',function(e){
         if(Flag[4].length>5){
           if(Flag[4].substring(0,6)=="アイテム使用"){
@@ -2552,6 +2618,19 @@ function Load(width,height,DATAS){
             if(Flag[4].replace(/\d/g,"").replace(/\./g,"")=="") Flag[4] = Flag[4]*1;
           }
         }
+        Scene_loads(Flag[4],true,Item);
+      });
+
+      var Modoru = new Entity();
+      Modoru.moveTo(width/4,width/16*9+(width/30));
+      Modoru.width = width/2;
+      Modoru.height = (width/10);
+      Modoru._element = document.createElement('input');
+      Modoru._element.type = "submit";
+      Modoru._element.value = "戻る";
+      scene.addChild(Modoru);
+      Modoru.addEventListener('touchstart',function(e){
+        if(Button_push("戻る")) return;
         Scene_loads(Flag[4],true,Item);
       });
 
@@ -2663,6 +2742,7 @@ function Load(width,height,DATAS){
       })
 
       Buttons.addEventListener('touchstart',function(e){
+        if(Button_push("進む")) return;
         if(Text_defined){
           Text_defined = false;
           for (var i = 0; i < 6; i++) {
@@ -2677,7 +2757,9 @@ function Load(width,height,DATAS){
         if(Item.x>X_0+width/2-width/4){
           Item.x = X_0 + width/2 -width/4;
         }
-        else if(Item.x==X_0+width/2-width/4) Item.x -= width/18+1;
+        else if(Item.x==X_0+width/2-width/4){
+          Item.x -= width/18+1;
+        }
         else{
           game.popScene();
           Scene_kazu--;
@@ -3870,13 +3952,33 @@ function Load(width,height,DATAS){
         }
       });
 
+      var Button = [];
+      var submits = 0;
+      var Numbers = width/16*9+(width/30);
+      function Submit(a){
+        Button[submits] = new Entity();
+        Button[submits].moveTo(width/4,Numbers);
+        Numbers += (width/20)+(width/25)+(width/25)+(width/25)+(width/25)+(width/25);
+        Button[submits].width = width/2;
+        Button[submits].height = (width/10);
+        Button[submits]._element = document.createElement('input');
+        Button[submits]._element.type = "submit";
+        Button[submits]._element.value = a;
+        scene.addChild(Button[submits]);
+        submits++;
+      }
+
       var Text = [];
 
-      Text[0] = new Texts("データを初期化する？");
-      Text[1] = new Texts("◆ はい");
-      Text[2] = new Texts("◆ いいえ");
+      Submit("データ初期化実行");
+      Submit("戻る");
 
-      Text[1].addEventListener('touchstart',function(e){
+      //Text[0] = new Texts("データを初期化する？");
+      //Text[1] = new Texts("◆ はい");
+      //Text[2] = new Texts("◆ いいえ");
+
+      Button[0].addEventListener('touchstart',function(e){
+        if(Button_push("選択音")) return;
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
@@ -3904,7 +4006,8 @@ function Load(width,height,DATAS){
         return;
       });
 
-      Text[2].addEventListener('touchstart',function(e){
+      Button[1].addEventListener('touchstart',function(e){
+        if(Button_push("戻る")) return;
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
