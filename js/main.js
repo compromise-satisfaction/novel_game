@@ -635,12 +635,14 @@ function Load(width,height){
           Datas[11] = Main_DATAS[i].セーブ;
           Datas[12] = Main_DATAS[i].次;
           Datas[13] = Main_DATAS[i].次次;
-          Datas[14] = Main_DATAS[i].表示アイテム位置;
+          Datas[14] = Main_DATAS[i].表示アイテムx座標;
           Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
           Datas[16] = Main_DATAS[i].トロフィー;
           Datas[17] = Main_DATAS[i].トロフィー画像;
           Datas[18] = Main_DATAS[i].トロフィー内容.replace(/\n/g,"↓");
           Datas[19] = conversion_url(Main_DATAS[i].文章音,"サウンド");
+          Datas[20] = Main_DATAS[i].表示アイテムy座標;
+          Datas[21] = Main_DATAS[i].表示アイテムフェード;
           if(Datas[1]=="主人公") Datas[1] = S_image;
           if(Datas[3]=="主人公") Datas[3] = S_image;
           if(Datas[5]=="主人公") Datas[5] = S_image;
@@ -1345,19 +1347,19 @@ function Load(width,height){
         Item.scaleX = ((width/4)/xxx);
         Item.scaleY = ((width/4)/yyy);
         Item.image = game.assets[Datas[15]];
-        Item.x = ((Item.scaleX*xxx/2)-xxx/2)+Datas[14].substring(0,4)*(width/1600);
-        Item.y = ((Item.scaleY*yyy/2)-yyy/2)+Datas[14].substring(5,9)*(width/16/100);
-        if(Return!=true&&Datas[14].substring(11,12)*1!=0){
+        Item.x = ((Item.scaleX*xxx/2)-xxx/2)+Datas[14]*(width/1600);
+        Item.y = ((Item.scaleY*yyy/2)-yyy/2)+Datas[20]*(width/16/100);
+        if(Return!=true&&Datas[21]!=0){
           Sound_ON("アイテム表示音",true);
-          if(Datas[14].substring(11,12)*1>0){
+          if(Datas[21]*1>0){
             if(Return!=true){
               Item.opacity = 0;
-              Item.tl.fadeIn(Datas[14].substring(11,12)*1);
+              Item.tl.fadeIn(Datas[21]);
             }
           }
           else{
             if(Return!=true){
-              Item.tl.fadeOut(Datas[14].substring(11,12)*-1);
+              Item.tl.fadeOut(Datas[21]*-1);
             }
             else Item.opacity = 0;
           }
