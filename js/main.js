@@ -1913,8 +1913,7 @@ function Load(width,height){
           else if(a == "つきつける") var ooo = "メニュー";
           else var ooo = "選択音";
           if(Button_push(ooo)) return;
-          if(a == "調べる") Scene_loads(a+Datas[6],false,false);
-          else if (a == "つきつける"){
+          if (a == "つきつける"){
             game.pushScene(ItemScene(Datas[6],"日常","アイテム"));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
