@@ -1348,8 +1348,19 @@ function Load(width,height){
         Item.x = ((Item.scaleX*xxx/2)-xxx/2)+Datas[14].substring(0,4)*(width/1600);
         Item.y = ((Item.scaleY*yyy/2)-yyy/2)+Datas[14].substring(5,9)*(width/16/100);
         if(Return!=true&&Datas[14].substring(11,12)*1!=0){
-          Item.opacity = 0;
-          Item.tl.fadeIn(Datas[14].substring(11,12)*1);
+          Sound_ON("アイテム表示音",true);
+          if(Datas[14].substring(11,12)*1>0){
+            if(Return!=true){
+              Item.opacity = 0;
+              Item.tl.fadeIn(Datas[14].substring(11,12)*1);
+            }
+          }
+          else{
+            if(Return!=true){
+              Item.tl.fadeOut(Datas[14].substring(11,12)*-1);
+            }
+            else Item.opacity = 0;
+          }
         }
         scene.addChild(Item);
       }//アイテム
