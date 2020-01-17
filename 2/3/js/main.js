@@ -5,12 +5,15 @@ var Version = "バージョン 4.7";
 switch (GitHub_type) {
   case "referee":
     var GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
+    var Foldar = "2/3/";
     break;
   case "Share":
     var GAS = "https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec";
+    var Foldar = "3/";
     break;
   case "novel_game":
     var GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
+    var Foldar = "";
     break;
 }
 
@@ -270,89 +273,92 @@ function Load(width,height){
       core.dispatchEvent(e);
     });
   });
-  game.preload("image/融合.png");
-  game.preload("sound/Item.wav");
-  game.preload("sound/セーブ.wav");
-  game.preload("sound/音量調整用.wav");
-  game.preload("sound/お任せなのだ.wav");
-  game.preload("sound/ダメージ.wav");
-  game.preload("image/left.png");
-  game.preload("image/right.png");
-  game.preload("image/white.png");
-  game.preload("image/stand.png");
-  game.preload("image/ユベル.png");
-  game.preload("image/留置所.png");
-  game.preload("image/裁判長席.png");
-  game.preload("image/背景/留置所背景.png");
-  game.preload("sound/進む.wav");
-  game.preload("image/Buttons.png");
-  game.preload("image/待った！.png");
-  game.preload("sound/ア.wav");
-  game.preload("sound/イ.wav");
-  game.preload("sound/ウ.wav");
-  game.preload("sound/エ.wav");
-  game.preload("sound/オ.wav");
-  game.preload("sound/カ.wav");
-  game.preload("sound/キ.wav");
-  game.preload("sound/ク.wav");
-  game.preload("sound/ケ.wav");
-  game.preload("sound/コ.wav");
-  game.preload("sound/サ.wav");
-  game.preload("sound/シ.wav");
-  game.preload("sound/ス.wav");
-  game.preload("sound/セ.wav");
-  game.preload("sound/ソ.wav");
-  game.preload("sound/タ.wav");
-  game.preload("sound/チ.wav");
-  game.preload("sound/ツ.wav");
-  game.preload("sound/テ.wav");
-  game.preload("sound/ト.wav");
-  game.preload("sound/ナ.wav");
-  game.preload("sound/ニ.wav");
-  game.preload("sound/ヌ.wav");
-  game.preload("sound/ネ.wav");
-  game.preload("sound/ノ.wav");
-  game.preload("sound/ハ.wav");
-  game.preload("sound/ヒ.wav");
-  game.preload("sound/フ.wav");
-  game.preload("sound/ヘ.wav");
-  game.preload("sound/ホ.wav");
-  game.preload("sound/マ.wav");
-  game.preload("sound/ミ.wav");
-  game.preload("sound/ム.wav");
-  game.preload("sound/メ.wav");
-  game.preload("sound/モ.wav");
-  game.preload("sound/ヤ.wav");
-  game.preload("sound/ユ.wav");
-  game.preload("sound/ヨ.wav");
-  game.preload("sound/ラ.wav");
-  game.preload("sound/ラ.wav");
-  game.preload("sound/リ.wav");
-  game.preload("sound/ル.wav");
-  game.preload("sound/レ.wav");
-  game.preload("sound/ロ.wav");
-  game.preload("sound/ワ.wav");
-  game.preload("sound/ヲ.wav");
-  game.preload("sound/ン.wav");
-  game.preload("sound/メニュー.wav");
-  game.preload("sound/メニュー移動.wav");
-  game.preload("sound/アイテム表示音.wav");
-  game.preload("sound/戻る.wav");
-  game.preload("sound/選択音.wav");
-  game.preload("sound/Trophy.wav");
-  game.preload("image/Trophy.png");
-  game.preload("image/異議あり！.png");
-  game.preload("image/カットイン.png");
-  game.preload("image/Explosion.png");
-  game.preload("image/背景/Black.png");
-  game.preload("image/背景/left.png");
-  game.preload("image/背景/right.png");
-  game.preload("image/背景/stand.png");
-  game.preload("image/背景/裁判長席.png");
-  game.preload("image/背景/透明.png");
-  game.preload("image/背景/留置所.png");
-  game.preload("image/Background.png");
-  game.preload("image/Set_button.png","image/stone.png","image/Hand.png","image/V_or_D.png");
+  game.preload(Foldar+"image/融合.png");
+  game.preload(Foldar+"sound/Item.wav");
+  game.preload(Foldar+"sound/セーブ.wav");
+  game.preload(Foldar+"sound/音量調整用.wav");
+  game.preload(Foldar+"sound/お任せなのだ.wav");
+  game.preload(Foldar+"sound/ダメージ.wav");
+  game.preload(Foldar+"image/left.png");
+  game.preload(Foldar+"image/right.png");
+  game.preload(Foldar+"image/white.png");
+  game.preload(Foldar+"image/stand.png");
+  game.preload(Foldar+"image/ユベル.png");
+  game.preload(Foldar+"image/留置所.png");
+  game.preload(Foldar+"image/裁判長席.png");
+  game.preload(Foldar+"image/背景/留置所背景.png");
+  game.preload(Foldar+"sound/進む.wav");
+  game.preload(Foldar+"image/Buttons.png");
+  game.preload(Foldar+"image/待った！.png");
+  game.preload(Foldar+"sound/ア.wav");
+  game.preload(Foldar+"sound/イ.wav");
+  game.preload(Foldar+"sound/ウ.wav");
+  game.preload(Foldar+"sound/エ.wav");
+  game.preload(Foldar+"sound/オ.wav");
+  game.preload(Foldar+"sound/カ.wav");
+  game.preload(Foldar+"sound/キ.wav");
+  game.preload(Foldar+"sound/ク.wav");
+  game.preload(Foldar+"sound/ケ.wav");
+  game.preload(Foldar+"sound/コ.wav");
+  game.preload(Foldar+"sound/サ.wav");
+  game.preload(Foldar+"sound/シ.wav");
+  game.preload(Foldar+"sound/ス.wav");
+  game.preload(Foldar+"sound/セ.wav");
+  game.preload(Foldar+"sound/ソ.wav");
+  game.preload(Foldar+"sound/タ.wav");
+  game.preload(Foldar+"sound/チ.wav");
+  game.preload(Foldar+"sound/ツ.wav");
+  game.preload(Foldar+"sound/テ.wav");
+  game.preload(Foldar+"sound/ト.wav");
+  game.preload(Foldar+"sound/ナ.wav");
+  game.preload(Foldar+"sound/ニ.wav");
+  game.preload(Foldar+"sound/ヌ.wav");
+  game.preload(Foldar+"sound/ネ.wav");
+  game.preload(Foldar+"sound/ノ.wav");
+  game.preload(Foldar+"sound/ハ.wav");
+  game.preload(Foldar+"sound/ヒ.wav");
+  game.preload(Foldar+"sound/フ.wav");
+  game.preload(Foldar+"sound/ヘ.wav");
+  game.preload(Foldar+"sound/ホ.wav");
+  game.preload(Foldar+"sound/マ.wav");
+  game.preload(Foldar+"sound/ミ.wav");
+  game.preload(Foldar+"sound/ム.wav");
+  game.preload(Foldar+"sound/メ.wav");
+  game.preload(Foldar+"sound/モ.wav");
+  game.preload(Foldar+"sound/ヤ.wav");
+  game.preload(Foldar+"sound/ユ.wav");
+  game.preload(Foldar+"sound/ヨ.wav");
+  game.preload(Foldar+"sound/ラ.wav");
+  game.preload(Foldar+"sound/ラ.wav");
+  game.preload(Foldar+"sound/リ.wav");
+  game.preload(Foldar+"sound/ル.wav");
+  game.preload(Foldar+"sound/レ.wav");
+  game.preload(Foldar+"sound/ロ.wav");
+  game.preload(Foldar+"sound/ワ.wav");
+  game.preload(Foldar+"sound/ヲ.wav");
+  game.preload(Foldar+"sound/ン.wav");
+  game.preload(Foldar+"sound/メニュー.wav");
+  game.preload(Foldar+"sound/メニュー移動.wav");
+  game.preload(Foldar+"sound/アイテム表示音.wav");
+  game.preload(Foldar+"sound/戻る.wav");
+  game.preload(Foldar+"sound/選択音.wav");
+  game.preload(Foldar+"sound/Trophy.wav");
+  game.preload(Foldar+"image/Trophy.png");
+  game.preload(Foldar+"image/異議あり！.png");
+  game.preload(Foldar+"image/カットイン.png");
+  game.preload(Foldar+"image/Explosion.png");
+  game.preload(Foldar+"image/背景/Black.png");
+  game.preload(Foldar+"image/背景/left.png");
+  game.preload(Foldar+"image/背景/right.png");
+  game.preload(Foldar+"image/背景/stand.png");
+  game.preload(Foldar+"image/背景/裁判長席.png");
+  game.preload(Foldar+"image/背景/透明.png");
+  game.preload(Foldar+"image/背景/留置所.png");
+  game.preload(Foldar+"image/Background.png");
+  game.preload(Foldar+"image/Set_button.png");
+  game.preload(Foldar+"image/stone.png");
+  game.preload(Foldar+"image/Hand.png");
+  game.preload(Foldar+"image/V_or_D.png");
   game.preload(Image_urls);
   game.preload(Sounds_urls);
 
@@ -452,17 +458,17 @@ function Load(width,height){
         return;
       }
       if(Play){
-        if(game.assets["sound/"+Sound_Name+".wav"].src==undefined){
-          game.assets["sound/"+Sound_Name+".wav"].volume = Volume;
+        if(game.assets[Foldar+"sound/"+Sound_Name+".wav"].src==undefined){
+          game.assets[Foldar+"sound/"+Sound_Name+".wav"].volume = Volume;
         }
         else{
-          game.assets["sound/"+Sound_Name+".wav"]._volume = Volume;
+          game.assets[Foldar+"sound/"+Sound_Name+".wav"]._volume = Volume;
         }
-        game.assets["sound/"+Sound_Name+".wav"].play();
+        game.assets[Foldar+"sound/"+Sound_Name+".wav"].play();
       }
       else{
-        game.assets["sound/"+Sound_Name+".wav"].play();
-        game.assets["sound/"+Sound_Name+".wav"].stop();
+        game.assets[Foldar+"sound/"+Sound_Name+".wav"].play();
+        game.assets[Foldar+"sound/"+Sound_Name+".wav"].stop();
       }
       return;
     }
@@ -1069,7 +1075,7 @@ function Load(width,height){
       })
 
       var Set_button = new Sprite(195,95);
-      Set_button.image = game.assets["image/Set_button.png"];
+      Set_button.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button.x = 105;
       Set_button.y = 455;
       Set_button.frame = 15;
@@ -1095,10 +1101,10 @@ function Load(width,height){
 
       switch (Datas[0]) {
         case "ヒント":
-          var xxx = game.assets["image/融合.png"].width;
-          var yyy = game.assets["image/融合.png"].height;
+          var xxx = game.assets[Foldar+"image/融合.png"].width;
+          var yyy = game.assets[Foldar+"image/融合.png"].height;
           var Background = new Sprite(xxx,yyy);
-          Background.image = game.assets["image/融合.png"];
+          Background.image = game.assets[Foldar+"image/融合.png"];
           Background.scaleX = width/xxx*1.2;
           Background.scaleY = width/yyy*1.2;
           Background.x = (width-xxx)/2;
@@ -1107,7 +1113,7 @@ function Load(width,height){
           Background.rotation = Rotation_Y;
           scene.addChild(Background);//背景
           var Background2 = new Sprite(width,height);
-          Background2.image = game.assets["image/white.png"];
+          Background2.image = game.assets[Foldar+"image/white.png"];
           Background2.x = 0;
           Background2.y = (width/16)*9;
           scene.addChild(Background2);//白地
@@ -1123,12 +1129,12 @@ function Load(width,height){
           case "stand":
           case "留置所":
           case "裁判長席":
-          var xxx = game.assets["image/背景/"+Datas[0]+".png"].width;
-          var yyy = game.assets["image/背景/"+Datas[0]+".png"].height;
+          var xxx = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].width;
+          var yyy = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].height;
           var Background = new Sprite(xxx,yyy);
           Background.scaleX = ((width)/xxx);
           Background.scaleY = (((width/16)*9)/yyy);
-          Background.image = game.assets["image/背景/"+Datas[0]+".png"];
+          Background.image = game.assets[Foldar+"image/背景/"+Datas[0]+".png"];
           Background.x = (Background.scaleX*xxx/2)-xxx/2;
           Background.y = (Background.scaleY*yyy/2)-yyy/2;
           scene.addChild(Background);
@@ -1149,12 +1155,12 @@ function Load(width,height){
       }
 
       if(Datas[0]=="カットイン"){
-        var ccx = game.assets["image/カットイン.png"].width*3;
-        var ccy = game.assets["image/カットイン.png"].height;
+        var ccx = game.assets[Foldar+"image/カットイン.png"].width*3;
+        var ccy = game.assets[Foldar+"image/カットイン.png"].height;
         var Cut_in = new Sprite(ccx,ccy);
         Cut_in.scaleX = width/ccx*3;
         Cut_in.scaleY = width/16*9/ccy;
-        Cut_in.image = game.assets["image/カットイン.png"];
+        Cut_in.image = game.assets[Foldar+"image/カットイン.png"];
         Cut_in_time += 10;
         Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2-Cut_in_time;
         Cut_in.y = (Cut_in.scaleY*ccy/2)-ccy/2;
@@ -1174,7 +1180,7 @@ function Load(width,height){
       var Explosion = new Sprite(xxx,yyy);
       Explosion.scaleX = ((width/2)/xxx);
       Explosion.scaleY = (((width/16)*9)/yyy);
-      Explosion.image = game.assets["image/Explosion.png"];
+      Explosion.image = game.assets[Foldar+"image/Explosion.png"];
       Explosion.frame = 11;
       Explosion.y = (Explosion.scaleY*yyy/2)-yyy/2;
       scene.addChild(Explosion);
@@ -1220,12 +1226,12 @@ function Load(width,height){
         case "stand":
         case "留置所":
         case "裁判長席":
-          var xxx = game.assets["image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["image/"+Datas[0]+".png"].height;
+          var xxx = game.assets[Foldar+"image/"+Datas[0]+".png"].width;
+          var yyy = game.assets[Foldar+"image/"+Datas[0]+".png"].height;
           var Stand = new Sprite(xxx,yyy);
           Stand.scaleX = width/xxx;
           Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["image/"+Datas[0]+".png"];
+          Stand.image = game.assets[Foldar+"image/"+Datas[0]+".png"];
           Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
           Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
           scene.addChild(Stand);
@@ -1326,12 +1332,12 @@ function Load(width,height){
       switch (Datas[0]) {
         case "right":
         case "left":
-          var xxx = game.assets["image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["image/"+Datas[0]+".png"].height;
+          var xxx = game.assets[Foldar+"image/"+Datas[0]+".png"].width;
+          var yyy = game.assets[Foldar+"image/"+Datas[0]+".png"].height;
           var Stand = new Sprite(xxx,yyy);
           Stand.scaleX = width/xxx;
           Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["image/"+Datas[0]+".png"];
+          Stand.image = game.assets[Foldar+"image/"+Datas[0]+".png"];
           Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
           Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
           scene.addChild(Stand);
@@ -1369,7 +1375,7 @@ function Load(width,height){
       }//アイテム
 
       var Background2 = new Sprite(width,height);
-      Background2.image = game.assets["image/white.png"];
+      Background2.image = game.assets[Foldar+"image/white.png"];
       Background2.x = 0;
       Background2.y = (width/16)*9;
       scene.addChild(Background2);//白地
@@ -1662,10 +1668,10 @@ function Load(width,height){
             Trophy_Flag[Trophy_Flag.length] = [Datas[16],Datas[18],Datas[17]];
           }
           var Trophy_Time = 0;
-          var xxx = game.assets["image/Trophy.png"].width;
-          var yyy = game.assets["image/Trophy.png"].height;
+          var xxx = game.assets[Foldar+"image/Trophy.png"].width;
+          var yyy = game.assets[Foldar+"image/Trophy.png"].height;
           var Trophy = new Sprite(xxx,yyy);
-          Trophy.image = game.assets["image/Trophy.png"];
+          Trophy.image = game.assets[Foldar+"image/Trophy.png"];
           Trophy.scaleX = ((width/3.61)/xxx);
           Trophy.scaleY = (((width/14.15))/yyy);//ココが変換した場所
           Trophy.x = (Trophy.scaleX*xxx/2)-xxx/2+(width-(width/3.5));
@@ -1711,12 +1717,12 @@ function Load(width,height){
     var MoveScene = function(Out){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/背景/Black.png"].width;
-      var yyy = game.assets["image/背景/Black.png"].height;
+      var xxx = game.assets[Foldar+"image/背景/Black.png"].width;
+      var yyy = game.assets[Foldar+"image/背景/Black.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = width/xxx;
       Background.scaleY = width/16*9/yyy;
-      Background.image = game.assets["image/背景/Black.png"];
+      Background.image = game.assets[Foldar+"image/背景/Black.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       if(Out!=0){
@@ -1731,7 +1737,7 @@ function Load(width,height){
       scene.addChild(Background);//背景
 
       var Background2 = new Sprite(width,height);
-      Background2.image = game.assets["image/white.png"];
+      Background2.image = game.assets[Foldar+"image/white.png"];
       Background2.x = 0;
       Background2.y = (width/16)*9;
       scene.addChild(Background2);//白地
@@ -1786,10 +1792,10 @@ function Load(width,height){
 
       switch (Datas[0]) {
         case "ヒント":
-          var xxx = game.assets["image/融合.png"].width;
-          var yyy = game.assets["image/融合.png"].height;
+          var xxx = game.assets[Foldar+"image/融合.png"].width;
+          var yyy = game.assets[Foldar+"image/融合.png"].height;
           var Background = new Sprite(xxx,yyy);
-          Background.image = game.assets["image/融合.png"];
+          Background.image = game.assets[Foldar+"image/融合.png"];
           Background.scaleX = width/xxx*1.2;
           Background.scaleY = width/yyy*1.2;
           Background.x = (width-xxx)/2;
@@ -1798,7 +1804,7 @@ function Load(width,height){
           Background.rotation = Rotation_Y;
           scene.addChild(Background);//背景
           var Background2 = new Sprite(width,height);
-          Background2.image = game.assets["image/white.png"];
+          Background2.image = game.assets[Foldar+"image/white.png"];
           Background2.x = 0;
           Background2.y = (width/16)*9;
           scene.addChild(Background2);//白地
@@ -1814,12 +1820,12 @@ function Load(width,height){
           case "stand":
           case "裁判長席":
           case "留置所":
-          var xxx = game.assets["image/背景/"+Datas[0]+".png"].width;
-          var yyy = game.assets["image/背景/"+Datas[0]+".png"].height;
+          var xxx = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].width;
+          var yyy = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].height;
           var Background = new Sprite(xxx,yyy);
           Background.scaleX = ((width)/xxx);
           Background.scaleY = (((width/16)*9)/yyy);
-          Background.image = game.assets["image/背景/"+Datas[0]+".png"];
+          Background.image = game.assets[Foldar+"image/背景/"+Datas[0]+".png"];
           Background.x = (Background.scaleX*xxx/2)-xxx/2;
           Background.y = (Background.scaleY*yyy/2)-yyy/2;
           scene.addChild(Background);
@@ -1852,12 +1858,12 @@ function Load(width,height){
       switch (Datas[0]) {
         case "stand":
         case "留置所":
-          var xxx = game.assets["image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["image/"+Datas[0]+".png"].height;
+          var xxx = game.assets[Foldar+"image/"+Datas[0]+".png"].width;
+          var yyy = game.assets[Foldar+"image/"+Datas[0]+".png"].height;
           var Stand = new Sprite(xxx,yyy);
           Stand.scaleX = width/xxx;
           Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["image/"+Datas[0]+".png"];
+          Stand.image = game.assets[Foldar+"image/"+Datas[0]+".png"];
           Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
           Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
           scene.addChild(Stand);
@@ -1893,12 +1899,12 @@ function Load(width,height){
       switch (Datas[0]) {
         case "right":
         case "left":
-          var xxx = game.assets["image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["image/"+Datas[0]+".png"].height;
+          var xxx = game.assets[Foldar+"image/"+Datas[0]+".png"].width;
+          var yyy = game.assets[Foldar+"image/"+Datas[0]+".png"].height;
           var Stand = new Sprite(xxx,yyy);
           Stand.scaleX = width/xxx;
           Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["image/"+Datas[0]+".png"];
+          Stand.image = game.assets[Foldar+"image/"+Datas[0]+".png"];
           Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
           Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
           scene.addChild(Stand);
@@ -2046,12 +2052,12 @@ function Load(width,height){
 
       Setting_Flag[4] = Datas[5];
 
-      var xxx = game.assets["image/背景/stand.png"].width;
-      var yyy = game.assets["image/背景/stand.png"].height;
+      var xxx = game.assets[Foldar+"image/背景/stand.png"].width;
+      var yyy = game.assets[Foldar+"image/背景/stand.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = width/xxx;
       Background.scaleY = width/16*9/yyy;
-      Background.image = game.assets["image/背景/stand.png"];
+      Background.image = game.assets[Foldar+"image/背景/stand.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);//証言席
@@ -2066,12 +2072,12 @@ function Load(width,height){
       Character.y = (Character.scaleY*yyy/2)-yyy/2+(width/16);
       scene.addChild(Character);//キャラ
 
-      var xxx = game.assets["image/stand.png"].width;
-      var yyy = game.assets["image/stand.png"].height;
+      var xxx = game.assets[Foldar+"image/stand.png"].width;
+      var yyy = game.assets[Foldar+"image/stand.png"].height;
       var Stand = new Sprite(xxx,yyy);
       Stand.scaleX = width/xxx;
       Stand.scaleY = width/16*9/yyy;
-      Stand.image = game.assets["image/stand.png"];
+      Stand.image = game.assets[Foldar+"image/stand.png"];
       Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
       Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
       scene.addChild(Stand);//証言台
@@ -2159,10 +2165,10 @@ function Load(width,height){
       Button(3,"▶",Datas[6]);//進む
       Button(4,"つきつける",Datas[7]);//つきつける
 
-      var xxx = game.assets["image/Buttons.png"].width/8;
-      var yyy = game.assets["image/Buttons.png"].height;
+      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
+      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
       var Button1 = new Sprite(xxx,yyy);
-      Button1.image = game.assets["image/Buttons.png"];
+      Button1.image = game.assets[Foldar+"image/Buttons.png"];
       Button1.scaleX = ((width/5)/xxx);
       Button1.scaleY = (((width/5))/yyy);//ココが変換した場所
       Button1.x = (Button1.scaleX*xxx/2)-xxx/2;
@@ -2176,10 +2182,10 @@ function Load(width,height){
       });//ゆさぶる
 
       if(Datas[4]!=false){
-        var xxx = game.assets["image/Buttons.png"].width/8;
-        var yyy = game.assets["image/Buttons.png"].height;
+        var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
+        var yyy = game.assets[Foldar+"image/Buttons.png"].height;
         var Button2 = new Sprite(xxx,yyy);
-        Button2.image = game.assets["image/Buttons.png"];
+        Button2.image = game.assets[Foldar+"image/Buttons.png"];
         Button2.scaleX = ((width/5)/xxx);
         Button2.scaleY = (((width/5))/yyy);//ココが変換した場所
         Button2.x = (Button2.scaleX*xxx/2)-xxx/2+(width/5);
@@ -2191,10 +2197,10 @@ function Load(width,height){
         });
       }//戻る
 
-      var xxx = game.assets["image/Buttons.png"].width/8;
-      var yyy = game.assets["image/Buttons.png"].height;
+      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
+      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
       var Button3 = new Sprite(xxx,yyy);
-      Button3.image = game.assets["image/Buttons.png"];
+      Button3.image = game.assets[Foldar+"image/Buttons.png"];
       Button3.scaleX = ((width/5)/xxx);
       Button3.scaleY = (((width/5))/yyy);//ココが変換した場所
       Button3.x = (Button3.scaleX*xxx/2)-xxx/2+(width/5)*2;
@@ -2207,10 +2213,10 @@ function Load(width,height){
         console.log("Scene数",Scene_kazu);
       });//設定
 
-      var xxx = game.assets["image/Buttons.png"].width/8;
-      var yyy = game.assets["image/Buttons.png"].height;
+      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
+      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
       var Button4 = new Sprite(xxx,yyy);
-      Button4.image = game.assets["image/Buttons.png"];
+      Button4.image = game.assets[Foldar+"image/Buttons.png"];
       Button4.scaleX = ((width/5)/xxx);
       Button4.scaleY = (((width/5))/yyy);//ココが変換した場所
       Button4.x = (Button4.scaleX*xxx/2)-xxx/2+(width/5)*3;
@@ -2221,10 +2227,10 @@ function Load(width,height){
         Scene_loads(Datas[6],false,false);
       });//進む
 
-      var xxx = game.assets["image/Buttons.png"].width/8;
-      var yyy = game.assets["image/Buttons.png"].height;
+      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
+      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
       var Button5 = new Sprite(xxx,yyy);
-      Button5.image = game.assets["image/Buttons.png"];
+      Button5.image = game.assets[Foldar+"image/Buttons.png"];
       Button5.scaleX = ((width/5)/xxx);
       Button5.scaleY = (((width/5))/yyy);//ココが変換した場所
       Button5.x = (Button5.scaleX*xxx/2)-xxx/2+(width/5)*4;
@@ -2242,12 +2248,12 @@ function Load(width,height){
     var SettingScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
@@ -2359,12 +2365,12 @@ function Load(width,height){
     var PlayerSettingScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
@@ -2496,12 +2502,12 @@ function Load(width,height){
     var SoundSettingScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
@@ -2663,7 +2669,7 @@ function Load(width,height){
           Sprite.call(this,width1*Background.scaleX,height1*Background.scaleY);
           this.x = x*Background.scaleX;
           this.y = y*Background.scaleY;
-          this.image = game.assets["image/背景/透明.png"];
+          this.image = game.assets[Foldar+"image/背景/透明.png"];
           scene.addChild(this);
           this.addEventListener('touchstart',function(e){
             Sound_ON("選択音",true);
@@ -2700,7 +2706,7 @@ function Load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite(width,height-(width/16)*9);
-      Background.image = game.assets["image/white.png"];
+      Background.image = game.assets[Foldar+"image/white.png"];
       Background.x = 0;
       Background.y = (width/16)*9;
       scene.addChild(Background);
@@ -2753,10 +2759,10 @@ function Load(width,height){
         T_D();
       })
 
-      var xxx = game.assets["image/Buttons.png"].width/8;
-      var yyy = game.assets["image/Buttons.png"].height;
+      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
+      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
       var Enter1 = new Sprite(xxx,yyy);
-      Enter1.image = game.assets["image/Buttons.png"];
+      Enter1.image = game.assets[Foldar+"image/Buttons.png"];
       Enter1.scaleX = ((width/5)/xxx);
       Enter1.scaleY = (((width/5))/yyy);//ココが変換した場所
       Enter1.x = (Enter1.scaleX*xxx/2)-xxx/2+(width/5)*3;
@@ -2851,12 +2857,12 @@ function Load(width,height){
           break;
       }
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
@@ -3070,12 +3076,12 @@ function Load(width,height){
     var DetailsScene = function(Number,Type){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
@@ -3172,12 +3178,12 @@ function Load(width,height){
     var ClearScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
@@ -3279,10 +3285,10 @@ function Load(width,height){
       var White_Number = 0;
 
       var Pointer = new Sprite(1,1);
-      Pointer.image = game.assets["image/Hand.png"];
+      Pointer.image = game.assets[Foldar+"image/Hand.png"];
 
       var White = new Sprite(405,600);
-      White.image = game.assets["image/white.png"];
+      White.image = game.assets[Foldar+"image/white.png"];
       scene.addChild(White);
 
       var Reversi = new Sprite(405,405);
@@ -3292,33 +3298,33 @@ function Load(width,height){
       scene.addChild(Reversi);
 
       var Set_button = new Sprite(195,95);
-      Set_button.image = game.assets["image/Set_button.png"];
+      Set_button.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button.x = 105;
       Set_button.y = 195;
       scene.addChild(Set_button);
 
       var Set_button1 = new Sprite(195,95);
-      Set_button1.image = game.assets["image/Set_button.png"];
+      Set_button1.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button1.x = 5;
       Set_button1.y = 295;
       Set_button1.frame = 1;
       scene.addChild(Set_button1);
 
       var Set_button2 = new Sprite(195,95);
-      Set_button2.image = game.assets["image/Set_button.png"];
+      Set_button2.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button2.x = 205;
       Set_button2.y = 295;
       Set_button2.frame = 2;
       scene.addChild(Set_button2);
 
       var Set_button3 = new Sprite(195,95);
-      Set_button3.image = game.assets["image/Set_button.png"];
+      Set_button3.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button3.x = 205;
       Set_button3.y = 145;
       Set_button3.frame = 9;
 
       var Set_button4 = new Sprite(195,95);
-      Set_button4.image = game.assets["image/Set_button.png"];
+      Set_button4.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button4.x = 105;
       Set_button4.y = 455;
       Set_button4.frame = 13;
@@ -3330,7 +3336,7 @@ function Load(width,height){
       });
 
       var Set_button5 = new Sprite(195,95);
-      Set_button5.image = game.assets["image/Set_button.png"];
+      Set_button5.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button5.x = 105;
       Set_button5.y = 245;
       Set_button5.frame = 11;
@@ -3458,7 +3464,7 @@ function Load(width,height){
       }
 
       var Hand = new Sprite(280,370);
-      Hand.image = game.assets["image/Hand.png"];
+      Hand.image = game.assets[Foldar+"image/Hand.png"];
 
       /*var label = new Label();
       label.x = 5;
@@ -3914,7 +3920,7 @@ function Load(width,height){
       function W_D(){
           if(Time_R_ensyutu!=0||AI == 100) return;
           var V_or_D = new Sprite(405,405);
-          V_or_D.image = game.assets["image/V_or_D.png"];
+          V_or_D.image = game.assets[Foldar+"image/V_or_D.png"];
           V_or_D.x = 0;
           V_or_D.y = 40;
           if(Black_Number>White_Number){
@@ -4092,11 +4098,11 @@ function Load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var White = new Sprite(405,600);
-      White.image = game.assets["image/white.png"];
+      White.image = game.assets[Foldar+"image/white.png"];
       scene.addChild(White);
 
       var Set_button = new Sprite(195,95);
-      Set_button.image = game.assets["image/Set_button.png"];
+      Set_button.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button.x = 105;
       Set_button.y = 195;
       Set_button.frame = 12;
@@ -4109,7 +4115,7 @@ function Load(width,height){
       });
 
       var Set_button1 = new Sprite(195,95);
-      Set_button1.image = game.assets["image/Set_button.png"];
+      Set_button1.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button1.x = 105;
       Set_button1.frame = 14;
       scene.addChild(Set_button1);
@@ -4123,7 +4129,7 @@ function Load(width,height){
       });
 
       var Set_button2 = new Sprite(195,95);
-      Set_button2.image = game.assets["image/Set_button.png"];
+      Set_button2.image = game.assets[Foldar+"image/Set_button.png"];
       Set_button2.x = 105;
       Set_button2.y = 455;
       Set_button2.frame = 10;
@@ -4139,12 +4145,12 @@ function Load(width,height){
     var TransformScene = function(Number,Ig){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["image/Background.png"].width;
-      var yyy = game.assets["image/Background.png"].height;
+      var xxx = game.assets[Foldar+"image/Background.png"].width;
+      var yyy = game.assets[Foldar+"image/Background.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = ((width)/xxx);
       Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["image/Background.png"];
+      Background.image = game.assets[Foldar+"image/Background.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
