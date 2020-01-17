@@ -1350,16 +1350,17 @@ function Load(width,height){
         Item.x = ((Item.scaleX*xxx/2)-xxx/2)+Datas[14]*(width/1600);
         Item.y = ((Item.scaleY*yyy/2)-yyy/2)+Datas[20]*(width/16/100);
         if(Datas[21]!=0){
-          Sound_ON("アイテム表示音",true);
           if(Datas[21]>0){
             if(Return!=true){
               Item.opacity = 0;
               Item.tl.fadeIn(Datas[21]);
+              Sound_ON("アイテム表示音",true);
             }
           }
           else{
             if(Return!=true){
               Item.tl.fadeOut(Datas[21]*-1);
+              Sound_ON("アイテム表示音",true);
             }
             else Item.opacity = 0;
           }
