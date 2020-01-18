@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 4.7";
+var Version = "バージョン 4.8";
 
 switch (GitHub_type) {
   case "referee":
@@ -1984,7 +1984,7 @@ function Load(width,height){
       switch (Type) {
         case "異議あり！":
         case "待った！":
-          Type = "image/"+Type+".png";
+          Type = Foldar+"image/"+Type+".png";
           break;
       }
 
