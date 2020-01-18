@@ -2929,7 +2929,7 @@ function Load(width,height){
                 return;
                 break;
                 default:
-                game.pushScene(DetailsScene(this.syousai,this._element.value));
+                game.pushScene(DetailsScene(this.syousai));
                 Scene_kazu++;
                 console.log("Scene数",Scene_kazu);
                 return;
@@ -3082,7 +3082,7 @@ function Load(width,height){
 
       return scene;
     }
-    var DetailsScene = function(Number,Type){
+    var DetailsScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var xxx = game.assets[Foldar+"image/Background.png"].width;
@@ -3126,59 +3126,56 @@ function Load(width,height){
 
       Submit("戻る");
 
-      switch (Type) {
-          case "見る":
-          case "拡大":
-          Number = conversion_url(Number,"画像");
-          var xxx = game.assets[Number].width;
-          var yyy = game.assets[Number].height;
-          var Photo = new Sprite(xxx,yyy);
-          Photo.scaleX = ((width)/xxx)*0.8;
-          Photo.scaleY = ((width)/yyy)*0.8;
-          if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
-          Photo.image = game.assets[Number];
-          Photo.x = (Photo.scaleX*xxx/2)-xxx/2+(width/10);
-          Photo.y = (Photo.scaleY*yyy/2)-yyy/2+Numbers+(width/5);
-          scene.addChild(Photo);
-          break;
-        default:
-          if(Number.substring(0,7)=="YOUTUBE"){
-            for (var k = 0; k < Sounds_DATAS.length; k++){
-              if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-                var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
-                game.assets[Sounds_DATAS[k].url].pause();
-                game.assets[Sounds_DATAS[k].url].状態=="ポーズ中";
-                if(game.assets[Sounds_DATAS[k].url].src==undefined){
-                  game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
-                }
-                else{
-                  game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
-                  game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
-                }
-                if(Setting_Flag[9]==0){
-                  game.assets[Sounds_DATAS[k].url].stop();
-                  game.assets[Sounds_DATAS[k].url].状態=="停止";
-                }
-              }
-            }
-            Number = Number.substring(7);
-            var Video = new Entity()
-            Video.visible =  true;
-            Video._element = document.createElement('div')
-            Video.x = (width/10);
-            Video.y = Numbers+(width/5);
-            Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Number+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
-            scene.addChild(Video);
-          }
-          else {
-            var S_Text = Number.replace(/\n/g,"↓").split("↓");
-            for (var i = 1; i < S_Text.length+1; i++) {
-              Text[i] = new Texts(S_Text[i-1]);
-              if(i==13) break;
-            }
-          }
-          break;
+      if(Number.substring(0,2)=="画像"){
+        Number = Number.substring(2);
+        Number = conversion_url(Number,"画像");
+        var xxx = game.assets[Number].width;
+        var yyy = game.assets[Number].height;
+        var Photo = new Sprite(xxx,yyy);
+        Photo.scaleX = ((width)/xxx)*0.8;
+        Photo.scaleY = ((width)/yyy)*0.8;
+        if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
+        Photo.image = game.assets[Number];
+        Photo.x = (Photo.scaleX*xxx/2)-xxx/2+(width/10);
+        Photo.y = (Photo.scaleY*yyy/2)-yyy/2+Numbers+(width/5);
+        scene.addChild(Photo);
       }
+      else if(Number.substring(0,7)=="YOUTUBE"){
+        for (var k = 0; k < Sounds_DATAS.length; k++){
+          if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
+            var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
+            game.assets[Sounds_DATAS[k].url].pause();
+            game.assets[Sounds_DATAS[k].url].状態=="ポーズ中";
+            if(game.assets[Sounds_DATAS[k].url].src==undefined){
+              game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
+            }
+            else{
+              game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
+              game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
+            }
+            if(Setting_Flag[9]==0){
+              game.assets[Sounds_DATAS[k].url].stop();
+              game.assets[Sounds_DATAS[k].url].状態=="停止";
+            }
+          }
+        }
+        Number = Number.substring(7);
+        var Video = new Entity()
+        Video.visible =  true;
+        Video._element = document.createElement('div')
+        Video.x = (width/10);
+        Video.y = Numbers+(width/5);
+        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Number+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
+        scene.addChild(Video);
+      }
+      else {
+        var S_Text = Number.replace(/\n/g,"↓").split("↓");
+        for (var i = 1; i < S_Text.length+1; i++) {
+          Text[i] = new Texts(S_Text[i-1]);
+          if(i==13) break;
+        }
+      }
+      break;
 
       var Pages3 = -1;
 
