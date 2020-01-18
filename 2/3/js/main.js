@@ -3081,6 +3081,7 @@ function Load(width,height){
           this.height = width/20;
           this.text = a;
           switch (a) {
+            case undefined:
             case "前のページボタン":
             case "次のページボタン":
             case "最初のページボタン":
