@@ -3106,6 +3106,14 @@ function Load(width,height){
         scene.addChild(Button[submits]);
         Button[submits].addEventListener('touchstart',function(e){
           if(Button_push("戻る")) return;
+          for (var k = 0; k < Sounds_DATAS.length; k++){
+            if(game.assets[Sounds_DATAS[k].url].状態=="ポーズ中"){
+              game.assets[Sounds_DATAS[k].url].play();
+              game.assets[Sounds_DATAS[k].url].src.loop = true;
+              game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
+              game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
+            }
+          }
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3132,6 +3140,24 @@ function Load(width,height){
           break;
         default:
           if(Number.substring(0,7)=="YOUTUBE"){
+            for (var k = 0; k < Sounds_DATAS.length; k++){
+              if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
+                var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
+                game.assets[Sounds_DATAS[k].url].pause();
+                game.assets[Sounds_DATAS[k].url].状態=="ポーズ中";
+                if(game.assets[Sounds_DATAS[k].url].src==undefined){
+                  game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
+                }
+                else{
+                  game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
+                  game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
+                }
+                if(Setting_Flag[9]==0){
+                  game.assets[Sounds_DATAS[k].url].stop();
+                  game.assets[Sounds_DATAS[k].url].状態=="停止";
+                }
+              }
+            }
             Number = Number.substring(7);
             var Video = new Entity()
             Video.visible =  true;
