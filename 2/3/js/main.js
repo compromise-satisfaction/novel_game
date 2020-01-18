@@ -3141,6 +3141,15 @@ function Load(width,height){
         Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
         scene.addChild(Photo);
       }
+      else if(Syousai.substring(0,2)=="移動"){
+        Syousai = Syousai.substring(2);
+        game.popScene();
+        game.popScene();
+        Scene_kazu--;
+        Scene_kazu--;
+        console.log("Scene数",Scene_kazu);
+        loadScene(Syousai);
+      }
       else if(Syousai.substring(0,7)=="YOUTUBE"){
         for (var k = 0; k < Sounds_DATAS.length; k++){
           if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
