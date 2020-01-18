@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 4.8";
+var Version = "バージョン 4.9";
 
 switch (GitHub_type) {
   case "referee":
@@ -619,7 +619,7 @@ function Load(width,height){
       }
       else{
       var Person = "我";
-      var S_image = "image/ユベル.png";
+      var S_image = Foldar+"image/ユベル.png";
       var S_Sound = conversion_url("未設定主人公ポポポ","サウンド");
       }
       Datas = [];
@@ -2907,115 +2907,121 @@ function Load(width,height){
           if(this.backgroundColor=="red"){
             game.replaceScene(ItemScene(Number,Ig,Type));
           }
-          switch (this._element.value) {
-            case "召喚":
-              Moves = "空";
-              game.replaceScene(MoveScene(10));
-              console.log("Scene数",Scene_kazu);
-              break;
-            case "遊ぶ":
-              OASOBI = true;
-              game.popScene();
-              game.pushScene(ReversiScene());
-              console.log("Scene数",Scene_kazu);
-              break;
-            case "改造":
-              game.replaceScene(TransformScene(Number,Ig));
-              console.log("Scene数",Scene_kazu);
-              break;
-            case "詳細":
-            case "見る":
-            case "拡大":
-              game.pushScene(DetailsScene(this.syousai,this._element.value));
-              Scene_kazu++;
-              console.log("Scene数",Scene_kazu);
-              break;
-            case "▶":
-              if(Setting_Flag[PAGAS]==0){
-                Setting_Flag[PAGAS] = Choice_Flag.length-Choice_Flag.length%5;
-                if(Choice_Flag.length%5==0) Setting_Flag[PAGAS]-=5;
-              }
-              else Setting_Flag[PAGAS]-=5;
-              game.replaceScene(ItemScene(Number,Ig,Type));
-              break;
-            case "◀":
-              if(Setting_Flag[PAGAS] == Choice_Flag.length-Choice_Flag.length%5) Setting_Flag[PAGAS] = 0;
-              else{
-                Setting_Flag[PAGAS]+=5;
-                if(Setting_Flag[PAGAS]==Choice_Flag.length) Setting_Flag[PAGAS] = 0;
-              }
-              game.replaceScene(ItemScene(Number,Ig,Type));
-              break;
-            case "戻る":
-              game.popScene();
-              Scene_kazu--;
-              console.log("Scene数",Scene_kazu);
-              break;
-            case "設定を開く":
-              game.pushScene(SettingScene(Number));
-              Scene_kazu++;
-              console.log("Scene数",Scene_kazu);
-              break;
-            case Type2:
-              game.replaceScene(ItemScene(Number,Ig,Type2));
-              break;
-            case "つきつける":
-              game.popScene();
-              Scene_kazu--;
-              console.log("Scene数",Scene_kazu);
-              if(Ig==Choice_Item||(Ig!="日常"&&(Choice_Item=="強欲な壺"||Choice_Item=="万能ツール"||Choice_Item=="ヒントカード"))){
-                if(Choice_Item=="ヒントカード"){
-                  Scene_loads("ヒント"+Number,false,false);
-                  return;
-                }
-                if(Choice_Item=="強欲な壺"){
-                  Get_ICF("アイテム","強欲な壺","消失");
-                  Choice_Flag[Choice_Flag.length] = ["強欲なカケラ","強欲な壺を使った証。","強欲なカケラ"];
-                }
-                game.pushScene(PopScene(Number,"異議あり！","主人公異議あり！"));
+          if(submits==2){
+            switch (this._element.value){
+              case "召喚":
+                Moves = "空";
+                game.replaceScene(MoveScene(10));
+                console.log("Scene数",Scene_kazu);
+                break;
+              case "遊ぶ":
+                OASOBI = true;
+                game.popScene();
+                game.pushScene(ReversiScene());
+                console.log("Scene数",Scene_kazu);
+                break;
+              case "改造":
+                game.replaceScene(TransformScene(Number,Ig));
+                console.log("Scene数",Scene_kazu);
+                break;
+              case "詳細":
+              case "見る":
+              case "拡大":
+                game.pushScene(DetailsScene(this.syousai,this._element.value));
                 Scene_kazu++;
                 console.log("Scene数",Scene_kazu);
-              }
-              else if(Ig=="日常") Scene_loads(Number,false,"つきつける"+Choice_Item);
-              else{
-                game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
+                break;
+            }
+          }
+          else{
+            switch (this._element.value){
+              case "▶":
+                if(Setting_Flag[PAGAS]==0){
+                  Setting_Flag[PAGAS] = Choice_Flag.length-Choice_Flag.length%5;
+                  if(Choice_Flag.length%5==0) Setting_Flag[PAGAS]-=5;
+                }
+                else Setting_Flag[PAGAS]-=5;
+                game.replaceScene(ItemScene(Number,Ig,Type));
+                break;
+              case "◀":
+                if(Setting_Flag[PAGAS] == Choice_Flag.length-Choice_Flag.length%5) Setting_Flag[PAGAS] = 0;
+                else{
+                  Setting_Flag[PAGAS]+=5;
+                  if(Setting_Flag[PAGAS]==Choice_Flag.length) Setting_Flag[PAGAS] = 0;
+                }
+                game.replaceScene(ItemScene(Number,Ig,Type));
+                break;
+              case "戻る":
+                game.popScene();
+                Scene_kazu--;
+                console.log("Scene数",Scene_kazu);
+                break;
+              case "設定を開く":
+                game.pushScene(SettingScene(Number));
                 Scene_kazu++;
                 console.log("Scene数",Scene_kazu);
-              }
-              break;
-            default:
-              for (var i = 0; i < 5; i++) {
-                if(f[1].split("↓")[i]==undefined) Text[i].text = "";
-                else Text[i].text = f[1].split("↓")[i];
-              }
-              for (var i = 0; i < submits; i++) {
-                Button[i].backgroundColor = "buttonface";
-              }
-              Choice_Item = f[0];
-              console.log(Choice_Item+"を選択");
-              var Item_image_url = conversion_url(f[2],"画像");
-              var xxx = game.assets[Item_image_url].width;
-              var yyy = game.assets[Item_image_url].height;
-              Item_image.image = game.assets[Item_image_url];
-              Item_image.width = xxx;
-              Item_image.height = yyy;
-              Item_image.scaleX = ((width/4)/xxx);
-              Item_image.scaleY = ((width/4)/yyy);
-              Item_image.x = (Item_image.scaleX*xxx/2)-xxx/2+(width/1.6);
-              Item_image.y = (Item_image.scaleY*yyy/2)-yyy/2+(width/4)+(width/20)+(width/25);
-              this.backgroundColor = "red";
-              if(f[3]){
-                Button[3]._element.value = f[3];
-                Button[3].syousai = f[4];
-                scene.addChild(Button[3]);
-              }
-              else scene.removeChild(Button[3]);
-              if(Ig){
-                Button[4]._element.value = "つきつける";
-                scene.addChild(Button[4]);
-              }
-              console.log(f);
-              break;
+                break;
+              case Type2:
+                game.replaceScene(ItemScene(Number,Ig,Type2));
+                break;
+              case "つきつける":
+                game.popScene();
+                Scene_kazu--;
+                console.log("Scene数",Scene_kazu);
+                if(Ig==Choice_Item||(Ig!="日常"&&(Choice_Item=="強欲な壺"||Choice_Item=="万能ツール"||Choice_Item=="ヒントカード"))){
+                  if(Choice_Item=="ヒントカード"){
+                    Scene_loads("ヒント"+Number,false,false);
+                    return;
+                  }
+                  if(Choice_Item=="強欲な壺"){
+                    Get_ICF("アイテム","強欲な壺","消失");
+                    Choice_Flag[Choice_Flag.length] = ["強欲なカケラ","強欲な壺を使った証。","強欲なカケラ"];
+                  }
+                  game.pushScene(PopScene(Number,"異議あり！","主人公異議あり！"));
+                  Scene_kazu++;
+                  console.log("Scene数",Scene_kazu);
+                }
+                else if(Ig=="日常") Scene_loads(Number,false,"つきつける"+Choice_Item);
+                else{
+                  game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
+                  Scene_kazu++;
+                  console.log("Scene数",Scene_kazu);
+                }
+                break;
+              default:
+                for (var i = 0; i < 5; i++) {
+                  if(f[1].split("↓")[i]==undefined) Text[i].text = "";
+                  else Text[i].text = f[1].split("↓")[i];
+                }
+                for (var i = 0; i < submits; i++) {
+                  Button[i].backgroundColor = "buttonface";
+                }
+                Choice_Item = f[0];
+                console.log(Choice_Item+"を選択");
+                var Item_image_url = conversion_url(f[2],"画像");
+                var xxx = game.assets[Item_image_url].width;
+                var yyy = game.assets[Item_image_url].height;
+                Item_image.image = game.assets[Item_image_url];
+                Item_image.width = xxx;
+                Item_image.height = yyy;
+                Item_image.scaleX = ((width/4)/xxx);
+                Item_image.scaleY = ((width/4)/yyy);
+                Item_image.x = (Item_image.scaleX*xxx/2)-xxx/2+(width/1.6);
+                Item_image.y = (Item_image.scaleY*yyy/2)-yyy/2+(width/4)+(width/20)+(width/25);
+                this.backgroundColor = "red";
+                if(f[3]){
+                  Button[3]._element.value = f[3];
+                  Button[3].syousai = f[4];
+                  scene.addChild(Button[3]);
+                }
+                else scene.removeChild(Button[3]);
+                if(Ig){
+                  Button[4]._element.value = "つきつける";
+                  scene.addChild(Button[4]);
+                }
+                console.log(f);
+                break;
+            }
           }
         });
         submits++;
