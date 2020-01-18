@@ -503,7 +503,7 @@ function Load(width,height){
                 break;
               }
             }
-            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明欄.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細,I_C_F_DATAS[k].詳細内容);
+            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
           }
         }
     }
@@ -2914,23 +2914,25 @@ function Load(width,height){
                 Moves = "空";
                 game.replaceScene(MoveScene(10));
                 console.log("Scene数",Scene_kazu);
+                return;
                 break;
               case "遊ぶ":
                 OASOBI = true;
                 game.popScene();
                 game.pushScene(ReversiScene());
                 console.log("Scene数",Scene_kazu);
+                return;
                 break;
               case "改造":
                 game.replaceScene(TransformScene(Number,Ig));
                 console.log("Scene数",Scene_kazu);
+                return;
                 break;
-              case "詳細":
-              case "見る":
-              case "拡大":
+                default:
                 game.pushScene(DetailsScene(this.syousai,this._element.value));
                 Scene_kazu++;
                 console.log("Scene数",Scene_kazu);
+                return;
                 break;
             }
           }
