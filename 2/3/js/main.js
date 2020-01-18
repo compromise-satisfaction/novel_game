@@ -2643,7 +2643,7 @@ function Load(width,height){
       Submit2(width/2+width/4,Text[12].y,"+");
 
       return scene;
-    }
+    };
     var InspectScene = function(Inspect){
       var scene = new Scene();                                // 新しいシーンを作る
 
@@ -2834,7 +2834,7 @@ function Load(width,height){
         }
       });//進む
       return scene;
-    }
+    };
     var ItemScene = function(Number,Ig,Type){
 
       var scene = new Scene();                                // 新しいシーンを作る
@@ -2881,7 +2881,7 @@ function Load(width,height){
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = a;
         if(a){
-          if((a=="設定を開く"&&Ig)==false) scene.addChild(Button[submits]);
+          if((a=="設定を開く"&&Ig)==false&&a!="詳細") scene.addChild(Button[submits]);
         }
         Button[submits].addEventListener('touchstart',function(e){
           switch (a) {
@@ -2904,35 +2904,30 @@ function Load(width,height){
             var ooo ="戻る";
           }
           if(Button_push(ooo)) return;
-          console.log(submits);
           if(this.backgroundColor=="red"){
             game.replaceScene(ItemScene(Number,Ig,Type));
           }
-          if(submits==2){
-            switch (this._element.value){
+          if(a=="詳細"){
+            switch (Button[3]._element.value){
               case "召喚":
                 Moves = "空";
                 game.replaceScene(MoveScene(10));
                 console.log("Scene数",Scene_kazu);
-                return;
                 break;
               case "遊ぶ":
                 OASOBI = true;
                 game.popScene();
                 game.pushScene(ReversiScene());
                 console.log("Scene数",Scene_kazu);
-                return;
                 break;
               case "改造":
                 game.replaceScene(TransformScene(Number,Ig));
                 console.log("Scene数",Scene_kazu);
-                return;
                 break;
-                default:
-                game.pushScene(DetailsScene(this.syousai));
+              default:
+                game.pushScene(DetailsScene(Button[3].詳細));
                 Scene_kazu++;
                 console.log("Scene数",Scene_kazu);
-                return;
                 break;
             }
           }
@@ -3014,7 +3009,7 @@ function Load(width,height){
                 this.backgroundColor = "red";
                 if(f[3]){
                   Button[3]._element.value = f[3];
-                  Button[3].syousai = f[4];
+                  Button[3].詳細 = f[4];
                   scene.addChild(Button[3]);
                 }
                 else scene.removeChild(Button[3]);
@@ -3036,7 +3031,7 @@ function Load(width,height){
       Submit("戻る",W_X_H,W_Y_H,S_X_H,S_Y_H);
       Submit("設定を開く",width/2-S_X_H/2,W_Y_H,S_X_H,S_Y_H);
       Submit(Type2,width-S_X_H-W_X_H,W_Y_H,S_X_H,S_Y_H);
-      Submit("",width/2+width/20,(width/4)+((width/20)+(width/25)+(width/50))*4,width/2.5+W_X_H-width/8,W_X_H)
+      Submit("詳細",width/2+width/20,(width/4)+((width/20)+(width/25)+(width/50))*4,width/2.5+W_X_H-width/8,W_X_H)
       Submit("",width/2+width/20,(width/4)+((width/20)+(width/25)*14),width/2.5+W_X_H-width/8,W_X_H);
 
       var Text = [];
@@ -3081,8 +3076,8 @@ function Load(width,height){
       }
 
       return scene;
-    }
-    var DetailsScene = function(Number){
+    };
+    var DetailsScene = function(Syousai){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var xxx = game.assets[Foldar+"image/Background.png"].width;
@@ -3095,12 +3090,11 @@ function Load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
 
-      var Numbers = (width/10)+(width/30);
       var Button = [];
       var submits = 0;
       function Submit(a){
         Button[submits] = new Entity();
-        Button[submits].moveTo(width/4,Numbers);
+        Button[submits].moveTo(width/4,width/10+width/30);
         Button[submits].width = width/2;
         Button[submits].height = (width/10);
         Button[submits]._element = document.createElement('input');
@@ -3112,9 +3106,17 @@ function Load(width,height){
           for (var k = 0; k < Sounds_DATAS.length; k++){
             if(game.assets[Sounds_DATAS[k].url].状態=="ポーズ中"){
               game.assets[Sounds_DATAS[k].url].play();
-              game.assets[Sounds_DATAS[k].url].src.loop = true;
-              game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
-              game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
+              game.assets[Sounds_DATAS[k].url].状態 = "再生中";
+              if(game.assets[Sounds_DATAS[k].url].src==undefined){
+                game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
+              }
+              else{
+                game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
+                game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
+                game.assets[Sounds_DATAS[k].url].src.loop = true;
+                game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
+                game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
+              }
             }
           }
           game.popScene();
@@ -3123,25 +3125,61 @@ function Load(width,height){
         });
         submits++;
       }
-
       Submit("戻る");
 
-      if(Number.substring(0,2)=="画像"){
-        Number = Number.substring(2);
-        Number = conversion_url(Number,"画像");
-        var xxx = game.assets[Number].width;
-        var yyy = game.assets[Number].height;
+      if(Syousai.substring(0,2)=="画像"){
+        Syousai = Syousai.substring(2);
+        Syousai = conversion_url(Syousai,"画像");
+        var xxx = game.assets[Syousai].width;
+        var yyy = game.assets[Syousai].height;
         var Photo = new Sprite(xxx,yyy);
         Photo.scaleX = ((width)/xxx)*0.8;
         Photo.scaleY = ((width)/yyy)*0.8;
         if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
-        Photo.image = game.assets[Number];
+        Photo.image = game.assets[Syousai];
+        Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
+        Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
+        scene.addChild(Photo);
+      }
+      else if(Syousai.substring(0,7)=="YOUTUBE"){
+        for (var k = 0; k < Sounds_DATAS.length; k++){
+          if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
+            var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
+            game.assets[Sounds_DATAS[k].url].pause();
+            game.assets[Sounds_DATAS[k].url].状態 = "ポーズ中";
+          }
+        }
+        Syousai = Syousai.substring(7);
+        var Video = new Entity()
+        Video.visible =  true;
+        Video._element = document.createElement('div')
+        Video.x = width/10;
+        Video.y = height/2-width/16*9*0.8/2;
+        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Syousai+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
+        scene.addChild(Video);
+      }
+
+      return scene;
+    };
+    var DetailsScene2 = function(Syousai){
+      var scene = new Scene();                                // 新しいシーンを作る
+
+      if(Syousai.substring(0,2)=="画像"){
+        Syousai = Syousai.substring(2);
+        Syousai = conversion_url(Syousai,"画像");
+        var xxx = game.assets[Syousai].width;
+        var yyy = game.assets[Syousai].height;
+        var Photo = new Sprite(xxx,yyy);
+        Photo.scaleX = ((width)/xxx)*0.8;
+        Photo.scaleY = ((width)/yyy)*0.8;
+        if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
+        Photo.image = game.assets[Syousai];
         Photo.x = (Photo.scaleX*xxx/2)-xxx/2+(width/10);
         Photo.y = (Photo.scaleY*yyy/2)-yyy/2+Numbers+(width/5);
         scene.addChild(Photo);
       }
-      else if(Number.substring(0,7)=="YOUTUBE"){
-        for (var k = 0; k < Sounds_DATAS.length; k++){
+      else if(Syousai.substring(0,7)=="YOUTUBE"){
+        /*for (var k = 0; k < Sounds_DATAS.length; k++){
           if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
             var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
             game.assets[Sounds_DATAS[k].url].pause();
@@ -3158,18 +3196,18 @@ function Load(width,height){
               game.assets[Sounds_DATAS[k].url].状態=="停止";
             }
           }
-        }
-        Number = Number.substring(7);
+        }*/
+        Syousai = Syousai.substring(7);
         var Video = new Entity()
         Video.visible =  true;
         Video._element = document.createElement('div')
         Video.x = (width/10);
         Video.y = Numbers+(width/5);
-        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Number+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
+        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Syousai+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
         scene.addChild(Video);
       }
       else {
-        var S_Text = Number.replace(/\n/g,"↓").split("↓");
+        var S_Text = Syousai.replace(/\n/g,"↓").split("↓");
         for (var i = 1; i < S_Text.length+1; i++) {
           Text[i] = new Texts(S_Text[i-1]);
           if(i==13) break;
@@ -3294,7 +3332,7 @@ function Load(width,height){
       });
 
       return scene;
-    }
+    };
     var ReversiScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
