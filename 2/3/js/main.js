@@ -2670,7 +2670,7 @@ function Load(width,height){
     var InspectScene = function(Inspect){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      if(Inspect[0]=="留置所") var ryu = "image/背景/留置所背景.png";
+      if(Inspect[0]=="留置所") var ryu = Foldar+"image/背景/留置所背景.png";
       else var ryu = conversion_url(Inspect[0],"画像");
       var xxx = game.assets[ryu].width;
       var yyy = game.assets[ryu].height;
@@ -3448,7 +3448,7 @@ function Load(width,height){
           Sprite.call(this, 45, 45);
           this.x = 50*x+5;
           this.y = 50*y+45;
-          this.image = game.assets['image/stone.png'];
+          this.image = game.assets[Foldar+"image/stone.png"];
           //scene.addChild(this);
           this.ura = z;
           if(z==3) z = 1;
