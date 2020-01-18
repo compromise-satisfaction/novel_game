@@ -282,6 +282,7 @@ function Load(width,height){
   game.preload(Foldar+"image/left.png");
   game.preload(Foldar+"image/right.png");
   game.preload(Foldar+"image/white.png");
+  game.preload(Foldar+"image/Black.png");
   game.preload(Foldar+"image/stand.png");
   game.preload(Foldar+"image/ユベル.png");
   game.preload(Foldar+"image/留置所.png");
@@ -538,8 +539,13 @@ function Load(width,height){
         }
       }
     }
-    function Scene_loads(Number,Return,Item){
-      if(Item) Number = Item + Number;
+    function Scene_loads(Number,Return,Item,Item_type){
+      if(Item){
+        if(Item_type) Number = [Item+Number,"つきつけるデフォルト"+Item_type+Number];
+        else Number = [Item+Number.split("↓")[0],Number.split("↓")[1]];
+        Item = Number[1];
+        Number = Number[0];
+      }
       console.log(Number);
       switch (Number) {
         case "セーブ読み込み":
@@ -560,8 +566,14 @@ function Load(width,height){
           return;
           break;
         case "直前":
+          if(Scene_kazu==2){
+            game.popScene();
+            Scene_kazu--;
+            console.log(Scene_kazu);
+            return;
+          }
           Number = Setting_Flag[4];
-          Scene_loads(Number,false,false);
+          Scene_loads(Number,true,false);
           return;
           break;
         case "調べる何もない":
@@ -627,7 +639,7 @@ function Load(width,height){
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
           Get_ICF2(Main_DATAS[i],Person);
-          Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
+          if(Datas[0]!="直前") Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
           Datas[1] = conversion_url(Main_DATAS[i].人物左,"画像");
           Datas[2] = Main_DATAS[i].フェード人物左;
           Datas[3] = conversion_url(Main_DATAS[i].人物中,"画像");
@@ -653,7 +665,13 @@ function Load(width,height){
           if(Datas[3]=="主人公") Datas[3] = S_image;
           if(Datas[5]=="主人公") Datas[5] = S_image;
           if(Datas[19]=="主人公") Datas[19] = S_Sound;
-          game.replaceScene(MainScene(Return,Number));
+          if(Main_DATAS[i].背景=="半透明") Datas[0] = Foldar+"image/Black.png";
+          if(Main_DATAS[i].背景=="半透明"&&Scene_kazu==1){
+            Scene_kazu++;
+            console.log(Scene_kazu);
+            game.pushScene(MainScene(Return,Number));
+          }
+          else game.replaceScene(MainScene(Return,Number));
           return;
         }
       }
@@ -773,6 +791,10 @@ function Load(width,height){
           game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
           return;
         }
+      }
+      if(Item){
+        Scene_loads(Item,false,false);
+        return;
       }
       Datas[0] = "Black";
       Datas[1] = "";
@@ -1099,80 +1121,82 @@ function Load(width,height){
         }
       }
 
-      switch (Datas[0]) {
-        case "ヒント":
-          var xxx = game.assets[Foldar+"image/融合.png"].width;
-          var yyy = game.assets[Foldar+"image/融合.png"].height;
-          var Background = new Sprite(xxx,yyy);
-          Background.image = game.assets[Foldar+"image/融合.png"];
-          Background.scaleX = width/xxx*1.2;
-          Background.scaleY = width/yyy*1.2;
-          Background.x = (width-xxx)/2;
-          Background.y = -(width-xxx)/2;
-          Rotation_Y -= 10;
-          Background.rotation = Rotation_Y;
-          scene.addChild(Background);//背景
-          var Background2 = new Sprite(width,height);
-          Background2.image = game.assets[Foldar+"image/white.png"];
-          Background2.x = 0;
-          Background2.y = (width/16)*9;
-          scene.addChild(Background2);//白地
-          Background.addEventListener("enterframe",function(){
+      if(Datas[0]){
+        switch (Datas[0]) {
+          case "ヒント":
+            var xxx = game.assets[Foldar+"image/融合.png"].width;
+            var yyy = game.assets[Foldar+"image/融合.png"].height;
+            var Background = new Sprite(xxx,yyy);
+            Background.image = game.assets[Foldar+"image/融合.png"];
+            Background.scaleX = width/xxx*1.2;
+            Background.scaleY = width/yyy*1.2;
+            Background.x = (width-xxx)/2;
+            Background.y = -(width-xxx)/2;
             Rotation_Y -= 10;
             Background.rotation = Rotation_Y;
-            if(Rotation_Y==-360) Rotation_Y = 0;
-          })
-          break;
-          case "Black":
-          case "left":
-          case "right":
-          case "stand":
-          case "留置所":
-          case "裁判長席":
-          var xxx = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].width;
-          var yyy = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].height;
-          var Background = new Sprite(xxx,yyy);
-          Background.scaleX = ((width)/xxx);
-          Background.scaleY = (((width/16)*9)/yyy);
-          Background.image = game.assets[Foldar+"image/背景/"+Datas[0]+".png"];
-          Background.x = (Background.scaleX*xxx/2)-xxx/2;
-          Background.y = (Background.scaleY*yyy/2)-yyy/2;
-          scene.addChild(Background);
-          break;
-        case "カットイン":
-          break;
-        default:
-          var xxx = game.assets[Datas[0]].width;
-          var yyy = game.assets[Datas[0]].height;
-          var Background = new Sprite(xxx,yyy);
-          Background.scaleX = ((width)/xxx);
-          Background.scaleY = (((width/16)*9)/yyy);
-          Background.image = game.assets[Datas[0]];
-          Background.x = (Background.scaleX*xxx/2)-xxx/2;
-          Background.y = (Background.scaleY*yyy/2)-yyy/2;
-          scene.addChild(Background);
-          break;
-      }
+            scene.addChild(Background);//背景
+            var Background2 = new Sprite(width,height);
+            Background2.image = game.assets[Foldar+"image/white.png"];
+            Background2.x = 0;
+            Background2.y = (width/16)*9;
+            scene.addChild(Background2);//白地
+            Background.addEventListener("enterframe",function(){
+              Rotation_Y -= 10;
+              Background.rotation = Rotation_Y;
+              if(Rotation_Y==-360) Rotation_Y = 0;
+            })
+            break;
+            case "Black":
+            case "left":
+            case "right":
+            case "stand":
+            case "留置所":
+            case "裁判長席":
+            var xxx = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].width;
+            var yyy = game.assets[Foldar+"image/背景/"+Datas[0]+".png"].height;
+            var Background = new Sprite(xxx,yyy);
+            Background.scaleX = ((width)/xxx);
+            Background.scaleY = (((width/16)*9)/yyy);
+            Background.image = game.assets[Foldar+"image/背景/"+Datas[0]+".png"];
+            Background.x = (Background.scaleX*xxx/2)-xxx/2;
+            Background.y = (Background.scaleY*yyy/2)-yyy/2;
+            scene.addChild(Background);
+            break;
+          case "カットイン":
+            break;
+          default:
+            var xxx = game.assets[Datas[0]].width;
+            var yyy = game.assets[Datas[0]].height;
+            var Background = new Sprite(xxx,yyy);
+            Background.scaleX = ((width)/xxx);
+            Background.scaleY = (((width/16)*9)/yyy);
+            Background.image = game.assets[Datas[0]];
+            Background.x = (Background.scaleX*xxx/2)-xxx/2;
+            Background.y = (Background.scaleY*yyy/2)-yyy/2;
+            scene.addChild(Background);
+            break;
+        }
 
-      if(Datas[0]=="カットイン"){
-        var ccx = game.assets[Foldar+"image/カットイン.png"].width*3;
-        var ccy = game.assets[Foldar+"image/カットイン.png"].height;
-        var Cut_in = new Sprite(ccx,ccy);
-        Cut_in.scaleX = width/ccx*3;
-        Cut_in.scaleY = width/16*9/ccy;
-        Cut_in.image = game.assets[Foldar+"image/カットイン.png"];
-        Cut_in_time += 10;
-        Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2-Cut_in_time;
-        Cut_in.y = (Cut_in.scaleY*ccy/2)-ccy/2;
-        scene.addChild(Cut_in);//背景
-        Cut_in.addEventListener("enterframe",function(){
+        if(Datas[0]=="カットイン"){
+          var ccx = game.assets[Foldar+"image/カットイン.png"].width*3;
+          var ccy = game.assets[Foldar+"image/カットイン.png"].height;
+          var Cut_in = new Sprite(ccx,ccy);
+          Cut_in.scaleX = width/ccx*3;
+          Cut_in.scaleY = width/16*9/ccy;
+          Cut_in.image = game.assets[Foldar+"image/カットイン.png"];
           Cut_in_time += 10;
-          Cut_in.x -= 10;
-          if(Cut_in_time>width*2){
-            Cut_in_time = 0;
-            Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2;
-          }
-        })
+          Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2-Cut_in_time;
+          Cut_in.y = (Cut_in.scaleY*ccy/2)-ccy/2;
+          scene.addChild(Cut_in);//背景
+          Cut_in.addEventListener("enterframe",function(){
+            Cut_in_time += 10;
+            Cut_in.x -= 10;
+            if(Cut_in_time>width*2){
+              Cut_in_time = 0;
+              Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2;
+            }
+          })
+        }
       }
 
       var xxx = 80;
@@ -2040,7 +2064,6 @@ function Load(width,height){
     };
     var InterrogationScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
-
 
       if(Datas[5]){
         if(Datas[5]=="無し") Datas[5] = Number;
@@ -2925,9 +2948,18 @@ function Load(width,height){
                 console.log("Scene数",Scene_kazu);
                 break;
               default:
-                game.pushScene(DetailsScene(Button[3].詳細));
-                Scene_kazu++;
-                console.log("Scene数",Scene_kazu);
+                if(Button[3].詳細.substring(0,2)=="移動"){
+                  Button[3].詳細 = Button[3].詳細.substring(2);
+                  game.popScene();
+                  Scene_kazu--;
+                  console.log("Scene数",Scene_kazu);
+                  Scene_loads(Number+"↓"+Button[3].詳細,false,Choice_Item,false);
+                }
+                else {
+                  game.pushScene(DetailsScene(Button[3].詳細));
+                  Scene_kazu++;
+                  console.log("Scene数",Scene_kazu);
+                }
                 break;
             }
           }
@@ -2979,7 +3011,7 @@ function Load(width,height){
                   Scene_kazu++;
                   console.log("Scene数",Scene_kazu);
                 }
-                else if(Ig=="日常") Scene_loads(Number,false,"つきつける"+Choice_Item);
+                else if(Ig=="日常") Scene_loads(Number,false,"つきつける"+Choice_Item,Type);
                 else{
                   game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
                   Scene_kazu++;
@@ -3140,15 +3172,6 @@ function Load(width,height){
         Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
         Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
         scene.addChild(Photo);
-      }
-      else if(Syousai.substring(0,2)=="移動"){
-        Syousai = Syousai.substring(2);
-        game.popScene();
-        game.popScene();
-        Scene_kazu--;
-        Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
-        loadScene(Syousai);
       }
       else if(Syousai.substring(0,7)=="YOUTUBE"){
         for (var k = 0; k < Sounds_DATAS.length; k++){
