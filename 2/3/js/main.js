@@ -289,7 +289,7 @@ function Load(width,height){
   game.preload(Foldar+"image/裁判長席.png");
   game.preload(Foldar+"image/背景/留置所背景.png");
   game.preload(Foldar+"sound/進む.wav");
-  game.preload(Foldar+"image/Buttons.png");
+  game.preload(Foldar+"sound/ページ.wav");
   game.preload(Foldar+"image/待った！.png");
   game.preload(Foldar+"sound/ア.wav");
   game.preload(Foldar+"sound/イ.wav");
@@ -2188,84 +2188,6 @@ function Load(width,height){
       Button(3,"▶",Datas[6]);//進む
       Button(4,"つきつける",Datas[7]);//つきつける
 
-      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
-      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
-      var Button1 = new Sprite(xxx,yyy);
-      Button1.image = game.assets[Foldar+"image/Buttons.png"];
-      Button1.scaleX = ((width/5)/xxx);
-      Button1.scaleY = (((width/5))/yyy);//ココが変換した場所
-      Button1.x = (Button1.scaleX*xxx/2)-xxx/2;
-      Button1.y = (Button1.scaleY*yyy/2)-yyy/2+height-Button1.scaleY*yyy;
-      Button1.frame = 0;
-      //scene.addChild(Button1);
-      Button1.addEventListener('touchstart',function(e){
-        game.pushScene(PopScene(Datas[3],"待った！"));
-        Scene_kazu++;
-        console.log("Scene数",Scene_kazu);
-      });//ゆさぶる
-
-      if(Datas[4]!=false){
-        var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
-        var yyy = game.assets[Foldar+"image/Buttons.png"].height;
-        var Button2 = new Sprite(xxx,yyy);
-        Button2.image = game.assets[Foldar+"image/Buttons.png"];
-        Button2.scaleX = ((width/5)/xxx);
-        Button2.scaleY = (((width/5))/yyy);//ココが変換した場所
-        Button2.x = (Button2.scaleX*xxx/2)-xxx/2+(width/5);
-        Button2.y = (Button2.scaleY*yyy/2)-yyy/2+height-Button2.scaleY*yyy;
-        Button2.frame = 2;
-        //scene.addChild(Button2);
-        Button2.addEventListener('touchstart',function(e){
-          Scene_loads(Datas[4],true,false);
-        });
-      }//戻る
-
-      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
-      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
-      var Button3 = new Sprite(xxx,yyy);
-      Button3.image = game.assets[Foldar+"image/Buttons.png"];
-      Button3.scaleX = ((width/5)/xxx);
-      Button3.scaleY = (((width/5))/yyy);//ココが変換した場所
-      Button3.x = (Button3.scaleX*xxx/2)-xxx/2+(width/5)*2;
-      Button3.y = (Button3.scaleY*yyy/2)-yyy/2+height-Button3.scaleY*yyy;
-      Button3.frame = 3;
-      //scene.addChild(Button3);
-      Button3.addEventListener('touchstart',function(e){
-        game.pushScene(SettingScene(Datas[5]));
-        Scene_kazu++;
-        console.log("Scene数",Scene_kazu);
-      });//設定
-
-      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
-      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
-      var Button4 = new Sprite(xxx,yyy);
-      Button4.image = game.assets[Foldar+"image/Buttons.png"];
-      Button4.scaleX = ((width/5)/xxx);
-      Button4.scaleY = (((width/5))/yyy);//ココが変換した場所
-      Button4.x = (Button4.scaleX*xxx/2)-xxx/2+(width/5)*3;
-      Button4.y = (Button4.scaleY*yyy/2)-yyy/2+height-Button4.scaleY*yyy;
-      Button4.frame = 5;
-      //scene.addChild(Button4);
-      Button4.addEventListener('touchstart',function(e){
-        Scene_loads(Datas[6],false,false);
-      });//進む
-
-      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
-      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
-      var Button5 = new Sprite(xxx,yyy);
-      Button5.image = game.assets[Foldar+"image/Buttons.png"];
-      Button5.scaleX = ((width/5)/xxx);
-      Button5.scaleY = (((width/5))/yyy);//ココが変換した場所
-      Button5.x = (Button5.scaleX*xxx/2)-xxx/2+(width/5)*4;
-      Button5.y = (Button5.scaleY*yyy/2)-yyy/2+height-Button5.scaleY*yyy;
-      Button5.frame = 7;
-      //scene.addChild(Button5);
-      Button5.addEventListener('touchstart',function(e){
-        game.pushScene(ItemScene(Datas[7],Datas[8],"アイテム"));
-        Scene_kazu++;
-        console.log("Scene数",Scene_kazu);
-      });//つきつける
-
       return scene;
     };
     var SettingScene = function(Number){
@@ -2782,17 +2704,6 @@ function Load(width,height){
         T_D();
       })
 
-      var xxx = game.assets[Foldar+"image/Buttons.png"].width/8;
-      var yyy = game.assets[Foldar+"image/Buttons.png"].height;
-      var Enter1 = new Sprite(xxx,yyy);
-      Enter1.image = game.assets[Foldar+"image/Buttons.png"];
-      Enter1.scaleX = ((width/5)/xxx);
-      Enter1.scaleY = (((width/5))/yyy);//ココが変換した場所
-      Enter1.x = (Enter1.scaleX*xxx/2)-xxx/2+(width/5)*3;
-      Enter1.y = (Enter1.scaleY*yyy/2)-yyy/2+height-Enter1.scaleY*yyy;
-      Enter1.frame = 5;
-      //scene.addChild(Enter1);
-
       var Buttons = new Entity();
       Buttons.moveTo((width/5)*3,height-(width/5));
       Buttons.width = (width/5);
@@ -2956,7 +2867,7 @@ function Load(width,height){
                   Scene_loads(Number+"↓"+Button[3].詳細,false,Choice_Item,false);
                 }
                 else {
-                  game.pushScene(DetailsScene(Button[3].詳細));
+                  game.pushScene(DetailsScene(Button[3].詳細,0));
                   Scene_kazu++;
                   console.log("Scene数",Scene_kazu);
                 }
@@ -3063,7 +2974,7 @@ function Load(width,height){
       Submit("戻る",W_X_H,W_Y_H,S_X_H,S_Y_H);
       Submit("設定を開く",width/2-S_X_H/2,W_Y_H,S_X_H,S_Y_H);
       Submit(Type2,width-S_X_H-W_X_H,W_Y_H,S_X_H,S_Y_H);
-      Submit("詳細",width/2+width/20,(width/4)+((width/20)+(width/25)+(width/50))*4,width/2.5+W_X_H-width/8,W_X_H)
+      Submit("詳細",width/2+width/20,(width/4)+((width/20)+(width/25)+(width/50))*4,width/2.5+W_X_H-width/8,W_X_H);
       Submit("",width/2+width/20,(width/4)+((width/20)+(width/25)*14),width/2.5+W_X_H-width/8,W_X_H);
 
       var Text = [];
@@ -3109,7 +3020,7 @@ function Load(width,height){
 
       return scene;
     };
-    var DetailsScene = function(Syousai){
+    var DetailsScene = function(Syousai,Pages){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var xxx = game.assets[Foldar+"image/Background.png"].width;
@@ -3159,6 +3070,64 @@ function Load(width,height){
       }
       Submit("戻る");
 
+      var Texts = Class.create(Label, {
+        initialize: function(a) {
+          Numbers += width/20+width/25;
+          Label.call(this);
+          this.font  = width/20+"px monospace";
+          this.x = width/12;
+          this.y = Numbers;
+          this.width = width*2;
+          this.height = width/20;
+          this.text = a;
+          switch (a) {
+            case "前のページボタン":
+            case "次のページボタン":
+            case "最初のページボタン":
+              break;
+            default:
+              scene.addChild(this);
+              break;
+          }
+        }
+      });
+      var Text = [];
+      var Numbers = width/10;
+      Numbers += width/20;
+
+      var Button2 = [];
+      var submits2 = 0;
+      function Submit2(a,b,c,d,e,f){
+        Button[submits2] = new Entity();
+        Button[submits2].moveTo(b,c);
+        Button[submits2].width = d;
+        Button[submits2].height = e;
+        Button[submits2]._element = document.createElement('input');
+        Button[submits2]._element.type = "submit";
+        Button[submits2]._element.value = a;
+        scene.addChild(Button[submits2]);
+        Button[submits2].addEventListener('touchstart',function(e){
+          if(Button_push("ページ")) return;
+          switch (a) {
+            case "前のページ":
+              Pages -= 13;
+              break;
+            case "次のページ":
+              Pages += 13;
+              break;
+            default:
+              Pages = 0;
+              break;
+          }
+          game.replaceScene(DetailsScene(Syousai,Pages));
+        });
+        submits2++;
+      }
+      var S_X_H = (width-width/6)/3;
+      var S_Y_H = width/10;
+      var W_X_H = width/12;
+      var W_Y_H = width/9;
+
       if(Syousai.substring(0,2)=="画像"){
         Syousai = Syousai.substring(2);
         Syousai = conversion_url(Syousai,"画像");
@@ -3190,89 +3159,15 @@ function Load(width,height){
         Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Syousai+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
         scene.addChild(Video);
       }
-
-      return scene;
-    };
-    var DetailsScene2 = function(Syousai){
-      var scene = new Scene();                                // 新しいシーンを作る
-
-      if(Syousai.substring(0,2)=="画像"){
-        Syousai = Syousai.substring(2);
-        Syousai = conversion_url(Syousai,"画像");
-        var xxx = game.assets[Syousai].width;
-        var yyy = game.assets[Syousai].height;
-        var Photo = new Sprite(xxx,yyy);
-        Photo.scaleX = ((width)/xxx)*0.8;
-        Photo.scaleY = ((width)/yyy)*0.8;
-        if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
-        Photo.image = game.assets[Syousai];
-        Photo.x = (Photo.scaleX*xxx/2)-xxx/2+(width/10);
-        Photo.y = (Photo.scaleY*yyy/2)-yyy/2+Numbers+(width/5);
-        scene.addChild(Photo);
-      }
-      else if(Syousai.substring(0,7)=="YOUTUBE"){
-        /*for (var k = 0; k < Sounds_DATAS.length; k++){
-          if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-            var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
-            game.assets[Sounds_DATAS[k].url].pause();
-            game.assets[Sounds_DATAS[k].url].状態=="ポーズ中";
-            if(game.assets[Sounds_DATAS[k].url].src==undefined){
-              game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
-            }
-            else{
-              game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
-              game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
-            }
-            if(Setting_Flag[9]==0){
-              game.assets[Sounds_DATAS[k].url].stop();
-              game.assets[Sounds_DATAS[k].url].状態=="停止";
-            }
-          }
-        }*/
-        Syousai = Syousai.substring(7);
-        var Video = new Entity()
-        Video.visible =  true;
-        Video._element = document.createElement('div')
-        Video.x = (width/10);
-        Video.y = Numbers+(width/5);
-        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Syousai+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
-        scene.addChild(Video);
-      }
-      else {
+      else{
         var S_Text = Syousai.replace(/\n/g,"↓").split("↓");
-        for (var i = 1; i < S_Text.length+1; i++) {
-          Text[i] = new Texts(S_Text[i-1]);
+        for (var i = 0; i < S_Text.length; i++) {
+          Text[i] = new Texts(S_Text[Pages+i]);
+          if(Text[i].text=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+          if(Text[i].text=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+          if(Text[i].text=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
           if(i==13) break;
         }
-      }
-      break;
-
-      var Pages3 = -1;
-
-      for (var i = 1; i < Text.length; i++) {
-        Text[i].addEventListener('touchstart',function(e){
-          if(this.text=="◆ 次のページ"){
-            Pages3 += 13;
-            for (var i = 1; i < Text.length; i++) {
-              if(S_Text[Pages3+i]) Text[i].text = S_Text[Pages3+i];
-              else Text[i].text = "";
-            }
-          }
-          else if(this.text=="◆ 前のページ"){
-            Pages3 -= 13;
-            for (var i = 1; i < Text.length; i++) {
-              if(S_Text[Pages3+i]) Text[i].text = S_Text[Pages3+i];
-              else Text[i].text = "";
-            }
-          }
-          else if(this.text=="◆ 最初のページ"){
-            Pages3 = -1;
-            for (var i = 1; i < 14; i++) {
-              if(S_Text[Pages3+i]) Text[i].text = S_Text[Pages3+i];
-              else Text[i].text = "";
-            }
-          }
-        });
       }
 
       return scene;
