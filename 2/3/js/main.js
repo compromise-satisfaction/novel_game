@@ -2904,6 +2904,7 @@ function Load(width,height){
             var ooo ="戻る";
           }
           if(Button_push(ooo)) return;
+          console.log(submits);
           if(this.backgroundColor=="red"){
             game.replaceScene(ItemScene(Number,Ig,Type));
           }
@@ -3105,7 +3106,6 @@ function Load(width,height){
         Button[submits]._element.value = a;
         scene.addChild(Button[submits]);
         Button[submits].addEventListener('touchstart',function(e){
-          console.log(submits);
           if(Button_push("戻る")) return;
           for (var k = 0; k < Sounds_DATAS.length; k++){
             if(game.assets[Sounds_DATAS[k].url].状態=="ポーズ中"){
