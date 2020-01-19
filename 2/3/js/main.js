@@ -3081,10 +3081,10 @@ function Load(width,height){
           this.height = width/20;
           this.text = a;
           switch (a) {
-            case undefined:
             case "前のページボタン":
             case "次のページボタン":
             case "最初のページボタン":
+            case undefined:
               break;
             default:
               scene.addChild(this);
@@ -3111,10 +3111,10 @@ function Load(width,height){
           if(Button_push("ページ")) return;
           switch (a) {
             case "前のページ":
-              Pages -= 12;
+              Pages -= 13;
               break;
             case "次のページ":
-              Pages += 12;
+              Pages += 13;
               break;
             default:
               Pages = 0;
@@ -3167,7 +3167,7 @@ function Load(width,height){
           if(Text[i].text=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
           if(Text[i].text=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
           if(Text[i].text=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-          if(i==12) break;
+          if(i==13) break;
         }
       }
 
