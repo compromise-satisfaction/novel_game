@@ -3167,7 +3167,7 @@ function Load(width,height){
           if(Text[i].text=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
           if(Text[i].text=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
           if(Text[i].text=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-          if(i==13) break;
+          if(i==12) break;
         }
       }
 
