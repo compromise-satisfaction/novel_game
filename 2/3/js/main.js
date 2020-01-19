@@ -1575,7 +1575,7 @@ function Load(width,height){
             }
             break;
           default:
-            break:
+            break;
         }
         Time ++;
         if(s){
