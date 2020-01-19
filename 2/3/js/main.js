@@ -1454,7 +1454,7 @@ function Load(width,height){
         scene.addChild(C_name);//キャラ名
       }
 
-      if(Moves=="空"){
+      if(Number=="空"){
         var xxx = game.assets[conversion_url("タクシー","画像")].width;
         var yyy = game.assets[conversion_url("タクシー","画像")].height;
         var Taxi = new Sprite(xxx,yyy);
@@ -2878,11 +2878,6 @@ function Load(width,height){
           }
           if(a=="詳細"){
             switch (Button[3]._element.value){
-              case "召喚":
-                Moves = "空";
-                game.replaceScene(MoveScene(10));
-                console.log("Scene数",Scene_kazu);
-                break;
               case "遊ぶ":
                 OASOBI = true;
                 game.popScene();
