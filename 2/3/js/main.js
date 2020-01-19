@@ -387,7 +387,6 @@ function Load(width,height){
     var Trophy_Flag = [];//トロフィー
     var Scene_type = "メイン";
     var Scene_kazu = 1;
-    var Get = false;
     var Moves = 0;
     var OASOBI = false;
 
@@ -927,61 +926,100 @@ function Load(width,height){
     return Math.floor(Math.random() * (n + 1));
     }
     function Get_ICF(Get_Type,a,b,c,d,e){
-    //console.log(a,b,c,d,e);
-    if(Get) return;
-    if(Get_Type=="人物"){
-    for (var i = 0; i < Character_Flag.length; i++) {
-    if(Character_Flag[i][0]==a) break;
+      if(Get_Type=="人物"){
+        for (var i = 0; i < Character_Flag.length; i++) {
+          if(Character_Flag[i][0]==a) break;
+        }
+        if(b=="消失"){
+          Character_Flag[i] = false;
+          var Character_Flag2 = [];
+          k = 0;
+          for (var i = 0; i < Character_Flag.length; i++){
+            if(Character_Flag[i]){
+              Character_Flag2[k] = Character_Flag[i];
+              k++;
+            }
+          }
+          Character_Flag = Character_Flag2;
+          if(Setting_Flag[5]==Character_Flag.length) Setting_Flag[5]-=5;
+        }
+        else if(b=="書き換え"){
+          if(i==Character_Flag.length) return;
+          Character_Flag[i][0] = c;
+          for (var k = 0; k < I_C_F_DATAS.length; k++) {
+            if(I_C_F_DATAS[k].シーン名==c){
+              break;
+            }
+            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
+          }
+        }
+        else Character_Flag[i] = [a,b,c,d,e];
+      }
+      else if(Get_Type=="フラグ"){
+      for (var i = 0; i < Flag.length; i++){
+        if(Flag[i]==a) return;
+      }
+      Flag[Flag.length] = a;
     }
-    if(b=="消失"){
-    Character_Flag[i] = false;
-    var Character_Flag2 = [];
-    k = 0;
-    for (var i = 0; i < Character_Flag.length; i++){
-    if(Character_Flag[i]){
-    Character_Flag2[k] = Character_Flag[i];
-    k++;
+      else if(Get_Type=="トロフィー"){
+      for (var i = 0; i < Trophy_Flag.length; i++) {
+        if(Trophy_Flag[i][0]==a) break;
+      }
+      if(b=="消失"){
+        Trophy_Flag[i] = false;
+        var Trophy_Flag2 = [];
+        k = 0;
+        for (var i = 0; i < Trophy_Flag.length; i++){
+          if(Trophy_Flag[i]){
+            Trophy_Flag2[k] = Trophy_Flag[i];
+            k++;
+          }
+        }
+        Trophy_Flag = Trophy_Flag2;
+        if(Setting_Flag[5]==Trophy_Flag.length) Setting_Flag[5]-=5;
+      }
+      else if(b=="書き換え"){
+        if(i==Trophy_Flag.length) return;
+        Trophy_Flag[i][0] = c;
+        for (var k = 0; k < I_C_F_DATAS.length; k++) {
+          if(I_C_F_DATAS[k].シーン名==c){
+            break;
+          }
+          Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
+        }
+      }
+      else Trophy_Flag[i] = [a,b,c,d,e];
     }
+      else{
+      for (var i = 0; i < Item_Flag.length; i++) {
+        if(Item_Flag[i][0]==a) break;
+      }
+      if(b=="消失"){
+        Item_Flag[i] = false;
+        var Item_Flag2 = [];
+        k = 0;
+        for (var i = 0; i < Item_Flag.length; i++){
+          if(Item_Flag[i]){
+            Item_Flag2[k] = Item_Flag[i];
+            k++;
+          }
+        }
+        Item_Flag = Item_Flag2;
+        if(Setting_Flag[5]==Item_Flag.length) Setting_Flag[5]-=5;
+      }
+      else if(b=="書き換え"){
+        if(i==Item_Flag.length) return;
+        Item_Flag[i][0] = c;
+        for (var k = 0; k < I_C_F_DATAS.length; k++) {
+          if(I_C_F_DATAS[k].シーン名==c){
+            break;
+          }
+          Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
+        }
+      }
+      else Item_Flag[i] = [a,b,c,d,e];
     }
-    Character_Flag = Character_Flag2;
-    if(Setting_Flag[6]==Character_Flag.length) Setting_Flag[6]-=5;
-    }
-    else if(b=="書き換え"){
-      if(i==Character_Flag.length) return;
-      Character_Flag[i][0] = c;
-    }
-    else Character_Flag[i] = [a,b,c,d,e];
-    }
-    else if(Get_Type=="フラグ"){
-    for (var i = 0; i < Flag.length; i++){
-    if(Flag[i]==a) return;
-    }
-    Flag[Flag.length] = a;
-    }
-    else{
-    for (var i = 0; i < Item_Flag.length; i++) {
-    if(Item_Flag[i][0]==a) break;
-    }
-    if(b=="消失"){
-    Item_Flag[i] = false;
-    var Item_Flag2 = [];
-    k = 0;
-    for (var i = 0; i < Item_Flag.length; i++){
-    if(Item_Flag[i]){
-    Item_Flag2[k] = Item_Flag[i];
-    k++;
-    }
-    }
-    Item_Flag = Item_Flag2;
-    if(Setting_Flag[5]==Item_Flag.length) Setting_Flag[5]-=5;
-    }
-    else if(b=="書き換え"){
-      if(i==Item_Flag.length) return;
-      Item_Flag[i][0] = c;
-    }
-    else Item_Flag[i] = [a,b,c,d,e];
-    }
-    return;
+      return;
     }//アイテム関連
 
     var TitleScene = function(){
@@ -3243,7 +3281,6 @@ function Load(width,height){
         Text = "";
         Scene_type = "メイン";
         Scene_kazu = 1;
-        Get = false;
         game.replaceScene(TitleScene());
         return;
       });
