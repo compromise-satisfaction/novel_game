@@ -279,6 +279,7 @@ function Load(width,height){
   game.preload(Foldar+"sound/音量調整用.wav");
   game.preload(Foldar+"sound/お任せなのだ.wav");
   game.preload(Foldar+"sound/ダメージ.wav");
+  game.preload(Foldar+"sound/机叩く.wav");
   game.preload(Foldar+"image/left.png");
   game.preload(Foldar+"image/right.png");
   game.preload(Foldar+"image/white.png");
@@ -1541,32 +1542,40 @@ function Load(width,height){
 
       function T_D(){
         var s = true;
-        if(Datas[8].substring(Time,Time+1)=="→"){
+        switch (Datas[8].substring(Time,Time+1)) {
+          case "◆":
+            s = false;
+            if(Return==false) Sound_ON("机叩く",true);
+            break;
+          case "→":
+            s = false;
+            break;
+          case "㊨":
+            s = false;
+            if(Return==false){
+              Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/2);
+              Explosion.frame = 0;
+              Sound_ON("ダメージ",true);
+            }
+            break;
+          case "㊥":
+            s = false;
+            if(Return==false){
+              Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/4);
+              Explosion.frame = 0;
+              Sound_ON("ダメージ",true);
+            }
+            break;
+          case "㊧":
           s = false;
-        }
-        else if(Datas[8].substring(Time,Time+1)=="㊨"){
-          s = false;
-          if(Return==false){
-            Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/2);
-            Explosion.frame = 0;
-            Sound_ON("ダメージ",true);
-          }
-        }
-        else if(Datas[8].substring(Time,Time+1)=="㊥"){
-          s = false;
-          if(Return==false){
-            Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/4);
-            Explosion.frame = 0;
-            Sound_ON("ダメージ",true);
-          }
-        }
-        else if(Datas[8].substring(Time,Time+1)=="㊧"){
-          s = false;
-          if(Return==false){
-            Explosion.x = (Explosion.scaleX*80/2)-80/2;
-            Explosion.frame = 0;
-            Sound_ON("ダメージ",true);
-          }
+            if(Return==false){
+              Explosion.x = (Explosion.scaleX*80/2)-80/2;
+              Explosion.frame = 0;
+              Sound_ON("ダメージ",true);
+            }
+            break;
+          default:
+            break:
         }
         Time ++;
         if(s){
