@@ -614,7 +614,7 @@ function Load(width,height){
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
           Datas[19] = S_Sound;
-          game.replaceScene(MainScene(Return));
+          game.replaceScene(MainScene(Return,Number));
           return;
           break;
         case "調べる":
@@ -762,7 +762,7 @@ function Load(width,height){
           Inspect[23] = Inspect_DATAS[i].幅5;
           Inspect[24] = Inspect_DATAS[i].高さ5;
           Inspect[25] = Inspect_DATAS[i].移動先5;
-          Datas[0] = Inspect[0];
+          Datas[0] = conversion_url(Inspect[0],"画像");
           game.replaceScene(InspectScene(Inspect));
           return;
         }
