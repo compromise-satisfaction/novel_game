@@ -547,6 +547,30 @@ function Load(width,height){
         Number = Number[0];
       }
       console.log(Number);
+      var Name = Setting_Flag[0];
+      var Gender = Setting_Flag[2];
+      var Surname = Setting_Flag[1];
+      if(Gender=="男"){
+      var www = ["僕","俺"];
+      var Person = www[rand(1)];
+      var S_image = conversion_url("男主人公","画像");
+      var S_Sound = conversion_url("男主人公ポポポ","サウンド");
+      if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"){
+        var Person = "俺";
+        var S_image = conversion_url("蟹","画像");
+      }
+      }
+      else if(Gender=="女"){
+      var Person = "私";
+      var S_image = conversion_url("女主人公","画像");
+      var S_Sound = conversion_url("女主人公ポポポ","サウンド");
+      }
+      else{
+      var Person = "我";
+      var S_image = Foldar+"image/ユベル.png";
+      var S_Sound = conversion_url("未設定主人公ポポポ","サウンド");
+      }
+      Datas = [];
       switch (Number) {
         case "セーブ読み込み":
           Moves = Load_Datas();
@@ -591,6 +615,7 @@ function Load(width,height){
           Datas[11] = "無し";
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
+          Datas[19] = S_Sound;
           game.replaceScene(MainScene(Return));
           return;
           break;
@@ -612,30 +637,6 @@ function Load(width,height){
         default:
           break;
       }
-      var Name = Setting_Flag[0];
-      var Gender = Setting_Flag[2];
-      var Surname = Setting_Flag[1];
-      if(Gender=="男"){
-      var www = ["僕","俺"];
-      var Person = www[rand(1)];
-      var S_image = conversion_url("男主人公","画像");
-      var S_Sound = conversion_url("男主人公ポポポ","サウンド");
-      if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"){
-        var Person = "俺";
-        var S_image = conversion_url("蟹","画像");
-      }
-      }
-      else if(Gender=="女"){
-      var Person = "私";
-      var S_image = conversion_url("女主人公","画像");
-      var S_Sound = conversion_url("女主人公ポポポ","サウンド");
-      }
-      else{
-      var Person = "我";
-      var S_image = Foldar+"image/ユベル.png";
-      var S_Sound = conversion_url("未設定主人公ポポポ","サウンド");
-      }
-      Datas = [];
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
