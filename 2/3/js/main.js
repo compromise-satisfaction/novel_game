@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 4.9";
+var Version = "バージョン 5.0";
 
 switch (GitHub_type) {
   case "referee":
@@ -3159,46 +3159,46 @@ function Load(width,height){
       var W_X_H = width/12;
       var W_Y_H = width/9;
 
-      if(Syousai.substring(0,2)=="画像"){
-        Syousai = Syousai.substring(2);
-        Syousai = conversion_url(Syousai,"画像");
-        var xxx = game.assets[Syousai].width;
-        var yyy = game.assets[Syousai].height;
-        var Photo = new Sprite(xxx,yyy);
-        Photo.scaleX = ((width)/xxx)*0.8;
-        Photo.scaleY = ((width)/yyy)*0.8;
-        if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
-        Photo.image = game.assets[Syousai];
-        Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
-        Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
-        scene.addChild(Photo);
-      }
-      else if(Syousai.substring(0,7)=="YOUTUBE"){
-        for (var k = 0; k < Sounds_DATAS.length; k++){
-          if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-            var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
-            game.assets[Sounds_DATAS[k].url].pause();
-            game.assets[Sounds_DATAS[k].url].状態 = "ポーズ中";
+      var S_Text = Syousai.replace(/\n/g,"↓").split("↓");
+      for (var i = 0; i < S_Text.length; i++) {
+        Text[i] = new Texts(S_Text[Pages+i]);
+        if(Text[i].text.substring(0,2)=="画像"){
+          var Photo_url = Text[i].text.substring(2);
+          Photo_url = conversion_url(Photo_url,"画像");
+          Text[i].text = "";
+          var xxx = game.assets[Photo_url].width;
+          var yyy = game.assets[Photo_url].height;
+          var Photo = new Sprite(xxx,yyy);
+          Photo.scaleX = ((width)/xxx)*0.8;
+          Photo.scaleY = ((width)/yyy)*0.8;
+          if(xxx!=yyy) Photo.scaleY = Photo.scaleY/16*9;
+          Photo.image = game.assets[Photo_url];
+          Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
+          Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
+          scene.addChild(Photo);
+        }
+        else if(Text[i].text.substring(0,7)=="YOUTUBE"){
+          for (var k = 0; k < Sounds_DATAS.length; k++){
+            if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
+              var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
+              game.assets[Sounds_DATAS[k].url].pause();
+              game.assets[Sounds_DATAS[k].url].状態 = "ポーズ中";
+            }
           }
+          var Video = new Entity()
+          var Video_url = Text[i].text.substring(7);
+          Text[i].text = "";
+          Video.visible =  true;
+          Video._element = document.createElement('div')
+          Video.x = width/10;
+          Video.y = height/2-width/16*9*0.8/2;
+          Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Video_url+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
+          scene.addChild(Video);
         }
-        Syousai = Syousai.substring(7);
-        var Video = new Entity()
-        Video.visible =  true;
-        Video._element = document.createElement('div')
-        Video.x = width/10;
-        Video.y = height/2-width/16*9*0.8/2;
-        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Syousai+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
-        scene.addChild(Video);
-      }
-      else{
-        var S_Text = Syousai.replace(/\n/g,"↓").split("↓");
-        for (var i = 0; i < S_Text.length; i++) {
-          Text[i] = new Texts(S_Text[Pages+i]);
-          if(Text[i].text=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-          if(Text[i].text=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-          if(Text[i].text=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-          if(i==12) break;
-        }
+        if(Text[i].text=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+        if(Text[i].text=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+        if(Text[i].text=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+        if(i==12) break;
       }
 
       return scene;
