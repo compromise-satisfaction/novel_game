@@ -654,7 +654,7 @@ function Load(width,height){
           Datas[13] = Main_DATAS[i].次次;
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
           Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
-          Datas[16] = Main_DATAS[i].トロフィー文章;
+          Datas[16] = Main_DATAS[i].トロフィー文字;
           Datas[17] = Main_DATAS[i].トロフィー画像;
           //Datas[18] = Main_DATAS[i].トロフィー内容.replace(/\n/g,"↓");
           Datas[19] = conversion_url(Main_DATAS[i].文章音,"サウンド");
