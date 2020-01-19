@@ -601,7 +601,6 @@ function Load(width,height){
           return;
           break;
         case "調べる何もない":
-          Datas[0] = Inspect[0];
           Datas[1] = 0;
           Datas[2] = 0;
           Datas[3] = 0;
@@ -615,7 +614,6 @@ function Load(width,height){
           Datas[11] = "無し";
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
-          Datas[19] = S_Sound;
           game.replaceScene(MainScene(Return));
           return;
           break;
@@ -763,6 +761,7 @@ function Load(width,height){
           Inspect[23] = Inspect_DATAS[i].幅5;
           Inspect[24] = Inspect_DATAS[i].高さ5;
           Inspect[25] = Inspect_DATAS[i].移動先5;
+          Datas[0] = Inspect[0];
           game.replaceScene(InspectScene(Inspect));
           return;
         }
