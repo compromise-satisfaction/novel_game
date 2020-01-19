@@ -570,7 +570,6 @@ function Load(width,height){
       var S_image = Foldar+"image/ユベル.png";
       var S_Sound = conversion_url("未設定主人公ポポポ","サウンド");
       }
-      Datas = [];
       switch (Number) {
         case "セーブ読み込み":
           Moves = Load_Datas();
@@ -614,6 +613,7 @@ function Load(width,height){
           Datas[11] = "無し";
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
+          Datas[19] = S_Sound;
           game.replaceScene(MainScene(Return));
           return;
           break;
@@ -635,6 +635,7 @@ function Load(width,height){
         default:
           break;
       }
+      Datas = [];
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
