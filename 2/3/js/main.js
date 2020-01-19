@@ -503,7 +503,7 @@ function Load(width,height){
                 break;
               }
             }
-            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
+            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容,Person);
           }
         }
     }
@@ -925,7 +925,7 @@ function Load(width,height){
     function rand(n) {
     return Math.floor(Math.random() * (n + 1));
     }
-    function Get_ICF(Get_Type,a,b,c,d,e){
+    function Get_ICF(Get_Type,a,b,c,d,e,Person){
       if(Get_Type=="人物"){
         for (var i = 0; i < Character_Flag.length; i++) {
           if(Character_Flag[i][0]==a) break;
@@ -948,9 +948,9 @@ function Load(width,height){
           Character_Flag[i][0] = c;
           for (var k = 0; k < I_C_F_DATAS.length; k++) {
             if(I_C_F_DATAS[k].シーン名==c){
+              Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容,Person);
               break;
             }
-            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
           }
         }
         else Character_Flag[i] = [a,b,c,d,e];
@@ -983,9 +983,9 @@ function Load(width,height){
         Trophy_Flag[i][0] = c;
         for (var k = 0; k < I_C_F_DATAS.length; k++) {
           if(I_C_F_DATAS[k].シーン名==c){
+            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容,Person);
             break;
           }
-          Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
         }
       }
       else Trophy_Flag[i] = [a,b,c,d,e];
@@ -1012,9 +1012,9 @@ function Load(width,height){
         Item_Flag[i][0] = c;
         for (var k = 0; k < I_C_F_DATAS.length; k++) {
           if(I_C_F_DATAS[k].シーン名==c){
+            Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容,Person);
             break;
           }
-          Get_ICF(I_C_F_DATAS[k].タイプ,I_C_F_DATAS[k].アイテムor人物orフラグ名,I_C_F_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),I_C_F_DATAS[k].画像,I_C_F_DATAS[k].詳細文,I_C_F_DATAS[k].詳細内容);
         }
       }
       else Item_Flag[i] = [a,b,c,d,e];
