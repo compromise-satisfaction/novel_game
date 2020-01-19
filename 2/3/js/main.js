@@ -577,6 +577,7 @@ function Load(width,height){
           return;
           break;
         case "調べる何もない":
+          Datas[0] = Inspect[0];
           Datas[1] = 0;
           Datas[2] = 0;
           Datas[3] = 0;
@@ -587,7 +588,7 @@ function Load(width,height){
           Datas[8] = "特に気になるものはない。";
           Datas[9] = 0;
           Datas[10] = 0;
-          Datas[11] = Number;
+          Datas[11] = "無し";
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
           game.replaceScene(MainScene(Return));
@@ -1476,12 +1477,6 @@ function Load(width,height){
 
         var Option = [];
 
-        for (var i = 0; i < Main_DATAS.length; i++){
-        Option[i] = document.createElement("option");
-        Option[i].text = Main_DATAS[i].シーン名;
-        Option[i].value = Main_DATAS[i].シーン名;
-        S_Input1._element.appendChild(Option[i]);
-        }
         for (var i = 0; i < Choice_DATAS.length; i++){
         Option[i] = document.createElement("option");
         Option[i].text = Choice_DATAS[i].シーン名;
@@ -1492,6 +1487,12 @@ function Load(width,height){
         Option[i] = document.createElement("option");
         Option[i].text = Interrogation_DATAS[i].シーン名;
         Option[i].value = Interrogation_DATAS[i].シーン名;
+        S_Input1._element.appendChild(Option[i]);
+        }
+        for (var i = 0; i < Main_DATAS.length; i++){
+        Option[i] = document.createElement("option");
+        Option[i].text = Main_DATAS[i].シーン名;
+        Option[i].value = Main_DATAS[i].シーン名;
         S_Input1._element.appendChild(Option[i]);
         }
         scene.addChild(S_Input1);
