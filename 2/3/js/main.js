@@ -67,7 +67,7 @@ function vue3(width,height){
         for (var i = 0; i < Sounds_DATAS.length; i++){
           Sounds_urls[i] = Sounds_DATAS[i].url;
           if(Sounds_DATAS[i].ループ開始=="効果音"){
-            Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].名前];
+            Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url];
             kkk++;
           }
         }
@@ -1559,7 +1559,7 @@ function Load(width,height){
         switch (Itimozi) {
           case "サウンド":
             s = false;
-            if(Return==false) Sound_ON(Itimozi_on,true);
+            if(Return==false) Sound_ON(Itimozi_on,true,"効果音");
             break;
           case "→":
             s = false;
