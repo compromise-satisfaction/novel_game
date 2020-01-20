@@ -1596,14 +1596,17 @@ function Load(width,height){
           if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
             if(Text[k-1].text.substring(0,1)=="("){
-              if(Text[k-1].text.substring(Text[k-1].text.length-1)!=")"){
-                Text[k].color = "blue";
+              if(Text[k-1].text.substring(Text[k-1].text.length-1)==")") Text[k].text = "";
+              else{
                 Text[k].text = " ";
+                Text[k].color = "blue";
               }
             }
             else if(Text[k-1].text.substring(0,1)=="「"){
-              if(Text[k-1].text.substring(Text[k-1].text.length-1)!="」"){
+              if(Text[k-1].text.substring(Text[k-1].text.length-1)=="」") Text[k].text = "";
+              else{
                 Text[k].text = "　";
+                Text[k].color = "Black";
               }
             }
           }
