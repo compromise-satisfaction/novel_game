@@ -29,7 +29,7 @@ function Images(width,height){
     Image_urls = [];
     Image_DATAS = result;
     for (var i = 0; i < Image_DATAS.length; i++){
-      if(Image_DATAS[i].url.substring(5)!="https"){
+      if(Image_DATAS[i].url.substring(0,4)!="http"){
         Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url +".png";
       }
       Image_urls[i] = Image_DATAS[i].url;
@@ -68,7 +68,7 @@ function vue3(width,height){
         Koukaon_DATAS = [];
         var kkk = 0;
         for (var i = 0; i < Sounds_DATAS.length; i++){
-          if(Sounds_DATAS[i].url.substring(5)!="https"){
+          if(Sounds_DATAS[i].url.substring(0,4)!="http"){
             Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
           }
           Sounds_urls[i] = Sounds_DATAS[i].url;
