@@ -453,7 +453,6 @@ function Load(width,height){
             break;
         }
         if(Play){
-          Sound_Name = conversion_url(Sound_Name,"サウンド");
           if(game.assets[Sound_Name].src==undefined){
             game.assets[Sound_Name].volume = Volume;
           }
@@ -1435,13 +1434,13 @@ function Load(width,height){
             if(Return!=true){
               Item.opacity = 0;
               Item.tl.fadeIn(Datas[21]);
-              Sound_ON("アイテム表示音",true,"効果音");
+              Sound_ON("アイテム表示音",true);
             }
           }
           else{
             if(Return!=true){
               Item.tl.fadeOut(Datas[21]*-1);
-              Sound_ON("アイテム表示音",true,"効果音");
+              Sound_ON("アイテム表示音",true);
             }
             else Item.opacity = 0;
           }
@@ -1575,7 +1574,7 @@ function Load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/2);
               Explosion.frame = 0;
-              Sound_ON("ダメージ",true,"効果音");
+              Sound_ON("ダメージ",true);
             }
             break;
           case "㊥":
@@ -1583,7 +1582,7 @@ function Load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/4);
               Explosion.frame = 0;
-              Sound_ON("ダメージ",true,"効果音");
+              Sound_ON("ダメージ",true);
             }
             break;
           case "㊧":
@@ -1591,7 +1590,7 @@ function Load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2;
               Explosion.frame = 0;
-              Sound_ON("ダメージ",true,"効果音");
+              Sound_ON("ダメージ",true);
             }
             break;
           default:
@@ -1670,7 +1669,7 @@ function Load(width,height){
                     case "ワ":
                     case "ヲ":
                     case "ン":
-                      Sound_ON(Text[k].text.substring(Text[k].text.length-1),true,"効果音");
+                      Sound_ON(Text[k].text.substring(Text[k].text.length-1),true);
                       break;
                     default:
                       break;
@@ -1689,7 +1688,7 @@ function Load(width,height){
                     case "！":
                       break;
                     default:
-                      Sound_ON(Datas[19],true,"効果音");
+                      Sound_ON(Datas[19],true);
                       break;
                   }
                 }
@@ -1794,7 +1793,7 @@ function Load(width,height){
           Trophy_text.tl.fadeIn(5);
           Trophy_text.text = Datas[16];
           scene.addChild(Trophy_text);
-          Sound_ON("Trophy",true,"効果音");
+          Sound_ON("Trophy",true);
           Trophy.addEventListener("enterframe",function(){
             Trophy_Time++;
             if(Trophy_Time==20){
@@ -2628,7 +2627,7 @@ function Load(width,height){
               }
               if(Setting_Flag[10]==10) Text[14].text = Setting_Flag[10];
               else Text[14].text = " "+Setting_Flag[10];
-              Sound_ON("進む",true,"効果音");
+              Sound_ON("進む",true);
               break;
             case Text[12].y:
               if(c=="+"){
@@ -2673,7 +2672,7 @@ function Load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
       Background.addEventListener('touchstart',function(e){
-        Sound_ON("選択音",true,"効果音");
+        Sound_ON("選択音",true);
         if(Inspect=="Black") Scene_loads("調べる出来てない",false,false);
         else Scene_loads("調べる何もない",false,false);
       });
@@ -2686,7 +2685,7 @@ function Load(width,height){
           this.image = game.assets[Foldar+"image/背景/透明.png"];
           scene.addChild(this);
           this.addEventListener('touchstart',function(e){
-            Sound_ON("選択音",true,"効果音");
+            Sound_ON("選択音",true);
             Scene_loads(Number,false,false);
             return;
           });
@@ -2793,7 +2792,7 @@ function Load(width,height){
       Item.x = X_0 + width;
       Item.y = Y_0 + width/32;
       scene.addChild(Item);
-      Sound_ON("Item",true,"効果音");
+      Sound_ON("Item",true);
 
       Item.addEventListener("enterframe",function(){
         if(Item.x < X_0+width/2-width/4-width/18 || Item.x > X_0+width/2-width/4+width/18){
@@ -3687,6 +3686,7 @@ function Load(width,height){
       }
 
       function okuugoki(){
+        Sound_ON("ページ",true);
         for (var x = 0; x < 8; x++) {
           for (var y = 0; y < 8; y++) {
             if(Stones[y][x].intersect(Pointer)&&Stones[y][x].ura==3&&Time>0){//接触
@@ -4331,7 +4331,7 @@ function Load(width,height){
           case "アイテム作成":
             Item_Flag[Item_Flag.length] = [S_Inputss[0]._element.value,S_Inputss[1]._element.value,S_Input1._element.value,S_Input3._element.value,S_Inputss[2]._element.value];
             Text[1].text = S_Inputss[0]._element.value+" 入手。";
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "シーンデータ修正":
             game.popScene();
@@ -4339,30 +4339,30 @@ function Load(width,height){
             console.log("Scene数",Scene_kazu);
             Datas = ["Black",0,0,0,0,0,0,0,"シーンデータを修正しました。",0,0,0,Setting_Flag[4],0];
             game.replaceScene(MainScene());
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "フラグ追加 or 消去":
             for (var i = 0; i < Flag.length; i++){
               if(Flag[i]==S_Inputss[0]._element.value){
                 Flag[i] = false;
                 Text[1].text = S_Inputss[0]._element.value+" オフ。";
-                Sound_ON("Item",true,"効果音");
+                Sound_ON("Item",true);
                 return;
               }
             }
             Flag[Flag.length] = S_Inputss[0]._element.value;
             Text[1].text = S_Inputss[0]._element.value+" オン。";
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "体力変更":
             Setting_Flag[3] = S_Inputss[0]._element.value*1;
             Text[1].text = "残り回数 = " + Setting_Flag[3];
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "フラグリセット":
             Flag = [];
             Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "アイテムリセット":
             for (var i = 0; i < Item_Flag.length; i++) {
@@ -4384,17 +4384,17 @@ function Load(width,height){
               ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2]
             ];
             Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "人物リセット":
             Character_Flag = [];
             Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           case "トロフィーリセット":
             Trophy_Flag = [];
             Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true,"効果音");
+            Sound_ON("Item",true);
             break;
           default:
             Text[1].text = "することを選択してください。";
