@@ -72,8 +72,8 @@ function vue3(width,height){
             Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
           }
           Sounds_urls[i] = Sounds_DATAS[i].url;
-          if(Sounds_DATAS[i].ループ開始=="効果音"){
-            Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url];
+          if(Sounds_DATAS[i].ループ開始=="効果音"||Sounds_DATAS[i].ループ開始=="音声"){
+            Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url,Sounds_DATAS[i].ループ開始];
             kkk++;
           }
         }
@@ -1558,12 +1558,13 @@ function Load(width,height){
           if(Koukaon_DATAS[i][0]==Itimozi){
             Itimozi = "サウンド";
             var Itimozi_on = Koukaon_DATAS[i][1];
+            var Type = Koukaon_DATAS[i][2];
           }
         }
         switch (Itimozi) {
           case "サウンド":
             s = false;
-            if(Return==false) Sound_ON(Itimozi_on,true,"効果音");
+            if(Return==false) Sound_ON(Itimozi_on,true,Type);
             break;
           case "→":
             s = false;
