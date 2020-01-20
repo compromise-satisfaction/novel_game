@@ -397,9 +397,7 @@ function Load(width,height){
     var Item_Flag = [];//所持アイテム
     var Character_Flag = [];//人物
     var Trophy_Flag = [];//トロフィー
-    var Scene_type = "メイン";
     var Scene_kazu = 1;
-    var Moves = 0;
     var OASOBI = false;
 
     function Button_push(expression){
@@ -1268,8 +1266,8 @@ function Load(width,height){
         var xxx = game.assets[Datas[3]].width;
         var yyy = game.assets[Datas[3]].height;
         var Character2 = new Sprite(xxx,yyy);
-        Character2.scaleX = ((width/2)/xxx);
-        Character2.scaleY = ((width/2)/yyy);
+        Character2.scaleX = width/16*9/xxx;
+        Character2.scaleY = width/16*9/yyy;
         Character2.image = game.assets[Datas[3]];
         if(Datas[0]=="カットイン"){
           Character2.scaleX *= 2;
@@ -1278,8 +1276,8 @@ function Load(width,height){
           Character2.y = (Character2.scaleY*yyy/2)-yyy/2;
         }
         else {
-          Character2.x = (Character2.scaleX*xxx/2)-xxx/2+(width/4);
-          Character2.y = (Character2.scaleY*yyy/2)-yyy/2+(width/16);
+          Character2.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
+          Character2.y = Character2.scaleY*yyy/2-yyy/2;
         }
         if(Datas[4]!=0){
           if(Datas[4]>0){
@@ -1320,8 +1318,8 @@ function Load(width,height){
         var xxx = game.assets[Datas[1]].width;
         var yyy = game.assets[Datas[1]].height;
         var Character1 = new Sprite(xxx,yyy);
-        Character1.scaleX = ((width/2)/xxx);
-        Character1.scaleY = ((width/2)/yyy);
+        Character1.scaleX = width/16*9/xxx;
+        Character1.scaleY = width/16*9/yyy;
         Character1.image = game.assets[Datas[1]];
         if(Datas[0]=="カットイン"){
           Character1.scaleX *= 2;
@@ -1330,8 +1328,8 @@ function Load(width,height){
           Character1.y = (Character1.scaleY*yyy/2)-yyy/2;
         }
         else {
-          Character1.x = (Character1.scaleX*xxx/2)-xxx/2;
-          Character1.y = (Character1.scaleY*yyy/2)-yyy/2+(width/16);
+          Character1.x = Character1.scaleX*xxx/2-xxx/2-width/32;
+          Character1.y = Character1.scaleY*yyy/2-yyy/2;
         }
         if(Datas[2]!=0){
           if(Datas[2]=="点滅"){
@@ -1375,8 +1373,8 @@ function Load(width,height){
         var xxx = game.assets[Datas[5]].width;
         var yyy = game.assets[Datas[5]].height;
         var Character3 = new Sprite(xxx,yyy);
-        Character3.scaleX = ((width/2)/xxx);
-        Character3.scaleY = ((width/2)/yyy);
+        Character3.scaleX = width/16*9/xxx;
+        Character3.scaleY = width/16*9/yyy;
         Character3.image = game.assets[Datas[5]];
         if(Datas[0]=="カットイン"){
           Character3.scaleX *= 2;
@@ -1385,8 +1383,8 @@ function Load(width,height){
           Character3.y = (Character3.scaleY*yyy/2)-yyy/2;
         }
         else {
-          Character3.x = (Character3.scaleX*xxx/2)-xxx/2+(width/2);
-          Character3.y = (Character3.scaleY*yyy/2)-yyy/2+(width/16);
+          Character3.x = Character3.scaleX*xxx/2-xxx/2-width/32+width/2;
+          Character3.y = Character3.scaleY*yyy/2-yyy/2;
         }
         if(Datas[6]!=0){
           if(Datas[6]>0){
@@ -1601,14 +1599,14 @@ function Load(width,height){
         if(s){
           if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
-            if(Text[k-1].text.substring(0,1)=="("){
+            if(Text[k-1].text.substring(0,1)=="("||Text[k-1].text.substring(0,1)==" "){
               if(Text[k-1].text.substring(Text[k-1].text.length-1)==")") Text[k].text = "";
               else{
                 Text[k].text = " ";
                 Text[k].color = "blue";
               }
             }
-            else if(Text[k-1].text.substring(0,1)=="「"){
+            else if(Text[k-1].text.substring(0,1)=="「"||Text[k-1].text.substring(0,1)=="　"){
               if(Text[k-1].text.substring(Text[k-1].text.length-1)=="」") Text[k].text = "";
               else{
                 Text[k].text = "　";
@@ -3300,8 +3298,6 @@ function Load(width,height){
         Item_Flag = [];//所持アイテム
         Character_Flag = [];//人物
         Trophy_Flag = [];//トロフィー
-        Text = "";
-        Scene_type = "メイン";
         Scene_kazu = 1;
         game.replaceScene(TitleScene());
         return;
