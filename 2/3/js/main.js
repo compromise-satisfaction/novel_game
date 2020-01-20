@@ -29,6 +29,9 @@ function Images(width,height){
     Image_urls = [];
     Image_DATAS = result;
     for (var i = 0; i < Image_DATAS.length; i++){
+      if(Image_DATAS[i].url.substring(5)!="https"){
+        Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/" + Image_DATAS[i].url +".png";
+      }
       Image_urls[i] = Image_DATAS[i].url;
     }
     vue2(width,height);
@@ -65,6 +68,9 @@ function vue3(width,height){
         Koukaon_DATAS = [];
         var kkk = 0;
         for (var i = 0; i < Sounds_DATAS.length; i++){
+          if(Sounds_DATAS[i].url.substring(5)!="https"){
+            Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/" + Sounds_DATAS[i].url +".wav";
+          }
           Sounds_urls[i] = Sounds_DATAS[i].url;
           if(Sounds_DATAS[i].ループ開始=="効果音"){
             Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url];
