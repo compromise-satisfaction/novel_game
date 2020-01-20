@@ -1596,8 +1596,10 @@ function Load(width,height){
           if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
             if(Datas[8].substring(0,1)=="("){
-              Text[k].color = "blue";
-              Text[k].text = " ";
+              if(Datas[8].substring(Time-2,Time-1)!=")"){
+                Text[k].color = "blue";
+                Text[k].text = " ";
+              }
             }
             if(Datas[8].substring(0,1)=="("){
               Text[k].text = " ";
