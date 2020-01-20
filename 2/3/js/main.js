@@ -1601,9 +1601,6 @@ function Load(width,height){
                 Text[k].text = " ";
               }
             }
-            if(Datas[8].substring(0,1)=="("){
-              Text[k].text = " ";
-            }
             if(Datas[8].substring(0,1)=="「"){
               if(Datas[8].substring(Time-2,Time-1)!="」"){
                 Text[k].text = "　";
