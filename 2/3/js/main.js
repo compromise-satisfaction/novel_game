@@ -290,7 +290,7 @@ function Load(width,height){
   game.preload(Foldar+"sound/セーブ.wav");
   game.preload(Foldar+"sound/音量調整用.wav");
   game.preload(Foldar+"sound/お任せなのだ.wav");
-  game.preload(Foldar+"sound/ダメージ.wav");
+  game.preload(Foldar+"sound/爆発.wav");
   game.preload(Foldar+"image/left.png");
   game.preload(Foldar+"image/right.png");
   game.preload(Foldar+"image/white.png");
@@ -1574,7 +1574,7 @@ function Load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/2);
               Explosion.frame = 0;
-              Sound_ON("ダメージ",true);
+              Sound_ON("爆発",true);
             }
             break;
           case "㊥":
@@ -1582,7 +1582,7 @@ function Load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/4);
               Explosion.frame = 0;
-              Sound_ON("ダメージ",true);
+              Sound_ON("爆発",true);
             }
             break;
           case "㊧":
@@ -1590,7 +1590,7 @@ function Load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2;
               Explosion.frame = 0;
-              Sound_ON("ダメージ",true);
+              Sound_ON("爆発",true);
             }
             break;
           default:
