@@ -1936,8 +1936,8 @@ function Load(width,height){
         var xxx = game.assets[Datas[2]].width;
         var yyy = game.assets[Datas[2]].height;
         var Character2 = new Sprite(xxx,yyy);
-        Character2.scaleX = ((width/2)/xxx);
-        Character2.scaleY = ((width/2)/yyy);
+        Character2.scaleX = width/16*9/xxx;
+        Character2.scaleY = width/16*9/yyy;
         Character2.image = game.assets[Datas[2]];
         Character2.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
         Character2.y = Character2.scaleY*yyy/2-yyy/2;
@@ -1965,8 +1965,8 @@ function Load(width,height){
         var xxx = game.assets[Datas[1]].width;
         var yyy = game.assets[Datas[1]].height;
         var Character1 = new Sprite(xxx,yyy);
-        Character1.scaleX = ((width/2)/xxx);
-        Character1.scaleY = ((width/2)/yyy);
+        Character1.scaleX = width/16*9/xxx;
+        Character1.scaleY = width/16*9/yyy;
         Character1.image = game.assets[Datas[1]];
         Character1.x = Character1.scaleX*xxx/2-xxx/2-width/32;
         Character1.y = Character1.scaleY*yyy/2-yyy/2;
@@ -1977,8 +1977,8 @@ function Load(width,height){
         var xxx = game.assets[Datas[3]].width;
         var yyy = game.assets[Datas[3]].height;
         var Character3 = new Sprite(xxx,yyy);
-        Character3.scaleX = ((width/2)/xxx);
-        Character3.scaleY = ((width/2)/yyy);
+        Character3.scaleX = width/16*9/xxx;
+        Character3.scaleY = width/16*9/yyy;
         Character3.image = game.assets[Datas[3]];
         Character3.x = Character3.scaleX*xxx/2-xxx/2-width/32+width/2;
         Character3.y = Character3.scaleY*yyy/2-yyy/2;
@@ -2153,11 +2153,11 @@ function Load(width,height){
       var xxx = game.assets[Datas[0]].width;
       var yyy = game.assets[Datas[0]].height;
       var Character = new Sprite(xxx,yyy);
-      Character.scaleX = ((width/2)/xxx);
-      Character.scaleY = ((width/2)/yyy);
+      Character.scaleX = width/16*9/xxx;
+      Character.scaleY = width/16*9/yyy;
       Character.image = game.assets[Datas[0]];
-      Character.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
-      Character.y = Character2.scaleY*yyy/2-yyy/2;
+      Character.x = Character.scaleX*xxx/2-xxx/2-width/32+width/4;
+      Character.y = Character.scaleY*yyy/2-yyy/2;
       scene.addChild(Character);//キャラ
 
       var xxx = game.assets[Foldar+"image/stand.png"].width;
