@@ -2156,8 +2156,8 @@ function Load(width,height){
       Character.scaleX = ((width/2)/xxx);
       Character.scaleY = ((width/2)/yyy);
       Character.image = game.assets[Datas[0]];
-      Character.x = (Character.scaleX*xxx/2)-xxx/2+(width/4);
-      Character.y = (Character.scaleY*yyy/2)-yyy/2+(width/16);
+      Character.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
+      Character.y = Character2.scaleY*yyy/2-yyy/2;
       scene.addChild(Character);//キャラ
 
       var xxx = game.assets[Foldar+"image/stand.png"].width;
