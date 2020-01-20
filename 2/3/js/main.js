@@ -1595,14 +1595,14 @@ function Load(width,height){
         if(s){
           if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
-            if(Datas[8].substring(0,1)=="("){
-              if(Datas[8].substring(Time-2,Time-1)!=")"){
+            if(Text[k-1].text.substring(0,1)=="("){
+              if(Text[k-1].text.substring(Text[k-1].text.length-1)!=")"){
                 Text[k].color = "blue";
                 Text[k].text = " ";
               }
             }
-            if(Datas[8].substring(0,1)=="「"){
-              if(Datas[8].substring(Time-2,Time-1)!="」"){
+            else if(Text[k-1].text.substring(0,1)=="「"){
+              if(Text[k-1].text.substring(Text[k-1].text.length-1)!="」"){
                 Text[k].text = "　";
               }
             }
