@@ -62,8 +62,14 @@ function vue3(width,height){
       .then(result => {
         Sounds_urls = [];
         Sounds_DATAS = result;
+        Koukaon_DATAS = [];
+        var kkk = 0;
         for (var i = 0; i < Sounds_DATAS.length; i++){
           Sounds_urls[i] = Sounds_DATAS[i].url;
+          if(Sounds_DATAS[i].ループ開始=="効果音"){
+            Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].名前];
+            kkk++;
+          }
         }
         Load(width,height);
         console.log("サウンドシート読み込み完了");
@@ -279,7 +285,6 @@ function Load(width,height){
   game.preload(Foldar+"sound/音量調整用.wav");
   game.preload(Foldar+"sound/お任せなのだ.wav");
   game.preload(Foldar+"sound/ダメージ.wav");
-  game.preload(Foldar+"sound/机叩く.wav");
   game.preload(Foldar+"image/left.png");
   game.preload(Foldar+"image/right.png");
   game.preload(Foldar+"image/white.png");
@@ -1544,10 +1549,17 @@ function Load(width,height){
 
       function T_D(){
         var s = true;
-        switch (Datas[8].substring(Time,Time+1)) {
-          case "◆":
+        var Itimozi = Datas[8].substring(Time,Time+1);
+        for (var i = 0; i < Koukaon_DATAS.length; i++) {
+          if(Koukaon_DATAS[i][0]==Itimozi){
+            Itimozi = "サウンド";
+            var Itimozi_on = Koukaon_DATAS[i][1];
+          }
+        }
+        switch (Itimozi) {
+          case "サウンド":
             s = false;
-            if(Return==false) Sound_ON("机叩く",true);
+            if(Return==false) Sound_ON(Itimozi_on,true);
             break;
           case "→":
             s = false;
@@ -3266,10 +3278,6 @@ function Load(width,height){
       Submit("データ初期化実行");
       Submit("戻る");
 
-      //Text[0] = new Texts("データを初期化する？");
-      //Text[1] = new Texts("◆ はい");
-      //Text[2] = new Texts("◆ いいえ");
-
       Button[0].addEventListener('touchstart',function(e){
         if(Button_push("音無し")) return;
         game.popScene();
@@ -4357,7 +4365,7 @@ function Load(width,height){
             for (var i = 0; i < Item_Flag.length; i++) {
               if(Item_Flag[i][0]!="赤き竜"&&Item_Flag[i][0]!="能力調整"&&Item_Flag[i][0]!="消えたアイテム") Item_Flag2 += Item_Flag[i][0] + "↓";
               if(Item_Flag2.replace(/[^↓]/g,"").length%12==k&&Item_Flag2.replace(/[^↓]/g,"").length>11){
-                Item_Flag2+="◆ 次のページ↓◆ 前のページ↓";
+                Item_Flag2+="次のページボタン↓前のページボタン";
                 k++;
               }
             }
