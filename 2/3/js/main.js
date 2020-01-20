@@ -1939,8 +1939,8 @@ function Load(width,height){
         Character2.scaleX = ((width/2)/xxx);
         Character2.scaleY = ((width/2)/yyy);
         Character2.image = game.assets[Datas[2]];
-        Character2.x = (Character2.scaleX*xxx/2)-xxx/2+(width/4);
-        Character2.y = (Character2.scaleY*yyy/2)-yyy/2+(width/16);
+        Character2.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
+        Character2.y = Character2.scaleY*yyy/2-yyy/2;
         scene.addChild(Character2);
       }//キャラ真ん中
 
@@ -1968,8 +1968,8 @@ function Load(width,height){
         Character1.scaleX = ((width/2)/xxx);
         Character1.scaleY = ((width/2)/yyy);
         Character1.image = game.assets[Datas[1]];
-        Character1.x = (Character1.scaleX*xxx/2)-xxx/2;
-        Character1.y = (Character1.scaleY*yyy/2)-yyy/2+(width/16);
+        Character1.x = Character1.scaleX*xxx/2-xxx/2-width/32;
+        Character1.y = Character1.scaleY*yyy/2-yyy/2;
         scene.addChild(Character1);
       }//キャラ左
 
@@ -1980,8 +1980,8 @@ function Load(width,height){
         Character3.scaleX = ((width/2)/xxx);
         Character3.scaleY = ((width/2)/yyy);
         Character3.image = game.assets[Datas[3]];
-        Character3.x = (Character3.scaleX*xxx/2)-xxx/2+(width/2);
-        Character3.y = (Character3.scaleY*yyy/2)-yyy/2+(width/16);
+        Character3.x = Character3.scaleX*xxx/2-xxx/2-width/32+width/2;
+        Character3.y = Character3.scaleY*yyy/2-yyy/2;
         scene.addChild(Character3);
       }//キャラ右
 
