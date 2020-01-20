@@ -1270,8 +1270,8 @@ function Load(width,height){
         Character2.scaleY = width/16*9/yyy;
         Character2.image = game.assets[Datas[3]];
         if(Datas[0]=="カットイン"){
-          Character2.scaleX *= 2;
-          Character2.scaleY *= 2;
+          Character2.scaleX = width/xxx;
+          Character2.scaleY = width/yyy;
           Character2.x = (Character2.scaleX*xxx/2)-xxx/2;
           Character2.y = (Character2.scaleY*yyy/2)-yyy/2;
         }
@@ -1322,8 +1322,8 @@ function Load(width,height){
         Character1.scaleY = width/16*9/yyy;
         Character1.image = game.assets[Datas[1]];
         if(Datas[0]=="カットイン"){
-          Character1.scaleX *= 2;
-          Character1.scaleY *= 2;
+          Character1.scaleX = width/xxx;
+          Character1.scaleY = width/yyy;
           Character1.x = (Character1.scaleX*xxx/2)-xxx/2-(width/4);
           Character1.y = (Character1.scaleY*yyy/2)-yyy/2;
         }
@@ -1377,8 +1377,8 @@ function Load(width,height){
         Character3.scaleY = width/16*9/yyy;
         Character3.image = game.assets[Datas[5]];
         if(Datas[0]=="カットイン"){
-          Character3.scaleX *= 2;
-          Character3.scaleY *= 2;
+          Character3.scaleX = width/xxx;
+          Character3.scaleY = width/yyy;
           Character3.x = (Character3.scaleX*xxx/2)-xxx/2+(width/4);
           Character3.y = (Character3.scaleY*yyy/2)-yyy/2;
         }
