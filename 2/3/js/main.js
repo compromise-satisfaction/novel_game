@@ -1669,7 +1669,7 @@ function Load(width,height){
                     case "ワ":
                     case "ヲ":
                     case "ン":
-                      Sound_ON(Text[k].text.substring(Text[k].text.length-1),true,"効果音");
+                      Sound_ON(Text[k].text.substring(Text[k].text.length-1),true);
                       break;
                     default:
                       break;
@@ -1688,7 +1688,7 @@ function Load(width,height){
                     case "！":
                       break;
                     default:
-                      Sound_ON(Datas[19],true);
+                      Sound_ON(Datas[19],true,"効果音");
                       break;
                   }
                 }
