@@ -2638,7 +2638,7 @@ function Load(width,height){
               }
               if(Setting_Flag[11]==10) Text[15].text = Setting_Flag[11];
               else Text[15].text = " "+Setting_Flag[11];
-              Sound_ON("音量調整用",true,"音声");
+              Sound_ON("音量調整用",true);
               break;
           }
           window.localStorage.setItem("Setting_Flag",Setting_Flag);
