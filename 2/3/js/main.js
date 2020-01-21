@@ -1599,9 +1599,10 @@ function Load(width,height){
             if(Return==false) Sound_ON(Itimozi_on,true,Type);
             break;
           case "→":
-            s = false;
+          s = false;
             break;
           case "☞":
+            s = false;
             Scene_loads(Datas[12],false,false);
             break;
           case "㊨":
