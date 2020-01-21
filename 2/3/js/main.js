@@ -518,34 +518,49 @@ function Load(width,height){
         }
     }
     function BGM_SSS(DATAS){
-      if(DATAS.BGM!="変化無し"){
-        for (var k = 0; k < Sounds_DATAS.length; k++){
-          if(DATAS.BGM!=Sounds_DATAS[k].名前&&game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-            game.assets[Sounds_DATAS[k].url].stop();
-            game.assets[Sounds_DATAS[k].url].状態 = "停止";
+      var BGM_name = DATAS.BGM;
+      if(BGM_name=="変化無し"){
+        for (var i = 0; i < Main_DATAS.length; i++) {
+          if(Setting_Flag[4]==Main_DATAS[i].シーン名){
+            BGM_name = Main_DATAS[i].BGM;
+            break;
           }
         }
-        if(DATAS.BGM!=false&&game.assets[conversion_url(DATAS.BGM,"サウンド")].状態!="再生中"){
-          game.assets[conversion_url(DATAS.BGM,"サウンド")].状態 = "再生中";
-          if(game.assets[conversion_url(DATAS.BGM,"サウンド")].src==undefined){
-            game.assets[conversion_url(DATAS.BGM,"サウンド")].volume = Setting_Flag[9]/10;
-            game.assets[conversion_url(DATAS.BGM,"サウンド")].play();
-            game.assets[conversion_url(DATAS.BGM,"サウンド")]._element.loop = true;
-            console.log(game.assets[conversion_url(DATAS.BGM,"サウンド")]);
+      }
+      if(BGM_name=="変化無し"){
+        for (var i = 0; i < Choice_DATAS.length; i++) {
+          if(Setting_Flag[4]==Choice_DATAS[i].シーン名){
+            BGM_name = Choice_DATAS[i].BGM;
+            break;
           }
-          else{
-            for (var k = 0; k < Sounds_DATAS.length; k++){
-              if(Sounds_DATAS[k].名前==DATAS.BGM) break;
-            }
-            game.assets[conversion_url(DATAS.BGM,"サウンド")]._volume = Setting_Flag[9]/10;
-            game.assets[conversion_url(DATAS.BGM,"サウンド")].play();
-            game.assets[conversion_url(DATAS.BGM,"サウンド")].src.loop = true;
-            game.assets[conversion_url(DATAS.BGM,"サウンド")].src.loopStart = Sounds_DATAS[k].ループ開始;
-            game.assets[conversion_url(DATAS.BGM,"サウンド")].src.loopEnd = Sounds_DATAS[k].ループ終了;
-            console.log(game.assets[conversion_url(DATAS.BGM,"サウンド")]);
-          }
-          if(Setting_Flag[9]==0) game.assets[conversion_url(DATAS.BGM,"サウンド")].stop();
         }
+      }
+      for (var k = 0; k < Sounds_DATAS.length; k++){
+        if(BGM_name!=Sounds_DATAS[k].名前&&game.assets[Sounds_DATAS[k].url].状態=="再生中"){
+          game.assets[Sounds_DATAS[k].url].stop();
+          game.assets[Sounds_DATAS[k].url].状態 = "停止";
+        }
+      }
+      if(BGM_name!=false&&game.assets[conversion_url(BGM_name,"サウンド")].状態!="再生中"){
+        game.assets[conversion_url(BGM_name,"サウンド")].状態 = "再生中";
+        if(game.assets[conversion_url(BGM_name,"サウンド")].src==undefined){
+          game.assets[conversion_url(BGM_name,"サウンド")].volume = Setting_Flag[9]/10;
+          game.assets[conversion_url(BGM_name,"サウンド")].play();
+          game.assets[conversion_url(BGM_name,"サウンド")]._element.loop = true;
+          console.log(game.assets[conversion_url(BGM_name,"サウンド")]);
+        }
+        else{
+          for (var k = 0; k < Sounds_DATAS.length; k++){
+            if(Sounds_DATAS[k].名前==BGM_name) break;
+          }
+          game.assets[conversion_url(BGM_name,"サウンド")]._volume = Setting_Flag[9]/10;
+          game.assets[conversion_url(BGM_name,"サウンド")].play();
+          game.assets[conversion_url(BGM_name,"サウンド")].src.loop = true;
+          game.assets[conversion_url(BGM_name,"サウンド")].src.loopStart = Sounds_DATAS[k].ループ開始;
+          game.assets[conversion_url(BGM_name,"サウンド")].src.loopEnd = Sounds_DATAS[k].ループ終了;
+          console.log(game.assets[conversion_url(BGM_name,"サウンド")]);
+        }
+        if(Setting_Flag[9]==0) game.assets[conversion_url(BGM_name,"サウンド")].stop();
       }
     }
     function Scene_loads(Number,Return,Item,Item_type){
