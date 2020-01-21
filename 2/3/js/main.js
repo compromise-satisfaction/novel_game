@@ -1601,6 +1601,9 @@ function Load(width,height){
           case "→":
             s = false;
             break;
+          case "☞":
+            Scene_loads(Datas[12],false,false);;
+            break;
           case "㊨":
             s = false;
             if(Return==false){
