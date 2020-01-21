@@ -401,7 +401,7 @@ function Load(width,height){
     var OASOBI = false;
 
     function Button_push(expression){
-      if(game.fps==200) return(true);
+      if(game.fps!=10) return(true);
       if(Button_time==Button_time_next){
         Button_time = 0;
         switch (expression) {
@@ -1604,7 +1604,7 @@ function Load(width,height){
             break;
           case "↦":
           s = false;
-            game.fps = 200;
+            game.fps += 200;
             break;
           case "↤":
           s = false;
