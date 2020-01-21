@@ -1601,6 +1601,14 @@ function Load(width,height){
           case "→":
           s = false;
             break;
+          case "↦":
+          s = false;
+            game.fps = 100;
+            break;
+          case "↤":
+          s = false;
+            game.fps = 10;
+            break;
           case "☞":
             s = false;
             if(Return==false) Scene_loads(Datas[12],false,false);
