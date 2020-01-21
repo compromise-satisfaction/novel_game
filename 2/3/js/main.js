@@ -1603,7 +1603,7 @@ function Load(width,height){
             break;
           case "☞":
             s = false;
-            Scene_loads(Datas[12],false,false);
+            if(Return==false) Scene_loads(Datas[12],false,false);
             break;
           case "㊨":
             s = false;
