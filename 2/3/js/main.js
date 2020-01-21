@@ -1604,7 +1604,7 @@ function Load(width,height){
             break;
           case "↦":
           s = false;
-            game.fps += 200;
+            if(Return==false) game.fps += 200;
             break;
           case "↤":
           s = false;
