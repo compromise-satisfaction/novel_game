@@ -649,7 +649,7 @@ function Load(width,height){
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
           Get_ICF2(Main_DATAS[i],Person);
-          if(Datas[0]!="直前") Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
+          Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
           Datas[1] = conversion_url(Main_DATAS[i].人物左,"画像");
           Datas[2] = Main_DATAS[i].フェード人物左;
           Datas[3] = conversion_url(Main_DATAS[i].人物中,"画像");
@@ -1168,6 +1168,23 @@ function Load(width,height){
         else{
           Setting_Flag[4] = Datas[11];
           if(Setting_Flag[8]) Save(Datas[11]);
+        }
+      }
+
+      if(Datas[0]=="変化無し"){
+        for (var i = 0; i < Main_DATAS.length; i++) {
+          if(Setting_Flag[4]==Main_DATAS[i].シーン名){
+            Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
+            break;
+          }
+        }
+      }
+      if(Datas[0]=="変化無し"){
+        for (var i = 0; i < Choice_DATAS.length; i++) {
+          if(Setting_Flag[4]==Choice_DATAS[i].シーン名){
+            Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
+            break;
+          }
         }
       }
 
