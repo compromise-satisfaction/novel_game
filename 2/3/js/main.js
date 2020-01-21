@@ -4286,7 +4286,8 @@ function Load(width,height){
       S_Input._element = document.createElement("select");
 
       var Option = [];
-      var Choice_Transform = ["することを選択","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット"];
+      var Choice_Transform = ["することを選択","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット",
+      "メインシーン更新","チョイスシーン更新","調べるシーン更新","移動シーン更新","分岐更新","フラグ更新","尋問シーン更新","吹き出しシーン更新","アイテムゲットシーン更新"];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
@@ -4442,6 +4443,131 @@ function Load(width,height){
             Text[1].text = S_Input._element.value;
             Sound_ON("Item",true);
             break;
+            case "メインシーン更新":
+              fetch(GAS,
+                {
+                  method: 'POST',
+                  body: "1"
+                }
+              )
+              .then(res => res.json())
+              .then(result => {
+                Main_DATAS = result;
+                Text[1].text = S_Input._element.value;
+                Sound_ON("Item",true);
+              },);
+              break;
+            case"チョイスシーン更新":
+                  fetch(GAS,
+                    {
+                      method: 'POST',
+                      body: "55555"
+                    }
+                  )
+                  .then(res => res.json())
+                  .then(result => {
+                    Choice_DATAS = result;
+                    Text[1].text = S_Input._element.value;
+                    Sound_ON("Item",true);
+                  },);
+                  break;
+            case"調べるシーン更新":
+                  fetch(GAS,
+                    {
+                      method: 'POST',
+                      body: "666666"
+                    }
+                  )
+                  .then(res => res.json())
+                  .then(result => {
+                    Inspect_DATAS = result;
+                    Text[1].text = S_Input._element.value;
+                    Sound_ON("Item",true);
+                  },);
+                  break;
+            case"移動シーン更新":
+                  fetch(GAS,
+                    {
+                      method: 'POST',
+                      body: "999999999"
+                    }
+                  )
+                  .then(res => res.json())
+                  .then(result => {
+                    Move_DATAS = result;
+                    Text[1].text = S_Input._element.value;
+                    Sound_ON("Item",true);
+                  },);
+            case"フラグ更新":
+              fetch(GAS,
+                    {
+                      method: 'POST',
+                      body: "11111111111"
+                    }
+                  )
+                  .then(res => res.json())
+                  .then(result => {
+                    I_C_F_DATAS = result;
+                    Text[1].text = S_Input._element.value;
+                    Sound_ON("Item",true);
+                  },);
+                  break;
+            case"分岐更新":
+                  fetch(GAS,
+                    {
+                      method: 'POST',
+                      body: "0000000000"
+                    }
+                  )
+                  .then(res => res.json())
+                  .then(result => {
+                    Branch_DATAS = result;
+                    Text[1].text = S_Input._element.value;
+                    Sound_ON("Item",true);
+                  },);
+              break;
+              case"尋問シーン更新":
+                    fetch(GAS,
+                      {
+                        method: 'POST',
+                        body: "4444"
+                      }
+                    )
+                    .then(res => res.json())
+                    .then(result => {
+                      Interrogation_DATAS = result;
+                      Text[1].text = S_Input._element.value;
+                      Sound_ON("Item",true);
+                    },);
+              break;
+              case "吹き出しシーン更新":
+                    fetch(GAS,
+                      {
+                        method: 'POST',
+                        body: "7777777"
+                      }
+                    )
+                    .then(res => res.json())
+                    .then(result => {
+                      Speech_DATAS = result;
+                      Text[1].text = S_Input._element.value;
+                      Sound_ON("Item",true);
+                    },);
+                break;
+              case "アイテムゲットシーン更新":
+                    fetch(GAS,
+                      {
+                        method: 'POST',
+                        body: "88888888"
+                      }
+                    )
+                    .then(res => res.json())
+                    .then(result => {
+                      Item_get_DATAS = result;
+                      Text[1].text = S_Input._element.value;
+                      Sound_ON("Item",true);
+                    },);
+                break;
           default:
             Text[1].text = "することを選択してください。";
             break;
