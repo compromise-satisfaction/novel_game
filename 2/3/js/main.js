@@ -1605,6 +1605,7 @@ function Load(width,height){
           case "↦":
           s = false;
             if(Return==false) game.fps += 200;
+            console.log(game.fps);
             break;
           case "↤":
           s = false;
