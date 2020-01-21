@@ -2009,9 +2009,9 @@ function Load(width,height){
       var Numbers = width/16*9+(width/30);
       function Submit(a,b){
         Text[submits] = new Entity();
-        Text[submits].moveTo(width/4,Numbers);
-        Text[submits].width = width/2;
-        Text[submits].height = (width/10);
+        Text[submits].moveTo(0,Numbers);
+        Text[submits].width = width;
+        Text[submits].height = width/10;
         Text[submits]._element = document.createElement('input');
         Text[submits]._element.type = "submit";
         Text[submits]._element.value = a;
