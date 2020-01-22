@@ -536,7 +536,7 @@ function Load(width,height){
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
           Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
           Datas[16] = Main_DATAS[i].トロフィー文字;
-          Datas[17] = Main_DATAS[i].トロフィー画像;
+          Datas[17] = conversion_url(Main_DATAS[i].トロフィー画像,"画像");
           //Datas[18] = Main_DATAS[i].トロフィー内容.replace(/\n/g,"↓");
           Datas[19] = conversion_url(Main_DATAS[i].文章音,"サウンド");
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
@@ -918,10 +918,16 @@ function Load(width,height){
         var Data = true;
       }
 
-      var xxx = game.assets[conversion_url("タイトル画面","画像")].width;
-      var yyy = game.assets[conversion_url("タイトル画面","画像")].height;
+      if(game.assets[conversion_url("タイトル画面","画像")]==undefined){
+        var Title_image = conversion_url("タイトル画面","画像");
+      }
+      else {
+        var Title_image = Foldar+"image/画像無.png";
+      }
+      var xxx = game.assets[Title_image].width;
+      var yyy = game.assets[Title_image].height;
       var Title = new Sprite(xxx,yyy);
-      Title.image = game.assets[conversion_url("タイトル画面","画像")];
+      Title.image = game.assets[Title_image];
       Title.scaleX = width/xxx;
       Title.scaleY = width/16*9/yyy;
       Title.x = (Title.scaleX*xxx/2)-xxx/2;
@@ -1695,10 +1701,11 @@ function Load(width,height){
           Trophy.opacity = 0;
           Trophy.tl.fadeIn(5);
           scene.addChild(Trophy);
-          var xxx = game.assets[conversion_url(Datas[17],"画像")].width;
-          var yyy = game.assets[conversion_url(Datas[17],"画像")].height;
+          if(game.assets[Datas[17]]==undefined) Datas[17] = Foldar+"画像無.png";
+          var xxx = game.assets[Datas[17]].width;
+          var yyy = game.assets[Datas[17]].height;
           var Trophy_image = new Sprite(xxx,yyy);
-          Trophy_image.image = game.assets[conversion_url(Datas[17],"画像")];
+          Trophy_image.image = game.assets[Datas[17]];
           Trophy_image.scaleX = ((width/18.82)/xxx);
           Trophy_image.scaleY = ((width/18.82)/yyy);
           Trophy_image.x = (Trophy_image.scaleX*xxx/2)-xxx/2+(width-(width/3.6));
