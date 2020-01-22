@@ -118,6 +118,7 @@ function Load(width,height){
       core.dispatchEvent(e);
   });
   game.preload(Foldar+"image/融合.png");
+  game.preload(Foldar+"image/画像無.png");
   game.preload(Foldar+"sound/Item.wav");
   game.preload(Foldar+"sound/セーブ.wav");
   game.preload(Foldar+"sound/音量調整用.wav");
@@ -1077,6 +1078,7 @@ function Load(width,height){
           }
         }
       }
+
       if(Datas[0]){
         switch (Datas[0]) {
           case "ヒント":
@@ -1121,6 +1123,7 @@ function Load(width,height){
           case "カットイン":
             break;
           default:
+            if(game.assets[Datas[0]]==undefined&&Datas[0]!="") Datas[0] = Foldar+"image/画像無.png";
             var xxx = game.assets[Datas[0]].width;
             var yyy = game.assets[Datas[0]].height;
             var Background = new Sprite(xxx,yyy);
@@ -1154,6 +1157,10 @@ function Load(width,height){
           })
         }
       }
+
+      if(game.assets[Datas[1]]==undefined&&Datas[1]!="") Datas[1] = Foldar+"image/画像無.png";
+      if(game.assets[Datas[3]]==undefined&&Datas[3]!="") Datas[3] = Foldar+"image/画像無.png";
+      if(game.assets[Datas[5]]==undefined&&Datas[5]!="") Datas[5] = Foldar+"image/画像無.png";
 
       var xxx = 80;
       var yyy = 80;
@@ -1842,6 +1849,7 @@ function Load(width,height){
           scene.addChild(Background);
           break;
         default:
+          if(game.assets[Datas[0]]==undefined&&Datas[1]!="") Datas[0] = Foldar+"image/画像無.png";
           var xxx = game.assets[Datas[0]].width;
           var yyy = game.assets[Datas[0]].height;
           var Background = new Sprite(xxx,yyy);
@@ -1853,7 +1861,9 @@ function Load(width,height){
           scene.addChild(Background);
           break;
       }
-
+      if(game.assets[Datas[1]]==undefined&&Datas[3]!="") Datas[1] = Foldar+"image/画像無.png";
+      if(game.assets[Datas[2]]==undefined&&Datas[5]!="") Datas[2] = Foldar+"image/画像無.png";
+      if(game.assets[Datas[3]]==undefined&&Datas[3]!="") Datas[3] = Foldar+"image/画像無.png";
       if(Datas[2]!=false){
         var xxx = game.assets[Datas[2]].width;
         var yyy = game.assets[Datas[2]].height;
@@ -2006,6 +2016,7 @@ function Load(width,height){
           break;
       }
 
+      if(game.assets[Type]==undefined&&Type!="") Type = Foldar+"image/画像無.png";
       var xxx = game.assets[Type].width;
       var yyy = game.assets[Type].height;
       var Pop = new Sprite(xxx,yyy);
@@ -2072,6 +2083,7 @@ function Load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);//証言席
 
+      if(game.assets[Datas[0]]==undefined) Datas[0] = Foldar+"image/画像無.png";
       var xxx = game.assets[Datas[0]].width;
       var yyy = game.assets[Datas[0]].height;
       var Character = new Sprite(xxx,yyy);
@@ -2581,6 +2593,7 @@ function Load(width,height){
 
       if(Inspect[0]=="留置所") var ryu = Foldar+"image/背景/留置所背景.png";
       else var ryu = conversion_url(Inspect[0],"画像");
+      if(game.assets[ryu]==undefined) ryu = Foldar+"image/画像無.png";
       var xxx = game.assets[ryu].width;
       var yyy = game.assets[ryu].height;
       var Background = new Sprite(xxx,yyy);
@@ -2700,6 +2713,7 @@ function Load(width,height){
       Buttons._element.value = "▶";
       scene.addChild(Buttons);
 
+      if(game.assets[a]==undefined) a = Foldar+"image/画像無.png";
       var xxx = game.assets[a].width;
       var yyy = game.assets[a].height;
       var Item = new Sprite(xxx,yyy);
@@ -2922,6 +2936,7 @@ function Load(width,height){
                 Choice_Item = f[0];
                 console.log(Choice_Item+"を選択");
                 var Item_image_url = conversion_url(f[2],"画像");
+                if(game.assets[Item_image_url]==undefined) Foldar+"image/画像無.png";
                 var xxx = game.assets[Item_image_url].width;
                 var yyy = game.assets[Item_image_url].height;
                 Item_image.image = game.assets[Item_image_url];
@@ -3265,7 +3280,12 @@ function Load(width,height){
       scene.addChild(White);
 
       var Reversi = new Sprite(405,405);
-      Reversi.image = game.assets[conversion_url("リバーシ","画像")];
+      if(game.assets[conversion_url("リバーシ","画像")]==undefined){
+        Reversi.image = game.assets[Foldar+"image/リバーシ.png"];
+      }
+      else {
+        Reversi.image = game.assets[conversion_url("リバーシ","画像")];
+      }
       Reversi.x = 0;
       Reversi.y = 40;
       scene.addChild(Reversi);
@@ -3319,8 +3339,12 @@ function Load(width,height){
           Sprite.call(this, 45, 45);
           this.x = 50*x+5;
           this.y = 50*y+45;
-          this.image = game.assets[Foldar+"image/stone.png"];
-          //scene.addChild(this);
+          if(game.assets[conversion_url("リバーシの石","画像")]==undefined){
+            this.image = game.assets[Foldar+"image/stone.png"];
+          }
+          else {
+            this.image = game.assets[conversion_url("リバーシの石","画像")];
+          }
           this.ura = z;
           if(z==3) z = 1;
           this.frame = z;
