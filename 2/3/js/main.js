@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 5.3";
+var Version = "バージョン 5.4";
 
 switch (GitHub_type) {
   case "referee":
@@ -996,7 +996,6 @@ function Load(width,height){
           fetch(GAS,)
           .then(res => res.json())
           .then(result => {
-            console.log(result[0].更新日);
           },);
         }
       }
@@ -1004,7 +1003,6 @@ function Load(width,height){
         fetch(GAS,)
         .then(res => res.json())
         .then(result => {
-          console.log(result[0].更新日);
         },);
       }
 
