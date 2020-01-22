@@ -1234,13 +1234,13 @@ function Load(width,height){
         }
         for (var i = 0; i < Main_DATAS.length; i++) {
           if(Datas[0]==Main_DATAS[i].シーン名){
-            Datas[0] = Main_DATAS[i].BGM;
+            Datas[0] = Main_DATAS[i].背景;
             break;
           }
         }
         for (var i = 0; i < Choice_DATAS.length; i++) {
           if(Datas[0]==Choice_DATAS[i].シーン名){
-            Datas[0] = Choice_DATAS[i].BGM;
+            Datas[0] = Choice_DATAS[i].背景;
             break;
           }
         }
