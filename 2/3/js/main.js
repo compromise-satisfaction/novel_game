@@ -1359,6 +1359,7 @@ function Load(width,height){
       }
 
       if(Datas[14]!=undefined&&Datas[14]!=false){
+        if(game.assets[Datas[15]]==undefined) Datas[15] = Foldar+"image/画像無.png";
         var xxx = game.assets[Datas[15]].width;
         var yyy = game.assets[Datas[15]].height;
         var Item = new Sprite(xxx,yyy);
@@ -2962,7 +2963,7 @@ function Load(width,height){
                 Choice_Item = f[0];
                 console.log(Choice_Item+"を選択");
                 var Item_image_url = conversion_url(f[2],"画像");
-                if(game.assets[Item_image_url]==undefined) Foldar+"image/画像無.png";
+                if(game.assets[Item_image_url]==undefined) Item_image_url = Foldar+"image/画像無.png";
                 var xxx = game.assets[Item_image_url].width;
                 var yyy = game.assets[Item_image_url].height;
                 Item_image.image = game.assets[Item_image_url];
