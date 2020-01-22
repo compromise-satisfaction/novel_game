@@ -536,6 +536,27 @@ function Load(width,height){
           }
         }
       }
+      if(BGM_name=="変化無し"){
+        for (var i = 0; i < Branch_DATAS.length; i++) {
+          if(Setting_Flag[4]==Branch_DATAS[i].シーン名){
+            if(have(Branch_DATAS[i].アイテムorフラグ名)) BGM_name = Branch_DATAS[i].ある;
+            else BGM_name = Branch_DATAS[i].ない;
+            break;
+          }
+        }
+        for (var i = 0; i < Main_DATAS.length; i++) {
+          if(BGM_name==Main_DATAS[i].シーン名){
+            BGM_name = Main_DATAS[i].BGM;
+            break;
+          }
+        }
+        for (var i = 0; i < Choice_DATAS.length; i++) {
+          if(BGM_name==Choice_DATAS[i].シーン名){
+            BGM_name = Choice_DATAS[i].BGM;
+            break;
+          }
+        }
+      }
       for (var k = 0; k < Sounds_DATAS.length; k++){
         if(BGM_name!=Sounds_DATAS[k].名前&&game.assets[Sounds_DATAS[k].url].状態=="再生中"){
           game.assets[Sounds_DATAS[k].url].stop();
@@ -1199,6 +1220,27 @@ function Load(width,height){
         for (var i = 0; i < Choice_DATAS.length; i++) {
           if(Setting_Flag[4]==Choice_DATAS[i].シーン名){
             Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
+            break;
+          }
+        }
+      }
+      if(Datas[0]=="変化無し"){
+        for (var i = 0; i < Branch_DATAS.length; i++) {
+          if(Setting_Flag[4]==Branch_DATAS[i].シーン名){
+            if(have(Branch_DATAS[i].アイテムorフラグ名)) Datas[0] = Branch_DATAS[i].ある;
+            else Datas[0] = Branch_DATAS[i].ない;
+            break;
+          }
+        }
+        for (var i = 0; i < Main_DATAS.length; i++) {
+          if(Datas[0]==Main_DATAS[i].シーン名){
+            Datas[0] = Main_DATAS[i].BGM;
+            break;
+          }
+        }
+        for (var i = 0; i < Choice_DATAS.length; i++) {
+          if(Datas[0]==Choice_DATAS[i].シーン名){
+            Datas[0] = Choice_DATAS[i].BGM;
             break;
           }
         }
