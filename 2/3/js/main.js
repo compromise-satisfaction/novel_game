@@ -62,37 +62,6 @@ function Images(width,height){
   },);
 }
 
-function vue2(width,height){
-      fetch(GAS,
-        {
-          method: 'POST',
-          body: "22"
-        }
-      )
-      .then(res => res.json())
-      .then(result => {
-        Kousin1 = result[0].更新日;
-        vue3(width,height);
-        console.log("更新日シート読み込み完了");
-      },);
-}
-
-function vue3(width,height){
-      fetch(GAS,
-        {
-          method: 'POST',
-          body: "333"
-        }
-      )
-      .then(res => res.json())
-      .then(result => {
-        Sounds_DATAS = result;
-
-        Load(width,height);
-        console.log("サウンドシート読み込み完了");
-      },);
-}
-
 var Button_time_next = 3;
 var Button_time = Button_time_next;
 
@@ -121,146 +90,11 @@ function Load(width,height){
 
   var Kousin2 = Kousin1+"↓"+Version;
   var Kousin3 = Kousin2.split("↓")
-  for (var i = 0; i < kousin3.length; i++) {
-    new Texts(kousin3[i],i);
+  for (var i = 0; i < Kousin3.length; i++) {
+    new Texts(Kousin3[i],i);
   }
 
   var Sheets = new Texts("",5);
-
-  function vue1(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "1"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Main_DATAS = result;
-          vue4();
-          Sheets.text = "シーンデータ読み込み 9/9";
-        },);
-  }
-
-  function vue4(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "4444"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Interrogation_DATAS = result;
-          vue5();
-          Sheets.text = "シーンデータ読み込み 2/9";
-        },);
-  }
-
-  function vue5(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "55555"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Choice_DATAS = result;
-          vue6();
-          Sheets.text = "シーンデータ読み込み 3/9";
-        },);
-  }
-
-  function vue6(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "666666"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Inspect_DATAS = result;
-          vue7();
-          Sheets.text = "シーンデータ読み込み 4/9";
-        },);
-  }
-
-  function vue7(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "7777777"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Speech_DATAS = result;
-          vue8();
-          Sheets.text = "シーンデータ読み込み 5/9";
-        },);
-  }
-
-  function vue8(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "88888888"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Item_get_DATAS = result;
-          vue9();
-          Sheets.text = "シーンデータ読み込み 6/9";
-        },);
-  }
-
-  function vue9(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "999999999"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Move_DATAS = result;
-          vue10();
-          Sheets.text = "シーンデータ読み込み 7/9";
-        },);
-  }
-
-  function vue10(){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "0000000000"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          Branch_DATAS = result;
-          vue11();
-          Sheets.text = "シーンデータ読み込み 8/9";
-        },);
-  }
-
-  function vue11(width,height){
-        fetch(GAS,
-          {
-            method: 'POST',
-            body: "11111111111"
-          }
-        )
-        .then(res => res.json())
-        .then(result => {
-          I_C_F_DATAS = result;
-          Sheets.text = "シーンデータ読み込み 9/9";
-          loadScene.addChild(Buttons);
-        },);
-  }
 
     loadScene.addEventListener('progress', function(e){
 
@@ -850,7 +684,7 @@ function Load(width,height){
       Datas[5] = "";
       Datas[6] = "";
       Datas[7] = "製作者";
-      Datas[8] = "ここから先は出来ていません。↓更新をお待ちください。↓" + kousin2;
+      Datas[8] = "ここから先は出来ていません。↓更新をお待ちください。↓" + Kousin2;
       Datas[9] = "";
       Datas[10] = "";
       Datas[11] = "";
