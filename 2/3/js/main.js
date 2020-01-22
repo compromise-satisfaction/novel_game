@@ -1,6 +1,7 @@
 enchant();
 
 var Version = "バージョン 5.4";
+var Syokika = false;
 
 switch (GitHub_type) {
   case "referee":
@@ -999,6 +1000,7 @@ function Load(width,height){
       if(Version_new){
         Setting_Flag = window.localStorage.getItem("Setting_Flag").split(",");
         if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"&&Setting_Flag[2]=="男") Submit("テスト用");
+        else if(Syokika);
         else {
           fetch(GAS,)
           .then(res => res.json())
@@ -3243,6 +3245,7 @@ function Load(width,height){
         Character_Flag = [];//人物
         Trophy_Flag = [];//トロフィー
         Scene_kazu = 1;
+        Syokika = true;
         game.replaceScene(TitleScene());
         return;
       });
