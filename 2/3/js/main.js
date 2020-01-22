@@ -412,7 +412,6 @@ function Load(width,height){
           game.assets[Sounds_DATAS[k].url].状態 = "停止";
         }
       }
-      console.log(BGM_name);
       if(BGM_name!=false&&game.assets[conversion_url(BGM_name,"サウンド")].状態!="再生中"){
         game.assets[conversion_url(BGM_name,"サウンド")].状態 = "再生中";
         if(game.assets[conversion_url(BGM_name,"サウンド")].src==undefined){
