@@ -4203,70 +4203,170 @@ function Load(width,height){
 
       var Text = [];
 
-      Text[0] = new Texts("◆ 改造をやめる");
+      for (var i = 0; i < 5; i++) {
+        Text[i] = new Texts("");
+      }
 
-      Numbers += (width/20)+(width/25);
-      Numbers += (width/20)+(width/25);
-      var S_Input = new Entity();
-      S_Input.moveTo((width/10),Numbers);
-      S_Input.width = 190;
-      S_Input.height = (width/20);
-      S_Input._element = document.createElement("select");
+      var Button = [];
+      var submits = 0;
+      var Numbers = (width/10)+(width/30);
+      function Submit(a){
+        Button[submits] = new Entity();
+        Button[submits].moveTo(width/4,Numbers);
+        Button[submits].width = width/2;
+        Button[submits].height = (width/10);
+        if(a) Button[submits]._element = document.createElement('input');
+        else Button[submits]._element = document.createElement("select");
+        if(a=="ここに入力") Button[submits]._element.type = "text";
+        else Button[submits]._element.type = "submit";
+        Button[submits]._element.value = a;
+        scene.addChild(Button[submits]);
+        if(a=="改造をやめる"){
+          Button[submits].addEventListener('touchstart',function(e){
+            if(Button_push("戻る")) return;
+            game.replaceScene(ItemScene(Number,Ig,"アイテム"));
+          });
+        }
+        if(a=="実行する"){
+          Button[submits].addEventListener('touchstart',function(e){
+            if(Button_push("音無し")) return;
+            for (var i = 4; i > 0; i--){
+              Text[i].text = Text[i-1].text;
+            }
+            for (var i = 3; i < 7; i++){
+                if(Button[i]._element.value.replace(/[^,]/g,"")!=""){
+                Text[0].text = ",(カンマ)は使用できません。";
+                return;
+              }
+              }
+            switch (Button[1]._element.value){
+            case "アイテム作成":
+              Item_Flag[Item_Flag.length] = [
+                Button[3]._element.value,
+                Button[4]._element.value,
+                Button[2]._element.value,
+                Button[5]._element.value,
+                Button[6]._element.value
+              ];
+              this._element.value = Button[3]._element.value + " 入手。";
+              Sound_ON("セーブ",true);
+              break;
+            case "シーンデータ修正":
+              game.popScene();
+              Scene_kazu--;
+              console.log("Scene数",Scene_kazu);
+              Datas = ["Black",0,0,0,0,0,0,0,"シーンデータを修正しました。",0,0,0,Setting_Flag[4],0];
+              game.replaceScene(MainScene());
+              Sound_ON("セーブ",true);
+              break;
+            case "フラグ追加 or 消去":
+              for (var i = 0; i < Flag.length; i++){
+                if(Flag[i]==Button[3]._element.value){
+                  Flag[i] = false;
+                  this._element.value = Button[3]._element.value+" オフ。";
+                  Sound_ON("セーブ",true);
+                  return;
+                }
+              }
+              Flag[Flag.length] = Button[3]._element.value;
+              this._element.value = Button[3]._element.value+" オン。";
+              Sound_ON("セーブ",true);
+              break;
+            case "体力変更":
+              Setting_Flag[3] = Button[3]._element.value*1;
+              this._element.value = "残り回数 = " + Setting_Flag[3];
+              Sound_ON("セーブ",true);
+              break;
+            case "フラグリセット":
+              Flag = [];
+              this._element.value = Button[1]._element.value;
+              Sound_ON("セーブ",true);
+              break;
+            case "アイテムリセット":
+              for (var i = 0; i < Item_Flag.length; i++) {
+                if(Item_Flag[i][0]=="消えたアイテム") break;
+              }
+              if(i==Item_Flag.length) var Item_Flag2 = "";
+              else var Item_Flag2 = Item_Flag[i][4];
+              var k = 0;
+              for (var i = 0; i < Item_Flag.length; i++) {
+                if(Item_Flag[i][0]!="赤き竜"&&Item_Flag[i][0]!="万能ツール"&&Item_Flag[i][0]!="消えたアイテム") Item_Flag2 += Item_Flag[i][0] + "↓";
+                if(Item_Flag2.replace(/[^↓]/g,"").length%12==k&&Item_Flag2.replace(/[^↓]/g,"").length>11){
+                  Item_Flag2+="次のページボタン↓前のページボタン";
+                  k++;
+                }
+              }
+              Item_Flag = [
+                ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造"],
+                ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動空移動"],
+                ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2]
+              ];
+              this._element.value = S_Input._element.value;
+              Sound_ON("セーブ",true);
+              break;
+            case "人物リセット":
+              Character_Flag = [];
+              this._element.value = Button[1]._element.value;
+              Sound_ON("セーブ",true);
+              break;
+            case "トロフィーリセット":
+              Trophy_Flag = [];
+              this._element.value = Button[1]._element.value;
+              Sound_ON("セーブ",true);
+              break;
+            case "シーンデータ更新":
+            game.fps = 200;
+            fetch(GAS,
+              {
+                method: 'POST',
+                body: ""
+              }
+            )
+            .then(res => res.json())
+            .then(result => {
+              Image_urls = [];
+              Move_DATAS = result.移動;
+              Main_DATAS = result.メイン;
+              Choice_DATAS = result.選択;
+              Branch_DATAS = result.分岐;
+              Item_get_DATAS = result.入手;
+              Inspect_DATAS = result.調べる;
+              I_C_F_DATAS = result.フラグ類;
+              Speech_DATAS = result.吹き出し;
+              Interrogation_DATAS = result.尋問;
+              this._element.value = Button[1]._element.value;
+              Sound_ON("セーブ",true);
+              game.fps = 10;
+              },);
+              break;
+            default:
+              this._element.value = "することを選択してください。";
+              break;
+          }
+          });
+        }
+        submits++;
+        Numbers += (width/20)+(width/25)+(width/25);
+      }
+      Submit("改造をやめる");
+      Numbers += (width/20)+(width/25)+(width/25);
+      Submit("");
+      Submit("");
+      Submit("ここに入力");
+      Submit("ここに入力");
+      Submit("ここに入力");
+      Submit("ここに入力");
+      Submit("実行する");
 
       var Option = [];
-      var Choice_Transform = ["することを選択","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット",
-      "メインシーン更新","チョイスシーン更新","調べるシーン更新","移動シーン更新","分岐更新","フラグ更新","尋問シーン更新","吹き出しシーン更新","アイテムゲットシーン更新"];
+      var Choice_Transform = ["することを選択","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
         Option[i].text = Choice_Transform[i];
         Option[i].value = Choice_Transform[i];
-        S_Input._element.appendChild(Option[i]);
+        Button[1]._element.appendChild(Option[i]);
       }
-      scene.addChild(S_Input);
-
-      Numbers += (width/20)+(width/25);
-      var S_Input1 = new Entity();
-      S_Input1.moveTo((width/10),Numbers);
-      S_Input1.width = 190;
-      S_Input1.height = (width/20);
-      S_Input1._element = document.createElement("select");
-
-      function S_Inputs(a){
-        Numbers += (width/20)+(width/25);
-        S_Inputss[a] = new Entity();
-        S_Inputss[a].moveTo((width/10),Numbers);
-        S_Inputss[a].width = 190;
-        S_Inputss[a].height = (width/20);
-        S_Inputss[a]._element = document.createElement('input');
-        S_Inputss[a]._element.type = "text";
-        S_Inputss[a]._element.value = "ここに入力";
-        scene.addChild(S_Inputss[a]);
-      }
-
-      var S_Inputss = [];
-
-      for (var i = 0; i < 3; i++) {
-        S_Inputs(i);
-      }
-
-      Numbers += (width/20)+(width/25);
-      var S_Input3 = new Entity();
-      S_Input3.moveTo((width/10),Numbers);
-      S_Input3.width = 190;
-      S_Input3.height = (width/20);
-      S_Input3._element = document.createElement("select");
-
-      Option = [];
-      Choice_Transform = ["詳細","見る"];
-
-      for (var i = 0; i < Choice_Transform.length; i++){
-        Option[i] = document.createElement("option");
-        Option[i].text = Choice_Transform[i];
-        Option[i].value = Choice_Transform[i];
-        S_Input3._element.appendChild(Option[i]);
-      }
-      scene.addChild(S_Input3);
 
       Option = [];
 
@@ -4274,240 +4374,8 @@ function Load(width,height){
         Option[i-1] = document.createElement("option");
         Option[i-1].text = Image_DATAS[i].名前;
         Option[i-1].value = Image_DATAS[i].名前;
-        S_Input1._element.appendChild(Option[i-1]);
+        Button[2]._element.appendChild(Option[i-1]);
       }
-      scene.addChild(S_Input1);
-
-      Numbers += (width/20)+(width/25);
-      var S_Input2 = new Entity();
-      S_Input2.moveTo((width/10),Numbers);
-      S_Input2.width = 190;
-      S_Input2.height = (width/20);
-      S_Input2._element = document.createElement('input');
-      S_Input2._element.type = "submit";
-      S_Input2._element.value = "実行する";
-      scene.addChild(S_Input2);
-
-      for (var i = 1; i < 6; i++) {
-        Text[i] = new Texts("");
-      }
-
-      S_Input2.addEventListener('touchstart',function(e){
-        for (var i = 5; i > 1; i--) {
-          Text[i].text = Text[i-1].text;
-        }
-        for (var i = 0; i < 3; i++) {
-          if(S_Inputss[i]._element.value.replace(/[^,]/g,"")!=""){
-            Text[1].text = ",(カンマ)は使用できません。";
-            return;
-          }
-        }
-        switch (S_Input._element.value) {
-          case "アイテム作成":
-            Item_Flag[Item_Flag.length] = [S_Inputss[0]._element.value,S_Inputss[1]._element.value,S_Input1._element.value,S_Input3._element.value,S_Inputss[2]._element.value];
-            Text[1].text = S_Inputss[0]._element.value+" 入手。";
-            Sound_ON("Item",true);
-            break;
-          case "シーンデータ修正":
-            game.popScene();
-            Scene_kazu--;
-            console.log("Scene数",Scene_kazu);
-            Datas = ["Black",0,0,0,0,0,0,0,"シーンデータを修正しました。",0,0,0,Setting_Flag[4],0];
-            game.replaceScene(MainScene());
-            Sound_ON("Item",true);
-            break;
-          case "フラグ追加 or 消去":
-            for (var i = 0; i < Flag.length; i++){
-              if(Flag[i]==S_Inputss[0]._element.value){
-                Flag[i] = false;
-                Text[1].text = S_Inputss[0]._element.value+" オフ。";
-                Sound_ON("Item",true);
-                return;
-              }
-            }
-            Flag[Flag.length] = S_Inputss[0]._element.value;
-            Text[1].text = S_Inputss[0]._element.value+" オン。";
-            Sound_ON("Item",true);
-            break;
-          case "体力変更":
-            Setting_Flag[3] = S_Inputss[0]._element.value*1;
-            Text[1].text = "残り回数 = " + Setting_Flag[3];
-            Sound_ON("Item",true);
-            break;
-          case "フラグリセット":
-            Flag = [];
-            Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true);
-            break;
-          case "アイテムリセット":
-            for (var i = 0; i < Item_Flag.length; i++) {
-              if(Item_Flag[i][0]=="消えたアイテム") break;
-            }
-            if(i==Item_Flag.length) var Item_Flag2 = "";
-            else var Item_Flag2 = Item_Flag[i][4];
-            var k = 0;
-            for (var i = 0; i < Item_Flag.length; i++) {
-              if(Item_Flag[i][0]!="赤き竜"&&Item_Flag[i][0]!="万能ツール"&&Item_Flag[i][0]!="消えたアイテム") Item_Flag2 += Item_Flag[i][0] + "↓";
-              if(Item_Flag2.replace(/[^↓]/g,"").length%12==k&&Item_Flag2.replace(/[^↓]/g,"").length>11){
-                Item_Flag2+="次のページボタン↓前のページボタン";
-                k++;
-              }
-            }
-            Item_Flag = [
-              ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造"],
-              ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動空移動"],
-              ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2]
-            ];
-            Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true);
-            break;
-          case "人物リセット":
-            Character_Flag = [];
-            Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true);
-            break;
-          case "トロフィーリセット":
-            Trophy_Flag = [];
-            Text[1].text = S_Input._element.value;
-            Sound_ON("Item",true);
-            break;
-            case "メインシーン更新":
-              fetch(GAS,
-                {
-                  method: 'POST',
-                  body: "1"
-                }
-              )
-              .then(res => res.json())
-              .then(result => {
-                Main_DATAS = result;
-                Text[1].text = S_Input._element.value;
-                Sound_ON("Item",true);
-              },);
-              break;
-            case"チョイスシーン更新":
-                  fetch(GAS,
-                    {
-                      method: 'POST',
-                      body: "55555"
-                    }
-                  )
-                  .then(res => res.json())
-                  .then(result => {
-                    Choice_DATAS = result;
-                    Text[1].text = S_Input._element.value;
-                    Sound_ON("Item",true);
-                  },);
-                  break;
-            case"調べるシーン更新":
-                  fetch(GAS,
-                    {
-                      method: 'POST',
-                      body: "666666"
-                    }
-                  )
-                  .then(res => res.json())
-                  .then(result => {
-                    Inspect_DATAS = result;
-                    Text[1].text = S_Input._element.value;
-                    Sound_ON("Item",true);
-                  },);
-                  break;
-            case"移動シーン更新":
-                  fetch(GAS,
-                    {
-                      method: 'POST',
-                      body: "999999999"
-                    }
-                  )
-                  .then(res => res.json())
-                  .then(result => {
-                    Move_DATAS = result;
-                    Text[1].text = S_Input._element.value;
-                    Sound_ON("Item",true);
-                  },);
-            case"フラグ更新":
-              fetch(GAS,
-                    {
-                      method: 'POST',
-                      body: "11111111111"
-                    }
-                  )
-                  .then(res => res.json())
-                  .then(result => {
-                    I_C_F_DATAS = result;
-                    Text[1].text = S_Input._element.value;
-                    Sound_ON("Item",true);
-                  },);
-                  break;
-            case"分岐更新":
-                  fetch(GAS,
-                    {
-                      method: 'POST',
-                      body: "0000000000"
-                    }
-                  )
-                  .then(res => res.json())
-                  .then(result => {
-                    Branch_DATAS = result;
-                    Text[1].text = S_Input._element.value;
-                    Sound_ON("Item",true);
-                  },);
-              break;
-              case"尋問シーン更新":
-                    fetch(GAS,
-                      {
-                        method: 'POST',
-                        body: "4444"
-                      }
-                    )
-                    .then(res => res.json())
-                    .then(result => {
-                      Interrogation_DATAS = result;
-                      Text[1].text = S_Input._element.value;
-                      Sound_ON("Item",true);
-                    },);
-              break;
-              case "吹き出しシーン更新":
-                    fetch(GAS,
-                      {
-                        method: 'POST',
-                        body: "7777777"
-                      }
-                    )
-                    .then(res => res.json())
-                    .then(result => {
-                      Speech_DATAS = result;
-                      Text[1].text = S_Input._element.value;
-                      Sound_ON("Item",true);
-                    },);
-                break;
-              case "アイテムゲットシーン更新":
-                    fetch(GAS,
-                      {
-                        method: 'POST',
-                        body: "88888888"
-                      }
-                    )
-                    .then(res => res.json())
-                    .then(result => {
-                      Item_get_DATAS = result;
-                      Text[1].text = S_Input._element.value;
-                      Sound_ON("Item",true);
-                    },);
-                break;
-          default:
-            Text[1].text = "することを選択してください。";
-            break;
-        }
-        return;
-      });
-
-      Text[0].addEventListener('touchstart',function(e){
-          game.replaceScene(ItemScene(Number,Ig,"アイテム"));
-          console.log("Scene数",Scene_kazu);
-          return;
-      });
 
       return scene;
     };
