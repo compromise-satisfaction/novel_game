@@ -920,10 +920,10 @@ function Load(width,height){
       }
 
       if(game.assets[conversion_url("タイトル画面","画像")]==undefined){
-        var Title_image = conversion_url("タイトル画面","画像");
+        var Title_image = Foldar+"image/画像無.png";
       }
       else {
-        var Title_image = Foldar+"image/画像無.png";
+        var Title_image = conversion_url("タイトル画面","画像");
       }
       var xxx = game.assets[Title_image].width;
       var yyy = game.assets[Title_image].height;
