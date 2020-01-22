@@ -1,7 +1,7 @@
 enchant();
 
 var Version = "バージョン 5.4";
-var Syokika = false;
+var Already = false;
 
 switch (GitHub_type) {
   case "referee":
@@ -955,6 +955,7 @@ function Load(width,height){
         Button[submits]._element.value = a;
         scene.addChild(Button[submits]);
         Button[submits].addEventListener('touchstart',function(e){
+          Already = true;
           switch (a) {
             case "データ初期化":
             case "データ初期化(推奨)":
@@ -1000,12 +1001,13 @@ function Load(width,height){
       if(Version_new){
         Setting_Flag = window.localStorage.getItem("Setting_Flag").split(",");
         if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"&&Setting_Flag[2]=="男") Submit("テスト用");
-        else if(Syokika);
+        else if(Already);
         else {
           fetch(GAS,)
           .then(res => res.json())
           .then(result => {
           },);
+          console.log("管理者以外");
         }
       }
       else{
@@ -1013,6 +1015,7 @@ function Load(width,height){
         .then(res => res.json())
         .then(result => {
         },);
+        console.log("バージョンが古い");
       }
 
       Title.addEventListener("enterframe",function(){
@@ -3245,7 +3248,8 @@ function Load(width,height){
         Character_Flag = [];//人物
         Trophy_Flag = [];//トロフィー
         Scene_kazu = 1;
-        Syokika = true;
+        Already= true;
+        Version_new = true;
         game.replaceScene(TitleScene());
         return;
       });
