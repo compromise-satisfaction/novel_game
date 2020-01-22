@@ -119,6 +119,7 @@ function Load(width,height){
   });
   game.preload(Foldar+"image/融合.png");
   game.preload(Foldar+"image/画像無.png");
+  game.preload(Foldar+"image/リバーシ.png");
   game.preload(Foldar+"sound/Item.wav");
   game.preload(Foldar+"sound/セーブ.wav");
   game.preload(Foldar+"sound/音量調整用.wav");
