@@ -372,6 +372,14 @@ function Load(width,height){
         }
       }
       if(BGM_name=="変化無し"){
+        for (var i = 0; i < Interrogation_DATAS.length; i++) {
+          if(Setting_Flag[4]==Interrogation_DATAS[i].シーン名){
+            BGM_name = Interrogation_DATAS[i].BGM;
+            break;
+          }
+        }
+      }
+      if(BGM_name=="変化無し"){
         for (var i = 0; i < Branch_DATAS.length; i++) {
           if(Setting_Flag[4]==Branch_DATAS[i].シーン名){
             if(have(Branch_DATAS[i].アイテムorフラグ名)) BGM_name = Branch_DATAS[i].ある;
@@ -391,6 +399,12 @@ function Load(width,height){
             break;
           }
         }
+        for (var i = 0; i < Interrogation_DATAS.length; i++) {
+          if(BGM_name==Interrogation_DATAS[i].シーン名){
+            BGM_name = Interrogation_DATAS[i].BGM;
+            break;
+          }
+        }
       }
       for (var k = 0; k < Sounds_DATAS.length; k++){
         if(BGM_name!=Sounds_DATAS[k].名前&&game.assets[Sounds_DATAS[k].url].状態=="再生中"){
@@ -398,6 +412,7 @@ function Load(width,height){
           game.assets[Sounds_DATAS[k].url].状態 = "停止";
         }
       }
+      console.log(BGM_name);
       if(BGM_name!=false&&game.assets[conversion_url(BGM_name,"サウンド")].状態!="再生中"){
         game.assets[conversion_url(BGM_name,"サウンド")].状態 = "再生中";
         if(game.assets[conversion_url(BGM_name,"サウンド")].src==undefined){
