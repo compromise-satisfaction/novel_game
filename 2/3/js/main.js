@@ -1010,6 +1010,7 @@ function Load(width,height){
           console.log("管理者以外");
         }
       }
+      else if(Already);
       else{
         fetch(GAS,)
         .then(res => res.json())
