@@ -1854,7 +1854,7 @@ function Load(width,height){
           scene.addChild(Background);
           break;
         default:
-          if(game.assets[Datas[0]]==undefined&&Datas[1]!="") Datas[0] = Foldar+"image/画像無.png";
+          if(game.assets[Datas[0]]==undefined&&Datas[0]!="") Datas[0] = Foldar+"image/画像無.png";
           var xxx = game.assets[Datas[0]].width;
           var yyy = game.assets[Datas[0]].height;
           var Background = new Sprite(xxx,yyy);
