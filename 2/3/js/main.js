@@ -4301,7 +4301,7 @@ function Load(width,height){
                 ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動空移動"],
                 ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2]
               ];
-              this._element.value = S_Input._element.value;
+              this._element.value = Button[1]._element.value;
               Sound_ON("セーブ",true);
               break;
             case "人物リセット":
