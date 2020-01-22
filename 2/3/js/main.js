@@ -1867,8 +1867,8 @@ function Load(width,height){
           scene.addChild(Background);
           break;
       }
-      if(game.assets[Datas[1]]==undefined&&Datas[3]!="") Datas[1] = Foldar+"image/画像無.png";
-      if(game.assets[Datas[2]]==undefined&&Datas[5]!="") Datas[2] = Foldar+"image/画像無.png";
+      if(game.assets[Datas[1]]==undefined&&Datas[1]!="") Datas[1] = Foldar+"image/画像無.png";
+      if(game.assets[Datas[2]]==undefined&&Datas[2]!="") Datas[2] = Foldar+"image/画像無.png";
       if(game.assets[Datas[3]]==undefined&&Datas[3]!="") Datas[3] = Foldar+"image/画像無.png";
       if(Datas[2]!=false){
         var xxx = game.assets[Datas[2]].width;
