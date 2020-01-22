@@ -27,15 +27,38 @@ function Images(width,height){
   .then(res => res.json())
   .then(result => {
     Image_urls = [];
-    Image_DATAS = result;
+    Move_DATAS = result.移動;
+    Sounds_DATAS = result.音;
+    Image_DATAS = result.画像;
+    Main_DATAS = result.メイン;
+    Choice_DATAS = result.選択;
+    Branch_DATAS = result.分岐;
+    Item_get_DATAS = result.入手;
+    Inspect_DATAS = result.調べる;
+    I_C_F_DATAS = result.フラグ類;
+    Speech_DATAS = result.吹き出し;
+    Kousin1 = result.更新[0].更新日;
+    Interrogation_DATAS = result.尋問;
     for (var i = 0; i < Image_DATAS.length; i++){
       if(Image_DATAS[i].url.substring(0,4)!="http"){
         Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url +".png";
       }
       Image_urls[i] = Image_DATAS[i].url;
     }
-    vue2(width,height);
-    console.log("画像シート読み込み完了");
+    Sounds_urls = [];
+    Koukaon_DATAS = [];
+    var kkk = 0;
+    for (var i = 0; i < Sounds_DATAS.length; i++){
+      if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+        Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+      }
+      Sounds_urls[i] = Sounds_DATAS[i].url;
+      if(Sounds_DATAS[i].ループ開始=="効果音"||Sounds_DATAS[i].ループ開始=="音声"){
+        Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url,Sounds_DATAS[i].ループ開始];
+        kkk++;
+      }
+    }
+    Load(width,height);
   },);
 }
 
@@ -48,7 +71,7 @@ function vue2(width,height){
       )
       .then(res => res.json())
       .then(result => {
-        kousin1 = result[0].更新日;
+        Kousin1 = result[0].更新日;
         vue3(width,height);
         console.log("更新日シート読み込み完了");
       },);
@@ -63,20 +86,8 @@ function vue3(width,height){
       )
       .then(res => res.json())
       .then(result => {
-        Sounds_urls = [];
         Sounds_DATAS = result;
-        Koukaon_DATAS = [];
-        var kkk = 0;
-        for (var i = 0; i < Sounds_DATAS.length; i++){
-          if(Sounds_DATAS[i].url.substring(0,4)!="http"){
-            Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
-          }
-          Sounds_urls[i] = Sounds_DATAS[i].url;
-          if(Sounds_DATAS[i].ループ開始=="効果音"||Sounds_DATAS[i].ループ開始=="音声"){
-            Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url,Sounds_DATAS[i].ループ開始];
-            kkk++;
-          }
-        }
+
         Load(width,height);
         console.log("サウンドシート読み込み完了");
       },);
@@ -108,23 +119,13 @@ function Load(width,height){
     }
   });
 
-  var kousin2 = kousin1+"↓"+Version;
-  var kousin3 = kousin2.split("↓")
+  var Kousin2 = Kousin1+"↓"+Version;
+  var Kousin3 = Kousin2.split("↓")
   for (var i = 0; i < kousin3.length; i++) {
     new Texts(kousin3[i],i);
   }
 
-  vue1();
-
   var Sheets = new Texts("",5);
-
-  var Buttons = new Entity();
-  Buttons.moveTo(100,100 + 40*6);
-  Buttons.width = (width/2);
-  Buttons.height = (width/5);
-  Buttons._element = document.createElement('input');
-  Buttons._element.type = "submit";
-  Buttons._element.value = "お待ちください…";
 
   function vue1(){
         fetch(GAS,
@@ -137,7 +138,7 @@ function Load(width,height){
         .then(result => {
           Main_DATAS = result;
           vue4();
-          Sheets.text = "シーンデータ読み込み 1/9";
+          Sheets.text = "シーンデータ読み込み 9/9";
         },);
   }
 
@@ -278,12 +279,9 @@ function Load(width,height){
 
   });
   loadScene.addEventListener('load', function(e) {
-    Buttons.addEventListener('enterframe',function(){
-      if(Sheets.text != "シーンデータ読み込み 9/9") return;
       var core = enchant.Core.instance;
       core.removeScene(core.loadingScene);
       core.dispatchEvent(e);
-    });
   });
   game.preload(Foldar+"image/融合.png");
   game.preload(Foldar+"sound/Item.wav");
