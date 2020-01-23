@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 5.4";
+var Version = "バージョン 5.5";
 var Already = false;
 
 switch (GitHub_type) {
