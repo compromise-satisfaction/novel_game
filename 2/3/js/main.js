@@ -4336,7 +4336,7 @@ function Load(width,height){
               I_C_F_T_DATAS = result.フラグ類;
               Speech_DATAS = result.吹き出し;
               Interrogation_DATAS = result.尋問;
-              this._element.value = Button[1]._element.value+"完了。";
+              this._element.value = "シーンデータ更新完了。";
               Sound_ON("セーブ",true);
               game.fps = 10;
               },);
