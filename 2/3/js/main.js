@@ -435,7 +435,7 @@ function Load(width,height){
               I_C_F_T_DATAS[k].画像,
               I_C_F_T_DATAS[k].詳細文,
               I_C_F_T_DATAS[k].詳細内容,
-              I_C_F_T_DATAS[k].つきつける
+              I_C_F_T_DATAS[k].つきつけるデータ
             ];
             Get_ICFT(DATAS);
           }
