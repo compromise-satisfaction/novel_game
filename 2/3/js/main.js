@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 5.7";
+var Version = "バージョン 5.8";
 var Already = false;
 
 switch (GitHub_type) {
@@ -226,8 +226,8 @@ function Load(width,height){
     var Syougen_time = 0;
     var Syougen_time2 = 1;
     var Datas = [];
-    var Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black",""];
-    //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
+    var Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black","",game.fps];
+    //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15fps];
     var Flag = [];//フラグ
     var Log_Flag = [];//記録
     var Item_Flag = [];//所持アイテム
@@ -237,8 +237,8 @@ function Load(width,height){
     var OASOBI = false;
 
     function Button_push(expression){
-      if(game.fps!=10) return(true);
       if(Button_time==Button_time_next){
+        game.fps = 10;
         Button_time = 0;
         switch (expression) {
           case "音無し":
@@ -567,6 +567,8 @@ function Load(width,height){
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
           Get_ICFT2(Main_DATAS[i],Person);
+          game.fps = Main_DATAS[i].速度;
+          Setting_Flag[15] = game.fps;
           if(Main_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
           else {
             if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
@@ -820,7 +822,7 @@ function Load(width,height){
         if(Setting_Flag[i]=="true") Setting_Flag[i] = true;
         else if(Setting_Flag[i]=="false") Setting_Flag[i] = false
         else if(Setting_Flag[i].replace(/\d/g,"").replace(/\./g,"")=="") Setting_Flag[i] = Setting_Flag[i]*1;
-        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
+        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15fps];
       }
       for (var i = 0; i < Datas.length; i++){
         if(Datas[i].replace(/\d/g,"").replace(/\./g,"")=="") Datas[i] = Datas[i]*1;
@@ -2825,6 +2827,7 @@ function Load(width,height){
                 game.replaceScene(ItemScene(Number,Ig,Type));
                 break;
               case "戻る":
+                game.fps = Setting_Flag[15];
                 game.popScene();
                 Scene_kazu--;
                 console.log("Scene数",Scene_kazu);
@@ -3169,8 +3172,8 @@ function Load(width,height){
         Data = false;
         window.localStorage.clear();
         Datas = [];
-        Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black",""];
-        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
+        Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black","",game.fps];
+        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15fps];
         Flag = [];//フラグ
         Log_Flag = [];//記録
         Item_Flag = [];//所持アイテム
