@@ -1323,17 +1323,6 @@ function Load(width,height){
       }
 
       if(Number=="空"){
-        var xxx = game.assets[conversion_url("タクシー","画像")].width;
-        var yyy = game.assets[conversion_url("タクシー","画像")].height;
-        var Taxi = new Sprite(xxx,yyy);
-        Taxi.scaleX = ((width/2)/xxx);
-        Taxi.scaleY = ((width/2)/yyy);
-        Taxi.image = game.assets[conversion_url("タクシー","画像")];
-        var X_0 = (Taxi.scaleX*xxx/2)-xxx/2;
-        var Y_0 = (Taxi.scaleY*yyy/2)-yyy/2;
-        Taxi.x = X_0 + width/2 -width/4;
-        Taxi.y = Y_0 + width/32;
-        scene.addChild(Taxi);
 
         var S_Input1 = new Entity();
         S_Input1.moveTo((width/4),width/16*9+(width/20)+(width/25)+(width/25));
@@ -1372,10 +1361,11 @@ function Load(width,height){
         Buttons._element.value = "決定";
         scene.addChild(Buttons);
         Buttons.addEventListener('touchstart',function(e){
-        Moves = S_Input1._element.value;
-        game.pushScene(MoveScene(10));
-        Scene_kazu++;
-        console.log("Scene数",Scene_kazu);
+          if(Button_push("選択音")) return;
+          Moves = S_Input1._element.value;
+          game.pushScene(MoveScene(10));
+          Scene_kazu++;
+          console.log("Scene数",Scene_kazu);
         });
       }
 
@@ -4173,8 +4163,8 @@ function Load(width,height){
                 Button[3]._element.value,//名前
                 Button[5]._element.value,//説明文
                 Button[4]._element.value,//画像
-                Button[6]._element.value,//詳細文
-                "詳細内容",//詳細内容
+                "詳細内容",//詳細文
+                Button[6]._element.value,//詳細内容
                 Button[3]._element.value//つきつけるデータ
               ];
               this._element.value = Button[3]._element.value + " 入手。";
@@ -4244,7 +4234,7 @@ function Load(width,height){
               }
               Item_Flag = [
                 ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"],
-                ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動空移動","ヒント"],
+                ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動赤き竜移動","ヒント"],
                 ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2,"ヒント"]
               ];
               this._element.value = Button[1]._element.value;
