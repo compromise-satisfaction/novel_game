@@ -660,7 +660,7 @@ function Load(width,height){
         }
       }
       for (var i = 0; i < Item_get_DATAS.length; i++) {
-        if(Number==Item_geT_DATAS[i].入手){
+        if(Number==Item_get_DATAS[i].シーン名){
           Get_ICFT2(Item_get_DATAS[i],Person);
           game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
           Scene_kazu++;
@@ -669,7 +669,7 @@ function Load(width,height){
         }
       }
       for (var i = 0; i < Inspect_DATAS.length; i++) {
-        if(Number==InspecT_DATAS[i].入手){
+        if(Number==Inspect_DATAS[i].シーン名){
           var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
           Setting_Flag[12] = Number;
           if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = conversion_url(Setting_Flag[13],"画像");
