@@ -563,6 +563,8 @@ function Load(width,height){
           break;
       }
       Datas = [];
+      game.fps = 10;
+      Setting_Flag[15] = game.fps;
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
@@ -1420,6 +1422,7 @@ function Load(width,height){
           case "↦":
           s = false;
             if(Return==false) game.fps += 200;
+            Setting_Flag[15] = game.fps;
             console.log(game.fps);
             break;
           case "↤":
