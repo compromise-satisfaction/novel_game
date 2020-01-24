@@ -1634,7 +1634,7 @@ function Load(width,height){
           Trophy.opacity = 0;
           Trophy.tl.fadeIn(5);
           scene.addChild(Trophy);
-          if(game.assets[Datas[17]]==undefined) Datas[17] = Foldar+"画像無.png";
+          if(game.assets[Datas[17]]==undefined) Datas[17] = Foldar+"image/画像無.png";
           var xxx = game.assets[Datas[17]].width;
           var yyy = game.assets[Datas[17]].height;
           var Trophy_image = new Sprite(xxx,yyy);
