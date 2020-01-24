@@ -1674,6 +1674,8 @@ function Load(width,height){
     var MoveScene = function(Out){
       var scene = new Scene();                                // 新しいシーンを作る
 
+      game.fps = 10;
+
       var xxx = game.assets[Foldar+"image/背景/Black.png"].width;
       var yyy = game.assets[Foldar+"image/背景/Black.png"].height;
       var Background = new Sprite(xxx,yyy);
@@ -1727,6 +1729,7 @@ function Load(width,height){
           console.log("Scene数",Scene_kazu);
         }
         if(Background.opacity == 0 && Out<0){
+          game.fps = Setting_Flag[15];
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
