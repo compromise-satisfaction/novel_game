@@ -620,7 +620,6 @@ function Load(width,height){
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
             Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
           }
-          Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
           Datas[1] = conversion_url(Choice_DATAS[i].人物左,"画像");
           Datas[2] = conversion_url(Choice_DATAS[i].人物中,"画像");
           Datas[3] = conversion_url(Choice_DATAS[i].人物右,"画像");
