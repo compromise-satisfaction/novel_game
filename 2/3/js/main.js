@@ -3092,6 +3092,25 @@ function Load(width,height){
           }
           scene.addChild(Photo);
         }
+        else if(Text[i].text.substring(0,3)=="小画像"){
+          var Photo_url = Text[i].text.substring(3);
+          Photo_url = conversion_url(Photo_url,"画像");
+          Text[i].text = "";
+          if(game.assets[Photo_url]==undefined) Photo_url = Foldar+"image/画像無.png";
+          var xxx = game.assets[Photo_url].width;
+          var yyy = game.assets[Photo_url].height;
+          var Photo = new Sprite(xxx,yyy);
+          Photo.scaleX = ((width)/xxx)*0.8/2;
+          Photo.scaleY = ((width)/yyy)*0.8/2;
+          Photo.image = game.assets[Photo_url];
+          Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
+          Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
+          if(xxx!=yyy){
+            Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
+            Photo.scaleY = Photo.scaleY/16*9;
+          }
+          scene.addChild(Photo);
+        }
         else if(Text[i].text.substring(0,7)=="YOUTUBE"){
           for (var k = 0; k < Sounds_DATAS.length; k++){
             if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
