@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 5.6";
+var Version = "バージョン 5.7";
 var Already = false;
 
 switch (GitHub_type) {
@@ -4180,6 +4180,23 @@ function Load(width,height){
               this._element.value = Button[3]._element.value + " 入手。";
               Sound_ON("セーブ",true);
               break;
+            case "フラグ類入手":
+              for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
+                if(I_C_F_T_DATAS[i].シーン名==Button[2]._element.value) break;
+              }
+              DATAS = [
+                I_C_F_T_DATAS[i].タイプ,
+                I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名,
+                I_C_F_T_DATAS[i].説明文,
+                I_C_F_T_DATAS[i].画像,
+                I_C_F_T_DATAS[i].詳細文,
+                I_C_F_T_DATAS[i].詳細内容,
+                I_C_F_T_DATAS[i].つきつけるデータ
+              ];
+              Get_ICFT(DATAS);
+              this._element.value = Button[2]._element.value+" 入手。";
+              Sound_ON("セーブ",true);
+              break;
             case "シーンデータ修正":
               game.popScene();
               Scene_kazu--;
@@ -4300,11 +4317,11 @@ function Load(width,height){
 
       Option = [];
 
-      for (var i = 1; i < Image_DATAS.length; i++){
-        Option[i-1] = document.createElement("option");
-        Option[i-1].text = Image_DATAS[i].名前;
-        Option[i-1].value = Image_DATAS[i].名前;
-        Button[2]._element.appendChild(Option[i-1]);
+      for (var i = 0; i < I_C_F_T_DATAS.length; i++){
+        Option[i] = document.createElement("option");
+        Option[i].text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+        Option[i].value = I_C_F_T_DATAS[i].シーン名;
+        Button[2]._element.appendChild(Option[i]);
       }
 
       return scene;
