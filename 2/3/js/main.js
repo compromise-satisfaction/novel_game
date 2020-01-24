@@ -660,7 +660,7 @@ function Load(width,height){
         }
       }
       for (var i = 0; i < Item_get_DATAS.length; i++) {
-        if(Number==Item_get_DATAS[i].シーン名){
+        if(Number==Item_geT_DATAS[i].入手){
           Get_ICFT2(Item_get_DATAS[i],Person);
           game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
           Scene_kazu++;
@@ -669,7 +669,7 @@ function Load(width,height){
         }
       }
       for (var i = 0; i < Inspect_DATAS.length; i++) {
-        if(Number==Inspect_DATAS[i].シーン名){
+        if(Number==InspecT_DATAS[i].入手){
           var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
           Setting_Flag[12] = Number;
           if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = conversion_url(Setting_Flag[13],"画像");
@@ -1322,7 +1322,7 @@ function Load(width,height){
         scene.addChild(C_name);//キャラ名
       }
 
-      if(Number=="空"){
+      if(Number=="赤き竜"){
 
         var S_Input1 = new Entity();
         S_Input1.moveTo((width/4),width/16*9+(width/20)+(width/25)+(width/25));
@@ -4172,7 +4172,7 @@ function Load(width,height){
               break;
             case "フラグ類入手":
               for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
-                if(I_C_F_T_DATAS[i].シーン名==Button[2]._element.value) break;
+                if(I_C_F_T_DATAS[i].入手==Button[2]._element.value) break;
               }
               DATAS = [
                 I_C_F_T_DATAS[i].タイプ,
@@ -4310,7 +4310,7 @@ function Load(width,height){
       for (var i = 0; i < I_C_F_T_DATAS.length; i++){
         Option[i] = document.createElement("option");
         Option[i].text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
-        Option[i].value = I_C_F_T_DATAS[i].シーン名;
+        Option[i].value = I_C_F_T_DATAS[i].入手;
         Button[2]._element.appendChild(Option[i]);
       }
 
