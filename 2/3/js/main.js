@@ -357,16 +357,7 @@ function Load(width,height){
         }
         if(Choice_Flag.length==i) return;
         if(DATAS[1].split("→")[1]=="消滅"){
-          Choice_Flag[i] = false;
-          var Choice_Flag2 = [];
-          k = 0;
-          for (var i = 0; i < Choice_Flag.length; i++){
-            if(Choice_Flag[i]){
-              Choice_Flag2[k] = Choice_Flag[i];
-              k++;
-            }
-          }
-          Choice_Flag = Choice_Flag2;
+          Choice_Flag.splice(i,1);
           if(Setting_Flag[Numbers]==Choice_Flag.length) Setting_Flag[Numbers]-=5;
         }
         else{
@@ -2232,9 +2223,11 @@ function Load(width,height){
                 break;
               case "セーブデータ読み込み":
               game.popScene();
-              game.popScene();
               Scene_kazu--;
-              Scene_kazu--;
+              if(Scene_kazu==2){
+                game.popScene();
+                Scene_kazu--;
+              }
               console.log("Scene数",Scene_kazu);
               Scene_loads("セーブ読み込み",false,false);
               break;
@@ -2864,8 +2857,8 @@ function Load(width,height){
                     return;
                   }
                   if(Choice_Item=="強欲な壺"){
-                    Get_ICF("アイテム","強欲な壺","消失");
-                    Choice_Flag[Choice_Flag.length] = ["強欲なカケラ","強欲な壺を使った証。","強欲なカケラ","強欲なカケラ"];
+                    Get_ICFT(["アイテム","強欲な壺→消滅"]);
+                    Choice_Flag[Choice_Flag.length] = ["強欲なカケラ","強欲な壺を使った証。","強欲なカケラ","","","強欲なカケラ"];
                   }
                   game.pushScene(PopScene(Number,"異議あり！","主人公異議あり！"));
                   Scene_kazu++;
@@ -4177,12 +4170,12 @@ function Load(width,height){
             switch (Button[1]._element.value){
             case "アイテム作成":
               Item_Flag[Item_Flag.length] = [
-                Button[3]._element.value,
-                Button[4]._element.value,
-                Button[2]._element.value,
-                Button[5]._element.value,
-                Button[6]._element.value,
-                Button[3]._element.value
+                Button[3]._element.value,//名前
+                Button[5]._element.value,//説明文
+                Button[4]._element.value,//画像
+                Button[6]._element.value,//詳細文
+                Button[6]._element.value,//詳細内容
+                Button[3]._element.value//つきつけるデータ
               ];
               this._element.value = Button[3]._element.value + " 入手。";
               Sound_ON("セーブ",true);
@@ -4233,7 +4226,7 @@ function Load(width,height){
                 }
               }
               Item_Flag = [
-                ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造","万能"],
+                ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"],
                 ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動空移動","ヒント"],
                 ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2,"ヒント"]
               ];
@@ -4290,9 +4283,9 @@ function Load(width,height){
       Submit("");
       Submit("");
       Submit("強欲な壺");
-      Submit("チーター(強)に勝って貰った賞品。↓尋問時につきつけると先へ進める。↓その後強欲な壺が一つ無くなり↓強欲なカケラを入手する。");
       Submit("強欲な壺");
-      Submit("ここに入力");
+      Submit("チーター(強)に勝って貰った賞品。↓尋問時につきつけると先へ進める。↓その後強欲な壺が一つ無くなり↓強欲なカケラを入手する。");
+      Submit("画像強欲な壺");
       Submit("実行する");
 
       var Option = [];
