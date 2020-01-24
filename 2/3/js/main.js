@@ -3103,11 +3103,13 @@ function Load(width,height){
           Photo.scaleX = ((width)/xxx)*0.8/2;
           Photo.scaleY = ((width)/yyy)*0.8/2;
           Photo.image = game.assets[Photo_url];
-          Photo.x = Photo.scaleX*xxx/2-xxx/2+width/2;
+          Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
           Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
           scene.addChild(Photo);
           Photo.addEventListener('touchstart',function(e){
             Sound_ON("選択音",true);
+            Scene_kazu++;
+            console.log("Scene数",Scene_kazu);
             game.pushScene(DetailsScene(Big_Photo,0));
           });
         }
