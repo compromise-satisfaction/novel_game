@@ -4225,23 +4225,8 @@ function Load(width,height){
               Sound_ON("セーブ",true);
               break;
             case "アイテムリセット":
-              for (var i = 0; i < Item_Flag.length; i++) {
-                if(Item_Flag[i][0]=="消えたアイテム") break;
-              }
-              if(i==Item_Flag.length) var Item_Flag2 = "";
-              else var Item_Flag2 = Item_Flag[i][4];
-              var k = 0;
-              for (var i = 0; i < Item_Flag.length; i++) {
-                if(Item_Flag[i][0]!="赤き竜"&&Item_Flag[i][0]!="万能ツール"&&Item_Flag[i][0]!="消えたアイテム") Item_Flag2 += Item_Flag[i][0] + "↓";
-                if(Item_Flag2.replace(/[^↓]/g,"").length%12==k&&Item_Flag2.replace(/[^↓]/g,"").length>11){
-                  Item_Flag2+="次のページボタン↓前のページボタン";
-                  k++;
-                }
-              }
               Item_Flag = [
-                ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"],
-                ["赤き竜","召喚すると↓メイン、チョイス、尋問の中から↓好きなシーンに飛べる。","タクシー","召喚","移動赤き竜移動","ヒント"],
-                ["消えたアイテム","消えたアイテムが書かれたメモ。","紙","詳細",Item_Flag2,"ヒント"]
+                ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"]
               ];
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ",true);
