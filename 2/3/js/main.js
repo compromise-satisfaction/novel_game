@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 5.5";
+var Version = "バージョン 5.6";
 var Already = false;
 
 switch (GitHub_type) {
@@ -226,8 +226,8 @@ function Load(width,height){
     var Syougen_time = 0;
     var Syougen_time2 = 1;
     var Datas = [];
-    var Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から"];
-    //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる];
+    var Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black",""];
+    //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
     var Flag = [];//フラグ
     var Log_Flag = [];//記録
     var Item_Flag = [];//所持アイテム
@@ -443,56 +443,9 @@ function Load(width,height){
     }
     function BGM_SSS(DATAS){
       var BGM_name = DATAS.BGM;
-      if(BGM_name=="変化無し"){
-        for (var i = 0; i < Main_DATAS.length; i++) {
-          if(Setting_Flag[4]==Main_DATAS[i].シーン名){
-            BGM_name = Main_DATAS[i].BGM;
-            break;
-          }
-        }
-      }
-      if(BGM_name=="変化無し"){
-        for (var i = 0; i < Choice_DATAS.length; i++) {
-          if(Setting_Flag[4]==Choice_DATAS[i].シーン名){
-            BGM_name = Choice_DATAS[i].BGM;
-            break;
-          }
-        }
-      }
-      if(BGM_name=="変化無し"){
-        for (var i = 0; i < Interrogation_DATAS.length; i++) {
-          if(Setting_Flag[4]==Interrogation_DATAS[i].シーン名){
-            BGM_name = Interrogation_DATAS[i].BGM;
-            break;
-          }
-        }
-      }
-      if(BGM_name=="変化無し"){
-        for (var i = 0; i < Branch_DATAS.length; i++) {
-          if(Setting_Flag[4]==Branch_DATAS[i].シーン名){
-            if(have(Branch_DATAS[i].アイテムorフラグ名)) BGM_name = Branch_DATAS[i].ある;
-            else BGM_name = Branch_DATAS[i].ない;
-            break;
-          }
-        }
-        for (var i = 0; i < Main_DATAS.length; i++) {
-          if(BGM_name==Main_DATAS[i].シーン名){
-            BGM_name = Main_DATAS[i].BGM;
-            break;
-          }
-        }
-        for (var i = 0; i < Choice_DATAS.length; i++) {
-          if(BGM_name==Choice_DATAS[i].シーン名){
-            BGM_name = Choice_DATAS[i].BGM;
-            break;
-          }
-        }
-        for (var i = 0; i < Interrogation_DATAS.length; i++) {
-          if(BGM_name==Interrogation_DATAS[i].シーン名){
-            BGM_name = Interrogation_DATAS[i].BGM;
-            break;
-          }
-        }
+      if(BGM_name=="変化無し") BGM_name = Setting_Flag[14];
+      else{
+        if(DATAS.セーブ!="無し") Setting_Flag[14] = BGM_name;
       }
       for (var k = 0; k < Sounds_DATAS.length; k++){
         if(BGM_name!=Sounds_DATAS[k].名前&&game.assets[Sounds_DATAS[k].url].状態=="再生中"){
@@ -623,7 +576,11 @@ function Load(width,height){
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
           Get_ICFT2(Main_DATAS[i],Person);
-          Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
+          if(Main_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
+          else {
+            if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
+            Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
+          }
           Datas[1] = conversion_url(Main_DATAS[i].人物左,"画像");
           Datas[2] = Main_DATAS[i].フェード人物左;
           Datas[3] = conversion_url(Main_DATAS[i].人物中,"画像");
@@ -663,6 +620,11 @@ function Load(width,height){
         if(Number==Choice_DATAS[i].シーン名){
           BGM_SSS(Choice_DATAS[i]);
           Get_ICFT2(Choice_DATAS[i],Person);
+          if(Choice_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
+          else {
+            if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
+            Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
+          }
           Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
           Datas[1] = conversion_url(Choice_DATAS[i].人物左,"画像");
           Datas[2] = conversion_url(Choice_DATAS[i].人物中,"画像");
@@ -719,7 +681,11 @@ function Load(width,height){
         if(Number==Inspect_DATAS[i].シーン名){
           var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
           Setting_Flag[12] = Number;
-          Inspect[0] = Inspect_DATAS[i].背景;
+          if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = conversion_url(Setting_Flag[13],"画像");
+          else {
+            Setting_Flag[13] = Inspect_DATAS[i].背景;
+            Inspect[0] = Inspect_DATAS[i].背景;
+          }
           Inspect[1] = Inspect_DATAS[i].x座標1;
           Inspect[2] = Inspect_DATAS[i].y座標1;
           Inspect[3] = Inspect_DATAS[i].幅1;
@@ -863,7 +829,7 @@ function Load(width,height){
         if(Setting_Flag[i]=="true") Setting_Flag[i] = true;
         else if(Setting_Flag[i]=="false") Setting_Flag[i] = false
         else if(Setting_Flag[i].replace(/\d/g,"").replace(/\./g,"")=="") Setting_Flag[i] = Setting_Flag[i]*1;
-        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる];
+        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
       }
       for (var i = 0; i < Datas.length; i++){
         if(Datas[i].replace(/\d/g,"").replace(/\./g,"")=="") Datas[i] = Datas[i]*1;
@@ -1061,44 +1027,6 @@ function Load(width,height){
         else{
           Setting_Flag[4] = Datas[11];
           if(Setting_Flag[8]) Save(Datas[11]);
-        }
-      }
-
-      if(Datas[0]=="変化無し"){
-        for (var i = 0; i < Main_DATAS.length; i++) {
-          if(Setting_Flag[4]==Main_DATAS[i].シーン名){
-            Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
-            break;
-          }
-        }
-      }
-      if(Datas[0]=="変化無し"){
-        for (var i = 0; i < Choice_DATAS.length; i++) {
-          if(Setting_Flag[4]==Choice_DATAS[i].シーン名){
-            Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
-            break;
-          }
-        }
-      }
-      if(Datas[0]=="変化無し"){
-        for (var i = 0; i < Branch_DATAS.length; i++) {
-          if(Setting_Flag[4]==Branch_DATAS[i].シーン名){
-            if(have(Branch_DATAS[i].アイテムorフラグ名)) Datas[0] = Branch_DATAS[i].ある;
-            else Datas[0] = Branch_DATAS[i].ない;
-            break;
-          }
-        }
-        for (var i = 0; i < Main_DATAS.length; i++) {
-          if(Datas[0]==Main_DATAS[i].シーン名){
-            Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
-            break;
-          }
-        }
-        for (var i = 0; i < Choice_DATAS.length; i++) {
-          if(Datas[0]==Choice_DATAS[i].シーン名){
-            Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
-            break;
-          }
         }
       }
 
@@ -3258,8 +3186,8 @@ function Load(width,height){
         Data = false;
         window.localStorage.clear();
         Datas = [];
-        Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から"];
-        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる];
+        Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black",""];
+        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
         Flag = [];//フラグ
         Log_Flag = [];//記録
         Item_Flag = [];//所持アイテム
@@ -4217,8 +4145,15 @@ function Load(width,height){
         Button[submits].height = (width/10);
         if(a) Button[submits]._element = document.createElement('input');
         else Button[submits]._element = document.createElement("select");
-        if(a=="ここに入力") Button[submits]._element.type = "text";
-        else Button[submits]._element.type = "submit";
+        switch (a) {
+          case "実行する":
+          case "改造をやめる":
+            Button[submits]._element.type = "submit";
+            break;
+          default:
+            Button[submits]._element.type = "text";
+            break;
+        }
         Button[submits]._element.value = a;
         scene.addChild(Button[submits]);
         if(a=="改造をやめる"){
@@ -4354,14 +4289,14 @@ function Load(width,height){
       Numbers += (width/20)+(width/25)+(width/25);
       Submit("");
       Submit("");
-      Submit("ここに入力");
-      Submit("ここに入力");
-      Submit("ここに入力");
+      Submit("強欲な壺");
+      Submit("チーター(強)に勝って貰った賞品。↓尋問時につきつけると先へ進める。↓その後強欲な壺が一つ無くなり↓強欲なカケラを入手する。");
+      Submit("強欲な壺");
       Submit("ここに入力");
       Submit("実行する");
 
       var Option = [];
-      var Choice_Transform = ["することを選択","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
+      var Choice_Transform = ["することを選択","フラグ類入手","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
