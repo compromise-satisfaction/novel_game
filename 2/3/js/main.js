@@ -415,7 +415,7 @@ function Load(width,height){
               break;
             }
             for (var k = 0; k < I_C_F_T_DATAS.length; k++) {
-              if(I_C_F_T_DATAS[k].シーン名==GET[l]){
+              if(I_C_F_T_DATAS[k].入手==GET[l]){
                 break;
               }
             }
