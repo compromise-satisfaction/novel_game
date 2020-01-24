@@ -4174,7 +4174,7 @@ function Load(width,height){
                 Button[5]._element.value,//説明文
                 Button[4]._element.value,//画像
                 Button[6]._element.value,//詳細文
-                Button[6]._element.value,//詳細内容
+                "詳細内容",//詳細内容
                 Button[3]._element.value//つきつけるデータ
               ];
               this._element.value = Button[3]._element.value + " 入手。";
