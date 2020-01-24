@@ -3077,6 +3077,7 @@ function Load(width,height){
           var Photo_url = Text[i].text.substring(2);
           Photo_url = conversion_url(Photo_url,"画像");
           Text[i].text = "";
+          if(game.assets[Photo_url]==undefined) Photo_url = Foldar+"image/画像無.png";
           var xxx = game.assets[Photo_url].width;
           var yyy = game.assets[Photo_url].height;
           var Photo = new Sprite(xxx,yyy);
@@ -3086,7 +3087,7 @@ function Load(width,height){
           Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
           Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
           if(xxx!=yyy){
-            Photo.y = height/2-width/16*9*0.8/2;
+            Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
             Photo.scaleY = Photo.scaleY/16*9;
           }
           scene.addChild(Photo);
