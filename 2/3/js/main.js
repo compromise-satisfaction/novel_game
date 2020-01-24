@@ -2855,8 +2855,7 @@ function Load(width,height){
                     return;
                   }
                   if(Choice_Item=="強欲な壺"){
-                    Get_ICFT(["アイテム","強欲な壺→消滅"]);
-                    Choice_Flag[Choice_Flag.length] = ["強欲なカケラ","強欲な壺を使った証。","強欲なカケラ","","","強欲なカケラ"];
+                    Get_ICFT(["アイテム","強欲な壺→強欲なカケラ","強欲な壺を使った証。","強欲なカケラ","","","強欲なカケラ"]);
                   }
                   game.pushScene(PopScene(Number,"異議あり！","主人公異議あり！"));
                   Scene_kazu++;
