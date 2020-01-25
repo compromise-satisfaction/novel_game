@@ -3161,7 +3161,7 @@ function Load(width,height){
             Sound_ON("選択音",true);
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
-            game.pushScene(DetailsScene(Big_Photo,true));
+            game.pushScene(DetailsScene(Big_Photo,0,true));
           });
         }
         else if(Text[i].text.substring(0,7)=="YOUTUBE"){
