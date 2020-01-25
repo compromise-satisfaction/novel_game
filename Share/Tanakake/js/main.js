@@ -841,6 +841,21 @@ function Load(width,height){
       }
       Trophy_Flag = Trophy_Flag2;
       if(Trophy_Flag == undefined) Trophy_Flag = [];
+      for (var i = 0; i < Favorability_Flag.length; i++){
+        Favorability_Flag[i] = Favorability_Flag[i].split(",");
+      }
+      for (var i = 1; i < Favorability_Flag.length; i++){
+        var Favorability_Flag2 = [];
+        for (var k = 1; k < Favorability_Flag[i].length; k++){
+          Favorability_Flag2[k-1] = Favorability_Flag[i][k];
+        }
+        Favorability_Flag[i] = Favorability_Flag2;
+      }
+      for (var i = 0; i < Favorability_Flag.length-1; i++) {
+        Favorability_Flag2[i] = Favorability_Flag[i];
+      }
+      Favorability_Flag = Favorability_Flag2;
+      if(Favorability_Flag == undefined) Favorability_Flag = [];
       for (var i = 3; i < Setting_Flag.length; i++){
         if(Setting_Flag[i]=="true") Setting_Flag[i] = true;
         else if(Setting_Flag[i]=="false") Setting_Flag[i] = false
