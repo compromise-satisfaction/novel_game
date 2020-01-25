@@ -1,16 +1,16 @@
 enchant();
 
-var Version = "バージョン 6.0";
+var Version = "バージョン 6.1";
 var Already = false;
 
 switch (GitHub_type) {
   case "referee":
     var GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
-    var Foldar = "2/3/";
+    var Foldar = "Share/Tanakake/";
     break;
   case "Share":
     var GAS = "https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec";
-    var Foldar = "3/";
+    var Foldar = "Tanakake/";
     break;
   case "novel_game":
     var GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
@@ -226,8 +226,9 @@ function Load(width,height){
     var Syougen_time = 0;
     var Syougen_time2 = 1;
     var Datas = [];
-    var Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black","",game.fps];
-    //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15fps];
+    var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black",""];
+    var Favorability_Flag = [];//好感度
+    //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
     var Flag = [];//フラグ
     var Log_Flag = [];//記録
     var Item_Flag = [];//所持アイテム
@@ -347,6 +348,24 @@ function Load(width,height){
           Choice_Flag = Trophy_Flag;
           Numbers = 7;
           break;
+        case "好感度":
+          for (var i = 0; i < Favorability_Flag.length; i++){
+            if(Favorability_Flag[i][0]==DATAS[1].split("→")[0]) break;
+          }
+          if(i==Favorability_Flag.length) Favorability_Flag[i] = [DATAS[1].split("→")[0],0];
+          var PURAMAI = DATAS[1].split("→")[1].substring(0,1);
+          switch (PURAMAI){
+            case "+":
+            case "-":
+              Favorability_Flag[i][1] += DATAS[1].substring(DATAS[1].indexOf(PURAMAI))*1;
+              break;
+            default:
+              Favorability_Flag[i][1] = DATAS[1].split("→")[1]*1;
+              break;
+          }
+          console.log(Favorability_Flag);
+          return;
+          break;
         default:
           return;
           break;
@@ -406,11 +425,7 @@ function Load(width,height){
               Character_Flag = [];
               continue;
               break;
-            case "ダメージ":
-              Setting_Flag[3]--;
-              continue;
-                break;
-              default:
+            default:
               console.log(GET[l]);
               break;
             }
@@ -523,6 +538,7 @@ function Load(width,height){
             return;
           }
           Number = Setting_Flag[4];
+          console.log("直前",Number);
           Scene_loads(Number,true,false);
           return;
           break;
@@ -549,28 +565,18 @@ function Load(width,height){
           Scene_loads(Number,false,false);
           return;
           break;
-        case "ライフ判断":
-        if(Setting_Flag[3]==0){
-          Number = "ライフ0_1";
-        }
-        else {
-          Number = Setting_Flag[4];
-        }
-          Scene_loads(Number,false,false);
-          return;
-          break;
         default:
           break;
       }
       Datas = [];
       game.fps = 10;
-      Setting_Flag[15] = game.fps;
+      Setting_Flag[3] = game.fps;
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
           BGM_SSS(Main_DATAS[i]);
           Get_ICFT2(Main_DATAS[i],Person);
           game.fps = Main_DATAS[i].速度;
-          Setting_Flag[15] = game.fps;
+          Setting_Flag[3] = game.fps;
           if(Main_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
           else {
             if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
@@ -583,7 +589,11 @@ function Load(width,height){
           Datas[5] = conversion_url(Main_DATAS[i].人物右,"画像");
           Datas[6] = Main_DATAS[i].フェード人物右;
           Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/,Name);
-          Datas[8] = Main_DATAS[i].文章.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/g,Name).replace(/\(一人称\)/g,Person).replace(/\(残りライフ\)/g,Setting_Flag[3]);
+          Datas[8] = Main_DATAS[i].文章.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/g,Name).replace(/\(一人称\)/g,Person);
+          for (var k = 0; k < Favorability_Flag.length; k++){
+            var Favorability = "("+Favorability_Flag[k][0]+"好感度)";
+            Datas[8] = Datas[8].replace(Favorability,Favorability_Flag[k][1]);
+          }
           Datas[9] = Main_DATAS[i].前前;
           Datas[10] = Main_DATAS[i].前;
           Datas[11] = Main_DATAS[i].セーブ;
@@ -657,6 +667,17 @@ function Load(width,height){
       }
       for (var i = 0; i < Branch_DATAS.length; i++) {
         if(Number==Branch_DATAS[i].シーン名){
+          if(Branch_DATAS[i].アイテムorフラグ名.split(">").length==2){
+            for (var k = 0; k < Favorability_Flag.length; k++){
+              if(Favorability_Flag[k][0]==Branch_DATAS[i].アイテムorフラグ名.split(">")[0]) break;
+            }
+            if(k==Favorability_Flag.length) Favorability_Flag[k] = [Branch_DATAS[i].アイテムorフラグ名.split(">")[0],0];
+            if(Favorability_Flag[k][1]>Branch_DATAS[i].アイテムorフラグ名.split(">")[1]*1){
+              Scene_loads(Branch_DATAS[i].ある,Return,Item);
+            }
+            else Scene_loads(Branch_DATAS[i].ない,Return,Item);
+            return;
+          }
           if(have(Branch_DATAS[i].アイテムorフラグ名)) Scene_loads(Branch_DATAS[i].ある,Return,Item);
           else Scene_loads(Branch_DATAS[i].ない,Return,Item);
           return;
@@ -774,6 +795,7 @@ function Load(width,height){
       Item_Flag = window.localStorage.getItem("Item").split("端");
       Trophy_Flag = window.localStorage.getItem("Trophy").split("端");
       Character_Flag = window.localStorage.getItem("Character").split("端");
+      Favorability_Flag = window.localStorage.getItem("Favorability").split("端");
       for (var i = 0; i < Item_Flag.length; i++){
         Item_Flag[i] = Item_Flag[i].split(",");
       }
@@ -823,7 +845,7 @@ function Load(width,height){
         if(Setting_Flag[i]=="true") Setting_Flag[i] = true;
         else if(Setting_Flag[i]=="false") Setting_Flag[i] = false
         else if(Setting_Flag[i].replace(/\d/g,"").replace(/\./g,"")=="") Setting_Flag[i] = Setting_Flag[i]*1;
-        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15fps];
+        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
       }
       for (var i = 0; i < Datas.length; i++){
         if(Datas[i].replace(/\d/g,"").replace(/\./g,"")=="") Datas[i] = Datas[i]*1;
@@ -864,6 +886,12 @@ function Load(width,height){
     }
     if(Character_Flag2==[]) Character_Flag2 = [[]+"端"]
     window.localStorage.setItem("Character",Character_Flag2);
+    var Favorability_Flag2 = [];
+    for (var i = 0; i < Favorability_Flag.length; i++) {
+    Favorability_Flag2[i] = Favorability_Flag[i] + "端";
+    }
+    if(Favorability_Flag2==[]) Favorability_Flag2 = [[]+"端"]
+    window.localStorage.setItem("Favorability",Favorability_Flag2);
     var Trophy_Flag2 = [];
     for (var i = 0; i < Trophy_Flag.length; i++) {
     Trophy_Flag2[i] = Trophy_Flag[i] + "端";
@@ -1421,7 +1449,7 @@ function Load(width,height){
           case "↦":
           s = false;
             if(Return==false) game.fps += 200;
-            Setting_Flag[15] = game.fps;
+            Setting_Flag[3] = game.fps;
             console.log(game.fps);
             break;
           case "↤":
@@ -1728,7 +1756,7 @@ function Load(width,height){
           console.log("Scene数",Scene_kazu);
         }
         if(Background.opacity == 0 && Out<0){
-          game.fps = Setting_Flag[15];
+          game.fps = Setting_Flag[3];
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -2832,7 +2860,7 @@ function Load(width,height){
                 game.replaceScene(ItemScene(Number,Ig,Type));
                 break;
               case "戻る":
-                game.fps = Setting_Flag[15];
+                game.fps = Setting_Flag[3];
                 game.popScene();
                 Scene_kazu--;
                 console.log("Scene数",Scene_kazu);
@@ -2960,7 +2988,7 @@ function Load(width,height){
 
       return scene;
     };
-    var DetailsScene = function(Syousai,Pages){
+    var DetailsScene = function(Syousai,Pages,Big){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var xxx = game.assets[Foldar+"image/Background.png"].width;
@@ -3089,6 +3117,14 @@ function Load(width,height){
             Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
             Photo.scaleY = Photo.scaleY/16*9;
           }
+          if(Big){
+            Photo.addEventListener('touchstart',function(e){
+              Sound_ON("戻る",true);
+              Scene_kazu--;
+              console.log("Scene数",Scene_kazu);
+              game.popScene();
+            });
+          }
           scene.addChild(Photo);
         }
         else if(Text[i].text.substring(0,3)=="小画像"){
@@ -3110,7 +3146,7 @@ function Load(width,height){
             Sound_ON("選択音",true);
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
-            game.pushScene(DetailsScene(Big_Photo,0));
+            game.pushScene(DetailsScene(Big_Photo,true));
           });
         }
         else if(Text[i].text.substring(0,7)=="YOUTUBE"){
@@ -3199,13 +3235,14 @@ function Load(width,height){
         Data = false;
         window.localStorage.clear();
         Datas = [];
-        Setting_Flag = ["名前","苗字","未設定",10,"最初から",0,0,0,true,5,5,5,"最初から","Black","",game.fps];
-        //[0名前,1苗字,2性別,3体力,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15fps];
+        Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black",""];
+        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM];
         Flag = [];//フラグ
         Log_Flag = [];//記録
         Item_Flag = [];//所持アイテム
         Character_Flag = [];//人物
         Trophy_Flag = [];//トロフィー
+        Favorability_Flag = [];//好感度
         Scene_kazu = 1;
         Already= true;
         Version_new = true;
@@ -4238,11 +4275,6 @@ function Load(width,height){
               this._element.value = Button[3]._element.value+" オン。";
               Sound_ON("セーブ",true);
               break;
-            case "体力変更":
-              Setting_Flag[3] = Button[3]._element.value*1;
-              this._element.value = "残り回数 = " + Setting_Flag[3];
-              Sound_ON("セーブ",true);
-              break;
             case "フラグリセット":
               Flag = [];
               this._element.value = Button[1]._element.value;
@@ -4250,7 +4282,7 @@ function Load(width,height){
               break;
             case "アイテムリセット":
               Item_Flag = [
-                ["万能ツール","アイテムの創造↓フラグの発現、消去↓体力増減、データ修正↓などが出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"]
+                ["万能ツール","色々出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"]
               ];
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ",true);
@@ -4311,7 +4343,7 @@ function Load(width,height){
       Submit("実行する");
 
       var Option = [];
-      var Choice_Transform = ["することを選択","フラグ類入手","アイテム作成","フラグ追加 or 消去","体力変更","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
+      var Choice_Transform = ["することを選択","フラグ類入手","アイテム作成","フラグ追加 or 消去","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
