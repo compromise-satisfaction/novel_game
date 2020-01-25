@@ -357,7 +357,7 @@ function Load(width,height){
           switch (PURAMAI){
             case "+":
             case "-":
-              Favorability_Flag[i][1] += DATAS[1].substring(DATAS[1].indexOf(PURAMAI))*1;
+              Favorability_Flag[i][1] = Favorability_Flag[i][1]*1+DATAS[1].substring(DATAS[1].indexOf(PURAMAI))*1;
               break;
             default:
               Favorability_Flag[i][1] = DATAS[1].split("→")[1]*1;
