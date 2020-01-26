@@ -515,7 +515,7 @@ function Load(width,height){
       if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"){
         var Person = "僕";
         var S_image = "満足";
-        var S_Sound = "スナネコ";
+        var S_Sound = conversion_url("スナネコ","サウンド");
       }
       switch (Number) {
         case "セーブ読み込み":
