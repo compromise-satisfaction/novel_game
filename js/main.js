@@ -3295,6 +3295,22 @@ function Load(width,height){
         scene.addChild(Button[submits2]);
         Button[submits2].addEventListener('touchstart',function(e){
           if(Button_push("ページ")) return;
+          for (var k = 0; k < Sounds_DATAS.length; k++){
+            if(game.assets[Sounds_DATAS[k].url].状態=="ポーズ中"){
+              game.assets[Sounds_DATAS[k].url].play();
+              game.assets[Sounds_DATAS[k].url].状態 = "再生中";
+              if(game.assets[Sounds_DATAS[k].url].src==undefined){
+                game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
+              }
+              else{
+                game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
+                game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
+                game.assets[Sounds_DATAS[k].url].src.loop = true;
+                game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
+                game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
+              }
+            }
+          }
           switch (a) {
             case "前のページ":
               Pages -= 13;
