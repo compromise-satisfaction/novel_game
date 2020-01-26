@@ -67,7 +67,7 @@ var Button_time_next = 3;
 var Button_time = Button_time_next;
 
 function Load(width,height){
-  var game = new Core(width, height);
+  var game = new Game(width, height);
 
   var loadScene = new Scene();
 	game.loadingScene = loadScene;
