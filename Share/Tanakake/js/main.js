@@ -1059,7 +1059,7 @@ function Load(width,height){
       if(Version_new){
         Setting_Flag = window.localStorage.getItem("Setting_Flag").split(",");
         if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"&&Setting_Flag[2]=="男") Submit("テスト用");
-        if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"&&Setting_Flag[2]=="未設定") Submit("テスト用");
+        else if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"&&Setting_Flag[2]=="未設定") Submit("テスト用");
         else if(Already);
         else {
           fetch(GAS,)
