@@ -1571,6 +1571,7 @@ function Load(width,height){
             }
             break;
           case "…":
+          case "\"":
           case "「":
           case "　":
           case "」":
@@ -1717,6 +1718,7 @@ function Load(width,height){
                 }
                 else{
                   switch(Text[k].text.substring(Text[k].text.length-1)){
+                    case "\"":
                     case "「":
                     case "　":
                     case "」":
