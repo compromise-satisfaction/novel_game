@@ -3371,7 +3371,7 @@ function Load(width,height){
           for (var k = 0; k < Sounds_DATAS.length; k++){
             if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
               var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
-              game.assets[Sounds_DATAS[k].url].pause();
+              game.assets[Sounds_DATAS[k].url].stop();
               game.assets[Sounds_DATAS[k].url].状態 = "ポーズ中";
             }
           }
