@@ -641,9 +641,7 @@ function Load(width,height){
           Datas[13] = Main_DATAS[i].次次;
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
           Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
-          Datas[16] = Main_DATAS[i].トロフィー文字;
-          Datas[17] = conversion_url(Main_DATAS[i].トロフィー画像,"画像");
-          //Datas[18] = Main_DATAS[i].トロフィー内容.replace(/\n/g,"↓");
+          Datas[16] = Main_DATAS[i].入手トロフィー;
           Datas[19] = conversion_url(Main_DATAS[i].文章音,"サウンド");
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
           Datas[21] = Main_DATAS[i].表示アイテムフェード;
@@ -1704,7 +1702,20 @@ function Load(width,height){
       if(Datas[13]!=false) Button(4,"▶ ▶",Datas[13]);//進む2
 
       if(Datas[16]!=false&&Datas[16]!=undefined){
-        if(have(Datas[16])==false){
+          for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
+            if(I_C_F_T_DATAS[i].入手==(Datas[16])) break;
+          }
+          DATAS = [
+            I_C_F_T_DATAS[i].タイプ,
+            I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名,
+            I_C_F_T_DATAS[i].説明文,
+            I_C_F_T_DATAS[i].画像,
+            I_C_F_T_DATAS[i].詳細文,
+            I_C_F_T_DATAS[i].詳細内容,
+            I_C_F_T_DATAS[i].つきつけるデータ
+          ];
+      if(have(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名)==false){
+          Get_ICFT(DATAS);
           var Trophy_Time = 0;
           var xxx = game.assets[Foldar+"image/Trophy.png"].width;
           var yyy = game.assets[Foldar+"image/Trophy.png"].height;
@@ -1717,7 +1728,8 @@ function Load(width,height){
           Trophy.opacity = 0;
           Trophy.tl.fadeIn(5);
           scene.addChild(Trophy);
-          if(game.assets[Datas[17]]==undefined) Datas[17] = Foldar+"image/画像無.png";
+          if(game.assets[conversion_url(I_C_F_T_DATAS[i].画像,"画像")]==undefined) Datas[17] = Foldar+"image/画像無.png";
+          else Datas[17] = conversion_url(I_C_F_T_DATAS[i].画像,"画像");
           var xxx = game.assets[Datas[17]].width;
           var yyy = game.assets[Datas[17]].height;
           var Trophy_image = new Sprite(xxx,yyy);
@@ -1738,7 +1750,7 @@ function Load(width,height){
           Trophy_text.height = (width/40);
           Trophy_text.opacity = 0;
           Trophy_text.tl.fadeIn(5);
-          Trophy_text.text = Datas[16];
+          Trophy_text.text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
           scene.addChild(Trophy_text);
           Sound_ON("Trophy",true);
           Trophy.addEventListener("enterframe",function(){
