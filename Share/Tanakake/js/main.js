@@ -2012,7 +2012,7 @@ function Load(width,height){
       if(game.assets[conversion_url(Datas[3],"画像")]==undefined&&Datas[3]!="") Datas[3] = Foldar+"image/画像無.png";
       if(Datas[2]!=false){
         var xxx = game.assets[conversion_url(Datas[2],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[2],"画像").height;
+        var yyy = game.assets[conversion_url(Datas[2],"画像")].height;
         var Character2 = new Sprite(xxx,yyy);
         Character2.scaleX = width/16*9/xxx;
         Character2.scaleY = width/16*9/yyy;
