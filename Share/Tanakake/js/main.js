@@ -1573,6 +1573,7 @@ function Load(width,height){
           case "…":
             break;
           default:
+            console.log(Speak_Character);
             if(Text[k].text.substring(0,1)=="「"||Text[k].text.substring(0,1)=="　"){
               Speak_Character_image++;
               switch(Speak_Character){
