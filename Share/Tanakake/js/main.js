@@ -668,9 +668,9 @@ function Load(width,height){
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
             Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
           }
-          Datas[1] = conversion_url(Choice_DATAS[i].左側の人物,"画像");
-          Datas[2] = conversion_url(Choice_DATAS[i].真ん中の人物,"画像");
-          Datas[3] = conversion_url(Choice_DATAS[i].右側の人物,"画像");
+          Datas[1] = Choice_DATAS[i].左側の人物;
+          Datas[2] = Choice_DATAS[i].真ん中の人物;
+          Datas[3] = Choice_DATAS[i].右側の人物;
           Datas[4] = Choice_DATAS[i].前前;
           Datas[5] = Choice_DATAS[i].前;
           Datas[6] = Choice_DATAS[i].セーブ;
@@ -2002,16 +2002,16 @@ function Load(width,height){
           scene.addChild(Background);
           break;
       }
-      if(game.assets[Datas[1]]==undefined&&Datas[1]!="") Datas[1] = Foldar+"image/画像無.png";
-      if(game.assets[Datas[2]]==undefined&&Datas[2]!="") Datas[2] = Foldar+"image/画像無.png";
-      if(game.assets[Datas[3]]==undefined&&Datas[3]!="") Datas[3] = Foldar+"image/画像無.png";
+      if(game.assets[conversion_url(Datas[1],"画像")]==undefined&&Datas[1]!="") Datas[1] = Foldar+"image/画像無.png";
+      if(game.assets[conversion_url(Datas[2],"画像")]==undefined&&Datas[2]!="") Datas[2] = Foldar+"image/画像無.png";
+      if(game.assets[conversion_url(Datas[3],"画像")]==undefined&&Datas[3]!="") Datas[3] = Foldar+"image/画像無.png";
       if(Datas[2]!=false){
-        var xxx = game.assets[Datas[2]].width;
-        var yyy = game.assets[Datas[2]].height;
+        var xxx = game.assets[conversion_url(Datas[2],"画像")].width;
+        var yyy = game.assets[conversion_url(Datas[2],"画像").height;
         var Character2 = new Sprite(xxx,yyy);
         Character2.scaleX = width/16*9/xxx;
         Character2.scaleY = width/16*9/yyy;
-        Character2.image = game.assets[Datas[2]];
+        Character2.image = game.assets[conversion_url(Datas[2],"画像")];
         Character2.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
         Character2.y = Character2.scaleY*yyy/2-yyy/2;
         scene.addChild(Character2);
@@ -2035,24 +2035,24 @@ function Load(width,height){
       }
 
       if(Datas[1]!=false){
-        var xxx = game.assets[Datas[1]].width;
-        var yyy = game.assets[Datas[1]].height;
+        var xxx = game.assets[conversion_url(Datas[1],"画像")].width;
+        var yyy = game.assets[conversion_url(Datas[1],"画像")].height;
         var Character1 = new Sprite(xxx,yyy);
         Character1.scaleX = width/16*9/xxx;
         Character1.scaleY = width/16*9/yyy;
-        Character1.image = game.assets[Datas[1]];
+        Character1.image = game.assets[conversion_url(Datas[1],"画像")];
         Character1.x = Character1.scaleX*xxx/2-xxx/2-width/32;
         Character1.y = Character1.scaleY*yyy/2-yyy/2;
         scene.addChild(Character1);
       }//キャラ左
 
       if(Datas[3]!=false){
-        var xxx = game.assets[Datas[3]].width;
-        var yyy = game.assets[Datas[3]].height;
+        var xxx = game.assets[conversion_url(Datas[3],"画像")].width;
+        var yyy = game.assets[conversion_url(Datas[3],"画像")].height;
         var Character3 = new Sprite(xxx,yyy);
         Character3.scaleX = width/16*9/xxx;
         Character3.scaleY = width/16*9/yyy;
-        Character3.image = game.assets[Datas[3]];
+        Character3.image = game.assets[conversion_url(Datas[3],"画像")];
         Character3.x = Character3.scaleX*xxx/2-xxx/2-width/32+width/2;
         Character3.y = Character3.scaleY*yyy/2-yyy/2;
         scene.addChild(Character3);
