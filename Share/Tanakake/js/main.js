@@ -1,6 +1,6 @@
 enchant();
 
-var Version = "バージョン 6.1";
+var Version = "バージョン 6.2";
 var Already = false;
 
 switch (Foldar.length) {
