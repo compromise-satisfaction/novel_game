@@ -582,7 +582,7 @@ function Load(width,height){
             if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
             Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
           }
-          if(Main_DATAS[i].左側の人物.split("イン").length==1&&Main_DATAS[i].左側の人物.split("アウト").length==1){
+          if(Main_DATAS[i].左側の人物.split("イン").length==1&&Main_DATAS[i].左側の人物.split("アウト").length==1&&Main_DATAS[i].左側の人物.split("点滅").length==1){
             Datas[1] = conversion_url(Main_DATAS[i].左側の人物,"画像");
             Datas[2] = 0;
           }
@@ -590,6 +590,10 @@ function Load(width,height){
             if(Main_DATAS[i].左側の人物.split("イン").length==2){
               Datas[1] = conversion_url(Main_DATAS[i].左側の人物.split("イン")[0],"画像");
               Datas[2] = Main_DATAS[i].左側の人物.split("イン")[1]*1;
+            }
+            else if(Main_DATAS[i].左側の人物.split("点滅").length==2){
+              Datas[1] = conversion_url(Main_DATAS[i].左側の人物.split("点滅")[0],"画像");
+              Datas[2] = "点滅";
             }
             else{
               Datas[1] = conversion_url(Main_DATAS[i].左側の人物.split("アウト")[0],"画像");
