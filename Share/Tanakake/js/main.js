@@ -3,18 +3,18 @@ enchant();
 var Version = "バージョン 6.1";
 var Already = false;
 
-switch (GitHub_type) {
-  case "referee":
-    var GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
-    var Foldar = "Share/Tanakake/";
-    break;
-  case "Share":
-    var GAS = "https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec";
-    var Foldar = "Tanakake/";
-    break;
-  case "novel_game":
+switch (Foldar.length) {
+  case 0:
     var GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
-    var Foldar = "";
+    break;
+  case 9:
+    var GAS = "https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec";
+    break;
+  case 15:
+    var GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
+    break;
+  default:
+    console.log(Foldar.length);
     break;
 }
 
@@ -582,12 +582,48 @@ function Load(width,height){
             if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
             Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
           }
-          Datas[1] = conversion_url(Main_DATAS[i].人物左,"画像");
-          Datas[2] = Main_DATAS[i].フェード人物左;
-          Datas[3] = conversion_url(Main_DATAS[i].人物中,"画像");
-          Datas[4] = Main_DATAS[i].フェード人物中;
-          Datas[5] = conversion_url(Main_DATAS[i].人物右,"画像");
-          Datas[6] = Main_DATAS[i].フェード人物右;
+          if(Main_DATAS[i].左側の人物.split("イン").length==1&&Main_DATAS[i].左側の人物.split("アウト").length==1){
+            Datas[1] = conversion_url(Main_DATAS[i].左側の人物,"画像");
+            Datas[2] = 0;
+          }
+          else{
+            if(Main_DATAS[i].左側の人物.split("イン").length==2){
+              Datas[1] = conversion_url(Main_DATAS[i].左側の人物.split("イン")[0],"画像");
+              Datas[2] = Main_DATAS[i].左側の人物.split("イン")[1]*1;
+            }
+            else{
+              Datas[1] = conversion_url(Main_DATAS[i].左側の人物.split("アウト")[0],"画像");
+              Datas[2] = Main_DATAS[i].左側の人物.split("アウト")[1]*-1;
+            }
+          }
+          if(Main_DATAS[i].真ん中の人物.split("イン").length==1&&Main_DATAS[i].真ん中の人物.split("アウト").length==1){
+            Datas[3] = conversion_url(Main_DATAS[i].真ん中の人物,"画像");
+            Datas[4] = 0;
+          }
+          else{
+            if(Main_DATAS[i].真ん中の人物.split("イン").length==2){
+              Datas[3] = conversion_url(Main_DATAS[i].真ん中の人物.split("イン")[0],"画像");
+              Datas[4] = Main_DATAS[i].真ん中の人物.split("イン")[1]*1;
+            }
+            else{
+              Datas[3] = conversion_url(Main_DATAS[i].真ん中の人物.split("アウト")[0],"画像");
+              Datas[4] = Main_DATAS[i].真ん中の人物.split("アウト")[1]*-1;
+            }
+          }
+          if(Main_DATAS[i].右側の人物.split("イン").length==1&&Main_DATAS[i].右側の人物.split("アウト").length==1){
+            Datas[5] = conversion_url(Main_DATAS[i].右側の人物,"画像");
+            Datas[6] = 0;
+          }
+          else{
+            if(Main_DATAS[i].右側の人物.split("イン").length==2){
+              Datas[5] = conversion_url(Main_DATAS[i].右側の人物.split("イン")[0],"画像");
+              Datas[6] = Main_DATAS[i].右側の人物.split("イン")[1]*1;
+            }
+            else{
+              Datas[5] = conversion_url(Main_DATAS[i].右側の人物.split("アウト")[0],"画像");
+              Datas[6] = Main_DATAS[i].右側の人物.split("アウト")[1]*-1;
+            }
+          }
           Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/,Name);
           Datas[8] = Main_DATAS[i].文章.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/g,Name).replace(/\(一人称\)/g,Person);
           for (var k = 0; k < Favorability_Flag.length; k++){
@@ -630,9 +666,9 @@ function Load(width,height){
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
             Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
           }
-          Datas[1] = conversion_url(Choice_DATAS[i].人物左,"画像");
-          Datas[2] = conversion_url(Choice_DATAS[i].人物中,"画像");
-          Datas[3] = conversion_url(Choice_DATAS[i].人物右,"画像");
+          Datas[1] = conversion_url(Choice_DATAS[i].左側の人物,"画像");
+          Datas[2] = conversion_url(Choice_DATAS[i].真ん中の人物,"画像");
+          Datas[3] = conversion_url(Choice_DATAS[i].右側の人物,"画像");
           Datas[4] = Choice_DATAS[i].前前;
           Datas[5] = Choice_DATAS[i].前;
           Datas[6] = Choice_DATAS[i].セーブ;
@@ -4195,6 +4231,7 @@ function Load(width,height){
       });
 
       var Text = [];
+      var Datakousin = false;
 
       for (var i = 0; i < 5; i++) {
         Text[i] = new Texts("");
@@ -4224,6 +4261,7 @@ function Load(width,height){
         if(a=="改造をやめる"){
           Button[submits].addEventListener('touchstart',function(e){
             if(Button_push("戻る")) return;
+            if(Datakousin) return;
             game.replaceScene(ItemScene(Number,Ig,"アイテム"));
           });
         }
@@ -4313,8 +4351,8 @@ function Load(width,height){
               Sound_ON("セーブ",true);
               break;
             case "シーンデータ更新":
+            Datakousin = true;
             this._element.value = Button[1]._element.value+"中……";
-            game.fps = 200;
             fetch(GAS,
               {
                 method: 'POST',
@@ -4335,7 +4373,7 @@ function Load(width,height){
               Interrogation_DATAS = result.尋問;
               this._element.value = "シーンデータ更新完了。";
               Sound_ON("セーブ",true);
-              game.fps = 10;
+              Datakousin = false;
               },);
               break;
             default:

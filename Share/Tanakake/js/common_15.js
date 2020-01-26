@@ -1,5 +1,5 @@
 //enchantjsの画面サイズの設定
-var GitHub_type = "referee";
+var Foldar = "Share/Tanakake/";
 
 function resetScreen(gameWidth,gameHeight){
 
