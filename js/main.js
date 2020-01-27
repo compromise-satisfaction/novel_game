@@ -259,7 +259,7 @@ function Game_load(width,height){
           case "音無し":
             break;
           default:
-            Sound_ON(expression,true);
+            Sound_ON(expression);
             break;
         }
         return(false);
@@ -1343,13 +1343,13 @@ function Game_load(width,height){
             if(Return!=true){
               Item.opacity = 0;
               Item.tl.fadeIn(Datas[21]);
-              Sound_ON("アイテム表示音",true);
+              Sound_ON("アイテム表示音");
             }
           }
           else{
             if(Return!=true){
               Item.tl.fadeOut(Datas[21]*-1);
-              Sound_ON("アイテム表示音",true);
+              Sound_ON("アイテム表示音");
             }
             else Item.opacity = 0;
           }
@@ -1481,21 +1481,21 @@ function Game_load(width,height){
         var s = true;
         var Itimozi = Datas[8].substring(Time,Time+1);
         for (var i = 0; i < Sound_effect_DATAS.length; i++){
-          if(Sound_effect_DATAS[i][0]==Itimozi){
+          if(Sound_effect_DATAS[i][1]==Itimozi){
             Itimozi = "サウンド";
-            var Itimozi_on = Sound_effect_DATAS[i][1];
+            var Itimozi_on = Sound_effect_DATAS[i][0];
           }
         }
         for (var i = 0; i < Voice_DATAS.length; i++){
-          if(Voice_DATAS[i][0]==Itimozi){
+          if(Voice_DATAS[i][1]==Itimozi){
             Itimozi = "サウンド";
-            var Itimozi_on = Voice_DATAS[i][1];
+            var Itimozi_on = Voice_DATAS[i][0];
           }
         }
         switch (Itimozi) {
           case "サウンド":
             s = false;
-            if(Return==false) Sound_ON(Itimozi_on,true);
+            if(Return==false) Sound_ON(Itimozi_on);
             break;
           case "→":
           s = false;
@@ -1519,7 +1519,7 @@ function Game_load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/2);
               Explosion.frame = 0;
-              Sound_ON("爆発",true);
+              Sound_ON("爆発");
             }
             break;
           case "㊥":
@@ -1527,7 +1527,7 @@ function Game_load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/4);
               Explosion.frame = 0;
-              Sound_ON("爆発",true);
+              Sound_ON("爆発");
             }
             break;
           case "㊧":
@@ -1535,7 +1535,7 @@ function Game_load(width,height){
             if(Return==false){
               Explosion.x = (Explosion.scaleX*80/2)-80/2;
               Explosion.frame = 0;
-              Sound_ON("爆発",true);
+              Sound_ON("爆発");
             }
             break;
           case "…":
@@ -1678,7 +1678,7 @@ function Game_load(width,height){
                     case "ワ":
                     case "ヲ":
                     case "ン":
-                      Sound_ON(Text[k].text.substring(Text[k].text.length-1),true);
+                      Sound_ON(Text[k].text.substring(Text[k].text.length-1));
                       break;
                     default:
                       break;
@@ -1698,7 +1698,7 @@ function Game_load(width,height){
                     case "！":
                       break;
                     default:
-                      Sound_ON(Datas[19],true,"効果音");
+                      Sound_ON(Datas[19]);
                       break;
                   }
                 }
@@ -1870,7 +1870,7 @@ function Game_load(width,height){
           Trophy_text.tl.fadeIn(5);
           Trophy_text.text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
           scene.addChild(Trophy_text);
-          Sound_ON("Trophy",true);
+          Sound_ON("Trophy");
           Trophy.addEventListener("enterframe",function(){
             Trophy_Time++;
             if(Trophy_Time==20){
@@ -2180,7 +2180,7 @@ function Game_load(width,height){
       Pop.x = (Pop.scaleX*xxx/2)-xxx/2;
       Pop.y = (Pop.scaleY*yyy/2)-yyy/2;
       scene.addChild(Pop);
-      if(Sound) Sound_ON(Sound,true,"音声");
+      if(Sound) Sound_ON(Sound);
 
       var Time = 0;
 
@@ -2733,7 +2733,7 @@ function Game_load(width,height){
               }
               if(Setting_Flag[10]==10) Text[14].text = Setting_Flag[10];
               else Text[14].text = " "+Setting_Flag[10];
-              Sound_ON("進む",true);
+              Sound_ON("進む");
               break;
             case Text[12].y:
               if(c=="+"){
@@ -2744,7 +2744,7 @@ function Game_load(width,height){
               }
               if(Setting_Flag[11]==10) Text[15].text = Setting_Flag[11];
               else Text[15].text = " "+Setting_Flag[11];
-              Sound_ON("音量調整用",true);
+              Sound_ON("音量調整用");
               break;
           }
           window.localStorage.setItem("Setting_Flag",Setting_Flag);
@@ -2779,7 +2779,7 @@ function Game_load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
       Background.addEventListener('touchstart',function(e){
-        Sound_ON("選択音",true);
+        Sound_ON("選択音");
         if(Inspect=="Black") Scene_loads("調べる出来てない",false,false);
         else Scene_loads("調べる何もない",false,false);
       });
@@ -2792,7 +2792,7 @@ function Game_load(width,height){
           this.image = game.assets["../image/背景/透明.png"];
           scene.addChild(this);
           this.addEventListener('touchstart',function(e){
-            Sound_ON("選択音",true);
+            Sound_ON("選択音");
             Scene_loads(Number,false,false);
             return;
           });
@@ -2900,7 +2900,7 @@ function Game_load(width,height){
       Item.x = X_0 + width;
       Item.y = Y_0 + width/32;
       scene.addChild(Item);
-      Sound_ON("Item",true);
+      Sound_ON("Item");
 
       Item.addEventListener("enterframe",function(){
         if(Item.x < X_0+width/2-width/4-width/18 || Item.x > X_0+width/2-width/4+width/18){
@@ -3339,7 +3339,7 @@ function Game_load(width,height){
           }
           if(Big){
             Photo.addEventListener('touchstart',function(e){
-              Sound_ON("戻る",true);
+              Sound_ON("戻る");
               Scene_kazu--;
               console.log("Scene数",Scene_kazu);
               game.popScene();
@@ -3363,7 +3363,7 @@ function Game_load(width,height){
           Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
           scene.addChild(Photo);
           Photo.addEventListener('touchstart',function(e){
-            Sound_ON("選択音",true);
+            Sound_ON("選択音");
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
             game.pushScene(DetailsScene(Big_Photo,0,true));
@@ -3858,7 +3858,7 @@ function Game_load(width,height){
       }
 
       function okuugoki(){
-        Sound_ON("ページ",true);
+        Sound_ON("ページ");
         for (var x = 0; x < 8; x++) {
           for (var y = 0; y < 8; y++) {
             if(Stones[y][x].intersect(Pointer)&&Stones[y][x].ura==3&&Time>0){//接触
@@ -4457,7 +4457,7 @@ function Game_load(width,height){
                 Button[3]._element.value//つきつけるデータ
               ];
               this._element.value = Button[3]._element.value + " 入手。";
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "フラグ類入手":
               for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
@@ -4474,7 +4474,7 @@ function Game_load(width,height){
               ];
               Get_ICFT(DATAS);
               this._element.value = Button[2]._element.value+" 入手。";
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "シーンデータ修正":
               game.popScene();
@@ -4482,42 +4482,42 @@ function Game_load(width,height){
               console.log("Scene数",Scene_kazu);
               Datas = ["Black",0,0,0,0,0,0,0,"シーンデータを修正しました。",0,0,0,Setting_Flag[4],0];
               game.replaceScene(MainScene());
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "フラグ追加 or 消去":
               for (var i = 0; i < Flag.length; i++){
                 if(Flag[i]==Button[3]._element.value){
                   Flag[i] = false;
                   this._element.value = Button[3]._element.value+" オフ。";
-                  Sound_ON("セーブ",true);
+                  Sound_ON("セーブ");
                   return;
                 }
               }
               Flag[Flag.length] = Button[3]._element.value;
               this._element.value = Button[3]._element.value+" オン。";
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "フラグリセット":
               Flag = [];
               this._element.value = Button[1]._element.value;
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "アイテムリセット":
               Item_Flag = [
                 ["万能ツール","色々出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"]
               ];
               this._element.value = Button[1]._element.value;
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "人物リセット":
               Character_Flag = [];
               this._element.value = Button[1]._element.value;
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "トロフィーリセット":
               Trophy_Flag = [];
               this._element.value = Button[1]._element.value;
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               break;
             case "シーンデータ更新":
             Datakousin = true;
@@ -4541,7 +4541,7 @@ function Game_load(width,height){
               Speech_DATAS = result.吹き出し;
               Interrogation_DATAS = result.尋問;
               this._element.value = "シーンデータ更新完了。";
-              Sound_ON("セーブ",true);
+              Sound_ON("セーブ");
               Datakousin = false;
               },);
               break;
