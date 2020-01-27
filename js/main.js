@@ -1,5 +1,5 @@
 enchant();
-
+//サウンド変更前
 var Version = "バージョン 6.2";
 var Already = false;
 
@@ -48,7 +48,6 @@ function Images(width,height){
     }
     Sounds_urls = [];
     Koukaon_DATAS = [];
-    BGM = [];
     var kkk = 0;
     for (var i = 0; i < Sounds_DATAS.length; i++){
       if(Sounds_DATAS[i].url.substring(0,4)!="http"){
@@ -59,15 +58,6 @@ function Images(width,height){
         Koukaon_DATAS[kkk] = [Sounds_DATAS[i].ループ終了,Sounds_DATAS[i].url,Sounds_DATAS[i].ループ開始];
         kkk++;
       }
-      BGM[i] = document.createElement("audio");
-      BGM[i].title = Sounds_DATAS[i].名前;
-      BGM[i].src = Sounds_DATAS[i].url;
-      BGM[i].id = Sounds_DATAS[i].ループ開始;
-      BGM[i].addEventListener("ended",function(e){
-        if(this.id=="効果音"||this.id=="音声"||this.id=="無") return;
-        this.currentTime = this.id;
-        this.play();
-      });
     }
     Load(width,height);
   },);
@@ -128,26 +118,26 @@ function Load(width,height){
       core.removeScene(core.loadingScene);
       core.dispatchEvent(e);
   });
-  game.preload("../image/融合.png");
+  //game.preload("../image/融合.png");
   game.preload("../image/画像無.png");
-  game.preload("../image/リバーシ.png");
+  //game.preload("../image/リバーシ.png");
   //game.preload("../sound/Item.wav");
   //game.preload("../sound/セーブ.wav");
   //game.preload("../sound/音量調整用.wav");
   //game.preload("../sound/お任せなのだ.wav");
   //game.preload("../sound/爆発.wav");
-  game.preload("../image/left.png");
-  game.preload("../image/right.png");
-  game.preload("../image/white.png");
-  game.preload("../image/Black.png");
-  game.preload("../image/stand.png");
-  game.preload("../image/ユベル.png");
-  game.preload("../image/留置所.png");
-  game.preload("../image/裁判長席.png");
-  game.preload("../image/背景/留置所背景.png");
+  //game.preload("../image/left.png");
+  //game.preload("../image/right.png");
+  //game.preload("../image/white.png");
+  //game.preload("../image/Black.png");
+  //game.preload("../image/stand.png");
+  //game.preload("../image/ユベル.png");
+  //game.preload("../image/留置所.png");
+  //game.preload("../image/裁判長席.png");
+  //game.preload("../image/背景/留置所背景.png");
   //game.preload("../sound/進む.wav");
   //game.preload("../sound/ページ.wav");
-  game.preload("../image/待った！.png");
+  //game.preload("../image/待った！.png");
   //game.preload("../sound/ア.wav");
   //game.preload("../sound/イ.wav");
   //game.preload("../sound/ウ.wav");
@@ -201,24 +191,24 @@ function Load(width,height){
   //game.preload("../sound/戻る.wav");
   //game.preload("../sound/選択音.wav");
   //game.preload("../sound/Trophy.wav");
-  game.preload("../image/Trophy.png");
-  game.preload("../image/異議あり！.png");
-  game.preload("../image/カットイン.png");
-  game.preload("../image/Explosion.png");
-  game.preload("../image/背景/Black.png");
-  game.preload("../image/背景/left.png");
-  game.preload("../image/背景/right.png");
-  game.preload("../image/背景/stand.png");
-  game.preload("../image/背景/裁判長席.png");
-  game.preload("../image/背景/透明.png");
-  game.preload("../image/背景/留置所.png");
-  game.preload("../image/Background.png");
+  //game.preload("../image/Trophy.png");
+  //game.preload("../image/異議あり！.png");
+  //game.preload("../image/カットイン.png");
+  //game.preload("../image/Explosion.png");
+  //game.preload("../image/背景/Black.png");
+  //game.preload("../image/背景/left.png");
+  //game.preload("../image/背景/right.png");
+  //game.preload("../image/背景/stand.png");
+  //game.preload("../image/背景/裁判長席.png");
+  //game.preload("../image/背景/透明.png");
+  //game.preload("../image/背景/留置所.png");
+  //game.preload("../image/Background.png");
   game.preload("../image/Set_button.png");
-  game.preload("../image/stone.png");
-  game.preload("../image/Hand.png");
-  game.preload("../image/V_or_D.png");
-  game.preload(Image_urls);
-  //game.preload(Sounds_urls);
+  //game.preload("../image/stone.png");
+  //game.preload("../image/Hand.png");
+  //game.preload("../image/V_or_D.png");
+  ////game.preload(Image_urls);
+  ////game.preload(Sounds_urls);
 
   game.fps = 10;
   game.onload = function(){
@@ -278,13 +268,6 @@ function Load(width,height){
       return(name);
     }
     function Sound_ON(Sound_Name,Play,Type){
-      for(var i = 0; i < BGM.length; i++){
-        if(BGM[i].title==Sound_Name){
-          BGM[i].play();
-          return;
-        }
-      }
-      return;
       switch (Sound_Name) {
         case "お任せなのだ":
         case "音量調整用":
@@ -470,16 +453,6 @@ function Load(width,height){
       else{
         if(DATAS.セーブ!="無し") Setting_Flag[14] = BGM_name;
       }
-      for (var i = 0; i < BGM.length; i++){
-        if(BGM[i].title==BGM_name){
-          BGM[i].play();
-        }
-        else{
-          BGM[i].pause();
-          BGM[i].currentTime = 0;
-        }
-      }
-      return;
       for (var k = 0; k < Sounds_DATAS.length; k++){
         if(BGM_name!=Sounds_DATAS[k].名前&&game.assets[Sounds_DATAS[k].url].状態=="再生中"){
           game.assets[Sounds_DATAS[k].url].stop();
@@ -532,17 +505,17 @@ function Load(width,height){
       else if(Gender=="女"){
       var Person = "私";
       var S_image = "女主人公";
-      var S_Sound = "女主人公ポポポ";
+      var S_Sound = conversion_url("女主人公ポポポ","サウンド");
       }
       else{
       var Person = "我";
       var S_image = "../image/ユベル.png";
-      var S_Sound = "未設定主人公ポポポ";
+      var S_Sound = conversion_url("未設定主人公ポポポ","サウンド");
       }
       if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"){
         var Person = "僕";
         var S_image = "満足";
-        var S_Sound = "スナネコ";
+        var S_Sound = conversion_url("スナネコ","サウンド");
       }
       switch (Number) {
         case "セーブ読み込み":
@@ -553,9 +526,11 @@ function Load(width,height){
           return;
           break;
         case "タイトルに戻る":
-          for (var k = 0; k < BGM.length; k++){
-            BGM[k].pause();
-            BGM[k].currentTime = 0;
+          for (var k = 0; k < Sounds_DATAS.length; k++){
+            if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
+              game.assets[Sounds_DATAS[k].url].stop();
+              game.assets[Sounds_DATAS[k].url].状態 = "停止";
+            }
           }
           game.replaceScene(TitleScene());
           return;
@@ -673,7 +648,7 @@ function Load(width,height){
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
           Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
           Datas[16] = Main_DATAS[i].トロフィー;
-          Datas[19] = Main_DATAS[i].文章音;
+          Datas[19] = conversion_url(Main_DATAS[i].文章音,"サウンド");
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
           Datas[21] = Main_DATAS[i].表示アイテムフェード;
           if(Datas[1]=="主人公") Datas[1] = S_image;
@@ -850,7 +825,7 @@ function Load(width,height){
       Datas[16] = "";
       Datas[17] = "";
       Datas[18] = "";
-      Datas[19] = "日付";
+      Datas[19] = conversion_url("日付","サウンド");
       game.replaceScene(MainScene(Return));
       return;
     }
@@ -1546,7 +1521,7 @@ function Load(width,height){
         for (var i = 0; i < Koukaon_DATAS.length; i++) {
           if(Koukaon_DATAS[i][0]==Itimozi){
             Itimozi = "サウンド";
-            var Itimozi_on = Koukaon_DATAS[i][0];
+            var Itimozi_on = Koukaon_DATAS[i][1];
             var Type = Koukaon_DATAS[i][2];
           }
         }
