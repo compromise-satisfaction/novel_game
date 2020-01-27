@@ -778,7 +778,7 @@ function Load(width,height){
       for (var i = 0; i < Interrogation_DATAS.length; i++) {
         if(Number==Interrogation_DATAS[i].シーン名){
           BGM_SSS(Interrogation_DATAS[i]);
-          Datas[0] = conversion_url(Interrogation_DATAS[i].人物,"画像");
+          Datas[0] = Interrogation_DATAS[i].人物;
           Datas[1] = Interrogation_DATAS[i].人物名;
           Datas[2] = Interrogation_DATAS[i].証言;
           Datas[3] = Interrogation_DATAS[i].待った移動場所;
@@ -2270,16 +2270,35 @@ function Load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);//証言席
 
-      if(game.assets[Datas[0]]==undefined) Datas[0] = "../image/画像無.png";
-      var xxx = game.assets[Datas[0]].width;
-      var yyy = game.assets[Datas[0]].height;
+      if(game.assets[conversion_url(Datas[0],"画像")]==undefined) Datas[0] = "../image/画像無.png";
+      var xxx = game.assets[conversion_url(Datas[0],"画像")].width;
+      var yyy = game.assets[conversion_url(Datas[0],"画像")].height;
       var Character = new Sprite(xxx,yyy);
       Character.scaleX = width/16*9/xxx;
       Character.scaleY = width/16*9/yyy;
-      Character.image = game.assets[Datas[0]];
+      Character.image = game.assets[conversion_url(Datas[0],"画像")];
       Character.x = Character.scaleX*xxx/2-xxx/2-width/32+width/4;
       Character.y = Character.scaleY*yyy/2-yyy/2;
       scene.addChild(Character);//キャラ
+
+      var Speak_Character_image = 0;
+
+      Character.addEventListener("enterframe",function(){
+        Speak_Character_image++;
+        if(game.assets[conversion_url(Datas[0]+"口パク"+Speak_Character_image,"画像")]==undefined){
+          if(Speak_Character_image==1){
+            Character.image = game.assets[conversion_url(Datas[0],"画像")];
+            Speak_Character_image = 0;
+          }
+          else{
+            Speak_Character_image = 1;
+            Character.image = game.assets[conversion_url(Datas[0]+"口パク"+Speak_Character_image,"画像")];
+          }
+        }
+        else{
+          Character.image = game.assets[conversion_url(Datas[0]+"口パク"+Speak_Character_image,"画像")];
+        }
+      });
 
       var xxx = game.assets["../image/stand.png"].width;
       var yyy = game.assets["../image/stand.png"].height;
