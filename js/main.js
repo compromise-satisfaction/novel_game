@@ -281,38 +281,42 @@ function Game_load(width,height){
       }
       return(name);
     }
+    function Sound_branch(Sound_Name,Volume){
+      Volume /= 10;
+      if(game.assets[Sound_Name].src==undefined){
+        game.assets[Sound_Name].volume = Volume;
+      }//オンライン
+      else{
+        game.assets[Sound_Name].volume = Volume;
+      }//オフライン
+      if(Volume) game.assets[Sound_Name].play();
+      return;
+    }
     function Sound_ON(Sound_Name){
       for (var i = 0; i < Sound_effect_DATAS.length; i++) {
         if(Sound_effect_DATAS[i][0]==Sound_Name){
-          if(Setting_Flag[10]==0) return;
-          game.assets[conversion_url(Sound_Name,"サウンド")].play();
+          Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[10]);
           return;
         }
       }
       for (var i = 0; i < Voice_DATAS.length; i++) {
         if(Voice_DATAS[i][0]==Sound_Name){
-          if(Setting_Flag[11]==0) return;
-          game.assets[conversion_url(Sound_Name,"サウンド")].play();
+          Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[11]);
           return;
         }
       }
       if(game.assets["../sound/"+Sound_Name+".wav"]==undefined){
-        game.assets["../sound/スカ.wav"].volume = Setting_Flag[10]/10;
-        if(Setting_Flag[10]==0) return;
-        game.assets["../sound/スカ.wav"].play();
+        Sound_branch("../sound/スカ.wav",Setting_Flag[10]);
       }
-      switch (Sound_Name) {
+      switch(Sound_Name){
         default:
-          game.assets["../sound/"+Sound_Name+".wav"].volume = Setting_Flag[10]/10;
-          if(Setting_Flag[10]==0) return;
+          Sound_branch(Sound_Name,Setting_Flag[10]);
           break;
         case "お任せなのだ":
         case "音量調整用":
-          game.assets["../sound/"+Sound_Name+".wav"].volume = Setting_Flag[11]/10;
-          if(Setting_Flag[11]==0) return;
+          Sound_branch(Sound_Name,Setting_Flag[11]);
           break;
       }
-      game.assets["../sound/"+Sound_Name+".wav"].play();
       return;
     }
     function Get_ICFT(DATAS){
