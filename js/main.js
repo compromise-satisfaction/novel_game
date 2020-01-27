@@ -285,10 +285,10 @@ function Game_load(width,height){
       Volume /= 10;
       if(game.assets[Sound_url].src==undefined){
         game.assets[Sound_url].volume = Volume;
-      }//オンライン
-      else{
-        game.assets[Sound_url].volume = Volume;
       }//オフライン
+      else{
+        game.assets[Sound_url]._volume = Volume;
+      }//オンライン
       if(Volume) game.assets[Sound_url].play();
       return;
     }
