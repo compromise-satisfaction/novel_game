@@ -296,6 +296,11 @@ function Game_load(width,height){
           return;
         }
       }
+      if(game.assets["../sound/"+Sound_Name+".wav"]==undefined){
+        game.assets["../sound/スカ.wav"].volume = Setting_Flag[10]/10;
+        if(Setting_Flag[10]==0) return;
+        game.assets["../sound/スカ.wav"].play();
+      }
       switch (Sound_Name) {
         default:
           game.assets["../sound/"+Sound_Name+".wav"].volume = Setting_Flag[10]/10;
