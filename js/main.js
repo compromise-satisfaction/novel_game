@@ -281,15 +281,15 @@ function Game_load(width,height){
       }
       return(name);
     }
-    function Sound_branch(Sound_Name,Volume){
+    function Sound_branch(Sound_url,Volume){
       Volume /= 10;
-      if(game.assets[Sound_Name].src==undefined){
-        game.assets[Sound_Name].volume = Volume;
+      if(game.assets[Sound_url].src==undefined){
+        game.assets[Sound_url].volume = Volume;
       }//オンライン
       else{
-        game.assets[Sound_Name].volume = Volume;
+        game.assets[Sound_url].volume = Volume;
       }//オフライン
-      if(Volume) game.assets[Sound_Name].play();
+      if(Volume) game.assets[Sound_url].play();
       return;
     }
     function Sound_ON(Sound_Name){
@@ -310,11 +310,11 @@ function Game_load(width,height){
       }
       switch(Sound_Name){
         default:
-          Sound_branch(Sound_Name,Setting_Flag[10]);
+          Sound_branch("../sound/"+Sound_Name+".wav",Setting_Flag[10]);
           break;
         case "お任せなのだ":
         case "音量調整用":
-          Sound_branch(Sound_Name,Setting_Flag[11]);
+          Sound_branch("../sound/"+Sound_Name+".wav",Setting_Flag[11]);
           break;
       }
       return;
