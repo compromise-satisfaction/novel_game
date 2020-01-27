@@ -1538,6 +1538,7 @@ function Game_load(width,height){
               Sound_ON("爆発");
             }
             break;
+          case "":
           case "…":
           case "\"":
           case "「":
