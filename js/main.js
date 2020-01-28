@@ -139,6 +139,7 @@ function Game_load(width,height){
   game.preload("../sound/セーブ.wav");
   game.preload("../sound/音量調整用.wav");
   game.preload("../sound/お任せなのだ.wav");
+  game.preload("../sound/スカ.wav");
   game.preload("../sound/爆発.wav");
   game.preload("../image/left.png");
   game.preload("../image/right.png");
@@ -318,6 +319,9 @@ function Game_load(width,height){
           break;
       }
       return;
+    }
+    function BGM_ON(){
+
     }
     function Get_ICFT(DATAS){
       switch (DATAS[0]) {
