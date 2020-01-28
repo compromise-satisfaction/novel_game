@@ -168,7 +168,7 @@ function Game_load(width,height){
   game.preload("../image/stone.png");
   game.preload("../image/Hand.png");
   game.preload("../image/V_or_D.png");
-  game.preload(Image_urls);
+  //game.preload(Image_urls);
   game.preload(Sounds_urls);
 
   game.fps = 10;
@@ -899,20 +899,17 @@ function Game_load(width,height){
         var Data = true;
       }
 
-      if(game.assets[conversion_url("タイトル画面","画像")]==undefined){
+      if(conversion_url("タイトル画面","画像")=="タイトル画面"){
         var Title_image = "../image/画像無.png";
       }
       else {
         var Title_image = conversion_url("タイトル画面","画像");
       }
-      var xxx = game.assets[Title_image].width;
-      var yyy = game.assets[Title_image].height;
-      var Title = new Sprite(xxx,yyy);
-      Title.image = game.assets[Title_image];
-      Title.scaleX = width/xxx;
-      Title.scaleY = width/16*9/yyy;
-      Title.x = (Title.scaleX*xxx/2)-xxx/2;
-      Title.y = (Title.scaleY*yyy/2)-yyy/2;
+      var Title = new Entity();
+      Title._element = document.createElement("img");
+      Title._element.src = Title_image;
+      Title.width = width;
+      Title.height = width/16*9;
       scene.addChild(Title);
 
       var Button = [];
@@ -1076,15 +1073,11 @@ function Game_load(width,height){
           case "カットイン":
             break;
           default:
-            if(game.assets[Datas[0]]==undefined&&Datas[0]!="") Datas[0] = "../image/画像無.png";
-            var xxx = game.assets[Datas[0]].width;
-            var yyy = game.assets[Datas[0]].height;
-            var Background = new Sprite(xxx,yyy);
-            Background.scaleX = ((width)/xxx);
-            Background.scaleY = (((width/16)*9)/yyy);
-            Background.image = game.assets[Datas[0]];
-            Background.x = (Background.scaleX*xxx/2)-xxx/2;
-            Background.y = (Background.scaleY*yyy/2)-yyy/2;
+            var Background = new Sprite();
+            Background._element = document.createElement("img");
+            Background._element.src = conversion_url(Datas[0],"画像");
+            Background.width = width;
+            Background.height = width/16*9;
             scene.addChild(Background);
             break;
         }
@@ -1111,10 +1104,6 @@ function Game_load(width,height){
         }
       }
 
-      if(game.assets[conversion_url(Datas[1],"画像")]==undefined&&Datas[1]!="") Datas[1] = "../image/画像無.png";
-      if(game.assets[conversion_url(Datas[3],"画像")]==undefined&&Datas[3]!="") Datas[3] = "../image/画像無.png";
-      if(game.assets[conversion_url(Datas[5],"画像")]==undefined&&Datas[5]!="") Datas[5] = "../image/画像無.png";
-
       var xxx = 80;
       var yyy = 80;
       var Explosion = new Sprite(xxx,yyy);
@@ -1124,26 +1113,19 @@ function Game_load(width,height){
       Explosion.frame = 11;
       Explosion.y = (Explosion.scaleY*yyy/2)-yyy/2;
       scene.addChild(Explosion);
-      Explosion.addEventListener("enterframe",function(){
-        if(Explosion.frame!=11) Explosion.frame++;
-      })
 
       if(Datas[3]!=false){
-        var xxx = game.assets[conversion_url(Datas[3],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[3],"画像")].height;
-        var Character2 = new Sprite(xxx,yyy);
-        Character2.scaleX = width/16*9/xxx;
-        Character2.scaleY = width/16*9/yyy;
-        Character2.image = game.assets[conversion_url(Datas[3],"画像")];
+        var Character2 = new Sprite();
+        Character2._element = document.createElement("img");
+        Character2._element.src = conversion_url(Datas[3],"画像");
+        Character2.width = width/16*9;
+        Character2.height = width/16*9;
         if(Datas[0]=="カットイン"){
-          Character2.scaleX = width/xxx;
-          Character2.scaleY = width/yyy;
-          Character2.x = (Character2.scaleX*xxx/2)-xxx/2;
-          Character2.y = (Character2.scaleY*yyy/2)-yyy/2;
+          Character2.width = width;
+          Character2.height = width;
         }
         else {
-          Character2.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
-          Character2.y = Character2.scaleY*yyy/2-yyy/2;
+          Character2.x = width/4-width/32;
         }
         if(Datas[4]!=0){
           if(Datas[4]>0){
@@ -1181,21 +1163,17 @@ function Game_load(width,height){
       }
 
       if(Datas[1]!=false){
-        var xxx = game.assets[conversion_url(Datas[1],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[1],"画像")].height;
-        var Character1 = new Sprite(xxx,yyy);
-        Character1.scaleX = width/16*9/xxx;
-        Character1.scaleY = width/16*9/yyy;
-        Character1.image = game.assets[conversion_url(Datas[1],"画像")];
+        var Character1 = new Sprite();
+        Character1._element = document.createElement("img");
+        Character1._element.src = conversion_url(Datas[1],"画像");
+        Character1.width = width/16*9;
+        Character1.height = width/16*9;
         if(Datas[0]=="カットイン"){
-          Character1.scaleX = width/xxx;
-          Character1.scaleY = width/yyy;
-          Character1.x = (Character1.scaleX*xxx/2)-xxx/2-(width/4);
-          Character1.y = (Character1.scaleY*yyy/2)-yyy/2;
+          Character2.width = width;
+          Character2.height = width;
         }
         else {
-          Character1.x = Character1.scaleX*xxx/2-xxx/2-width/32;
-          Character1.y = Character1.scaleY*yyy/2-yyy/2;
+          Character1.x = -width/32;
         }
         if(Datas[2]!=0){
           if(Datas[2]=="点滅"){
@@ -1236,21 +1214,17 @@ function Game_load(width,height){
       }//キャラ左
 
       if(Datas[5]!=false){
-        var xxx = game.assets[conversion_url(Datas[5],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[5],"画像")].height;
-        var Character3 = new Sprite(xxx,yyy);
-        Character3.scaleX = width/16*9/xxx;
-        Character3.scaleY = width/16*9/yyy;
-        Character3.image = game.assets[conversion_url(Datas[5],"画像")];
+        var Character3 = new Sprite();
+        Character3._element = document.createElement("img");
+        Character3._element.src = conversion_url(Datas[5],"画像");
+        Character3.width = width/16*9;
+        Character3.height = width/16*9;
         if(Datas[0]=="カットイン"){
-          Character3.scaleX = width/xxx;
-          Character3.scaleY = width/yyy;
-          Character3.x = (Character3.scaleX*xxx/2)-xxx/2+(width/4);
-          Character3.y = (Character3.scaleY*yyy/2)-yyy/2;
+          Character3.width = width;
+          Character3.height = width;
         }
         else {
-          Character3.x = Character3.scaleX*xxx/2-xxx/2-width/32+width/2;
-          Character3.y = Character3.scaleY*yyy/2-yyy/2;
+          Character3.x = width/2-width/32;
         }
         if(Datas[6]!=0){
           if(Datas[6]>0){
@@ -1314,12 +1288,6 @@ function Game_load(width,height){
         }
         scene.addChild(Item);
       }//アイテム
-
-      var Background2 = new Sprite(width,height);
-      Background2.image = game.assets["../image/white.png"];
-      Background2.x = 0;
-      Background2.y = (width/16)*9;
-      scene.addChild(Background2);//白地
 
       if(Datas[7]!=""){
         var C_name = new Label();
@@ -1433,9 +1401,8 @@ function Game_load(width,height){
       var Winking_time = 0;
 
       function T_D(){
-        if(Datas[1]) Character1.image = game.assets[conversion_url(Datas[1],"画像")];
-        if(Datas[3]) Character2.image = game.assets[conversion_url(Datas[3],"画像")];
-        if(Datas[5]) Character3.image = game.assets[conversion_url(Datas[5],"画像")];
+        //if(Datas[1]) Character1.image = game.assets[conversion_url(Datas[1],"画像")];
+        //if(Datas[5]) Character3.image = game.assets[conversion_url(Datas[5],"画像")];
         var s = true;
         var Itimozi = Datas[8].substring(Time,Time+1);
         for (var i = 0; i < Sound_effect_DATAS.length; i++){
@@ -1512,6 +1479,7 @@ function Game_load(width,height){
           default:
             if(Text[k].text.substring(0,1)=="「"||Text[k].text.substring(0,1)=="　"){
               Speak_Character_image++;
+              break;
               switch(Speak_Character){
                 case "㊧":
                 if(game.assets[conversion_url(Datas[1]+"口パク"+Speak_Character_image,"画像")]==undefined){
@@ -1562,7 +1530,6 @@ function Game_load(width,height){
                 break;
               }
             }
-            break;
         }
         Time ++;
         if(s){
@@ -1670,7 +1637,8 @@ function Game_load(width,height){
         }
       }
 
-      Background2.addEventListener("enterframe",function(){
+      Explosion.addEventListener("enterframe",function(){
+        if(Explosion.frame!=11) Explosion.frame++;
         if(Return!=true&&Text_defined){
           T_D();
         }
@@ -1680,42 +1648,41 @@ function Game_load(width,height){
           switch (Winking_time) {
             case 1:
             case 17:
-              if(Datas[1]) Character1.image = game.assets[conversion_url(Datas[1],"画像")];
-              if(Datas[3]) Character2.image = game.assets[conversion_url(Datas[3],"画像")];
-              if(Datas[5]) Character3.image = game.assets[conversion_url(Datas[5],"画像")];
+              //if(Datas[1]) Character1.image = game.assets[conversion_url(Datas[1],"画像")];
+              //if(Datas[5]) Character3.image = game.assets[conversion_url(Datas[5],"画像")];
               break;//通常
             case 14:
             case 16:
               if(Datas[1]){
                 if(game.assets[conversion_url(Datas[1]+"半目","画像")]!=undefined){
-                  Character1.image = game.assets[conversion_url(Datas[1]+"半目","画像")];
+                  //Character1.image = game.assets[conversion_url(Datas[1]+"半目","画像")];
                 }
               }
               if(Datas[3]){
                 if(game.assets[conversion_url(Datas[3]+"半目","画像")]!=undefined){
-                  Character2.image = game.assets[conversion_url(Datas[3]+"半目","画像")];
+                  //Character2.image = game.assets[conversion_url(Datas[3]+"半目","画像")];
                 }
               }
               if(Datas[5]){
                 if(game.assets[conversion_url(Datas[5]+"半目","画像")]!=undefined){
-                  Character3.image = game.assets[conversion_url(Datas[5]+"半目","画像")];
+                  //Character3.image = game.assets[conversion_url(Datas[5]+"半目","画像")];
                 }
               }
               break;//半目
             case 15:
               if(Datas[1]){
                 if(game.assets[conversion_url(Datas[1]+"目閉じ","画像")]!=undefined){
-                  Character1.image = game.assets[conversion_url(Datas[1]+"目閉じ","画像")];
+                  //Character1.image = game.assets[conversion_url(Datas[1]+"目閉じ","画像")];
                 }
               }
               if(Datas[3]){
                 if(game.assets[conversion_url(Datas[3]+"目閉じ","画像")]!=undefined){
-                  Character2.image = game.assets[conversion_url(Datas[3]+"目閉じ","画像")];
+                  //Character2.image = game.assets[conversion_url(Datas[3]+"目閉じ","画像")];
                 }
               }
               if(Datas[5]){
                 if(game.assets[conversion_url(Datas[5]+"目閉じ","画像")]!=undefined){
-                  Character3.image = game.assets[conversion_url(Datas[5]+"目閉じ","画像")];
+                  //Character3.image = game.assets[conversion_url(Datas[5]+"目閉じ","画像")];
                 }
               }
               break;//閉じる
@@ -1726,7 +1693,7 @@ function Game_load(width,height){
               break;
           }
         }
-      })
+      });
 
       if(Return){
           for (var i = 0; i < Datas[8].length+1; i++) {
@@ -1974,18 +1941,13 @@ function Game_load(width,height){
           scene.addChild(Background);
           break;
       }
-      if(game.assets[conversion_url(Datas[1],"画像")]==undefined&&Datas[1]!="") Datas[1] = "../image/画像無.png";
-      if(game.assets[conversion_url(Datas[2],"画像")]==undefined&&Datas[2]!="") Datas[2] = "../image/画像無.png";
-      if(game.assets[conversion_url(Datas[3],"画像")]==undefined&&Datas[3]!="") Datas[3] = "../image/画像無.png";
       if(Datas[2]!=false){
-        var xxx = game.assets[conversion_url(Datas[2],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[2],"画像")].height;
-        var Character2 = new Sprite(xxx,yyy);
-        Character2.scaleX = width/16*9/xxx;
-        Character2.scaleY = width/16*9/yyy;
-        Character2.image = game.assets[conversion_url(Datas[2],"画像")];
-        Character2.x = Character2.scaleX*xxx/2-xxx/2-width/32+width/4;
-        Character2.y = Character2.scaleY*yyy/2-yyy/2;
+        var Character2 = new Sprite();
+        Character2._element = document.createElement("img");
+        Character2._element.src = conversion_url(Datas[2],"画像");
+        Character2.width = width/16*9;
+        Character2.height = width/16*9;
+        Character2.x = width/4-width/32;
         scene.addChild(Character2);
       }//キャラ真ん中
 
@@ -2007,26 +1969,22 @@ function Game_load(width,height){
       }
 
       if(Datas[1]!=false){
-        var xxx = game.assets[conversion_url(Datas[1],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[1],"画像")].height;
-        var Character1 = new Sprite(xxx,yyy);
-        Character1.scaleX = width/16*9/xxx;
-        Character1.scaleY = width/16*9/yyy;
-        Character1.image = game.assets[conversion_url(Datas[1],"画像")];
-        Character1.x = Character1.scaleX*xxx/2-xxx/2-width/32;
-        Character1.y = Character1.scaleY*yyy/2-yyy/2;
+        var Character1 = new Sprite();
+        Character1._element = document.createElement("img");
+        Character1._element.src = conversion_url(Datas[2],"画像");
+        Character1.width = width/16*9;
+        Character1.height = width/16*9;
+        Character1.x = -width/32;
         scene.addChild(Character1);
       }//キャラ左
 
       if(Datas[3]!=false){
-        var xxx = game.assets[conversion_url(Datas[3],"画像")].width;
-        var yyy = game.assets[conversion_url(Datas[3],"画像")].height;
-        var Character3 = new Sprite(xxx,yyy);
-        Character3.scaleX = width/16*9/xxx;
-        Character3.scaleY = width/16*9/yyy;
-        Character3.image = game.assets[conversion_url(Datas[3],"画像")];
-        Character3.x = Character3.scaleX*xxx/2-xxx/2-width/32+width/2;
-        Character3.y = Character3.scaleY*yyy/2-yyy/2;
+        var Character3 = new Sprite();
+        Character3._element = document.createElement("img");
+        Character3._element.src = conversion_url(Datas[3],"画像");
+        Character3.width = width/16*9;
+        Character3.height = width/16*9;
+        Character3.x = width/2-width/32;
         scene.addChild(Character3);
       }//キャラ右
 
@@ -2196,45 +2154,22 @@ function Game_load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);//証言席
 
-      if(game.assets[conversion_url(Datas[0],"画像")]==undefined) Datas[0] = "../image/画像無.png";
-      var xxx = game.assets[conversion_url(Datas[0],"画像")].width;
-      var yyy = game.assets[conversion_url(Datas[0],"画像")].height;
-      var Character = new Sprite(xxx,yyy);
-      Character.scaleX = width/16*9/xxx;
-      Character.scaleY = width/16*9/yyy;
-      Character.image = game.assets[conversion_url(Datas[0],"画像")];
-      Character.x = Character.scaleX*xxx/2-xxx/2-width/32+width/4;
-      Character.y = Character.scaleY*yyy/2-yyy/2;
-      scene.addChild(Character);//キャラ
+      var Character = new Entity();
+      Character._element = document.createElement("img");
+      Character._element.src = conversion_url(Datas[0],"画像");
+      Character.width = width/16*9;
+      Character.height = width/16*9;
+      Character.x = width/4-width/32;
+      scene.addChild(Character);
 
       var Speak_Character_image = 0;
 
-      Character.addEventListener("enterframe",function(){
-        Speak_Character_image++;
-        if(game.assets[conversion_url(Datas[0]+"口パク"+Speak_Character_image,"画像")]==undefined){
-          if(Speak_Character_image==1){
-            Character.image = game.assets[conversion_url(Datas[0],"画像")];
-            Speak_Character_image = 0;
-          }
-          else{
-            Speak_Character_image = 1;
-            Character.image = game.assets[conversion_url(Datas[0]+"口パク"+Speak_Character_image,"画像")];
-          }
-        }
-        else{
-          Character.image = game.assets[conversion_url(Datas[0]+"口パク"+Speak_Character_image,"画像")];
-        }
-      });
-
-      var xxx = game.assets["../image/stand.png"].width;
-      var yyy = game.assets["../image/stand.png"].height;
-      var Stand = new Sprite(xxx,yyy);
-      Stand.scaleX = width/xxx;
-      Stand.scaleY = width/16*9/yyy;
-      Stand.image = game.assets["../image/stand.png"];
-      Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
-      Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
-      scene.addChild(Stand);//証言台
+      var Stand = new Entity();
+      Stand._element = document.createElement("img");
+      Stand._element.src = "../image/stand.png";
+      Stand.width = width;
+      Stand.height = width/16*9;
+      scene.addChild(Stand);
 
       var C_name = new Label();
       C_name.font  = (width/20)+"px monospace";
@@ -3128,7 +3063,6 @@ function Game_load(width,height){
 
       for (var i = 0; i < 5; i++) {
         if(Choice_Flag[i+Setting_Flag[PAGAS]]){
-          //Item[Item_Number] = new Items(Choice_Flag[i+Setting_Flag[PAGAS]]);
           Submit(Choice_Flag[i+Setting_Flag[PAGAS]][0],width/8,Numbers,width/2.5+W_X_H-width/8,W_X_H,Choice_Flag[i+Setting_Flag[PAGAS]]);
           Numbers += (width/20)+(width/25)+(width/50);
         };
