@@ -2956,7 +2956,7 @@ function Game_load(width,height){
             case Type2:
               var ooo ="メニュー";
               break;
-            case "つきつける":
+            case "":
               if(Ig=="日常") var ooo ="選択音";
               else var ooo ="音無し";
               break;
