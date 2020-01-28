@@ -132,6 +132,7 @@ function Game_load(width,height){
       core.removeScene(core.loadingScene);
       core.dispatchEvent(e);
   });
+  game.preload("../sound/スカ.wav");
   game.preload("../image/融合.png");
   game.preload("../image/画像無.png");
   game.preload("../image/リバーシ.png");
@@ -2954,6 +2955,10 @@ function Game_load(width,height){
             case "設定を開く":
             case Type2:
               var ooo ="メニュー";
+              break;
+            case "つきつける":
+              if(Ig=="日常") var ooo ="選択音";
+              else var ooo ="音無し";
               break;
             default:
               var ooo ="選択音";
