@@ -267,7 +267,7 @@ function Game_load(width,height){
         BGM.title = null;
       }
       else{
-        if(BGM.title == BGM_Name) return;
+        if(BGM.title == BGM_Name && BGM.paused == false) return;
         BGM.src = conversion_url(BGM_Name,"サウンド");
         BGM.currentTime = 0;
         BGM.volume = Setting_Flag[9]/10;
