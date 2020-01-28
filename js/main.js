@@ -242,6 +242,7 @@ function Game_load(width,height){
         game.assets[Sound_url]._volume = Volume;
       }//オンライン
       if(Volume) game.assets[Sound_url].play();
+      else game.assets[Sound_url].stop();
       return;
     }
     function Sound_ON(Sound_Name){
