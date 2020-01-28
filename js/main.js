@@ -1148,14 +1148,11 @@ function Game_load(width,height){
         case "stand":
         case "留置所":
         case "裁判長席":
-          var xxx = game.assets["../image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["../image/"+Datas[0]+".png"].height;
-          var Stand = new Sprite(xxx,yyy);
-          Stand.scaleX = width/xxx;
-          Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["../image/"+Datas[0]+".png"];
-          Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
-          Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
+          var Stand = new Sprite();
+          Stand._element = document.createElement("img");
+          Stand._element.src = "../image/"+Datas[0]+".png";
+          Stand.width = width;
+          Stand.height = width/16*9;
           scene.addChild(Stand);
           break;
         default:
@@ -1246,14 +1243,11 @@ function Game_load(width,height){
       switch (Datas[0]) {
         case "right":
         case "left":
-          var xxx = game.assets["../image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["../image/"+Datas[0]+".png"].height;
-          var Stand = new Sprite(xxx,yyy);
-          Stand.scaleX = width/xxx;
-          Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["../image/"+Datas[0]+".png"];
-          Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
-          Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
+          var Stand = new Sprite();
+          Stand._element = document.createElement("img");
+          Stand._element.src = "../image/"+Datas[0]+".png";
+          Stand.width = width;
+          Stand.height = width/16*9;
           scene.addChild(Stand);
           break;
         default:
@@ -1401,8 +1395,6 @@ function Game_load(width,height){
       var Winking_time = 0;
 
       function T_D(){
-        //if(Datas[1]) Character1.image = game.assets[conversion_url(Datas[1],"画像")];
-        //if(Datas[5]) Character3.image = game.assets[conversion_url(Datas[5],"画像")];
         var s = true;
         var Itimozi = Datas[8].substring(Time,Time+1);
         for (var i = 0; i < Sound_effect_DATAS.length; i++){
@@ -1475,61 +1467,57 @@ function Game_load(width,height){
           case "・":
           case "!":
           case "！":
+            if(Datas[1]){
+              if(Character1._element.title != Datas[1]){
+                Character1._element.title = Datas[1];
+                Character1._element.src = conversion_url(Datas[1],"画像");
+              }
+            }
+            if(Datas[3]){
+              if(Character2._element.title != Datas[3]){
+                Character2._element.title = Datas[3];
+                Character2._element.src = conversion_url(Datas[3],"画像");
+              }
+            }
+            if(Datas[5]){
+              if(Character3._element.title != Datas[5]){
+                Character3._element.title = Datas[5];
+                Character3._element.src = conversion_url(Datas[5],"画像");
+              }
+            }
             break;
           default:
             if(Text[k].text.substring(0,1)=="「"||Text[k].text.substring(0,1)=="　"){
-              Speak_Character_image++;
-              break;
               switch(Speak_Character){
                 case "㊧":
-                if(game.assets[conversion_url(Datas[1]+"口パク"+Speak_Character_image,"画像")]==undefined){
-                  if(Speak_Character_image==1){
-                    Character1.image = game.assets[conversion_url(Datas[1],"画像")];
-                    Speak_Character_image = 0;
+                  if(Character1._element.title != Datas[1]+"口パク"){
+                    if(conversion_url(Datas[1]+"口パク","画像")!=Datas[1]+"口パク"){
+                      Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
+                      Character1._element.title = Datas[1]+"口パク";
+                    }
                   }
-                  else{
-                    Speak_Character_image = 1;
-                    Character1.image = game.assets[conversion_url(Datas[1]+"口パク"+Speak_Character_image,"画像")];
-                  }
-                }
-                else{
-                  Character1.image = game.assets[conversion_url(Datas[1]+"口パク"+Speak_Character_image,"画像")];
-                }
-                break;
+                  break;
                 case "㊥":
-                if(game.assets[conversion_url(Datas[3]+"口パク"+Speak_Character_image,"画像")]==undefined){
-                  if(Speak_Character_image==1){
-                    Character2.image = game.assets[conversion_url(Datas[3],"画像")];
-                    Speak_Character_image = 0;
+                  if(Character2._element.title != Datas[3]+"口パク"){
+                    if(conversion_url(Datas[3]+"口パク","画像")!=Datas[3]+"口パク"){
+                      Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
+                      Character2._element.title = Datas[3]+"口パク";
+                    }
                   }
-                  else{
-                    Speak_Character_image = 1;
-                    Character2.image = game.assets[conversion_url(Datas[3]+"口パク"+Speak_Character_image,"画像")];
-                  }
-                }
-                else{
-                  Character2.image = game.assets[conversion_url(Datas[3]+"口パク"+Speak_Character_image,"画像")];
-                }
-                break;
+                  break;
                 case "㊨":
-                if(game.assets[conversion_url(Datas[5]+"口パク"+Speak_Character_image,"画像")]==undefined){
-                  if(Speak_Character_image==1){
-                    Character3.image = game.assets[conversion_url(Datas[5],"画像")];
-                    Speak_Character_image = 0;
+                  if(Character3._element.title != Datas[5]+"口パク"){
+                    if(conversion_url(Datas[5]+"口パク","画像")!=Datas[5]+"口パク"){
+                      Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
+                      Character3._element.title = Datas[5]+"口パク";
+                    }
                   }
-                  else{
-                    Speak_Character_image = 1;
-                    Character3.image = game.assets[conversion_url(Datas[5]+"口パク"+Speak_Character_image,"画像")];
-                  }
-                }
-                else{
-                  Character3.image = game.assets[conversion_url(Datas[5]+"口パク"+Speak_Character_image,"画像")];
-                }
-                break;
+                  break;
                 default:
-                break;
+                  break;
               }
             }
+            break;
         }
         Time ++;
         if(s){
@@ -1633,6 +1621,9 @@ function Game_load(width,height){
           }
           else if(Datas[8].substring(Time-1,Time)==""){
             Text_defined = false;
+            if(Datas[1]) Character1._element.src = conversion_url(Datas[1],"画像");
+            if(Datas[3]) Character2._element.src = conversion_url(Datas[3],"画像");
+            if(Datas[5]) Character3._element.src = conversion_url(Datas[5],"画像");
           }
         }
       }
@@ -1641,57 +1632,6 @@ function Game_load(width,height){
         if(Explosion.frame!=11) Explosion.frame++;
         if(Return!=true&&Text_defined){
           T_D();
-        }
-        else{
-          Winking_time++;
-          if(game.fps!=10) game.fps = 10;
-          switch (Winking_time) {
-            case 1:
-            case 17:
-              //if(Datas[1]) Character1.image = game.assets[conversion_url(Datas[1],"画像")];
-              //if(Datas[5]) Character3.image = game.assets[conversion_url(Datas[5],"画像")];
-              break;//通常
-            case 14:
-            case 16:
-              if(Datas[1]){
-                if(game.assets[conversion_url(Datas[1]+"半目","画像")]!=undefined){
-                  //Character1.image = game.assets[conversion_url(Datas[1]+"半目","画像")];
-                }
-              }
-              if(Datas[3]){
-                if(game.assets[conversion_url(Datas[3]+"半目","画像")]!=undefined){
-                  //Character2.image = game.assets[conversion_url(Datas[3]+"半目","画像")];
-                }
-              }
-              if(Datas[5]){
-                if(game.assets[conversion_url(Datas[5]+"半目","画像")]!=undefined){
-                  //Character3.image = game.assets[conversion_url(Datas[5]+"半目","画像")];
-                }
-              }
-              break;//半目
-            case 15:
-              if(Datas[1]){
-                if(game.assets[conversion_url(Datas[1]+"目閉じ","画像")]!=undefined){
-                  //Character1.image = game.assets[conversion_url(Datas[1]+"目閉じ","画像")];
-                }
-              }
-              if(Datas[3]){
-                if(game.assets[conversion_url(Datas[3]+"目閉じ","画像")]!=undefined){
-                  //Character2.image = game.assets[conversion_url(Datas[3]+"目閉じ","画像")];
-                }
-              }
-              if(Datas[5]){
-                if(game.assets[conversion_url(Datas[5]+"目閉じ","画像")]!=undefined){
-                  //Character3.image = game.assets[conversion_url(Datas[5]+"目閉じ","画像")];
-                }
-              }
-              break;//閉じる
-            case 180:
-              Winking_time = 0;
-              break;//戻る
-            default:
-              break;
-          }
         }
       });
 
