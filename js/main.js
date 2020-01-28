@@ -60,20 +60,20 @@ function Datas_load(width,height){
       if(Sounds_DATAS[i].url.substring(0,4)!="http"){
         Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
       }
-      switch (Sounds_DATAS[i].タイプ) {
-        case "BGM":
+      switch (Sounds_DATAS[i].備考) {
+        default:
           BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
           k1++;
           break;
         case "音声":
           Sounds_urls[k0] = Sounds_DATAS[i].url;
-          Voice_DATAS[k2] = [Sounds_DATAS[i].名前,Sounds_DATAS[i].備考];
+          Voice_DATAS[k2] = Sounds_DATAS[i].名前;
           k0++;
           k2++;
           break;
         case "効果音":
           Sounds_urls[k0] = Sounds_DATAS[i].url;
-          Sound_effect_DATAS[k3] = [Sounds_DATAS[i].名前,Sounds_DATAS[i].備考];
+          Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
           k0++;
           k3++;
           break;
@@ -247,13 +247,13 @@ function Game_load(width,height){
     }
     function Sound_ON(Sound_Name){
       for (var i = 0; i < Sound_effect_DATAS.length; i++) {
-        if(Sound_effect_DATAS[i][0]==Sound_Name){
+        if(Sound_effect_DATAS[i]==Sound_Name){
           Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[10]);
           return;
         }
       }
       for (var i = 0; i < Voice_DATAS.length; i++) {
-        if(Voice_DATAS[i][0]==Sound_Name){
+        if(Voice_DATAS[i]==Sound_Name){
           Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[11]);
           return;
         }
