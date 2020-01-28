@@ -2,6 +2,7 @@ enchant();
 //サウンド変更前
 var Version = "バージョン 6.2";
 var Already = false;
+var BGM = document.createElement("audio");
 
 switch (Foldar) {
   case 1:
@@ -61,13 +62,13 @@ function Datas_load(width,height){
           break;
         case "音声":
           Sounds_urls[k0] = Sounds_DATAS[i].url;
-          Voice_DATAS[k2] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+          Voice_DATAS[k2] = [Sounds_DATAS[i].名前,Sounds_DATAS[i].備考];
           k0++;
           k2++;
           break;
         case "効果音":
           Sounds_urls[k0] = Sounds_DATAS[i].url;
-          Sound_effect_DATAS[k3] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+          Sound_effect_DATAS[k3] = [Sounds_DATAS[i].名前,Sounds_DATAS[i].備考];
           k0++;
           k3++;
           break;
@@ -246,19 +247,7 @@ function Game_load(width,height){
           return;
         }
       }
-      if(game.assets["../sound/"+Sound_Name+".wav"]==undefined){
-        Sound_branch("../sound/スカ.wav",Setting_Flag[10]);
-        return;
-      }
-      switch(Sound_Name){
-        default:
-          Sound_branch("../sound/"+Sound_Name+".wav",Setting_Flag[10]);
-          break;
-        case "お任せなのだ":
-        case "音量調整用":
-          Sound_branch("../sound/"+Sound_Name+".wav",Setting_Flag[11]);
-          break;
-      }
+      Sound_branch("../sound/スカ.wav",Setting_Flag[10]);
       return;
     }
     function BGM_ON(BGM_Name){
@@ -407,7 +396,7 @@ function Game_load(width,height){
       var www = ["僕","俺"];
       var Person = www[rand(1)];
       var S_image = "男主人公";
-      var S_Sound = conversion_url("男主人公ポポポ","サウンド");
+      var S_Sound = "男主人公ポポポ";
       if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"){
         var Person = "俺";
         var S_image = "蟹";
@@ -416,17 +405,17 @@ function Game_load(width,height){
       else if(Gender=="女"){
       var Person = "私";
       var S_image = "女主人公";
-      var S_Sound = conversion_url("女主人公ポポポ","サウンド");
+      var S_Sound = "女主人公ポポポ";
       }
       else{
       var Person = "我";
       var S_image = "../image/ユベル.png";
-      var S_Sound = conversion_url("未設定主人公ポポポ","サウンド");
+      var S_Sound = "未設定主人公ポポポ";
       }
       if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"){
         var Person = "僕";
         var S_image = "満足";
-        var S_Sound = conversion_url("スナネコ","サウンド");
+        var S_Sound = "スナネコ";
       }
       switch (Number) {
         case "セーブ読み込み":
@@ -559,7 +548,7 @@ function Game_load(width,height){
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
           Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
           Datas[16] = Main_DATAS[i].トロフィー;
-          Datas[19] = conversion_url(Main_DATAS[i].文章音,"サウンド");
+          Datas[19] = Main_DATAS[i].文章音;
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
           Datas[21] = Main_DATAS[i].表示アイテムフェード;
           if(Datas[1]=="主人公") Datas[1] = S_image;
@@ -705,7 +694,7 @@ function Game_load(width,height){
       for (var i = 0; i < Speech_DATAS.length; i++) {
         if(Number==Speech_DATAS[i].シーン名){
           Datas[0] = conversion_url(Speech_DATAS[i].吹き出し画像,"画像");
-          Datas[1] = conversion_url(Speech_DATAS[i].再生音声,"サウンド");
+          Datas[1] = Speech_DATAS[i].再生音声;
           Datas[2] = Speech_DATAS[i].次のシーン;
           Scene_kazu++;
           console.log(Scene_kazu);
@@ -736,7 +725,7 @@ function Game_load(width,height){
       Datas[16] = "";
       Datas[17] = "";
       Datas[18] = "";
-      Datas[19] = conversion_url("日付","サウンド");
+      Datas[19] = "日付";
       game.replaceScene(MainScene(Return));
       return;
     }
@@ -971,7 +960,7 @@ function Game_load(width,height){
       if(Version_new){
         Setting_Flag = window.localStorage.getItem("Setting_Flag").split(",");
         if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"&&Setting_Flag[2]=="男") Submit("テスト用");
-        else if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"&&Setting_Flag[2]=="未設定") Submit("テスト用");
+        else if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足") Submit("テスト用");
         else if(Already);
         else {
           fetch(GAS,)
@@ -2116,7 +2105,7 @@ function Game_load(width,height){
       switch (Sound) {
         case "主人公異議あり！":
         case "主人公待った！":
-          Sound = conversion_url(Setting_Flag[2]+Sound,"サウンド");
+          Sound = Setting_Flag[2]+Sound;
           break;
       }
 
