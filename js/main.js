@@ -267,11 +267,12 @@ function Game_load(width,height){
       }
       else{
         if(BGM.title == BGM_Name) return;
-        BGM.src = conversion_url(BGM_Name,"サウンド");
         BGM.currentTime = 0;
+        BGM.volume = Setting_Flag[9];
         BGM.play();
         BGM.title = BGM_Name;
         BGM.id = conversion_url(BGM_Name,"id");
+        BGM.src = conversion_url(BGM_Name,"サウンド");
       }
       return;
     }
@@ -447,12 +448,8 @@ function Game_load(width,height){
           return;
           break;
         case "タイトルに戻る":
-          /*for (var k = 0; k < Sounds_DATAS.length; k++){
-            if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-              game.assets[Sounds_DATAS[k].url].stop();
-              game.assets[Sounds_DATAS[k].url].状態 = "停止";
-            }
-          }*/
+          BGM.pause();
+          BGM.currentTime = 0;
           game.replaceScene(TitleScene());
           return;
           break;
@@ -2663,26 +2660,7 @@ function Game_load(width,height){
               }
               if(Setting_Flag[9]==10) Text[13].text = Setting_Flag[9];
               else Text[13].text = " "+Setting_Flag[9];
-              for (var k = 0; k < Sounds_DATAS.length; k++){
-                /*if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-                  var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
-                  game.assets[Sounds_DATAS[k].url].pause();
-                  if(game.assets[Sounds_DATAS[k].url].src==undefined){
-                    game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
-                    game.assets[Sounds_DATAS[k].url].play();
-                  }
-                  else{
-                    game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
-                    game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
-                    game.assets[Sounds_DATAS[k].url].play();
-                    game.assets[Sounds_DATAS[k].url].src.loop = true;
-                    game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
-                    game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
-                  }
-                  console.log(game.assets[Sounds_DATAS[k].url]);
-                  if(Setting_Flag[9]==0) game.assets[Sounds_DATAS[k].url].stop();
-                }*/
-              }
+              BGM.volume = Setting_Flag[9];
               break;
             case Text[11].y:
               if(c=="+"){
@@ -3182,22 +3160,7 @@ function Game_load(width,height){
         scene.addChild(Button[submits]);
         Button[submits].addEventListener('touchstart',function(e){
           if(Button_push("戻る")) return;
-          /*for (var k = 0; k < Sounds_DATAS.length; k++){
-            if(game.assets[Sounds_DATAS[k].url].状態=="ポーズ中"){
-              game.assets[Sounds_DATAS[k].url].play();
-              game.assets[Sounds_DATAS[k].url].状態 = "再生中";
-              if(game.assets[Sounds_DATAS[k].url].src==undefined){
-                game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
-              }
-              else{
-                game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
-                game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
-                game.assets[Sounds_DATAS[k].url].src.loop = true;
-                game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
-                game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
-              }
-            }
-          }*/
+          if(BGM.paused) BGM.play();
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3245,22 +3208,7 @@ function Game_load(width,height){
         scene.addChild(Button[submits2]);
         Button[submits2].addEventListener('touchstart',function(e){
           if(Button_push("ページ")) return;
-          /*for (var k = 0; k < Sounds_DATAS.length; k++){
-            if(game.assets[Sounds_DATAS[k].url].状態=="ポーズ中"){
-              game.assets[Sounds_DATAS[k].url].play();
-              game.assets[Sounds_DATAS[k].url].状態 = "再生中";
-              if(game.assets[Sounds_DATAS[k].url].src==undefined){
-                game.assets[Sounds_DATAS[k].url].volume = Setting_Flag[9]/10;
-              }
-              else{
-                game.assets[Sounds_DATAS[k].url]._currentTime = basyo;
-                game.assets[Sounds_DATAS[k].url]._volume = Setting_Flag[9]/10;
-                game.assets[Sounds_DATAS[k].url].src.loop = true;
-                game.assets[Sounds_DATAS[k].url].src.loopStart = Sounds_DATAS[k].ループ開始;
-                game.assets[Sounds_DATAS[k].url].src.loopEnd = Sounds_DATAS[k].ループ終了;
-              }
-            }
-          }*/
+          if(BGM.paused) BGM.play();
           switch (a) {
             case "前のページ":
               Pages -= 13;
@@ -3334,13 +3282,7 @@ function Game_load(width,height){
           });
         }
         else if(Text[i].text.substring(0,7)=="YOUTUBE"){
-          /*for (var k = 0; k < Sounds_DATAS.length; k++){
-            if(game.assets[Sounds_DATAS[k].url].状態=="再生中"){
-              var basyo = game.assets[Sounds_DATAS[k].url].currentTime;
-              game.assets[Sounds_DATAS[k].url].stop();
-              game.assets[Sounds_DATAS[k].url].状態 = "ポーズ中";
-            }
-          }*/
+          BGM.pause();
           var Video = new Entity()
           var Video_url = Text[i].text.substring(7);
           Text[i].text = "";
@@ -3655,16 +3597,6 @@ function Game_load(width,height){
 
       var Hand = new Sprite(280,370);
       Hand.image = game.assets["../image/Hand.png"];
-
-      /*var label = new Label();
-      label.x = 5;
-      label.y = 5;
-      label.color = 'black';
-      label.font = '40px "Arial"';
-      label.on('enterframe', function(){
-        label.text = (Time_R_ensyutu);
-      });
-      scene.addChild(label);*/
 
       var label1 = new Label();
       label1.x = 5;
