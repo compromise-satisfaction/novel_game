@@ -4,7 +4,7 @@ var Version = "バージョン 6.2";
 var Already = false;
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
-  BGM.currentTime = BGM.id;
+  BGM.currentTime = BGM.id*1;
   BGM.play();
 });
 
@@ -262,17 +262,17 @@ function Game_load(width,height){
     function BGM_ON(BGM_Name){
       if(BGM_Name=="変化無し") BGM_Name = Setting_Flag[14];
       else if(BGM_Name==""){
-        BGM.pause();
-        BGM.title = BGM_Name;
+        if(BGM.paused==false) BGM.pause();
+        BGM.title = null;
       }
       else{
         if(BGM.title == BGM_Name) return;
+        BGM.src = conversion_url(BGM_Name,"サウンド");
         BGM.currentTime = 0;
-        BGM.volume = Setting_Flag[9];
+        BGM.volume = Setting_Flag[9]/10;
         BGM.play();
         BGM.title = BGM_Name;
         BGM.id = conversion_url(BGM_Name,"id");
-        BGM.src = conversion_url(BGM_Name,"サウンド");
       }
       return;
     }
@@ -448,7 +448,7 @@ function Game_load(width,height){
           return;
           break;
         case "タイトルに戻る":
-          BGM.pause();
+          if(BGM.paused==false) BGM.pause();
           BGM.currentTime = 0;
           game.replaceScene(TitleScene());
           return;
@@ -2660,7 +2660,7 @@ function Game_load(width,height){
               }
               if(Setting_Flag[9]==10) Text[13].text = Setting_Flag[9];
               else Text[13].text = " "+Setting_Flag[9];
-              BGM.volume = Setting_Flag[9];
+              BGM.volume = Setting_Flag[9]/10;
               break;
             case Text[11].y:
               if(c=="+"){
@@ -3282,7 +3282,7 @@ function Game_load(width,height){
           });
         }
         else if(Text[i].text.substring(0,7)=="YOUTUBE"){
-          BGM.pause();
+          if(BGM.paused==false) BGM.pause();
           var Video = new Entity()
           var Video_url = Text[i].text.substring(7);
           Text[i].text = "";
