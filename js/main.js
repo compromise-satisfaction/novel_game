@@ -135,12 +135,6 @@ function Game_load(width,height){
   game.preload("../image/融合.png");
   game.preload("../image/画像無.png");
   game.preload("../image/リバーシ.png");
-  game.preload("../sound/Item.wav");
-  game.preload("../sound/セーブ.wav");
-  game.preload("../sound/音量調整用.wav");
-  game.preload("../sound/お任せなのだ.wav");
-  game.preload("../sound/スカ.wav");
-  game.preload("../sound/爆発.wav");
   game.preload("../image/left.png");
   game.preload("../image/right.png");
   game.preload("../image/white.png");
@@ -150,62 +144,7 @@ function Game_load(width,height){
   game.preload("../image/留置所.png");
   game.preload("../image/裁判長席.png");
   game.preload("../image/背景/留置所背景.png");
-  game.preload("../sound/進む.wav");
-  game.preload("../sound/ページ.wav");
   game.preload("../image/待った！.png");
-  game.preload("../sound/ア.wav");
-  game.preload("../sound/イ.wav");
-  game.preload("../sound/ウ.wav");
-  game.preload("../sound/エ.wav");
-  game.preload("../sound/オ.wav");
-  game.preload("../sound/カ.wav");
-  game.preload("../sound/キ.wav");
-  game.preload("../sound/ク.wav");
-  game.preload("../sound/ケ.wav");
-  game.preload("../sound/コ.wav");
-  game.preload("../sound/サ.wav");
-  game.preload("../sound/シ.wav");
-  game.preload("../sound/ス.wav");
-  game.preload("../sound/セ.wav");
-  game.preload("../sound/ソ.wav");
-  game.preload("../sound/タ.wav");
-  game.preload("../sound/チ.wav");
-  game.preload("../sound/ツ.wav");
-  game.preload("../sound/テ.wav");
-  game.preload("../sound/ト.wav");
-  game.preload("../sound/ナ.wav");
-  game.preload("../sound/ニ.wav");
-  game.preload("../sound/ヌ.wav");
-  game.preload("../sound/ネ.wav");
-  game.preload("../sound/ノ.wav");
-  game.preload("../sound/ハ.wav");
-  game.preload("../sound/ヒ.wav");
-  game.preload("../sound/フ.wav");
-  game.preload("../sound/ヘ.wav");
-  game.preload("../sound/ホ.wav");
-  game.preload("../sound/マ.wav");
-  game.preload("../sound/ミ.wav");
-  game.preload("../sound/ム.wav");
-  game.preload("../sound/メ.wav");
-  game.preload("../sound/モ.wav");
-  game.preload("../sound/ヤ.wav");
-  game.preload("../sound/ユ.wav");
-  game.preload("../sound/ヨ.wav");
-  game.preload("../sound/ラ.wav");
-  game.preload("../sound/ラ.wav");
-  game.preload("../sound/リ.wav");
-  game.preload("../sound/ル.wav");
-  game.preload("../sound/レ.wav");
-  game.preload("../sound/ロ.wav");
-  game.preload("../sound/ワ.wav");
-  game.preload("../sound/ヲ.wav");
-  game.preload("../sound/ン.wav");
-  game.preload("../sound/メニュー.wav");
-  game.preload("../sound/メニュー移動.wav");
-  game.preload("../sound/アイテム表示音.wav");
-  game.preload("../sound/戻る.wav");
-  game.preload("../sound/選択音.wav");
-  game.preload("../sound/Trophy.wav");
   game.preload("../image/Trophy.png");
   game.preload("../image/異議あり！.png");
   game.preload("../image/カットイン.png");
@@ -321,8 +260,9 @@ function Game_load(width,height){
       }
       return;
     }
-    function BGM_ON(){
-
+    function BGM_ON(BGM_Name){
+      console.log(BGM_Name);
+      return;
     }
     function Get_ICFT(DATAS){
       switch (DATAS[0]) {
@@ -548,6 +488,7 @@ function Game_load(width,height){
       Setting_Flag[3] = game.fps;
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
+          BGM_ON(Main_DATAS[i].BGM);
           Get_ICFT2(Main_DATAS[i],Person);
           game.fps = Main_DATAS[i].速度;
           Setting_Flag[3] = game.fps;
@@ -636,6 +577,7 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Choice_DATAS.length; i++) {
         if(Number==Choice_DATAS[i].シーン名){
+          BGM_ON(Choice_DATAS[i].BGM);
           Get_ICFT2(Choice_DATAS[i],Person);
           if(Choice_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
           else {
@@ -745,6 +687,7 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Interrogation_DATAS.length; i++) {
         if(Number==Interrogation_DATAS[i].シーン名){
+          BGM_ON(Interrogation_DATAS[i].BGM);
           Datas[0] = Interrogation_DATAS[i].人物;
           Datas[1] = Interrogation_DATAS[i].人物名;
           Datas[2] = Interrogation_DATAS[i].証言;
@@ -1876,7 +1819,7 @@ function Game_load(width,height){
           Trophy_text.tl.fadeIn(5);
           Trophy_text.text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
           scene.addChild(Trophy_text);
-          Sound_ON("Trophy");
+          Sound_ON("トロフィー");
           Trophy.addEventListener("enterframe",function(){
             Trophy_Time++;
             if(Trophy_Time==20){
@@ -2906,7 +2849,7 @@ function Game_load(width,height){
       Item.x = X_0 + width;
       Item.y = Y_0 + width/32;
       scene.addChild(Item);
-      Sound_ON("Item");
+      Sound_ON("アイテムゲット");
 
       Item.addEventListener("enterframe",function(){
         if(Item.x < X_0+width/2-width/4-width/18 || Item.x > X_0+width/2-width/4+width/18){
