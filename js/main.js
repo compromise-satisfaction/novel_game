@@ -1021,6 +1021,9 @@ function Game_load(width,height){
     var MainScene = function(Return,Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
+      var Sound_effect = Datas[8].match(/\(♪[^\)]+\)/g);
+      Datas[8] = Datas[8].replace(/\(♪[^\)]+\)/g,"§");
+
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
         else{
@@ -1393,26 +1396,16 @@ function Game_load(width,height){
       }
       var Speak_Character_image = 0;
       var Winking_time = 0;
+      var sese = 0;
 
       function T_D(){
         var s = true;
         var Itimozi = Datas[8].substring(Time,Time+1);
-        for (var i = 0; i < Sound_effect_DATAS.length; i++){
-          if(Sound_effect_DATAS[i][1]==Itimozi){
-            if(Itimozi!="") Itimozi = "サウンド";
-            var Itimozi_on = Sound_effect_DATAS[i][0];
-          }
-        }
-        for (var i = 0; i < Voice_DATAS.length; i++){
-          if(Voice_DATAS[i][1]==Itimozi){
-            if(Itimozi!="") Itimozi = "サウンド";
-            var Itimozi_on = Voice_DATAS[i][0];
-          }
-        }
         switch (Itimozi) {
-          case "サウンド":
+          case "§":
             s = false;
-            if(Return==false) Sound_ON(Itimozi_on);
+            if(Return==false) Sound_ON(Sound_effect[sese].replace(/[\(♪\)]/g,""));
+            sese++;
             break;
           case "→":
           s = false;
