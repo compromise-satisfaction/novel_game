@@ -48,7 +48,7 @@ function Datas_load(width,height){
     Interrogation_DATAS = result.尋問;
     for (var i = 0; i < Image_DATAS.length; i++){
       if(Image_DATAS[i].url.substring(0,4)!="http"){
-        Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url +".png";
+        Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
       }
       Image_urls[i] = Image_DATAS[i].url;
     }
