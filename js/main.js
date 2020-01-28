@@ -3025,7 +3025,7 @@ function Game_load(width,height){
         scene.addChild(Button[submits]);
         Button[submits].addEventListener('touchstart',function(e){
           if(Button_push("戻る")) return;
-          if(BGM.paused) BGM.play();
+          if(BGM.paused&&BGM.title) BGM.play();
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3073,7 +3073,7 @@ function Game_load(width,height){
         scene.addChild(Button[submits2]);
         Button[submits2].addEventListener('touchstart',function(e){
           if(Button_push("ページ")) return;
-          if(BGM.paused) BGM.play();
+          if(BGM.paused&&BGM.title) BGM.play();
           switch (a) {
             case "前のページ":
               Pages -= 13;
