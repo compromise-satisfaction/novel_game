@@ -3,6 +3,10 @@ enchant();
 var Version = "バージョン 6.2";
 var Already = false;
 var BGM = document.createElement("audio");
+BGM.addEventListener("ended",function(e){
+  BGM.currentTime = BGM.id;
+  BGM.play();
+});
 
 switch (Foldar) {
   case 1:
@@ -220,6 +224,11 @@ function Game_load(width,height){
             if(Sounds_DATAS[i].名前==name) return(Sounds_DATAS[i].url);
           }
           break;
+        case "id":
+          for (var i = 0; i < Sounds_DATAS.length; i++) {
+            if(Sounds_DATAS[i].名前==name) return(Sounds_DATAS[i].備考);
+          }
+          break;
       }
       return(name);
     }
@@ -252,7 +261,18 @@ function Game_load(width,height){
     }
     function BGM_ON(BGM_Name){
       if(BGM_Name=="変化無し") BGM_Name = Setting_Flag[14];
-      console.log(BGM_Name);
+      else if(BGM_Name==""){
+        BGM.pause();
+        BGM.title = BGM_Name;
+      }
+      else{
+        if(BGM.title == BGM_Name) return;
+        BGM.src = conversion_url(BGM_Name,"サウンド");
+        BGM.currentTime = 0;
+        BGM.play();
+        BGM.title = BGM_Name;
+        BGM.id = conversion_url(BGM_Name,"id");
+      }
       return;
     }
     function Get_ICFT(DATAS){
