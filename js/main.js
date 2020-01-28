@@ -1431,13 +1431,13 @@ function Game_load(width,height){
         var Itimozi = Datas[8].substring(Time,Time+1);
         for (var i = 0; i < Sound_effect_DATAS.length; i++){
           if(Sound_effect_DATAS[i][1]==Itimozi){
-            Itimozi = "サウンド";
+            if(Itimozi!="") Itimozi = "サウンド";
             var Itimozi_on = Sound_effect_DATAS[i][0];
           }
         }
         for (var i = 0; i < Voice_DATAS.length; i++){
           if(Voice_DATAS[i][1]==Itimozi){
-            Itimozi = "サウンド";
+            if(Itimozi!="") Itimozi = "サウンド";
             var Itimozi_on = Voice_DATAS[i][0];
           }
         }
