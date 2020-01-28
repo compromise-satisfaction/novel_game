@@ -1929,15 +1929,11 @@ function Game_load(width,height){
           scene.addChild(Background);
           break;
         default:
-          if(game.assets[Datas[0]]==undefined&&Datas[0]!="") Datas[0] = "../image/画像無.png";
-          var xxx = game.assets[Datas[0]].width;
-          var yyy = game.assets[Datas[0]].height;
-          var Background = new Sprite(xxx,yyy);
-          Background.scaleX = ((width)/xxx);
-          Background.scaleY = (((width/16)*9)/yyy);
-          Background.image = game.assets[Datas[0]];
-          Background.x = (Background.scaleX*xxx/2)-xxx/2;
-          Background.y = (Background.scaleY*yyy/2)-yyy/2;
+          var Background = new Sprite();
+          Background._element = document.createElement("img");
+          Background._element.src = conversion_url(Datas[0],"画像");
+          Background.width = width;
+          Background.height = width/16*9;
           scene.addChild(Background);
           break;
       }
