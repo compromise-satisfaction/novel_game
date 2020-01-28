@@ -1967,7 +1967,7 @@ function Game_load(width,height){
       if(Datas[1]!=false){
         var Character1 = new Sprite();
         Character1._element = document.createElement("img");
-        Character1._element.src = conversion_url(Datas[2],"画像");
+        Character1._element.src = conversion_url(Datas[1],"画像");
         Character1.width = width/16*9;
         Character1.height = width/16*9;
         Character1.x = -width/32;
