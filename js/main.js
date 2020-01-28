@@ -284,6 +284,7 @@ function Game_load(width,height){
     }
     function Sound_branch(Sound_url,Volume){
       Volume /= 10;
+      console.log(Sound_url);
       if(game.assets[Sound_url].src==undefined){
         game.assets[Sound_url].volume = Volume;
       }//オフライン
@@ -308,6 +309,7 @@ function Game_load(width,height){
       }
       if(game.assets["../sound/"+Sound_Name+".wav"]==undefined){
         Sound_branch("../sound/スカ.wav",Setting_Flag[10]);
+        return;
       }
       switch(Sound_Name){
         default:
