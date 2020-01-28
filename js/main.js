@@ -1,11 +1,12 @@
 enchant();
 //サウンド変更前
-var Version = "バージョン 6.2";
+var Version = "バージョン 6.3";
 var Already = false;
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
   BGM.currentTime = BGM.id*1;
   BGM.play();
+  console.log(BGM.currentTime);
 });
 
 switch (Foldar) {
