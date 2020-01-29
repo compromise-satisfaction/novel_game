@@ -304,6 +304,7 @@ function Game_load(width,height){
             if(Log_Flag[i]==DATAS[1]) return;
           }
           Log_Flag[Log_Flag.length] = DATAS[1];
+          window.localStorage.setItem("Log_Flag",Log_Flag);
           return;
           break;
         case "人物":
@@ -436,6 +437,7 @@ function Game_load(width,height){
         }
         else{
           Log_Flag[Log_Flag.length] = Number+"プレイ済み";
+          window.localStorage.setItem("Log_Flag",Log_Flag);
           console.log(Number);
         }
       }
@@ -452,6 +454,7 @@ function Game_load(width,height){
         }
         else{
           Log_Flag[Log_Flag.length] = Number+"プレイ済み";
+          window.localStorage.setItem("Log_Flag",Log_Flag);
           console.log(Number);
         }
       }
