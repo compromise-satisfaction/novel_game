@@ -410,6 +410,8 @@ function Game_load(width,height){
         }
     }
     function Scene_loads(Number,Return,Item,Item_type){
+      if(have(Number+"既読")) Return = true;
+      else Log_Flag[Log_Flag.length] = Number+"既読";
       if(Item){
         if(Item_type) Number = [Item+Number,"つきつけるデフォルト"+Item_type+Number];
         else Number = [Item+Number.split("↓")[0],Number.split("↓")[1]];
@@ -888,7 +890,6 @@ function Game_load(width,height){
     return Math.floor(Math.random() * (n + 1));
     }
 
-
     var TitleScene = function(){
 
       var scene = new Scene();                                // 新しいシーンを作る
@@ -1027,9 +1028,6 @@ function Game_load(width,height){
 
       var Sound_effect = Datas[8].match(/\(♪[^♪]+♪\)/g);
       Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
-
-      if(have(Number+"既読")) Return = true;
-      else Log_Flag[Log_Flag.length] = Number+"既読";
 
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
@@ -1817,8 +1815,6 @@ function Game_load(width,height){
     var ChoiceScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      if(have(Number+"既読")==false) Log_Flag[Log_Flag.length] = Number+"既読";
-
       if(Datas[6]){
         if(Datas[6]=="無し") Datas[6] = Number;
         else{
@@ -2060,8 +2056,6 @@ function Game_load(width,height){
     };
     var InterrogationScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
-
-      if(have(Number+"既読")==false) Log_Flag[Log_Flag.length] = Number+"既読";
 
       if(Datas[5]){
         if(Datas[5]=="無し") Datas[5] = Number;
