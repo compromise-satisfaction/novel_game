@@ -144,8 +144,8 @@ function Game_load(width,height){
   game.preload("../image/リバーシ.png");
   game.preload("../image/left.png");
   game.preload("../image/right.png");
-  game.preload("../image/white.png");
-  game.preload("../image/Black.png");
+  game.preload("../image/白.png");
+  game.preload("../image/黒.png");
   game.preload("../image/stand.png");
   game.preload("../image/ユベル.png");
   game.preload("../image/留置所.png");
@@ -156,12 +156,10 @@ function Game_load(width,height){
   game.preload("../image/異議あり！.png");
   game.preload("../image/カットイン.png");
   game.preload("../image/Explosion.png");
-  game.preload("../image/背景/Black.png");
   game.preload("../image/背景/left.png");
   game.preload("../image/背景/right.png");
   game.preload("../image/背景/stand.png");
   game.preload("../image/背景/裁判長席.png");
-  game.preload("../image/背景/透明.png");
   game.preload("../image/背景/留置所.png");
   game.preload("../image/Background.png");
   game.preload("../image/Set_button.png");
@@ -620,7 +618,7 @@ function Game_load(width,height){
           if(Datas[3]=="主人公") Datas[3] = S_image;
           if(Datas[5]=="主人公") Datas[5] = S_image;
           if(Datas[19]=="主人公") Datas[19] = S_Sound;
-          if(Main_DATAS[i].背景=="半透明") Datas[0] = "../image/Black.png";
+          if(Main_DATAS[i].背景=="半透明") Datas[0] = "../image/黒.png";
           if(Main_DATAS[i].背景=="半透明"&&Scene_kazu==1){
             Scene_kazu++;
             console.log(Scene_kazu);
@@ -1102,7 +1100,7 @@ function Game_load(width,height){
             Background.rotation = Rotation_Y;
             scene.addChild(Background);//背景
             var Background2 = new Sprite(width,height);
-            Background2.image = game.assets["../image/white.png"];
+            Background2.image = game.assets["../image/白.png"];
             Background2.x = 0;
             Background2.y = (width/16)*9;
             scene.addChild(Background2);//白地
@@ -1797,12 +1795,12 @@ function Game_load(width,height){
 
       game.fps = 10;
 
-      var xxx = game.assets["../image/背景/Black.png"].width;
-      var yyy = game.assets["../image/背景/Black.png"].height;
+      var xxx = game.assets["../image/黒.png"].width;
+      var yyy = game.assets["../image/黒.png"].height;
       var Background = new Sprite(xxx,yyy);
       Background.scaleX = width/xxx;
       Background.scaleY = width/16*9/yyy;
-      Background.image = game.assets["../image/背景/Black.png"];
+      Background.image = game.assets["../image/黒.png"];
       Background.x = (Background.scaleX*xxx/2)-xxx/2;
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       if(Out!=0){
@@ -1817,7 +1815,7 @@ function Game_load(width,height){
       scene.addChild(Background);//背景
 
       var Background2 = new Sprite(width,height);
-      Background2.image = game.assets["../image/white.png"];
+      Background2.image = game.assets["../image/白.png"];
       Background2.x = 0;
       Background2.y = (width/16)*9;
       scene.addChild(Background2);//白地
@@ -1884,7 +1882,7 @@ function Game_load(width,height){
           Background.rotation = Rotation_Y;
           scene.addChild(Background);//背景
           var Background2 = new Sprite(width,height);
-          Background2.image = game.assets["../image/white.png"];
+          Background2.image = game.assets["../image/白.png"];
           Background2.x = 0;
           Background2.y = (width/16)*9;
           scene.addChild(Background2);//白地
@@ -2632,7 +2630,7 @@ function Game_load(width,height){
       function Touchs(x,y,width_t,height_t,Number){
         Touch[k] = new Sprite();
         Touch[k]._element = document.createElement("img");
-        Touch[k]._element.src = "../image/背景/透明.png";
+        Touch[k]._element.src = "../image/透明.png";
         Touch[k].x = x*width/NaturalWidth;
         Touch[k].y = y*width/16*9/NaturalHeight;
         Touch[k].width = width_t*width/NaturalWidth;
@@ -2646,21 +2644,6 @@ function Game_load(width,height){
         });
         return;
       }
-
-      /*var Touchs = Class.create(Sprite, {
-        initialize: function(x,y,width1,height1,Number){
-          Sprite.call(this,width1*Background.scaleX,height1*Background.scaleY);
-          this.x = x*Background.scaleX;
-          this.y = y*Background.scaleY;
-          this.image = game.assets["../image/背景/透明.png"];
-          scene.addChild(this);
-          this.addEventListener('touchstart',function(e){
-            Sound_ON("選択音");
-            Scene_loads(Number,false,false);
-            return;
-          });
-        }
-      });*/
 
       var Touch = [];
       var k = 0;
@@ -2689,7 +2672,7 @@ function Game_load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite(width,height-(width/16)*9);
-      Background.image = game.assets["../image/white.png"];
+      Background.image = game.assets["../image/白.png"];
       Background.x = 0;
       Background.y = (width/16)*9;
       scene.addChild(Background);
@@ -2838,7 +2821,7 @@ function Game_load(width,height){
 
       var Item_image = new Sprite();
       Item_image._element = document.createElement("img");
-      Item_image._element.src = "../image/white.png";
+      Item_image._element.src = "../image/白.png";
       Item_image.width = width/4;
       Item_image.height = width/4;
       Item_image.x = width/1.6;
@@ -3327,7 +3310,7 @@ function Game_load(width,height){
       Pointer.image = game.assets["../image/Hand.png"];
 
       var White = new Sprite(405,600);
-      White.image = game.assets["../image/white.png"];
+      White.image = game.assets["../image/白.png"];
       scene.addChild(White);
 
       var Reversi = new Sprite(405,405);
@@ -4137,7 +4120,7 @@ function Game_load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var White = new Sprite(405,600);
-      White.image = game.assets["../image/white.png"];
+      White.image = game.assets["../image/白.png"];
       scene.addChild(White);
 
       var Set_button = new Sprite(195,95);
