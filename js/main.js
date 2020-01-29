@@ -286,6 +286,9 @@ function Game_load(width,height){
       switch (DATAS[0]) {
         case "フラグ":
           for (var i = 0; i < Flag.length; i++){
+            if(Datas[1].split("→")[1]=="消滅"&&Flag[i]==Datas[1].split("→")[0]){
+              Flag.splice(i,1);
+            }
             if(Flag[i]==DATAS[1]) return;
           }
           Flag[Flag.length] = DATAS[1];
