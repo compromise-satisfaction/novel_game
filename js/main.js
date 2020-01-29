@@ -4291,12 +4291,14 @@ function Game_load(width,height){
                   Flag.splice(i,1);
                   this._element.value = Button[3]._element.value+" オフ。";
                   Sound_ON("セーブ");
+                  console.log(Flag);
                   return;
                 }
               }
               Flag[Flag.length] = Button[3]._element.value;
               this._element.value = Button[3]._element.value+" オン。";
               Sound_ON("セーブ");
+              console.log(Flag);
               break;
             case "フラグリセット":
               Flag = [];
