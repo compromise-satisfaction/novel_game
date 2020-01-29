@@ -2061,6 +2061,8 @@ function Game_load(width,height){
     var InterrogationScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
+      if(have(Number+"既読")==false) Log_Flag[Log_Flag.length] = Number+"既読";
+
       if(Datas[5]){
         if(Datas[5]=="無し") Datas[5] = Number;
         else{
