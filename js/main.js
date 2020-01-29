@@ -146,6 +146,7 @@ function Game_load(width,height){
   game.preload("../image/right.png");
   game.preload("../image/白.png");
   game.preload("../image/黒.png");
+  game.preload("../image/背景/Black.png");
   game.preload("../image/stand.png");
   game.preload("../image/ユベル.png");
   game.preload("../image/留置所.png");
