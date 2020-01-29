@@ -388,10 +388,10 @@ function Game_load(width,height){
               continue;
               break;
             default:
+              if(Get==false) return;
               console.log(GET[l]);
               break;
             }
-            if(Get==false) return;
             for (var k = 0; k < I_C_F_T_DATAS.length; k++) {
               if(I_C_F_T_DATAS[k].入手==GET[l]){
                 break;
@@ -674,9 +674,12 @@ function Game_load(width,height){
       for (var i = 0; i < Item_get_DATAS.length; i++) {
         if(Number==Item_get_DATAS[i].シーン名){
           Get_ICFT2(Item_get_DATAS[i],Person,Get);
-          game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン),Get);
-          Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+          if(Get){
+            game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
+            Scene_kazu++;
+            console.log("Scene数",Scene_kazu);
+          }
+          else game.replaceScene(MainScene(Return,Item_get_DATAS[i].次のシーン));
           return;
         }
       }
@@ -2634,15 +2637,8 @@ function Game_load(width,height){
 
       return scene;
     };
-    var ItemgetScene = function(a,b,c,Get){
+    var ItemgetScene = function(a,b,c){
       var scene = new Scene();                                // 新しいシーンを作る
-
-      if(Get==false){
-        game.popScene();
-        Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
-        Scene_loads(c,false,false);
-      }
 
       var Background = new Sprite(width,height-(width/16)*9);
       Background.image = game.assets["../image/white.png"];
