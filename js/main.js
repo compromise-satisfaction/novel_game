@@ -286,7 +286,7 @@ function Game_load(width,height){
       switch (DATAS[0]) {
         case "フラグ":
           for (var i = 0; i < Flag.length; i++){
-            if(Datas[1].split("→")[1]=="消滅"&&Flag[i]==Datas[1].split("→")[0]){
+            if(DATAS[1].split("→")[1]=="消滅"&&Flag[i]==DATAS[1].split("→")[0]){
               Flag.splice(i,1);
               return;
             }
@@ -297,7 +297,7 @@ function Game_load(width,height){
           break;
         case "記録":
           for (var i = 0; i < Log_Flag.length; i++){
-            if(Datas[1].split("→")[1]=="消滅"&&Log_Flag[i]==Datas[1].split("→")[0]){
+            if(DATAS[1].split("→")[1]=="消滅"&&Log_Flag[i]==DATAS[1].split("→")[0]){
               Log_Flag.splice(i,1);
               return;
             }
