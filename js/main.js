@@ -993,6 +993,12 @@ function Game_load(width,height){
             Flag = [];//フラグ
             Item_Flag = [];//所持アイテム
             Character_Flag = [];//人物
+            if(a=="テスト用"){
+              Log_Flag = [];//記録
+              for (var i = 0; i < Main_DATAS.length; i++) {
+                Log_Flag[i] = Main_DATAS[i].シーン名 + "プレイ済み";
+              }
+            }
           }
           switch (a) {
             case "続きから":
@@ -4279,18 +4285,10 @@ function Game_load(width,height){
               this._element.value = Button[2]._element.value+" 入手。";
               Sound_ON("セーブ");
               break;
-            case "シーンデータ修正":
-              game.popScene();
-              Scene_kazu--;
-              console.log("Scene数",Scene_kazu);
-              Datas = ["Black",0,0,0,0,0,0,0,"シーンデータを修正しました。",0,0,0,Setting_Flag[4],0];
-              game.replaceScene(MainScene());
-              Sound_ON("セーブ");
-              break;
             case "フラグ追加 or 消去":
               for (var i = 0; i < Flag.length; i++){
                 if(Flag[i]==Button[3]._element.value){
-                  Flag[i] = false;
+                  Flag.splice(i,1);
                   this._element.value = Button[3]._element.value+" オフ。";
                   Sound_ON("セーブ");
                   return;
@@ -4323,29 +4321,29 @@ function Game_load(width,height){
               Sound_ON("セーブ");
               break;
             case "シーンデータ更新":
-            Datakousin = true;
-            this._element.value = Button[1]._element.value+"中……";
-            fetch(GAS,
-              {
-                method: 'POST',
-                body: ""
-              }
-            )
-            .then(res => res.json())
-            .then(result => {
-              Image_urls = [];
-              Move_DATAS = result.移動;
-              Main_DATAS = result.メイン;
-              Choice_DATAS = result.選択;
-              Branch_DATAS = result.分岐;
-              Item_get_DATAS = result.入手;
-              Inspect_DATAS = result.調べる;
-              I_C_F_T_DATAS = result.フラグ類;
-              Speech_DATAS = result.吹き出し;
-              Interrogation_DATAS = result.尋問;
-              this._element.value = "シーンデータ更新完了。";
-              Sound_ON("セーブ");
-              Datakousin = false;
+              Datakousin = true;
+              this._element.value = Button[1]._element.value+"中……";
+              fetch(GAS,
+                {
+                  method: 'POST',
+                  body: ""
+                }
+              )
+              .then(res => res.json())
+              .then(result => {
+                Image_urls = [];
+                Move_DATAS = result.移動;
+                Main_DATAS = result.メイン;
+                Choice_DATAS = result.選択;
+                Branch_DATAS = result.分岐;
+                Item_get_DATAS = result.入手;
+                Inspect_DATAS = result.調べる;
+                I_C_F_T_DATAS = result.フラグ類;
+                Speech_DATAS = result.吹き出し;
+                Interrogation_DATAS = result.尋問;
+                this._element.value = "シーンデータ更新完了。";
+                Sound_ON("セーブ");
+                Datakousin = false;
               },);
               break;
             default:
@@ -4368,7 +4366,7 @@ function Game_load(width,height){
       Submit("実行する");
 
       var Option = [];
-      var Choice_Transform = ["することを選択","フラグ類入手","アイテム作成","フラグ追加 or 消去","シーンデータ修正","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
+      var Choice_Transform = ["フラグ類入手","アイテム作成","フラグ追加 or 消去","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
