@@ -845,7 +845,7 @@ function Game_load(width,height){
       for (var i = 0; i < Flag.length; i++) {
         if(Flag[i]==a) return(true);
       }
-      for (var i = 0; i < Flag.length; i++) {
+      for (var i = 0; i < Log_Flag.length; i++) {
         if(Log_Flag[i]==a) return(true);
       }
       return(false);
@@ -1025,8 +1025,11 @@ function Game_load(width,height){
     var MainScene = function(Return,Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var Sound_effect = Datas[8].match(/\(♪[^\)]+\)/g);
-      Datas[8] = Datas[8].replace(/\(♪[^\)]+\)/g,"§");
+      var Sound_effect = Datas[8].match(/\(♪[^♪]+♪\)/g);
+      Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
+
+      if(have(Number+"既読")) Return = true;
+      else Log_Flag[Log_Flag.length] = Number+"既読";
 
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
@@ -1130,6 +1133,8 @@ function Game_load(width,height){
         if(Datas[0]=="カットイン"){
           Character2.width = width;
           Character2.height = width;
+          Character2._element.transform = "matrix(1,10,10,10,10,10)";
+          console.log(Character2._element);
         }
         else {
           Character2.x = width/4-width/32;
@@ -1678,7 +1683,7 @@ function Game_load(width,height){
       if(Datas[10]!=false) Button(1,"◀",Datas[10]);//戻る2
       if(Datas[11]!=false) Button(2,"アイテム",Datas[11]);//設定
       if(Datas[12]!=false) Button(3,"▶",Datas[12]);//進む1
-      if(Datas[13]!=false) Button(4,"▶ ▶",Datas[13]);//進む2
+      if(Datas[13]!=false&&have(Datas[13]+"既読")) Button(4,"▶ ▶",Datas[13]);//進む2
 
       if(Datas[16]!=false&&Datas[16]!=undefined){
           for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
@@ -1812,6 +1817,7 @@ function Game_load(width,height){
     var ChoiceScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
+      if(have(Number+"既読")==false) Log_Flag[Log_Flag.length] = Number+"既読";
 
       if(Datas[6]){
         if(Datas[6]=="無し") Datas[6] = Number;
@@ -1879,6 +1885,7 @@ function Game_load(width,height){
 
       switch (Datas[0]) {
         case "stand":
+        case "裁判長席":
         case "留置所":
           var Stand = new Sprite();
           Stand._element = document.createElement("img");
