@@ -1719,7 +1719,7 @@ function Game_load(width,height){
       if(Datas[10]!=false) Button(1,"◀",Datas[10]);//戻る2
       if(Datas[11]!=false) Button(2,"アイテム",Datas[11]);//設定
       if(Datas[12]!=false) Button(3,"▶",Datas[12]);//進む1
-      if(Datas[13]!=false&&have(Datas[13]+"既読")) Button(4,"▶ ▶",Datas[13]);//進む2
+      if(Datas[13]!=false&&have(Datas[13]+"プレイ済み")) Button(4,"▶ ▶",Datas[13]);//進む2
 
       if(Datas[16]!=false&&Datas[16]!=undefined){
           for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
