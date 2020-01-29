@@ -2689,13 +2689,13 @@ function Game_load(width,height){
       Sound_ON("アイテムゲット");
 
       Item.addEventListener("enterframe",function(){
-        if(Item.x < X_0+width/2-width/4-width/18 || Item.x > X_0+width/2-width/4+width/18){
+        if(Item.x < width/2-width/4-width/18 || Item.x > width/2-width/4+width/18){
           Item.x -= width/18;
         }
         else {
-          Item.x = X_0+width/2-width/4;
+          Item.x = width/2-width/4;
         }
-        if(Item.x<X_0-width/2){
+        if(Item.x<-width/2){
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -2716,10 +2716,10 @@ function Game_load(width,height){
             T_D();
           }
         }
-        if(Item.x>X_0+width/2-width/4){
-          Item.x = X_0 + width/2 -width/4;
+        if(Item.x>width/2-width/4){
+          Item.x = width/2 -width/4;
         }
-        else if(Item.x==X_0+width/2-width/4){
+        else if(Item.x==width/2-width/4){
           Item.x -= width/18+1;
         }
         else{
