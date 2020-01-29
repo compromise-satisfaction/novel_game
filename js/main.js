@@ -679,7 +679,7 @@ function Game_load(width,height){
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
           }
-          else game.replaceScene(MainScene(Return,Item_get_DATAS[i].次のシーン));
+          else Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
           return;
         }
       }
