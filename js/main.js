@@ -2053,9 +2053,8 @@ function Game_load(width,height){
         var Pop = new Sprite();
         Pop._element = document.createElement("img");
         Pop._element.src = conversion_url(Type,"画像");
-        Pop.width = width/16*9;
+        Pop.width = width;
         Pop.height = width/16*9;
-        Pop.x = -width/32;
       }
       else {
         var xxx = game.assets[Type].width;
@@ -2068,7 +2067,7 @@ function Game_load(width,height){
         Pop.y = (Pop.scaleY*yyy/2)-yyy/2;
       }
       scene.addChild(Pop);
-      
+
       if(Sound) Sound_ON(Sound);
 
       var Time = 0;
