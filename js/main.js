@@ -998,6 +998,9 @@ function Game_load(width,height){
               for (var i = 0; i < Main_DATAS.length; i++) {
                 Log_Flag[i] = Main_DATAS[i].シーン名 + "プレイ済み";
               }
+              for (var k = 0; k < Choice_DATAS.length; i++) {
+                Log_Flag[i+k] = Choice_DATAS[k].シーン名 + "プレイ済み";
+              }
             }
           }
           switch (a) {
