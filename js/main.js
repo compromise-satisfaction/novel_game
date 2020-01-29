@@ -618,13 +618,7 @@ function Game_load(width,height){
           if(Datas[3]=="主人公") Datas[3] = S_image;
           if(Datas[5]=="主人公") Datas[5] = S_image;
           if(Datas[19]=="主人公") Datas[19] = S_Sound;
-          if(Main_DATAS[i].背景=="半透明") Datas[0] = "../image/黒.png";
-          if(Main_DATAS[i].背景=="半透明"&&Scene_kazu==1){
-            Scene_kazu++;
-            console.log(Scene_kazu);
-            game.pushScene(MainScene(Return,Number));
-          }
-          else game.replaceScene(MainScene(Return,Number));
+          game.replaceScene(MainScene(Return,Number));
           return;
         }
       }
@@ -3138,7 +3132,7 @@ function Game_load(width,height){
           var Photo = new Sprite();
           Photo._element = document.createElement("img");
           Photo._element.src = conversion_url(Photo_url,"画像");
-          if(conversion_url(Photo_url,"比率")=="正方形"){
+          if(conversion_url(Photo_url,"比率")=="正方形"||Photo._element.NaturalWidth==Photo._element.naturalHeight){
             Photo.width = width*0.8;
             Photo.height = width*0.8;
             Photo.x = width/10;
