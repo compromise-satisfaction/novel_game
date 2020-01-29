@@ -168,7 +168,6 @@ function Game_load(width,height){
   game.preload("../image/stone.png");
   game.preload("../image/Hand.png");
   game.preload("../image/V_or_D.png");
-  //game.preload(Image_urls);
   game.preload(Sounds_urls);
 
   game.fps = 10;
@@ -234,6 +233,7 @@ function Game_load(width,height){
           for (var i = 0; i < Image_DATAS.length; i++) {
             if(Image_DATAS[i].名前==name) return(Image_DATAS[i].備考);
           }
+          break;
       }
       return(name);
     }
@@ -1172,8 +1172,7 @@ function Game_load(width,height){
         if(Datas[0]=="カットイン"){
           Character2.width = width;
           Character2.height = width;
-          Character2._element.transform = "matrix(1,10,10,10,10,10)";
-          console.log(Character2._element);
+          console.log(Character2._element.naturalHeight);
         }
         else {
           Character2.x = width/4-width/32;
@@ -2618,7 +2617,28 @@ function Game_load(width,height){
         else Scene_loads("調べる何もない",false,false);
       });
 
-      var Touchs = Class.create(Sprite, {
+      var NaturalWidth = Background._element.naturalWidth;
+      var NaturalHeight = Background._element.naturalHeight;
+
+      function Touchs(x,y,width_t,height_t,Number){
+        Touch[k] = new Sprite();
+        Touch[k]._element = document.createElement("img");
+        Touch[k]._element.src = "../image/背景/透明.png";
+        Touch[k].x = x*width/NaturalWidth;
+        Touch[k].y = y*width/16*9/NaturalHeight;
+        Touch[k].width = width_t*width/NaturalWidth;
+        Touch[k].height = height_t*width/16*9/NaturalHeight;
+        console.log(Number);
+        scene.addChild(Touch[k]);
+        Touch[k].addEventListener('touchstart',function(e){
+          Sound_ON("選択音");
+          Scene_loads(Number,false,false);
+          return;
+        });
+        return;
+      }
+
+      /*var Touchs = Class.create(Sprite, {
         initialize: function(x,y,width1,height1,Number){
           Sprite.call(this,width1*Background.scaleX,height1*Background.scaleY);
           this.x = x*Background.scaleX;
@@ -2631,13 +2651,13 @@ function Game_load(width,height){
             return;
           });
         }
-      });
+      });*/
 
       var Touch = [];
       var k = 0;
 
       for (var i = 1; i < Inspect.length; i = i+5) {
-        Touch[k] = new Touchs(Inspect[i],Inspect[i+1],Inspect[i+2],Inspect[i+3],Inspect[i+4]);
+        Touchs(Inspect[i],Inspect[i+1],Inspect[i+2],Inspect[i+3],Inspect[i+4]);
         k++;
       }
 
@@ -3126,12 +3146,16 @@ function Game_load(width,height){
           var Photo = new Sprite();
           Photo._element = document.createElement("img");
           Photo._element.src = conversion_url(Photo_url,"画像");
-          Photo.width = width*0.8;
-          Photo.height = width*0.8;
-          Photo.x = width/10;
-          Photo.y = width/10+width/30+width/5;
-          if(conversion_url(Photo_url,"比率")=="16:9"){
+          if(conversion_url(Photo_url,"比率")=="正方形"){
+            Photo.width = width*0.8;
+            Photo.height = width*0.8;
+            Photo.x = width/10;
+            Photo.y = width/10+width/30+width/5;
+          }
+          else{
+            Photo.x = width/10;
             Photo.y = height/2 - width*0.8/16*9/2;
+            Photo.width = width*0.8;
             Photo.height = width*0.8/16*9;
           }
           if(Big){
