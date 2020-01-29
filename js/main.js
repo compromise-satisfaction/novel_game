@@ -2612,7 +2612,7 @@ function Game_load(width,height){
     var InspectScene = function(Inspect){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      if(Inspect[0]=="留置所") var ryu = "../image/背景/留置所背景.png";
+      if(Inspect[0]=="留置所背景") var ryu = "../image/背景/留置所背景.png";
       else var ryu = conversion_url(Inspect[0],"画像");
       var Background = new Sprite();
       Background._element = document.createElement("img");
@@ -4371,7 +4371,7 @@ function Game_load(width,height){
       Submit("実行する");
 
       var Option = [];
-      var Choice_Transform = ["フラグ類入手","アイテム作成","フラグ追加 or 消去","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット","シーンデータ更新"];
+      var Choice_Transform = ["シーンデータ更新","フラグ類入手","アイテム作成","フラグ追加 or 消去","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット"];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
