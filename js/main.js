@@ -2613,6 +2613,7 @@ function Game_load(width,height){
       var scene = new Scene();                                // 新しいシーンを作る
 
       if(Inspect[0]=="留置所背景") var ryu = "../image/背景/留置所背景.png";
+      else if (Inspect[0]=="留置所") var ryu = "../image/背景/留置所.png";
       else var ryu = conversion_url(Inspect[0],"画像");
       var Background = new Sprite();
       Background._element = document.createElement("img");
