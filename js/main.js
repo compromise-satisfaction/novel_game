@@ -1444,7 +1444,6 @@ function Game_load(width,height){
             Speak_Character = "㊨";
             break;
           default:
-            console.log(Datas[1],Datas[3],Datas[5]);
             break;
         }
       }
