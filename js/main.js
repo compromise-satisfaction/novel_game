@@ -2049,16 +2049,26 @@ function Game_load(width,height){
           break;
       }
 
-      if(game.assets[Type]==undefined&&Type!="") Type = "../image/画像無.png";
-      var xxx = game.assets[Type].width;
-      var yyy = game.assets[Type].height;
-      var Pop = new Sprite(xxx,yyy);
-      Pop.image = game.assets[Type];
-      Pop.scaleX = width/xxx;
-      Pop.scaleY = width/16*9/yyy;
-      Pop.x = (Pop.scaleX*xxx/2)-xxx/2;
-      Pop.y = (Pop.scaleY*yyy/2)-yyy/2;
+      if(game.assets[Type]==undefined&&Type!=""){
+        var Pop = new Sprite();
+        Pop._element = document.createElement("img");
+        Pop._element.src = conversion_url(Type,"画像");
+        Pop.width = width/16*9;
+        Pop.height = width/16*9;
+        Pop.x = -width/32;
+      }
+      else {
+        var xxx = game.assets[Type].width;
+        var yyy = game.assets[Type].height;
+        var Pop = new Sprite(xxx,yyy);
+        Pop.image = game.assets[Type];
+        Pop.scaleX = width/xxx;
+        Pop.scaleY = width/16*9/yyy;
+        Pop.x = (Pop.scaleX*xxx/2)-xxx/2;
+        Pop.y = (Pop.scaleY*yyy/2)-yyy/2;
+      }
       scene.addChild(Pop);
+      
       if(Sound) Sound_ON(Sound);
 
       var Time = 0;
