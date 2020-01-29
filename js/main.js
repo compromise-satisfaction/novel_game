@@ -1914,6 +1914,7 @@ function Game_load(width,height){
       switch (Datas[0]) {
         case "right":
         case "left":
+          var Stand = new Sprite();
           Stand._element = document.createElement("img");
           Stand._element.src = "../image/"+Datas[0]+".png";
           Stand.width = width;
