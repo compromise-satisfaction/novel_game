@@ -230,6 +230,10 @@ function Game_load(width,height){
             if(Sounds_DATAS[i].名前==name) return(Sounds_DATAS[i].備考);
           }
           break;
+        case "比率":
+          for (var i = 0; i < Image_DATAS.length; i++) {
+            if(Image_DATAS[i].名前==name) return(Image_DATAS[i].備考);
+          }
       }
       return(name);
     }
@@ -265,7 +269,7 @@ function Game_load(width,height){
       if(BGM_Name=="変化無し") BGM_Name = Setting_Flag[14];
       else if(BGM_Name==""){
         if(BGM.paused==false) BGM.pause();
-        BGM.title = null;
+        BGM.title = "無";
       }
       else{
         if(BGM.title == BGM_Name && BGM.paused == false) return;
@@ -1258,15 +1262,13 @@ function Game_load(width,height){
       }
 
       if(Datas[14]!=undefined&&Datas[14]!=false){
-        if(game.assets[Datas[15]]==undefined) Datas[15] = "../image/画像無.png";
-        var xxx = game.assets[Datas[15]].width;
-        var yyy = game.assets[Datas[15]].height;
-        var Item = new Sprite(xxx,yyy);
-        Item.scaleX = ((width/4)/xxx);
-        Item.scaleY = ((width/4)/yyy);
-        Item.image = game.assets[Datas[15]];
-        Item.x = ((Item.scaleX*xxx/2)-xxx/2)+Datas[14]*(width/1600);
-        Item.y = ((Item.scaleY*yyy/2)-yyy/2)+Datas[20]*(width/16/100);
+        var Item = new Sprite();
+        Item._element = document.createElement("img");
+        Item._element.src = conversion_url(Datas[15],"画像");
+        Item.width = width/4;
+        Item.height = width/4;
+        Item.x = Datas[14]*(width/1600);
+        Item.y = Datas[20]*(width/16/100);
         if(Datas[21]!=0){
           if(Datas[21]>0){
             if(Return!=true){
@@ -1694,27 +1696,25 @@ function Game_load(width,height){
       if(have(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名)==false){
           Get_ICFT(DATAS);
           var Trophy_Time = 0;
-          var xxx = game.assets["../image/Trophy.png"].width;
-          var yyy = game.assets["../image/Trophy.png"].height;
-          var Trophy = new Sprite(xxx,yyy);
-          Trophy.image = game.assets["../image/Trophy.png"];
-          Trophy.scaleX = ((width/3.61)/xxx);
-          Trophy.scaleY = (((width/14.15))/yyy);//ココが変換した場所
-          Trophy.x = (Trophy.scaleX*xxx/2)-xxx/2+(width-(width/3.5));
-          Trophy.y = (Trophy.scaleY*yyy/2)-yyy/2+(width/80);
+          var Trophy = new Sprite();
+          Trophy._element = document.createElement("img");
+          Trophy._element.src = "../image/Trophy.png";
+          Trophy.width = width/3.61;
+          Trophy.height = width/14.15;
+          Trophy.x = width-width/3.5;
+          Trophy.y = width/80;
           Trophy.opacity = 0;
           Trophy.tl.fadeIn(5);
           scene.addChild(Trophy);
           if(game.assets[conversion_url(I_C_F_T_DATAS[i].画像,"画像")]==undefined) Datas[17] = "../image/画像無.png";
           else Datas[17] = conversion_url(I_C_F_T_DATAS[i].画像,"画像");
-          var xxx = game.assets[Datas[17]].width;
-          var yyy = game.assets[Datas[17]].height;
-          var Trophy_image = new Sprite(xxx,yyy);
-          Trophy_image.image = game.assets[Datas[17]];
-          Trophy_image.scaleX = ((width/18.82)/xxx);
-          Trophy_image.scaleY = ((width/18.82)/yyy);
-          Trophy_image.x = (Trophy_image.scaleX*xxx/2)-xxx/2+(width-(width/3.6));
-          Trophy_image.y = (Trophy_image.scaleY*yyy/2)-yyy/2+(width/50);
+          var Trophy_image = new Sprite();
+          Trophy_image._element = document.createElement("img");
+          Trophy_image._element.src = Datas[17];
+          Trophy_image.width = width/18.82;
+          Trophy_image.height = width/18.82;
+          Trophy_image.x = width-width/3.6;
+          Trophy_image.y = width/50;
           Trophy_image.opacity = 0;
           Trophy_image.tl.fadeIn(5);
           scene.addChild(Trophy_image);
@@ -1851,14 +1851,11 @@ function Game_load(width,height){
           case "stand":
           case "裁判長席":
           case "留置所":
-          var xxx = game.assets["../image/背景/"+Datas[0]+".png"].width;
-          var yyy = game.assets["../image/背景/"+Datas[0]+".png"].height;
-          var Background = new Sprite(xxx,yyy);
-          Background.scaleX = ((width)/xxx);
-          Background.scaleY = (((width/16)*9)/yyy);
-          Background.image = game.assets["../image/背景/"+Datas[0]+".png"];
-          Background.x = (Background.scaleX*xxx/2)-xxx/2;
-          Background.y = (Background.scaleY*yyy/2)-yyy/2;
+          var Background = new Sprite();
+          Background._element = document.createElement("img");
+          Background._element.src = "../image/背景/"+Datas[0]+".png";
+          Background.width = width;
+          Background.height = width/16*9;
           scene.addChild(Background);
           break;
         default:
@@ -1883,14 +1880,11 @@ function Game_load(width,height){
       switch (Datas[0]) {
         case "stand":
         case "留置所":
-          var xxx = game.assets["../image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["../image/"+Datas[0]+".png"].height;
-          var Stand = new Sprite(xxx,yyy);
-          Stand.scaleX = width/xxx;
-          Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["../image/"+Datas[0]+".png"];
-          Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
-          Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
+          var Stand = new Sprite();
+          Stand._element = document.createElement("img");
+          Stand._element.src = "../image/"+Datas[0]+".png";
+          Stand.width = width;
+          Stand.height = width/16*9;
           scene.addChild(Stand);
           break;
         default:
@@ -1920,14 +1914,10 @@ function Game_load(width,height){
       switch (Datas[0]) {
         case "right":
         case "left":
-          var xxx = game.assets["../image/"+Datas[0]+".png"].width;
-          var yyy = game.assets["../image/"+Datas[0]+".png"].height;
-          var Stand = new Sprite(xxx,yyy);
-          Stand.scaleX = width/xxx;
-          Stand.scaleY = width/16*9/yyy;
-          Stand.image = game.assets["../image/"+Datas[0]+".png"];
-          Stand.x = (Stand.scaleX*xxx/2)-xxx/2;
-          Stand.y = (Stand.scaleY*yyy/2)-yyy/2;
+          Stand._element = document.createElement("img");
+          Stand._element.src = "../image/"+Datas[0]+".png";
+          Stand.width = width;
+          Stand.height = width/16*9;
           scene.addChild(Stand);
           break;
         default:
@@ -2572,15 +2562,11 @@ function Game_load(width,height){
 
       if(Inspect[0]=="留置所") var ryu = "../image/背景/留置所背景.png";
       else var ryu = conversion_url(Inspect[0],"画像");
-      if(game.assets[ryu]==undefined) ryu = "../image/画像無.png";
-      var xxx = game.assets[ryu].width;
-      var yyy = game.assets[ryu].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = width/xxx;
-      Background.scaleY = width/16*9/yyy;
-      Background.image = game.assets[ryu];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Sprite();
+      Background._element = document.createElement("img");
+      Background._element.src = ryu;
+      Background.width = width;
+      Background.height = width/16*9;
       scene.addChild(Background);
       Background.addEventListener('touchstart',function(e){
         Sound_ON("選択音");
@@ -2692,17 +2678,13 @@ function Game_load(width,height){
       Buttons._element.value = "▶";
       scene.addChild(Buttons);
 
-      if(game.assets[a]==undefined) a = "../image/画像無.png";
-      var xxx = game.assets[a].width;
-      var yyy = game.assets[a].height;
-      var Item = new Sprite(xxx,yyy);
-      Item.scaleX = ((width/2)/xxx);
-      Item.scaleY = ((width/2)/yyy);
-      Item.image = game.assets[a];
-      var X_0 = (Item.scaleX*xxx/2)-xxx/2;
-      var Y_0 = (Item.scaleY*yyy/2)-yyy/2;
-      Item.x = X_0 + width;
-      Item.y = Y_0 + width/32;
+      var Item = new Sprite();
+      Item._element = document.createElement("img");
+      Item._element.src = a;
+      Item.width = width/2;
+      Item.height = width/2;
+      Item.x = width;
+      Item.y = width/32;
       scene.addChild(Item);
       Sound_ON("アイテムゲット");
 
@@ -2781,7 +2763,14 @@ function Game_load(width,height){
       Background.y = (Background.scaleY*yyy/2)-yyy/2;
       scene.addChild(Background);
 
-      var Item_image = new Sprite(0,0);
+      var Item_image = new Sprite();
+      Item_image._element = document.createElement("img");
+      Item_image._element.src = "../image/white.png";
+      Item_image.width = width/4;
+      Item_image.height = width/4;
+      Item_image.x = width/1.6;
+      Item_image.y = width/4+width/20+width/25;
+      Item_image.border = 2;
       scene.addChild(Item_image);
 
       var Button = [];
@@ -2855,7 +2844,7 @@ function Game_load(width,height){
           }
           else{
             switch (this._element.value){
-              case "▶":
+              case "◀":
                 if(Setting_Flag[PAGAS]==0){
                   Setting_Flag[PAGAS] = Choice_Flag.length-Choice_Flag.length%5;
                   if(Choice_Flag.length%5==0) Setting_Flag[PAGAS]-=5;
@@ -2863,7 +2852,7 @@ function Game_load(width,height){
                 else Setting_Flag[PAGAS]-=5;
                 game.replaceScene(ItemScene(Number,Ig,Type));
                 break;
-              case "◀":
+              case "▶":
                 if(Setting_Flag[PAGAS] == Choice_Flag.length-Choice_Flag.length%5) Setting_Flag[PAGAS] = 0;
                 else{
                   Setting_Flag[PAGAS]+=5;
@@ -2917,18 +2906,8 @@ function Game_load(width,height){
                   Button[i].backgroundColor = "buttonface";
                 }
                 Choice_Item = f[5];
-                console.log(f[0]+"を選択 つきつけコード"+Choice_Item);
                 var Item_image_url = conversion_url(f[2],"画像");
-                if(game.assets[Item_image_url]==undefined) Item_image_url = "../image/画像無.png";
-                var xxx = game.assets[Item_image_url].width;
-                var yyy = game.assets[Item_image_url].height;
-                Item_image.image = game.assets[Item_image_url];
-                Item_image.width = xxx;
-                Item_image.height = yyy;
-                Item_image.scaleX = ((width/4)/xxx);
-                Item_image.scaleY = ((width/4)/yyy);
-                Item_image.x = (Item_image.scaleX*xxx/2)-xxx/2+(width/1.6);
-                Item_image.y = (Item_image.scaleY*yyy/2)-yyy/2+(width/4)+(width/20)+(width/25);
+                Item_image._element.src = Item_image_url;
                 this.backgroundColor = "red";
                 if(f[3]){
                   Button[3]._element.value = f[3];
@@ -3025,7 +3004,7 @@ function Game_load(width,height){
         scene.addChild(Button[submits]);
         Button[submits].addEventListener('touchstart',function(e){
           if(Button_push("戻る")) return;
-          if(BGM.paused&&BGM.title) BGM.play();
+          if(BGM.paused&&BGM.title!="無") BGM.play();
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3073,7 +3052,7 @@ function Game_load(width,height){
         scene.addChild(Button[submits2]);
         Button[submits2].addEventListener('touchstart',function(e){
           if(Button_push("ページ")) return;
-          if(BGM.paused&&BGM.title) BGM.play();
+          if(BGM.paused&&BGM.title!="無") BGM.play();
           switch (a) {
             case "前のページ":
               Pages -= 13;
@@ -3099,20 +3078,17 @@ function Game_load(width,height){
         Text[i] = new Texts(S_Text[Pages+i]);
         if(Text[i].text.substring(0,2)=="画像"){
           var Photo_url = Text[i].text.substring(2);
-          Photo_url = conversion_url(Photo_url,"画像");
           Text[i].text = "";
-          if(game.assets[Photo_url]==undefined) Photo_url = "../image/画像無.png";
-          var xxx = game.assets[Photo_url].width;
-          var yyy = game.assets[Photo_url].height;
-          var Photo = new Sprite(xxx,yyy);
-          Photo.scaleX = ((width)/xxx)*0.8;
-          Photo.scaleY = ((width)/yyy)*0.8;
-          Photo.image = game.assets[Photo_url];
-          Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
-          Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
-          if(xxx!=yyy){
-            Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
-            Photo.scaleY = Photo.scaleY/16*9;
+          var Photo = new Sprite();
+          Photo._element = document.createElement("img");
+          Photo._element.src = conversion_url(Photo_url,"画像");
+          Photo.width = width*0.8;
+          Photo.height = width*0.8;
+          Photo.x = width/10;
+          Photo.y = width/10+width/30+width/5;
+          if(conversion_url(Photo_url,"比率")=="16:9"){
+            Photo.y = height/2 - width*0.8/16*9/2;
+            Photo.height = width*0.8/16*9;
           }
           if(Big){
             Photo.addEventListener('touchstart',function(e){
@@ -3129,15 +3105,13 @@ function Game_load(width,height){
           Photo_url = conversion_url(Photo_url,"画像");
           var Big_Photo = Text[i].text.substring(1);
           Text[i].text = "";
-          if(game.assets[Photo_url]==undefined) Photo_url = "../image/画像無.png";
-          var xxx = game.assets[Photo_url].width;
-          var yyy = game.assets[Photo_url].height;
-          var Photo = new Sprite(xxx,yyy);
-          Photo.scaleX = ((width)/xxx)*0.8/2;
-          Photo.scaleY = ((width)/yyy)*0.8/2;
-          Photo.image = game.assets[Photo_url];
-          Photo.x = Photo.scaleX*xxx/2-xxx/2+width/10;
-          Photo.y = Photo.scaleY*yyy/2-yyy/2+width/10+width/30+width/5;
+          var Photo = new Sprite();
+          Photo._element = document.createElement("img");
+          Photo._element.src = Photo_url;
+          Photo.width = width*0.8/2;
+          Photo.height = width*0.8/2;
+          Photo.x = width/10;
+          Photo.y = width/10+width/30+width/5;
           scene.addChild(Photo);
           Photo.addEventListener('touchstart',function(e){
             Sound_ON("選択音");
