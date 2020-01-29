@@ -426,22 +426,32 @@ function Game_load(width,height){
         Number = Number[0];
         if(have(Number+"既読")){
           var Get = false;
-          Return = true;
         }
         else{
           var Get = true;
           Flag[Flag.length] = Number+"既読";
+        }
+        if(have(Number+"プレイ済み")){
+          Return = true;
+        }
+        else{
+          Log_Flag[Log_Flag.length] = Number+"プレイ済み";
           console.log(Number);
         }
       }
       else{
         if(have(Number+"既読")){
           var Get = false;
-          Return = true;
         }
         else{
           var Get = true;
           Flag[Flag.length] = Number+"既読";
+        }
+        if(have(Number+"プレイ済み")){
+          Return = true;
+        }
+        else{
+          Log_Flag[Log_Flag.length] = Number+"プレイ済み";
           console.log(Number);
         }
       }
@@ -1737,8 +1747,7 @@ function Game_load(width,height){
           Trophy.opacity = 0;
           Trophy.tl.fadeIn(5);
           scene.addChild(Trophy);
-          if(game.assets[conversion_url(I_C_F_T_DATAS[i].画像,"画像")]==undefined) Datas[17] = "../image/画像無.png";
-          else Datas[17] = conversion_url(I_C_F_T_DATAS[i].画像,"画像");
+          Datas[17] = conversion_url(I_C_F_T_DATAS[i].画像,"画像");
           var Trophy_image = new Sprite();
           Trophy_image._element = document.createElement("img");
           Trophy_image._element.src = Datas[17];
