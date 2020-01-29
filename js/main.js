@@ -391,7 +391,7 @@ function Game_load(width,height){
               console.log(GET[l]);
               break;
             }
-            if(Get) return;
+            if(Get==false) return;
             for (var k = 0; k < I_C_F_T_DATAS.length; k++) {
               if(I_C_F_T_DATAS[k].入手==GET[l]){
                 break;
@@ -423,8 +423,8 @@ function Game_load(width,height){
         else{
           var Get = true;
           Log_Flag[Log_Flag.length] = Number+"既読";
+          console.log(Number);
         }
-        console.log(Number);
       }
       else{
         if(have(Number+"既読")){
@@ -434,8 +434,8 @@ function Game_load(width,height){
         else{
           var Get = true;
           Log_Flag[Log_Flag.length] = Number+"既読";
+          console.log(Number);
         }
-        console.log(Number);
       }
       var Name = Setting_Flag[0];
       var Gender = Setting_Flag[2];
@@ -2641,6 +2641,7 @@ function Game_load(width,height){
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
+        Scene_loads(c,false,false);
       }
 
       var Background = new Sprite(width,height-(width/16)*9);
