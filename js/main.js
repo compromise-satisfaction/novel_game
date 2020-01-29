@@ -654,7 +654,6 @@ function Game_load(width,height){
       for (var i = 0; i < Move_DATAS.length; i++) {
         if(Number==Move_DATAS[i].シーン名){
           Moves = Move_DATAS[i].移動先;
-          console.log(Moves);
           game.pushScene(MoveScene(10));
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
