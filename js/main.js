@@ -430,7 +430,7 @@ function Game_load(width,height){
         }
         else{
           var Get = true;
-          Log_Flag[Log_Flag.length] = Number+"既読";
+          Flag[Flag.length] = Number+"既読";
           console.log(Number);
         }
       }
@@ -441,7 +441,7 @@ function Game_load(width,height){
         }
         else{
           var Get = true;
-          Log_Flag[Log_Flag.length] = Number+"既読";
+          Flag[Flag.length] = Number+"既読";
           console.log(Number);
         }
       }
