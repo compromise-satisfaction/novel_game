@@ -369,7 +369,7 @@ function Game_load(width,height){
       }
       return;
     }//アイテム関連
-    function Get_ICFT2(DATAS,Person){
+    function Get_ICFT2(DATAS,Person,Get){
       if(DATAS.入手!=false){
         GET = DATAS.入手.replace(/↓/g,"\n");
         GET = GET.split("\n");
@@ -391,6 +391,7 @@ function Game_load(width,height){
               console.log(GET[l]);
               break;
             }
+            if(Get) return;
             for (var k = 0; k < I_C_F_T_DATAS.length; k++) {
               if(I_C_F_T_DATAS[k].入手==GET[l]){
                 break;
@@ -410,15 +411,32 @@ function Game_load(width,height){
         }
     }
     function Scene_loads(Number,Return,Item,Item_type){
-      if(have(Number+"既読")) Return = true;
-      else Log_Flag[Log_Flag.length] = Number+"既読";
       if(Item){
         if(Item_type) Number = [Item+Number,"つきつけるデフォルト"+Item_type+Number];
         else Number = [Item+Number.split("↓")[0],Number.split("↓")[1]];
         Item = Number[1];
         Number = Number[0];
+        if(have(Number+"既読")){
+          var Get = false;
+          Return = true;
+        }
+        else{
+          var Get = true;
+          Log_Flag[Log_Flag.length] = Number+"既読";
+        }
+        console.log(Number);
       }
-      console.log(Number);
+      else{
+        if(have(Number+"既読")){
+          var Get = false;
+          Return = true;
+        }
+        else{
+          var Get = true;
+          Log_Flag[Log_Flag.length] = Number+"既読";
+        }
+        console.log(Number);
+      }
       var Name = Setting_Flag[0];
       var Gender = Setting_Flag[2];
       var Surname = Setting_Flag[1];
@@ -505,7 +523,7 @@ function Game_load(width,height){
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
           BGM_ON(Main_DATAS[i].BGM);
-          Get_ICFT2(Main_DATAS[i],Person);
+          Get_ICFT2(Main_DATAS[i],Person,Get);
           game.fps = Main_DATAS[i].速度;
           Setting_Flag[3] = game.fps;
           if(Main_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
@@ -594,7 +612,7 @@ function Game_load(width,height){
       for (var i = 0; i < Choice_DATAS.length; i++) {
         if(Number==Choice_DATAS[i].シーン名){
           BGM_ON(Choice_DATAS[i].BGM);
-          Get_ICFT2(Choice_DATAS[i],Person);
+          Get_ICFT2(Choice_DATAS[i],Person,Get);
           if(Choice_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
           else {
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
@@ -655,8 +673,8 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Item_get_DATAS.length; i++) {
         if(Number==Item_get_DATAS[i].シーン名){
-          Get_ICFT2(Item_get_DATAS[i],Person);
-          game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
+          Get_ICFT2(Item_get_DATAS[i],Person,Get);
+          game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン),Get);
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
           return;
@@ -2616,8 +2634,14 @@ function Game_load(width,height){
 
       return scene;
     };
-    var ItemgetScene = function(a,b,c){
+    var ItemgetScene = function(a,b,c,Get){
       var scene = new Scene();                                // 新しいシーンを作る
+
+      if(Get==false){
+        game.popScene();
+        Scene_kazu--;
+        console.log("Scene数",Scene_kazu);
+      }
 
       var Background = new Sprite(width,height-(width/16)*9);
       Background.image = game.assets["../image/white.png"];
