@@ -1576,6 +1576,7 @@ function Game_load(width,height){
         Text[i]._element.textContent = "";
         Text[i].x = width/50;
         Text[i].y = Numbers;
+        if(Datas[19]=="日付") Text[i]._style.color = "green";
         scene.addChild(Text[i]);
       }
 
@@ -1752,7 +1753,7 @@ function Game_load(width,height){
             if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
               else{
-                Text[k]._element.textContent = "  ";
+                Text[k]._element.textContent = " ";
                 Text[k]._style.color = "blue";
               }
             }
