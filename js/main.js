@@ -1,6 +1,6 @@
 enchant();
 //サウンド変更前
-var Version = "バージョン 6.4";
+var Version = "バージョン 6.5";
 var Already = false;
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
@@ -251,7 +251,11 @@ function Game_load(width,height){
       for (var i = 0; i < SE.length; i++) {
         if(SE[i].title == Sound_url) break;
       }
-      SE[i].play();
+      SE[i].volume = Volume;
+      if(Volume) SE[i].play();
+      else{
+        if(SE[i].paused==false) SE[i].stop();
+      }
       return;
       if(game.assets[Sound_url].src==undefined){
         game.assets[Sound_url].volume = Volume;
