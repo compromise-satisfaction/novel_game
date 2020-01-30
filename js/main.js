@@ -2,6 +2,7 @@ enchant();
 //サウンド変更前
 var Version = "バージョン 6.6";
 var Already = false;
+var Data_loading = false;
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
   BGM.currentTime = BGM.id*1;
@@ -24,7 +25,9 @@ switch (Foldar) {
     break;
 }
 
-function Datas_load(width,height){
+function Datas_load(width,height,GAS_URL){
+  if(GAS_URL) GAS = GAS_URL;
+  Data_loading = true;
   fetch(GAS,
     {
       method: 'POST',
@@ -119,10 +122,12 @@ function Game_load(width,height){
     }
   });
 
-  var Kousin2 = Kousin1+"↓"+Version;
-  var Kousin3 = Kousin2.split("↓")
-  for (var i = 0; i < Kousin3.length; i++) {
-    new Texts(Kousin3[i],i);
+  if(Data_loading){
+    var Kousin2 = Kousin1+"↓"+Version;
+    var Kousin3 = Kousin2.split("↓")
+    for (var i = 0; i < Kousin3.length; i++) {
+      new Texts(Kousin3[i],i);
+    }
   }
 
   var Sheets = new Texts("",5);
@@ -940,14 +945,13 @@ function Game_load(width,height){
         var Data = true;
       }
 
-      var Title_image = conversion_url("タイトル画面","画像");
-
-      var Title = new Entity();
-      Title._element = document.createElement("img");
-      Title._element.src = Title_image;
-      Title.width = width;
-      Title.height = width/16*9;
-      scene.addChild(Title);
+      if(Data_loading){
+        var Title = new Entity();
+        Title._element = document.createElement("img");
+        Title._element.src = conversion_url("タイトル画面","画像");
+        Title.width = width;
+        Title.height = width/16*9;
+        scene.addChild(Title);
 
       var Button = [];
       var submits = 0;
@@ -1042,14 +1046,6 @@ function Game_load(width,height){
         console.log("バージョンが古い");
       }
 
-      Title.addEventListener("enterframe",function(){
-        if(game.input.up){
-          game.popScene();
-          Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
-        }
-      })
-
       var Set_button = new Entity();
       Set_button._element = document.createElement("img");
       Set_button._element.src = "../image/リバーシ.gif";
@@ -1068,6 +1064,118 @@ function Game_load(width,height){
         console.log("Scene数",Scene_kazu);
       });
 
+      }
+      else{
+        var xxx = game.assets["../image/Background.png"].width;
+        var yyy = game.assets["../image/Background.png"].height;
+        var Background = new Sprite(xxx,yyy);
+        Background.scaleX = ((width)/xxx);
+        Background.scaleY = ((height)/yyy);
+        Background.image = game.assets["../image/Background.png"];
+        Background.x = (Background.scaleX*xxx/2)-xxx/2;
+        Background.y = (Background.scaleY*yyy/2)-yyy/2;
+        scene.addChild(Background);
+
+        var Numbers = (width/20);
+
+        var Datakousin = false;
+        var Button = [];
+        var submits = 0;
+        var Numbers = (width/10)+(width/30);
+        function Submit(a){
+          Button[submits] = new Entity();
+          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+          Button[submits].width = width/1.2;
+          Button[submits].height = width/10;
+          Button[submits]._element = document.createElement('input');
+          if(a=="GASのURLを入力してこのボタンを押してね。"){
+            Button[submits]._element.type = "submit";
+          }
+          Button[submits]._element.value = a;
+          scene.addChild(Button[submits]);
+          if(a=="GASのURLを入力してこのボタンを押してね。"){
+            Button[0].addEventListener('touchstart',function(e){
+              if(Data_loading) return;
+              this._element.value = "読み込み中…………。";
+              Data_loading = true;
+              fetch(Button[1]._element.value,
+                {
+                  method: 'POST',
+                  body: ""
+                }
+              )
+              .then(res => res.json())
+              .then(result => {
+                Image_urls = [];
+                Move_DATAS = result.移動;
+                Sounds_DATAS = result.音;
+                Image_DATAS = result.画像;
+                Main_DATAS = result.メイン;
+                Choice_DATAS = result.選択;
+                Branch_DATAS = result.分岐;
+                Item_get_DATAS = result.入手;
+                Inspect_DATAS = result.調べる;
+                I_C_F_T_DATAS = result.フラグ類;
+                Speech_DATAS = result.吹き出し;
+                Kousin1 = result.更新[0].更新日;
+                Kousin2 = Kousin1+"↓"+Version;
+                Interrogation_DATAS = result.尋問;
+                for (var i = 0; i < Image_DATAS.length; i++){
+                  if(Image_DATAS[i].url.substring(0,4)!="http"){
+                    Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+                  }
+                  else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
+                      Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
+                  }
+                  Image_urls[i] = Image_DATAS[i].url;
+                }
+                BGM_DATAS = [];
+                Sounds_urls = [];
+                Voice_DATAS = [];
+                Sound_effect_DATAS = [];
+                SE = [];
+                for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
+                  if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+                    Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+                  }
+                  switch (Sounds_DATAS[i].備考) {
+                    default:
+                      BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+                      k1++;
+                      break;
+                    case "音声":
+                      Sounds_urls[k0] = Sounds_DATAS[i].url;
+                      Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+                      SE[k0] = document.createElement("audio");
+                      SE[k0].src = Sounds_DATAS[i].url;
+                      SE[k0].title = Sounds_DATAS[i].名前;
+                      k0++;
+                      k2++;
+                      break;
+                    case "効果音":
+                      Sounds_urls[k0] = Sounds_DATAS[i].url;
+                      Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+                      SE[k0] = document.createElement("audio");
+                      SE[k0].src = Sounds_DATAS[i].url;
+                      SE[k0].title = Sounds_DATAS[i].名前;
+                      k0++;
+                      k3++;
+                      break;
+                  }
+                }
+                game.replaceScene(TitleScene());
+              },);
+              return;
+            });
+          }
+          submits++;
+          Numbers += (width/20)+(width/25)+(width/25);
+        }
+        Submit("GASのURLを入力してこのボタンを押してね。");
+        Numbers += (width/20)+(width/25)+(width/25);
+        Submit("ここにGASのURLを入力してね。");
+
+      }
       return scene;
     };
     var MainScene = function(Return,Number){
