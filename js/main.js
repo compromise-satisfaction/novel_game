@@ -420,8 +420,8 @@ function Game_load(width,height){
     }
     function Scene_loads(Number,Return,Item,Item_type){
       if(Item){
-        if(Item_type) Number = [Item+Number,"つきつけるデフォルト"+Item_type+Number];
-        else Number = [Item+Number.split("↓")[0],Number.split("↓")[1]];
+        if(Item_type) Number = [Number+"で"+Item,Number+"で"+Item_type+"をつきつけた時のデフォルト"];
+        else Number = [Number.split("↓")[0]+"で"+Item+"を使用",Number.split("↓")[1]];
         Item = Number[1];
         Number = Number[0];
         if(have(Number+"既読")){
@@ -3074,7 +3074,7 @@ function Game_load(width,height){
                   Scene_kazu++;
                   console.log("Scene数",Scene_kazu);
                 }
-                else if(Ig=="日常") Scene_loads(Number,false,"つきつける"+Choice_Item,Type);
+                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item+"をつきつける",Type);
                 else{
                   game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
                   Scene_kazu++;
