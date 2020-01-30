@@ -1174,7 +1174,6 @@ function Game_load(width,height){
         if(Datas[0]=="カットイン"){
           Character2.width = width;
           Character2.height = width;
-          console.log(Character2._element.naturalHeight);
         }
         else {
           Character2.x = width/4-width/32;
@@ -1218,8 +1217,8 @@ function Game_load(width,height){
         Character1.width = width/16*9;
         Character1.height = width/16*9;
         if(Datas[0]=="カットイン"){
-          Character2.width = width;
-          Character2.height = width;
+          Character1.width = width;
+          Character1.height = width;
         }
         else {
           Character1.x = -width/32;
