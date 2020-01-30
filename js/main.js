@@ -1694,7 +1694,7 @@ function Game_load(width,height){
             console.log("Scene数",Scene_kazu);
           }
           else if(a==3){
-            if(Text_defined||have(Number+"プレイ済み")){
+            if(Text_defined&&have(Number+"プレイ済み")==false){
               Return = true;
               Text_defined = false;
               for (var i = 0; i < 6; i++) {
