@@ -1,6 +1,6 @@
 enchant();
 //サウンド変更前
-var Version = "バージョン 6.3";
+var Version = "バージョン 6.4";
 var Already = false;
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
