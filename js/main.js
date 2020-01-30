@@ -431,10 +431,7 @@ function Game_load(width,height){
           var Get = true;
           Flag[Flag.length] = Number+"既読";
         }
-        if(have(Number+"プレイ済み")){
-          Return = true;
-        }
-        else{
+        if(have(Number+"プレイ済み")==false){
           Log_Flag[Log_Flag.length] = Number+"プレイ済み";
           window.localStorage.setItem("Log_Flag",Log_Flag);
           console.log(Number);
@@ -448,10 +445,7 @@ function Game_load(width,height){
           var Get = true;
           Flag[Flag.length] = Number+"既読";
         }
-        if(have(Number+"プレイ済み")){
-          Return = true;
-        }
-        else{
+        if(have(Number+"プレイ済み")==false){
           Log_Flag[Log_Flag.length] = Number+"プレイ済み";
           window.localStorage.setItem("Log_Flag",Log_Flag);
           console.log(Number);
@@ -1700,7 +1694,7 @@ function Game_load(width,height){
             console.log("Scene数",Scene_kazu);
           }
           else if(a==3){
-            if(Text_defined){
+            if(Text_defined||if(have(Number+"プレイ済み")){
               Return = true;
               Text_defined = false;
               for (var i = 0; i < 6; i++) {
