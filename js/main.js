@@ -153,8 +153,6 @@ function Game_load(width,height){
       core.removeScene(core.loadingScene);
       core.dispatchEvent(e);
   });
-  game.preload("../image/白.png");
-  game.preload("../image/融合.png");
   game.preload("../image/カットイン.png");
   game.preload("../image/Explosion.png");
   game.preload("../image/Background.png");
@@ -1238,27 +1236,21 @@ function Game_load(width,height){
       if(Datas[0]){
         switch (Datas[0]) {
           case "ヒント":
-            var xxx = game.assets["../image/融合.png"].width;
-            var yyy = game.assets["../image/融合.png"].height;
-            var Background = new Sprite(xxx,yyy);
-            Background.image = game.assets["../image/融合.png"];
-            Background.scaleX = width/xxx*1.2;
-            Background.scaleY = width/yyy*1.2;
-            Background.x = (width-xxx)/2;
-            Background.y = -(width-xxx)/2;
+            var Background = new Sprite();
+            Background._element = document.createElement("img");
+            Background._element.src = "../image/融合.png";
+            Background.width = width*1.2;
+            Background.height = width*1.2;
+            Background.x = (width - width*1.2)/2;
+            Background.y = (width - width*1.6)/2;
             Rotation_Y -= 10;
             Background.rotation = Rotation_Y;
             scene.addChild(Background);//背景
-            var Background2 = new Sprite(width,height);
-            Background2.image = game.assets["../image/白.png"];
-            Background2.x = 0;
-            Background2.y = (width/16)*9;
-            scene.addChild(Background2);//白地
             Background.addEventListener("enterframe",function(){
               Rotation_Y -= 10;
               Background.rotation = Rotation_Y;
               if(Rotation_Y==-360) Rotation_Y = 0;
-            })
+            });
             break;
             case "Black":
             case "left":
@@ -1997,13 +1989,13 @@ function Game_load(width,height){
       }
       scene.addChild(Background);//背景
 
-      var Background2 = new Sprite();
-      Background2._element = document.createElement("img");
-      Background2._element.src = "../image/白.png";
-      Background2.y = width/16*9;
-      Background2.width = width;
-      Background2.height = height - width/16*9;
-      scene.addChild(Background2);//白地
+      var White_Background = new Sprite();
+      White_Background._element = document.createElement("img");
+      White_Background._element.src = "../image/白.png";
+      White_Background.y = width/16*9;
+      White_Background.width = width;
+      White_Background.height = height - width/16*9;
+      scene.addChild(White_Background);//白地
 
       var Buttons = new Entity();
       Buttons.moveTo((width/5)*3,height-(width/5));
@@ -2055,27 +2047,21 @@ function Game_load(width,height){
 
       switch (Datas[0]) {
         case "ヒント":
-          var xxx = game.assets["../image/融合.png"].width;
-          var yyy = game.assets["../image/融合.png"].height;
-          var Background = new Sprite(xxx,yyy);
-          Background.image = game.assets["../image/融合.png"];
-          Background.scaleX = width/xxx*1.2;
-          Background.scaleY = width/yyy*1.2;
-          Background.x = (width-xxx)/2;
-          Background.y = -(width-xxx)/2;
+          var Background = new Sprite();
+          Background._element = document.createElement("img");
+          Background._element.src = "../image/融合.png";
+          Background.width = width*1.2;
+          Background.height = width*1.2;
+          Background.x = (width - width*1.2)/2;
+          Background.y = (width - width*1.6)/2;
           Rotation_Y -= 10;
           Background.rotation = Rotation_Y;
           scene.addChild(Background);//背景
-          var Background2 = new Sprite(width,height);
-          Background2.image = game.assets["../image/白.png"];
-          Background2.x = 0;
-          Background2.y = (width/16)*9;
-          scene.addChild(Background2);//白地
           Background.addEventListener("enterframe",function(){
             Rotation_Y -= 10;
             Background.rotation = Rotation_Y;
             if(Rotation_Y==-360) Rotation_Y = 0;
-          })
+          });
           break;
           case "Black":
           case "left":
@@ -2157,6 +2143,14 @@ function Game_load(width,height){
         default:
           break;
       }
+
+      var White_Background = new Sprite();
+      White_Background._element = document.createElement("img");
+      White_Background._element.src = "../image/白.png";
+      White_Background.y = width/16*9;
+      White_Background.width = width;
+      White_Background.height = height-width/16*9;
+      scene.addChild(White_Background);
 
       var submits = 0;
       var Numbers = width/16*9+(width/30);
@@ -2848,34 +2842,32 @@ function Game_load(width,height){
     var ItemgetScene = function(a,b,c){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var Background = new Sprite(width,height-(width/16)*9);
-      Background.image = game.assets["../image/白.png"];
-      Background.x = 0;
-      Background.y = (width/16)*9;
-      scene.addChild(Background);
+      var White_Background = new Sprite();
+      White_Background._element = document.createElement("img");
+      White_Background._element.src = "../image/白.png";
+      White_Background.y = width/16*9;
+      White_Background.width = width;
+      White_Background.height = height-width/16*9;
+      scene.addChild(White_Background);
 
       var Numbers = width/16*9+(width/20)+(width/25);
 
-      var Texts = Class.create(Label, {
-        initialize: function(a) {
-          Numbers += (width/20)+(width/25);
-          Label.call(this);
-          this.font  = (width/20)+"px monospace";
-          this.color = 'blue';
-          this.x = (width/50);
-          this.y = Numbers;
-          this.width = width*2;
-          this.height = (width/20);
-          this.text = a;
-          if(a.substring(0,1)=="("&&a.substring(a.length-1)==")") this.color = "blue";
-          scene.addChild(this);
-        }
-      });
+      function Texts(){
+        Numbers += width/20+width/25;
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/20+"px monospace";
+        Text[i]._element.textContent = "";
+        Text[i].x = width/50;
+        Text[i].y = Numbers;
+        Text[i]._style.color = "blue";
+        scene.addChild(Text[i]);
+      }
 
       var Text =[];
 
       for (var i = 0; i < 6; i++) {
-        Text[i] = new Texts("");
+        Texts();
       }
 
       var Time = 0;
@@ -2890,7 +2882,7 @@ function Game_load(width,height){
             k++;
           }
           else if(b.substring(Time-1,Time)!=""){
-            Text[k].text = Text[k].text+b.substring(Time-1,Time);
+            Text[k]._element.textContent = Text[k]._element.textContent+b.substring(Time-1,Time);
           }
           else if(b.substring(Time-1,Time)==""){
             Text_defined = false;
@@ -2898,7 +2890,7 @@ function Game_load(width,height){
         }
       }
 
-      Background.addEventListener("enterframe",function(){
+      White_Background.addEventListener("enterframe",function(){
         T_D();
       })
 
@@ -2941,7 +2933,7 @@ function Game_load(width,height){
         if(Text_defined){
           Text_defined = false;
           for (var i = 0; i < 6; i++) {
-            Text[i].text = "";
+            Text[i]._element.textContent = "";
           }
           Time = 0;
           k = 0;
