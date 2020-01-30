@@ -59,6 +59,7 @@ function Datas_load(width,height){
     Sounds_urls = [];
     Voice_DATAS = [];
     Sound_effect_DATAS = [];
+    SE = [];
     for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
       if(Sounds_DATAS[i].url.substring(0,4)!="http"){
         Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
@@ -71,12 +72,18 @@ function Datas_load(width,height){
         case "音声":
           Sounds_urls[k0] = Sounds_DATAS[i].url;
           Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+          SE[k0] = document.createElement("audio");
+          SE[k0].src = Sounds_DATAS[i].url;
+          SE[k0].title = Sounds_DATAS[i].名前;
           k0++;
           k2++;
           break;
         case "効果音":
           Sounds_urls[k0] = Sounds_DATAS[i].url;
           Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+          SE[k0] = document.createElement("audio");
+          SE[k0].src = Sounds_DATAS[i].url;
+          SE[k0].title = Sounds_DATAS[i].名前;
           k0++;
           k3++;
           break;
@@ -170,7 +177,7 @@ function Game_load(width,height){
   game.preload("../image/stone.png");
   game.preload("../image/Hand.png");
   game.preload("../image/V_or_D.png");
-  game.preload(Sounds_urls);
+  //game.preload(Sounds_urls);
 
   game.fps = 10;
   game.onload = function(){
@@ -241,6 +248,11 @@ function Game_load(width,height){
     }
     function Sound_branch(Sound_url,Volume){
       Volume /= 10;
+      for (var i = 0; i < SE.length; i++) {
+        if(SE[i].title == Sound_url) break;
+      }
+      SE[i].play();
+      return;
       if(game.assets[Sound_url].src==undefined){
         game.assets[Sound_url].volume = Volume;
       }//オフライン
@@ -254,12 +266,16 @@ function Game_load(width,height){
     function Sound_ON(Sound_Name){
       for (var i = 0; i < Sound_effect_DATAS.length; i++) {
         if(Sound_effect_DATAS[i]==Sound_Name){
+          Sound_branch(Sound_Name,Setting_Flag[10]);
+          return;
           Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[10]);
           return;
         }
       }
       for (var i = 0; i < Voice_DATAS.length; i++) {
         if(Voice_DATAS[i]==Sound_Name){
+          Sound_branch(Sound_Name,Setting_Flag[11]);
+          return;
           Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[11]);
           return;
         }
