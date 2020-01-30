@@ -4327,8 +4327,8 @@ function Game_load(width,height){
               )
               .then(res => res.json())
               .then(result => {
-                Image_urls = [];
                 Move_DATAS = result.移動;
+                Image_DATAS = result.画像;
                 Main_DATAS = result.メイン;
                 Choice_DATAS = result.選択;
                 Branch_DATAS = result.分岐;
