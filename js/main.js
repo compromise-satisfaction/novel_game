@@ -932,7 +932,7 @@ function Game_load(width,height){
     function rand(n) {
     return Math.floor(Math.random() * (n + 1));
     }
-    function GAS_nyuryoku(a){
+    function GAS_nyuryoku(a,b){
       fetch(a,
         {
           method: 'POST',
@@ -998,6 +998,7 @@ function Game_load(width,height){
               break;
           }
         }
+        if(b) game.replaceScene(TitleScene());
       },);
       return;
     }
@@ -1169,8 +1170,7 @@ function Game_load(width,height){
               this._element.value = "読み込み中…………。";
               Data_loading = true;
               GAS = Button[1]._element.value;
-              GAS_nyuryoku(GAS);
-              game.replaceScene(TitleScene());
+              GAS_nyuryoku(GAS,true);
               return;
             });
           }
@@ -1196,8 +1196,7 @@ function Game_load(width,height){
           this._element.value = "読み込み中…………。";
           Data_loading = true;
           GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
-          GAS_nyuryoku(GAS);
-          game.replaceScene(TitleScene());
+          GAS_nyuryoku(GAS,true);
           return;
         });
         submits++;
@@ -1217,8 +1216,7 @@ function Game_load(width,height){
           this._element.value = "読み込み中…………。";
           Data_loading = true;
           GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
-          GAS_nyuryoku(GAS);
-          game.replaceScene(TitleScene());
+          GAS_nyuryoku(GAS,true);
           return;
         });
       }
@@ -3598,7 +3596,7 @@ function Game_load(width,height){
             case "シーンデータ更新":
               Datakousin = true;
               this._element.value = Button[1]._element.value+"中……";
-              GAS_nyuryoku(GAS);
+              GAS_nyuryoku(GAS,false);
               break;
             default:
               this._element.value = "することを選択してください。";
