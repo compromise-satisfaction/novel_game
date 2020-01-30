@@ -148,9 +148,8 @@ function Game_load(width,height){
       core.removeScene(core.loadingScene);
       core.dispatchEvent(e);
   });
-  game.preload("../image/融合.png");
-  game.preload("../image/画像無.png");
   game.preload("../image/白.png");
+  game.preload("../image/融合.png");
   game.preload("../image/カットイン.png");
   game.preload("../image/Explosion.png");
   game.preload("../image/Background.png");
@@ -941,12 +940,7 @@ function Game_load(width,height){
         var Data = true;
       }
 
-      if(conversion_url("タイトル画面","画像")=="タイトル画面"){
-        var Title_image = "../image/画像無.png";
-      }
-      else {
-        var Title_image = conversion_url("タイトル画面","画像");
-      }
+      var Title_image = conversion_url("タイトル画面","画像");
 
       var Title = new Entity();
       Title._element = document.createElement("img");
