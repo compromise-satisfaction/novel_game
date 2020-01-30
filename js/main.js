@@ -709,8 +709,10 @@ function Game_load(width,height){
           Setting_Flag[12] = Number;
           if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = conversion_url(Setting_Flag[13],"画像");
           else {
-            Setting_Flag[13] = Inspect_DATAS[i].背景;
-            Inspect[0] = Inspect_DATAS[i].背景;
+            if(Inspect_DATAS[i].背景=="留置所背景") Inspect[0] = "../image/背景/留置所背景.png";
+            else if (Inspect_DATAS[i].背景=="留置所") Inspect[0] = "../image/背景/留置所.png";
+            else Inspect[0] = Inspect_DATAS[i].背景;
+            Setting_Flag[13] = Inspect[0];
           }
           if(Inspect_DATAS[i].x座標1) Inspect[1] = Inspect_DATAS[i].x座標1;
           if(Inspect_DATAS[i].y座標1) Inspect[2] = Inspect_DATAS[i].y座標1;
@@ -2750,12 +2752,9 @@ function Game_load(width,height){
     var InspectScene = function(Inspect){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      if(Inspect[0]=="留置所背景") var ryu = "../image/背景/留置所背景.png";
-      else if (Inspect[0]=="留置所") var ryu = "../image/背景/留置所.png";
-      else var ryu = conversion_url(Inspect[0],"画像");
       var Background = new Sprite();
       Background._element = document.createElement("img");
-      Background._element.src = ryu;
+      Background._element.src = conversion_url(Inspect[0],"画像");
       Background.width = width;
       Background.height = width/16*9;
       scene.addChild(Background);
