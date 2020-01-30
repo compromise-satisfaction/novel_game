@@ -256,7 +256,7 @@ function Game_load(width,height){
         else SE[i].currentTime = 0;
       }
       else{
-        if(SE[i].paused==false) SE[i].stop();
+        if(SE[i].paused==false) SE[i].pause();
       }
       return;
       if(game.assets[Sound_url].src==undefined){
