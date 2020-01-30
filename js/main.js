@@ -3064,7 +3064,7 @@ function Game_load(width,height){
                 console.log("Scene数",Scene_kazu);
                 if(Ig==Choice_Item||(Ig!="日常"&&(Choice_Item=="強欲な壺"||Choice_Item=="万能"||Choice_Item=="ヒント"))){
                   if(Choice_Item=="ヒント"){
-                    Scene_loads("ヒント"+Number,false,false);
+                    Scene_loads(Number+"のヒント",false,false);
                     return;
                   }
                   if(Choice_Item=="強欲な壺"){
