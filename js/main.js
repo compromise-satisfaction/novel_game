@@ -932,7 +932,76 @@ function Game_load(width,height){
     function rand(n) {
     return Math.floor(Math.random() * (n + 1));
     }
-
+    function GAS_nyuryoku(a){
+      fetch(a,
+        {
+          method: 'POST',
+          body: ""
+        }
+      )
+      .then(res => res.json())
+      .then(result => {
+        Image_urls = [];
+        Move_DATAS = result.移動;
+        Sounds_DATAS = result.音;
+        Image_DATAS = result.画像;
+        Main_DATAS = result.メイン;
+        Choice_DATAS = result.選択;
+        Branch_DATAS = result.分岐;
+        Item_get_DATAS = result.入手;
+        Inspect_DATAS = result.調べる;
+        I_C_F_T_DATAS = result.フラグ類;
+        Speech_DATAS = result.吹き出し;
+        Kousin1 = result.更新[0].更新日;
+        Kousin2 = Kousin1+"↓"+Version;
+        Interrogation_DATAS = result.尋問;
+        for (var i = 0; i < Image_DATAS.length; i++){
+          if(Image_DATAS[i].url.substring(0,4)!="http"){
+            Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+          }
+          else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
+              Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
+          }
+          Image_urls[i] = Image_DATAS[i].url;
+        }
+        BGM_DATAS = [];
+        Sounds_urls = [];
+        Voice_DATAS = [];
+        Sound_effect_DATAS = [];
+        SE = [];
+        for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
+          if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+            Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+          }
+          switch (Sounds_DATAS[i].備考) {
+            default:
+              BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+              k1++;
+              break;
+            case "音声":
+              Sounds_urls[k0] = Sounds_DATAS[i].url;
+              Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+              SE[k0] = document.createElement("audio");
+              SE[k0].src = Sounds_DATAS[i].url;
+              SE[k0].title = Sounds_DATAS[i].名前;
+              k0++;
+              k2++;
+              break;
+            case "効果音":
+              Sounds_urls[k0] = Sounds_DATAS[i].url;
+              Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+              SE[k0] = document.createElement("audio");
+              SE[k0].src = Sounds_DATAS[i].url;
+              SE[k0].title = Sounds_DATAS[i].名前;
+              k0++;
+              k3++;
+              break;
+          }
+        }
+        game.replaceScene(TitleScene());
+      },);
+      return;
+    }
     var TitleScene = function(){
 
       var scene = new Scene();                                // 新しいシーンを作る
@@ -1100,7 +1169,8 @@ function Game_load(width,height){
               if(Data_loading) return;
               this._element.value = "読み込み中…………。";
               Data_loading = true;
-              GAS_nyuryoku(Button[1]._element.value);
+              GAS = Button[1]._element.value;
+              GAS_nyuryoku(GAS);
               return;
             });
           }
@@ -1110,77 +1180,6 @@ function Game_load(width,height){
         Submit("GASのURLを入力してこのボタンを押してね。");
         Numbers += (width/20)+(width/25)+(width/25);
         Submit("ここにGASのURLを入力してね。");
-
-        function GAS_nyuryoku(a){
-          fetch(a,
-            {
-              method: 'POST',
-              body: ""
-            }
-          )
-          .then(res => res.json())
-          .then(result => {
-            Image_urls = [];
-            Move_DATAS = result.移動;
-            Sounds_DATAS = result.音;
-            Image_DATAS = result.画像;
-            Main_DATAS = result.メイン;
-            Choice_DATAS = result.選択;
-            Branch_DATAS = result.分岐;
-            Item_get_DATAS = result.入手;
-            Inspect_DATAS = result.調べる;
-            I_C_F_T_DATAS = result.フラグ類;
-            Speech_DATAS = result.吹き出し;
-            Kousin1 = result.更新[0].更新日;
-            Kousin2 = Kousin1+"↓"+Version;
-            Interrogation_DATAS = result.尋問;
-            for (var i = 0; i < Image_DATAS.length; i++){
-              if(Image_DATAS[i].url.substring(0,4)!="http"){
-                Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
-              }
-              else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
-                  Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
-              }
-              Image_urls[i] = Image_DATAS[i].url;
-            }
-            BGM_DATAS = [];
-            Sounds_urls = [];
-            Voice_DATAS = [];
-            Sound_effect_DATAS = [];
-            SE = [];
-            for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
-              if(Sounds_DATAS[i].url.substring(0,4)!="http"){
-                Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
-              }
-              switch (Sounds_DATAS[i].備考) {
-                default:
-                  BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
-                  k1++;
-                  break;
-                case "音声":
-                  Sounds_urls[k0] = Sounds_DATAS[i].url;
-                  Voice_DATAS[k2] = Sounds_DATAS[i].名前;
-                  SE[k0] = document.createElement("audio");
-                  SE[k0].src = Sounds_DATAS[i].url;
-                  SE[k0].title = Sounds_DATAS[i].名前;
-                  k0++;
-                  k2++;
-                  break;
-                case "効果音":
-                  Sounds_urls[k0] = Sounds_DATAS[i].url;
-                  Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
-                  SE[k0] = document.createElement("audio");
-                  SE[k0].src = Sounds_DATAS[i].url;
-                  SE[k0].title = Sounds_DATAS[i].名前;
-                  k0++;
-                  k3++;
-                  break;
-              }
-            }
-            game.replaceScene(TitleScene());
-          },);
-          return;
-        }
 
       Numbers += (width/20)+(width/25)+(width/25);
 
@@ -1196,7 +1195,8 @@ function Game_load(width,height){
           if(Data_loading) return;
           this._element.value = "読み込み中…………。";
           Data_loading = true;
-          GAS_nyuryoku("https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec");
+          GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
+          GAS_nyuryoku(GAS);
           return;
         });
         submits++;
@@ -1215,7 +1215,8 @@ function Game_load(width,height){
           if(Data_loading) return;
           this._element.value = "読み込み中…………。";
           Data_loading = true;
-          GAS_nyuryoku("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec");
+          GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
+          GAS_nyuryoku(GAS);
           return;
         });
       }
@@ -3595,28 +3596,7 @@ function Game_load(width,height){
             case "シーンデータ更新":
               Datakousin = true;
               this._element.value = Button[1]._element.value+"中……";
-              fetch(GAS,
-                {
-                  method: 'POST',
-                  body: ""
-                }
-              )
-              .then(res => res.json())
-              .then(result => {
-                Move_DATAS = result.移動;
-                Image_DATAS = result.画像;
-                Main_DATAS = result.メイン;
-                Choice_DATAS = result.選択;
-                Branch_DATAS = result.分岐;
-                Item_get_DATAS = result.入手;
-                Inspect_DATAS = result.調べる;
-                I_C_F_T_DATAS = result.フラグ類;
-                Speech_DATAS = result.吹き出し;
-                Interrogation_DATAS = result.尋問;
-                this._element.value = "シーンデータ更新完了。";
-                Sound_ON("セーブ");
-                Datakousin = false;
-              },);
+              GAS_nyuryoku(GAS);
               break;
             default:
               this._element.value = "することを選択してください。";
