@@ -50,7 +50,7 @@ function Datas_load(width,height){
       if(Image_DATAS[i].url.substring(0,4)!="http"){
         Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
       }
-      else if(Image_DATAS[i].substring(0,18)=="https://gyazo.com/"){
+      else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
         Image_DATAS[i].url = "https://i."+Image_DATAS[i].substring(8)+".png\")";
       }
       Image_urls[i] = Image_DATAS[i].url;
