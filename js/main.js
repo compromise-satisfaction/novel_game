@@ -1,6 +1,6 @@
 enchant();
 //サウンド変更前
-var Version = "バージョン 6.5";
+var Version = "バージョン 6.6";
 var Already = false;
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
@@ -177,7 +177,6 @@ function Game_load(width,height){
   game.preload("../image/stone.png");
   game.preload("../image/Hand.png");
   game.preload("../image/V_or_D.png");
-  //game.preload(Sounds_urls);
 
   game.fps = 10;
   game.onload = function(){
