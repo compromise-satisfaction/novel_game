@@ -1054,7 +1054,7 @@ function Game_load(width,height){
       Set_button.width = 195;
       Set_button.height = 95;
       //Set_button.frame = 15;
-      scene.addChild(Set_button);
+      //scene.addChild(Set_button);
 
       Set_button.addEventListener('touchstart',function(e){
         console.log(Set_button);
