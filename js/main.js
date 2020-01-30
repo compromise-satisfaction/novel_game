@@ -4311,6 +4311,11 @@ function Game_load(width,height){
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
+            case "記録削除":
+              Log_Flag = [];
+              this._element.value = Button[1]._element.value;
+              Sound_ON("セーブ");
+              break;
             case "シーンデータ更新":
               Datakousin = true;
               this._element.value = Button[1]._element.value+"中……";
@@ -4357,7 +4362,17 @@ function Game_load(width,height){
       Submit("実行する");
 
       var Option = [];
-      var Choice_Transform = ["シーンデータ更新","フラグ類入手","アイテム作成","フラグ追加 or 消去","アイテムリセット","人物リセット","フラグリセット","トロフィーリセット"];
+      var Choice_Transform = [
+        "シーンデータ更新",
+        "フラグ類入手",
+        "アイテム作成",
+        "フラグ追加 or 消去",
+        "記録削除"
+        "アイテムリセット",
+        "人物リセット",
+        "フラグリセット",
+        "トロフィーリセット",
+      ];
 
       for (var i = 0; i < Choice_Transform.length; i++){
         Option[i] = document.createElement("option");
