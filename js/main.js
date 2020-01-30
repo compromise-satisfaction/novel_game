@@ -1606,7 +1606,25 @@ function Game_load(width,height){
             sese++;
             break;
           case "→":
-          s = false;
+            s = false;
+            if(Datas[1]){
+              if(Character1._element.title != Datas[1]){
+                Character1._element.title = Datas[1];
+                Character1._element.src = conversion_url(Datas[1],"画像");
+              }
+            }
+            if(Datas[3]){
+              if(Character2._element.title != Datas[3]){
+                Character2._element.title = Datas[3];
+                Character2._element.src = conversion_url(Datas[3],"画像");
+              }
+            }
+            if(Datas[5]){
+              if(Character3._element.title != Datas[5]){
+                Character3._element.title = Datas[5];
+                Character3._element.src = conversion_url(Datas[5],"画像");
+              }
+            }
             break;
           case "↦":
           s = false;
