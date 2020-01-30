@@ -150,19 +150,16 @@ function Game_load(width,height){
   });
   game.preload("../image/融合.png");
   game.preload("../image/画像無.png");
-  game.preload("../image/リバーシ.png");
   game.preload("../image/left.png");
   game.preload("../image/right.png");
   game.preload("../image/白.png");
   game.preload("../image/黒.png");
   game.preload("../image/背景/Black.png");
   game.preload("../image/stand.png");
-  game.preload("../image/ユベル.png");
   game.preload("../image/留置所.png");
   game.preload("../image/裁判長席.png");
   game.preload("../image/背景/留置所背景.png");
   game.preload("../image/待った！.png");
-  game.preload("../image/Trophy.png");
   game.preload("../image/異議あり！.png");
   game.preload("../image/カットイン.png");
   game.preload("../image/Explosion.png");
@@ -172,10 +169,11 @@ function Game_load(width,height){
   game.preload("../image/背景/裁判長席.png");
   game.preload("../image/背景/留置所.png");
   game.preload("../image/Background.png");
-  game.preload("../image/Set_button.png");
-  game.preload("../image/stone.png");
-  game.preload("../image/Hand.png");
-  game.preload("../image/V_or_D.png");
+  //game.preload("../image/リバーシ.png");
+  //game.preload("../image/Set_button.png");
+  //game.preload("../image/stone.png");
+  //game.preload("../image/Hand.png");
+  //game.preload("../image/V_or_D.png");
 
   game.fps = 10;
   game.onload = function(){
@@ -1084,6 +1082,8 @@ function Game_load(width,height){
       scene.addChild(Set_button);
 
       Set_button.addEventListener('touchstart',function(e){
+        console.log(Set_button);
+        return;
         game.pushScene(ReversiScene());
         Scene_kazu++;
         console.log("Scene数",Scene_kazu);
