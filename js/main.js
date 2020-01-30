@@ -998,6 +998,7 @@ function Game_load(width,height){
               break;
           }
         }
+        Sound_ON("セーブ");
         game.replaceScene(TitleScene());
       },);
       return;
@@ -1370,6 +1371,7 @@ function Game_load(width,height){
         if(Datas[0]=="カットイン"){
           Character1.width = width;
           Character1.height = width;
+          Character1.x = -width/3;
         }
         else {
           Character1.x = -width/32;
@@ -1421,6 +1423,7 @@ function Game_load(width,height){
         if(Datas[0]=="カットイン"){
           Character3.width = width;
           Character3.height = width;
+          Character3.x = width/3;
         }
         else {
           Character3.x = width/2-width/32;
@@ -1483,15 +1486,20 @@ function Game_load(width,height){
         scene.addChild(Item);
       }//アイテム
 
+      var White_Background = new Sprite();
+      White_Background._element = document.createElement("img");
+      White_Background._element.src = "../image/白.png";
+      White_Background.y = width/16*9;
+      White_Background.width = width;
+      White_Background.height = height-width/16*9;
+      scene.addChild(White_Background);
+
       if(Datas[7]!=""){
-        var C_name = new Label();
-        C_name.font  = (width/20)+"px monospace";
-        C_name.color = 'black';
-        C_name.x = 0;
+        C_name = new Sprite();
+        C_name._element = document.createElement("innerHTML");
+        C_name._style.font  = width/20+"px monospace";
+        C_name._element.textContent = "【" + Datas[7].replace(/[㊧㊥㊨]/,"") + "】";
         C_name.y = width/16*9+(width/25);
-        C_name.width = width;
-        C_name.height = (width/20);
-        C_name.text = "【" + Datas[7].replace(/[㊧㊥㊨]/,"") + "】";
         scene.addChild(C_name);//キャラ名
       }
 
@@ -1544,7 +1552,7 @@ function Game_load(width,height){
 
       var Numbers = width/16*9+(width/20)+(width/25);
 
-      var Texts = Class.create(Label, {
+      /*var Texts = Class.create(Label, {
         initialize: function(a) {
           Numbers += (width/20)+(width/25);
           Label.call(this);
@@ -1558,12 +1566,23 @@ function Game_load(width,height){
           if(a.substring(0,1)=="("&&a.substring(a.length-1)==")") this.color = "blue";
           scene.addChild(this);
         }
-      });
+      });*/
+
+      function Texts(){
+        Numbers += width/20+width/25;
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/20+"px monospace";
+        Text[i]._element.textContent = "";
+        Text[i].x = width/50;
+        Text[i].y = Numbers;
+        scene.addChild(Text[i]);
+      }
 
       var Text =[];
 
       for (var i = 0; i < 6; i++) {
-        Text[i] = new Texts("");
+        Texts();
       }
 
       var Time = 0;
@@ -1694,7 +1713,7 @@ function Game_load(width,height){
             }
             break;
           default:
-            if(Text[k].text.substring(0,1)=="「"||Text[k].text.substring(0,1)=="　"){
+            if(Text[k]._element.textContent.substring(0,1)=="「"||Text[k]._element.textContent.substring(0,1)=="　"){
               switch(Speak_Character){
                 case "㊧":
                   if(Character1._element.title != Datas[1]+"口パク"){
@@ -1730,28 +1749,28 @@ function Game_load(width,height){
         if(s){
           if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
-            if(Text[k-1].text.substring(0,1)=="("||Text[k-1].text.substring(0,1)==" "){
-              if(Text[k-1].text.substring(Text[k-1].text.length-1)==")") Text[k].text = "";
+            if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
+              if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
               else{
-                Text[k].text = " ";
-                Text[k].color = "blue";
+                Text[k]._element.textContent = "  ";
+                Text[k]._style.color = "blue";
               }
             }
-            else if(Text[k-1].text.substring(0,1)=="「"||Text[k-1].text.substring(0,1)=="　"){
-              if(Text[k-1].text.substring(Text[k-1].text.length-1)=="」") Text[k].text = "";
+            else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text[k-1]._element.textContent.substring(0,1)=="　"){
+              if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)=="」") Text[k]._element.textContent = "";
               else{
-                Text[k].text = "　";
-                Text[k].color = "Black";
+                Text[k]._element.textContent = "　";
+                Text[k]._style.color = "Black";
               }
             }
           }
           else if(Datas[8].substring(Time-1,Time)!=""){
-            if(Text[k].text.substring(0,1)=="("||Text[k].text.substring(0,1)==" ") Text[k].color = "blue";
-            Text[k].text = Text[k].text+Datas[8].substring(Time-1,Time);
+            if(Text[k]._element.textContent.substring(0,1)=="("||Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
+            Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
             if(Return==false){
               if(Datas[19]){
                 if(Datas[19]=="メカ"){
-                  switch(Text[k].text.substring(Text[k].text.length-1)){
+                  switch(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1)){
                     case "ア":
                     case "イ":
                     case "ウ":
@@ -1799,14 +1818,14 @@ function Game_load(width,height){
                     case "ワ":
                     case "ヲ":
                     case "ン":
-                      Sound_ON(Text[k].text.substring(Text[k].text.length-1));
+                      Sound_ON(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1));
                       break;
                     default:
                       break;
                   }
                 }
                 else{
-                  switch(Text[k].text.substring(Text[k].text.length-1)){
+                  switch(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1)){
                     case "\"":
                     case "「":
                     case "　":
@@ -1835,7 +1854,7 @@ function Game_load(width,height){
         }
       }
 
-      Explosion.addEventListener("enterframe",function(){
+      White_Background.addEventListener("enterframe",function(){
         if(Explosion.frame!=11) Explosion.frame++;
         if(Return!=true&&Text_defined){
           T_D();
@@ -1873,7 +1892,7 @@ function Game_load(width,height){
               Return = true;
               Text_defined = false;
               for (var i = 0; i < 6; i++) {
-                Text[i].text = "";
+                Text[i]._element.textContent = "";
               }
               Time = 0;
               k = 0;
@@ -1929,17 +1948,18 @@ function Game_load(width,height){
           Trophy_image.opacity = 0;
           Trophy_image.tl.fadeIn(5);
           scene.addChild(Trophy_image);
-          var Trophy_text = new Label();
-          Trophy_text.font  = (width/40)+"px monospace";
-          Trophy_text.color = 'white';
-          Trophy_text.x = (width-(width/5));
-          Trophy_text.y = (width/28)+(width/80);
-          Trophy_text.width = width;
-          Trophy_text.height = (width/40);
+
+          var Trophy_text = new Sprite();
+          Trophy_text._element = document.createElement("innerHTML");
+          Trophy_text._style.font  = width/40+"px monospace";
+          Trophy_text._style.color = 'white';
+          Trophy_text._element.textContent = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+          Trophy_text.x = width-width/5;
+          Trophy_text.y = width/28+width/80;
           Trophy_text.opacity = 0;
           Trophy_text.tl.fadeIn(5);
-          Trophy_text.text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
           scene.addChild(Trophy_text);
+
           Sound_ON("トロフィー");
           Trophy.addEventListener("enterframe",function(){
             Trophy_Time++;
