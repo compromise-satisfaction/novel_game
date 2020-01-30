@@ -998,7 +998,6 @@ function Game_load(width,height){
               break;
           }
         }
-        game.replaceScene(TitleScene());
       },);
       return;
     }
@@ -1171,6 +1170,7 @@ function Game_load(width,height){
               Data_loading = true;
               GAS = Button[1]._element.value;
               GAS_nyuryoku(GAS);
+              game.replaceScene(TitleScene());
               return;
             });
           }
@@ -1197,6 +1197,7 @@ function Game_load(width,height){
           Data_loading = true;
           GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
           GAS_nyuryoku(GAS);
+          game.replaceScene(TitleScene());
           return;
         });
         submits++;
@@ -1217,6 +1218,7 @@ function Game_load(width,height){
           Data_loading = true;
           GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
           GAS_nyuryoku(GAS);
+          game.replaceScene(TitleScene());
           return;
         });
       }
