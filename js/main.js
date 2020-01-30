@@ -2310,7 +2310,7 @@ function Game_load(width,height){
       var Text = [];
       var Syougen = Datas[2].split("↓");
 
-      for (var i = 0; i < Text.length; i++) {
+      for (var i = 0; i < Syougen.length; i++) {
         Texts(Syougen[i]);
       }
 
