@@ -932,7 +932,7 @@ function Game_load(width,height){
     function rand(n) {
     return Math.floor(Math.random() * (n + 1));
     }
-    function GAS_nyuryoku(a,b){
+    function GAS_nyuryoku(a){
       fetch(a,
         {
           method: 'POST',
@@ -998,7 +998,7 @@ function Game_load(width,height){
               break;
           }
         }
-        if(b) game.replaceScene(TitleScene());
+        game.replaceScene(TitleScene());
       },);
       return;
     }
@@ -1169,8 +1169,7 @@ function Game_load(width,height){
               if(Data_loading) return;
               this._element.value = "読み込み中…………。";
               Data_loading = true;
-              GAS = Button[1]._element.value;
-              GAS_nyuryoku(GAS,true);
+              GAS_nyuryoku(Button[1]._element.value);
               return;
             });
           }
@@ -1195,8 +1194,7 @@ function Game_load(width,height){
           if(Data_loading) return;
           this._element.value = "読み込み中…………。";
           Data_loading = true;
-          GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
-          GAS_nyuryoku(GAS,true);
+          GAS_nyuryoku("https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec");
           return;
         });
         submits++;
@@ -1215,8 +1213,7 @@ function Game_load(width,height){
           if(Data_loading) return;
           this._element.value = "読み込み中…………。";
           Data_loading = true;
-          GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
-          GAS_nyuryoku(GAS,true);
+          GAS_nyuryoku("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec");
           return;
         });
       }
@@ -3596,7 +3593,28 @@ function Game_load(width,height){
             case "シーンデータ更新":
               Datakousin = true;
               this._element.value = Button[1]._element.value+"中……";
-              GAS_nyuryoku(GAS,false);
+              fetch(GAS,
+                {
+                  method: 'POST',
+                  body: ""
+                }
+              )
+              .then(res => res.json())
+              .then(result => {
+                Move_DATAS = result.移動;
+                Image_DATAS = result.画像;
+                Main_DATAS = result.メイン;
+                Choice_DATAS = result.選択;
+                Branch_DATAS = result.分岐;
+                Item_get_DATAS = result.入手;
+                Inspect_DATAS = result.調べる;
+                I_C_F_T_DATAS = result.フラグ類;
+                Speech_DATAS = result.吹き出し;
+                Interrogation_DATAS = result.尋問;
+                this._element.value = "シーンデータ更新完了。";
+                Sound_ON("セーブ");
+                Datakousin = false;
+              },);
               break;
             default:
               this._element.value = "することを選択してください。";
