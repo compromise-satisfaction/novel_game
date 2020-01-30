@@ -155,7 +155,6 @@ function Game_load(width,height){
   });
   game.preload("../image/カットイン.png");
   game.preload("../image/Explosion.png");
-  game.preload("../image/Background.png");
   //game.preload("../image/リバーシ.png");
   //game.preload("../image/Set_button.png");
   //game.preload("../image/stone.png");
@@ -243,17 +242,6 @@ function Game_load(width,height){
         if(SE[i].paused==false) SE[i].pause();
       }
       return;
-      /*
-      if(game.assets[Sound_url].src==undefined){
-        game.assets[Sound_url].volume = Volume;
-      }//オフライン
-      else{
-        game.assets[Sound_url]._volume = Volume;
-      }//オンライン
-      if(Volume) game.assets[Sound_url].play();
-      else game.assets[Sound_url].stop();
-      return;
-      */
     }
     function Sound_ON(Sound_Name){
       for (var i = 0; i < Sound_effect_DATAS.length; i++) {
@@ -1136,14 +1124,12 @@ function Game_load(width,height){
 
       }
       else{
-        var xxx = game.assets["../image/Background.png"].width;
-        var yyy = game.assets["../image/Background.png"].height;
-        var Background = new Sprite(xxx,yyy);
-        Background.scaleX = ((width)/xxx);
-        Background.scaleY = ((height)/yyy);
-        Background.image = game.assets["../image/Background.png"];
-        Background.x = (Background.scaleX*xxx/2)-xxx/2;
-        Background.y = (Background.scaleY*yyy/2)-yyy/2;
+
+        var Background = new Entity();
+        Background._element = document.createElement("img");
+        Background._element.src = "../image/Background.png";
+        Background.width = width;
+        Background.height = height;
         scene.addChild(Background);
 
         var Numbers = (width/20);
@@ -1543,22 +1529,6 @@ function Game_load(width,height){
       }
 
       var Numbers = width/16*9+(width/20)+(width/25);
-
-      /*var Texts = Class.create(Label, {
-        initialize: function(a) {
-          Numbers += (width/20)+(width/25);
-          Label.call(this);
-          this.font  = (width/20)+"px monospace";
-          this.color = "Black";
-          this.x = (width/50);
-          this.y = Numbers;
-          this.width = width*2;
-          this.height = (width/20);
-          this.text = a;
-          if(a.substring(0,1)=="("&&a.substring(a.length-1)==")") this.color = "blue";
-          scene.addChild(this);
-        }
-      });*/
 
       function Texts(){
         Numbers += width/20+width/25;
@@ -2313,42 +2283,40 @@ function Game_load(width,height){
       Stand.height = width/16*9;
       scene.addChild(Stand);
 
-      var C_name = new Label();
-      C_name.font  = (width/20)+"px monospace";
-      C_name.color = 'black';
-      C_name.x = 0;
-      C_name.y = width/16*9+(width/25);
-      C_name.width = width;
-      C_name.height = (width/20);
-      C_name.text = "【" + Datas[1] + "】";
-      scene.addChild(C_name);//キャラ名
+
+      if(Datas[1]!=""){
+        C_name = new Sprite();
+        C_name._element = document.createElement("innerHTML");
+        C_name._style.font  = width/20+"px monospace";
+        C_name._element.textContent = "【" + Datas[1] + "】";
+        C_name.y = width/16*9+(width/25);
+        scene.addChild(C_name);//キャラ名
+      }
 
       var Numbers = width/16*9+(width/20)+(width/25);
 
-      var Texts = Class.create(Label, {
-        initialize: function(a) {
-          Numbers += (width/20)+(width/25);
-          Label.call(this);
-          this.font  = (width/20)+"px monospace";
-          this.color = 'purple';
-          this.x = (width/50);
-          this.y = Numbers;
-          this.width = width*2;
-          this.height = (width/20);
-          this.text = a;
-          scene.addChild(this);
-        }
-      });
-
-      var Text = Datas[2].split("↓");
-
-      for (var i = 0; i < Text.length; i++) {
-        Text[i] = new Texts(Text[i]);
+      function Texts(a){
+        Numbers += width/20+width/25;
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/20+"px monospace";
+        Text[i]._element.textContent = a;
+        Text[i].x = width/50;
+        Text[i].y = Numbers;
+        Text[i]._style.color = "green";
+        scene.addChild(Text[i]);
       }
 
-      if(Text[0].text.substring(0,1)=="「"&&Text[i-1].text.substring(Text[i-1].text.length-1)=="」"){
+      var Text = [];
+      var Syougen = Datas[2].split("↓");
+
+      for (var i = 0; i < Text.length; i++) {
+        Texts(Syougen[i]);
+      }
+
+      if(Text[0]._element.textContent.substring(0,1)=="「"&&Text[i-1]._element.textContent.substring(Text[i-1]._element.textContent.length-1)=="」"){
         for (var i = 1; i < Text.length; i++) {
-          Text[i].text = "　" + Text[i].text;
+          Text[i]._element.textContent = "　" + Text[i]._element.textContent;
         }
       }
 
@@ -2401,14 +2369,11 @@ function Game_load(width,height){
     var SettingScene = function(Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
 
       var Button = [];
@@ -2520,14 +2485,11 @@ function Game_load(width,height){
     var PlayerSettingScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
 
       var Numbers = width/2;
@@ -2625,46 +2587,39 @@ function Game_load(width,height){
 
       Submit("戻る");
 
-      var Texts = Class.create(Label, {
-        initialize: function(a,b,c) {
-          Label.call(this);
-          this.font  = width/10+"px monospace";
-          this.color = 'black';
-          this.x = width/15;
-          this.y = b;
-          this.width = width;
-          this.height = width/10;
-          this.text = a;
-          i++;
-          if(c!=undefined){
-            this.x = width/7;
-            this.color = 'red';
-            this.font  = c+"px monospace";
-          }
-          else scene.addChild(this);
+      function Texts(a,b,c){
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/10+"px monospace";
+        Text[i]._element.textContent = a;
+        Text[i].x = width/15;
+        Text[i].y = b;
+        if(c!=undefined){
+          Text[i].x = width/7;
+          Text[i]._style.color = 'red';
+          Text[i]._style.font = c+"px monospace";
         }
-      });
+        else scene.addChild(Text[i]);
+        i++;
+      }
 
+      var i = 0;
       var Text = [];
-
-      Text[0] = new Texts("性別",Gender.y);
-      Text[1] = new Texts("苗字",S_Input1.y);
-      Text[2] = new Texts("名前",S_Input2.y);
-      Text[3] = new Texts(",(カンマ)は使用できません。",width/3,width/20);
+      Texts("性別",Gender.y);
+      Texts("苗字",S_Input1.y);
+      Texts("名前",S_Input2.y);
+      Texts(",(カンマ)は使用できません。",width/3,width/20);
 
       return scene;
     };
     var SoundSettingScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
 
       var Numbers = (width/10)+(width/30);
@@ -2692,29 +2647,34 @@ function Game_load(width,height){
 
       Numbers = width/2;
       var Text = [];
-      var Text_Number = 10;
+      var i = 10;
 
-      var Texts = Class.create(Label, {
-        initialize: function(a,b,c) {
-          Label.call(this);
-          this.font  = (width/10)+"px monospace";
-          this.color = 'black';
-          this.x = b;
-          this.y = c;
-          this.width = width;
-          this.height = (width/10);
-          this.c = Text_Number;
-          if(a==10) this.text = a;
-          else this.text = " " + a;
-          scene.addChild(this);
-          Numbers += (width/4);
-          Text_Number++;
+      function Texts(a,b,c){
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/10+"px monospace";
+        Text[i].c = i;
+        Text[i].x = b;
+        Text[i].y = c;
+        switch (a) {
+          case 10:
+          case "BGM":
+          case "効果音":
+          case "音声":
+            Text[i]._element.textContent = a;
+            break;
+          default:
+            Text[i]._element.textContent = "0" + a;
+            break;
         }
-      });
+        scene.addChild(Text[i]);
+        Numbers += (width/4);
+        i++;
+      }
 
-      Text[Text_Number] = new Texts("BGM",width/8,Numbers);
-      Text[Text_Number] = new Texts("効果音",width/8,Numbers);
-      Text[Text_Number] = new Texts("音声",width/8,Numbers);
+      Texts("BGM",width/8,Numbers);
+      Texts("効果音",width/8,Numbers);
+      Texts("音声",width/8,Numbers);
 
       submits = 0;
       var Button2 = [];
@@ -2737,8 +2697,8 @@ function Game_load(width,height){
               else{
                 if(Setting_Flag[9]!=0) Setting_Flag[9] --;
               }
-              if(Setting_Flag[9]==10) Text[13].text = Setting_Flag[9];
-              else Text[13].text = " "+Setting_Flag[9];
+              if(Setting_Flag[9]==10) Text[13]._element.textContent = Setting_Flag[9];
+              else Text[13]._element.textContent = "0"+Setting_Flag[9];
               BGM.volume = Setting_Flag[9]/10;
               break;
             case Text[11].y:
@@ -2748,8 +2708,8 @@ function Game_load(width,height){
               else{
                 if(Setting_Flag[10]!=0) Setting_Flag[10] --;
               }
-              if(Setting_Flag[10]==10) Text[14].text = Setting_Flag[10];
-              else Text[14].text = " "+Setting_Flag[10];
+              if(Setting_Flag[10]==10) Text[14]._element.textContent = Setting_Flag[10];
+              else Text[14]._element.textContent = "0"+Setting_Flag[10];
               Sound_ON("進む");
               break;
             case Text[12].y:
@@ -2759,8 +2719,8 @@ function Game_load(width,height){
               else{
                 if(Setting_Flag[11]!=0) Setting_Flag[11] --;
               }
-              if(Setting_Flag[11]==10) Text[15].text = Setting_Flag[11];
-              else Text[15].text = " "+Setting_Flag[11];
+              if(Setting_Flag[11]==10) Text[15]._element.textContent = Setting_Flag[11];
+              else Text[15]._element.textContent = "0"+Setting_Flag[11];
               Sound_ON("音量調整用");
               break;
           }
@@ -2769,13 +2729,13 @@ function Game_load(width,height){
         submits++;
       }
       Submit2(width/2,Text[10].y,"-");
-      Text[Text_Number] = new Texts(Setting_Flag[9],width/2+width/8,Text[10].y);
+      Texts(Setting_Flag[9],width/2+width/8,Text[10].y);
       Submit2(width/2+width/4,Text[10].y,"+");
       Submit2(width/2,Text[11].y,"-");
-      Text[Text_Number] = new Texts(Setting_Flag[10],width/2+width/8,Text[11].y);
+      Texts(Setting_Flag[10],width/2+width/8,Text[11].y);
       Submit2(width/2+width/4,Text[11].y,"+");
       Submit2(width/2,Text[12].y,"-");
-      Text[Text_Number] = new Texts(Setting_Flag[11],width/2+width/8,Text[12].y);
+      Texts(Setting_Flag[11],width/2+width/8,Text[12].y);
       Submit2(width/2+width/4,Text[12].y,"+");
 
       return scene;
@@ -2978,14 +2938,11 @@ function Game_load(width,height){
           break;
       }
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
 
       var Item_image = new Sprite();
@@ -3125,7 +3082,7 @@ function Game_load(width,height){
               default:
                 for (var i = 0; i < 5; i++) {
                   if(f[1].split("↓")[i]==undefined) Text[i].text = "";
-                  else Text[i].text = f[1].split("↓")[i];
+                  else Text[i]._element.textContent = f[1].split("↓")[i];
                 }
                 for (var i = 0; i < submits; i++) {
                   Button[i].backgroundColor = "buttonface";
@@ -3162,23 +3119,18 @@ function Game_load(width,height){
       Submit("",width/2+width/20,(width/4)+((width/20)+(width/25)*14),width/2.5+W_X_H-width/8,W_X_H);
 
       var Text = [];
-      var Text_Number = 0;
 
       function Description_text(){
-        Text[Text_Number] = new Label();
-        Text[Text_Number].font  = (width/20)+"px monospace";
-        Text[Text_Number].color = 'black';
-        Text[Text_Number].x = (width/8);
-        Text[Text_Number].y = (width/4) + ((width/20)+(width/25)*(18+Text_Number*2)) - (width/25);
-        Text[Text_Number].width = width;
-        Text[Text_Number].height = (width/20);
-        Text[Text_Number].text = "";
-        scene.addChild(Text[Text_Number]);
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/20+"px monospace";
+        Text[i].x = width/8;
+        Text[i].y = (width/4) + ((width/20)+(width/25)*(18+i*2)) - (width/25);
+        scene.addChild(Text[i]);
       }
 
       for (var i = 0; i < 5; i++) {
         Description_text();
-        Text_Number++;
       }
 
       if(Choice_Flag.length>5){
@@ -3206,14 +3158,11 @@ function Game_load(width,height){
     var DetailsScene = function(Syousai,Pages,Big){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
 
       var Button = [];
@@ -3238,28 +3187,26 @@ function Game_load(width,height){
       }
       Submit("戻る");
 
-      var Texts = Class.create(Label, {
-        initialize: function(a) {
-          Numbers += width/20+width/25;
-          Label.call(this);
-          this.font  = width/20+"px monospace";
-          this.x = width/12;
-          this.y = Numbers;
-          this.width = width*2;
-          this.height = width/20;
-          this.text = a;
-          switch (a) {
-            case "前のページボタン":
-            case "次のページボタン":
-            case "最初のページボタン":
-            case undefined:
-              break;
-            default:
-              scene.addChild(this);
-              break;
-          }
+      function Texts(a){
+        Numbers += width/20+width/25;
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/20+"px monospace";
+        Text[i].x = width/12;
+        Text[i].y = Numbers;
+        Text[i]._element.textContent = a;
+        switch (a) {
+          case "前のページボタン":
+          case "次のページボタン":
+          case "最初のページボタン":
+          case undefined:
+            break;
+          default:
+            scene.addChild(Text[i]);
+            break;
         }
-      });
+      }
+
       var Text = [];
       var Numbers = width/10;
       Numbers += width/20;
@@ -3300,10 +3247,10 @@ function Game_load(width,height){
 
       var S_Text = Syousai.replace(/\n/g,"↓").split("↓");
       for (var i = 0; i < S_Text.length; i++) {
-        Text[i] = new Texts(S_Text[Pages+i]);
-        if(Text[i].text.substring(0,2)=="画像"){
-          var Photo_url = Text[i].text.substring(2);
-          Text[i].text = "";
+        Texts(S_Text[Pages+i]);
+        if(Text[i]._element.textContent.substring(0,2)=="画像"){
+          var Photo_url = Text[i]._element.textContent.substring(2);
+          Text[i]._element.textContent = "";
           var Photo = new Sprite();
           Photo._element = document.createElement("img");
           Photo._element.src = conversion_url(Photo_url,"画像");
@@ -3329,11 +3276,11 @@ function Game_load(width,height){
           }
           scene.addChild(Photo);
         }
-        else if(Text[i].text.substring(0,3)=="小画像"){
-          var Photo_url = Text[i].text.substring(3);
+        else if(Text[i]._element.textContent.substring(0,3)=="小画像"){
+          var Photo_url = Text[i]._element.textContent.substring(3);
           Photo_url = conversion_url(Photo_url,"画像");
-          var Big_Photo = Text[i].text.substring(1);
-          Text[i].text = "";
+          var Big_Photo = Text[i]._element.textContent.substring(1);
+          Text[i]._element.textContent = "";
           var Photo = new Sprite();
           Photo._element = document.createElement("img");
           Photo._element.src = Photo_url;
@@ -3349,11 +3296,11 @@ function Game_load(width,height){
             game.pushScene(DetailsScene(Big_Photo,0,true));
           });
         }
-        else if(Text[i].text.substring(0,7)=="YOUTUBE"){
+        else if(Text[i]._element.textContent.substring(0,7)=="YOUTUBE"){
           if(BGM.paused==false) BGM.pause();
           var Video = new Entity()
-          var Video_url = Text[i].text.substring(7);
-          Text[i].text = "";
+          var Video_url = Text[i]._element.textContent.substring(7);
+          Text[i]._element.textContent = "";
           Video.visible =  true;
           Video._element = document.createElement('div');
           Video.x = width/10;
@@ -3361,9 +3308,9 @@ function Game_load(width,height){
           Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Video_url+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
           scene.addChild(Video);
         }
-        if(Text[i].text=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-        if(Text[i].text=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
-        if(Text[i].text=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+        if(Text[i]._element.textContent=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+        if(Text[i]._element.textContent=="次のページボタン") Submit2("次のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
+        if(Text[i]._element.textContent=="最初のページボタン") Submit2("最初のページ",width-S_X_H-W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
         if(i==12) break;
       }
 
@@ -3372,33 +3319,12 @@ function Game_load(width,height){
     var ClearScene = function(){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
-
-      var Numbers = (width/20);
-
-      var Texts = Class.create(Label, {
-        initialize: function(a) {
-          Label.call(this);
-          Numbers += (width/20)+(width/25)+(width/25)+(width/25)+(width/25)+(width/25);
-          this.font  = (width/20)+"px monospace";
-          this.color = 'black';
-          this.x = (width/15);
-          this.y = Numbers;
-          this.width = width;
-          this.height = (width/20);
-          this.text = a;
-          i++;
-          scene.addChild(this);
-        }
-      });
 
       var Button = [];
       var submits = 0;
@@ -3415,8 +3341,6 @@ function Game_load(width,height){
         scene.addChild(Button[submits]);
         submits++;
       }
-
-      var Text = [];
 
       Submit("データ初期化実行");
       Submit("戻る");
@@ -3457,39 +3381,25 @@ function Game_load(width,height){
     var TransformScene = function(Number,Ig){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var xxx = game.assets["../image/Background.png"].width;
-      var yyy = game.assets["../image/Background.png"].height;
-      var Background = new Sprite(xxx,yyy);
-      Background.scaleX = ((width)/xxx);
-      Background.scaleY = ((height)/yyy);
-      Background.image = game.assets["../image/Background.png"];
-      Background.x = (Background.scaleX*xxx/2)-xxx/2;
-      Background.y = (Background.scaleY*yyy/2)-yyy/2;
+      var Background = new Entity();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/Background.png";
+      Background.width = width;
+      Background.height = height;
       scene.addChild(Background);
 
-      var Numbers = (width/20);
-
-      var Texts = Class.create(Label, {
-        initialize: function(a) {
-          Label.call(this);
-          Numbers += (width/20)+(width/25);
-          this.font  = (width/20)+"px monospace";
-          this.color = 'black';
-          this.x = (width/10);
-          this.y = Numbers;
-          this.width = width;
-          this.height = (width/20);
-          this.text = a;
-          scene.addChild(this);
-        }
-      });
+      function Texts(i){
+        Text[i] = new Sprite();
+        Text[i]._element = document.createElement("innerHTML");
+        Text[i]._style.font  = width/20+"px monospace";
+        Text[i]._style.color  = "red";
+        Text[i].x = width/10;
+        Text[i].y = Numbers;
+        scene.addChild(Text[i]);
+      }
 
       var Text = [];
       var Datakousin = false;
-
-      for (var i = 0; i < 5; i++) {
-        Text[i] = new Texts("");
-      }
 
       var Button = [];
       var submits = 0;
@@ -3522,15 +3432,12 @@ function Game_load(width,height){
         if(a=="実行する"){
           Button[submits].addEventListener('touchstart',function(e){
             if(Button_push("音無し")) return;
-            for (var i = 4; i > 0; i--){
-              Text[i].text = Text[i-1].text;
-            }
             for (var i = 3; i < 7; i++){
-                if(Button[i]._element.value.replace(/[^,]/g,"")!=""){
-                Text[0].text = ",(カンマ)は使用できません。";
+              if(Button[i]._element.value.replace(/[^,]/g,"")!=""){
+                Text[0]._element.textContent = ",(カンマ)は使用できません。";
                 return;
               }
-              }
+            }
             switch (Button[1]._element.value){
             case "アイテム作成":
               Item_Flag[Item_Flag.length] = [
@@ -3639,6 +3546,7 @@ function Game_load(width,height){
         Numbers += (width/20)+(width/25)+(width/25);
       }
       Submit("改造をやめる");
+      Texts(0);
       Numbers += (width/20)+(width/25)+(width/25);
       Submit("");
       Submit("");
