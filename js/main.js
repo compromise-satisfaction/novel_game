@@ -412,7 +412,7 @@ function Game_load(width,height){
               I_C_F_T_DATAS[k].画像,
               I_C_F_T_DATAS[k].詳細文,
               I_C_F_T_DATAS[k].詳細内容,
-              I_C_F_T_DATAS[k].つきつけるデータ
+              I_C_F_T_DATAS[k].コード
             ];
             Get_ICFT(DATAS);
           }
@@ -420,7 +420,7 @@ function Game_load(width,height){
     }
     function Scene_loads(Number,Return,Item,Item_type){
       if(Item){
-        if(Item_type) Number = [Number+"で"+Item,Number+"で"+Item_type+"をつきつけた時のデフォルト"];
+        if(Item_type) Number = [Number+"で"+Item+"をつきつける",Number+"で"+Item_type+"をつきつける"];
         else Number = [Number.split("↓")[0]+"で"+Item+"を使用",Number.split("↓")[1]];
         Item = Number[1];
         Number = Number[0];
@@ -1043,18 +1043,18 @@ function Game_load(width,height){
           }
           if(Button_push(ooo)) return;
           if(a!="データ初期化"&&a!="データ初期化(推奨)"&&Data) Load_Datas();
-          if(a=="最初から"||a=="テスト用"){
+          if(a=="最初から"){
             Flag = [];//フラグ
             Item_Flag = [];//所持アイテム
             Character_Flag = [];//人物
-            if(a=="テスト用"){
-              Log_Flag = [];//記録
-              for (var i = 0; i < Main_DATAS.length; i++) {
-                Log_Flag[i] = Main_DATAS[i].シーン名 + "プレイ済み";
-              }
-              for (var k = 0; k < Choice_DATAS.length; k++) {
-                Log_Flag[i+k] = Choice_DATAS[k].シーン名 + "プレイ済み";
-              }
+          }
+          if(a=="テスト用"){
+            Log_Flag = [];//記録
+            for (var i = 0; i < Main_DATAS.length; i++) {
+              Log_Flag[i] = Main_DATAS[i].シーン名 + "プレイ済み";
+            }
+            for (var k = 0; k < Choice_DATAS.length; k++) {
+              Log_Flag[i+k] = Choice_DATAS[k].シーン名 + "プレイ済み";
             }
           }
           switch (a) {
@@ -1887,7 +1887,7 @@ function Game_load(width,height){
             I_C_F_T_DATAS[i].画像,
             I_C_F_T_DATAS[i].詳細文,
             I_C_F_T_DATAS[i].詳細内容,
-            I_C_F_T_DATAS[i].つきつけるデータ
+            I_C_F_T_DATAS[i].コード
           ];
       if(have(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名)==false){
           Get_ICFT(DATAS);
@@ -3074,7 +3074,7 @@ function Game_load(width,height){
                   Scene_kazu++;
                   console.log("Scene数",Scene_kazu);
                 }
-                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item+"をつきつける",Type);
+                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item,Type);
                 else{
                   game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
                   Scene_kazu++;
@@ -3083,7 +3083,7 @@ function Game_load(width,height){
                 break;
               default:
                 for (var i = 0; i < 5; i++) {
-                  if(f[1].split("↓")[i]==undefined) Text[i].text = "";
+                  if(f[1].split("↓")[i]==undefined) Text[i]._element.textContent = "";
                   else Text[i]._element.textContent = f[1].split("↓")[i];
                 }
                 for (var i = 0; i < submits; i++) {
@@ -3464,7 +3464,7 @@ function Game_load(width,height){
                 I_C_F_T_DATAS[i].画像,
                 I_C_F_T_DATAS[i].詳細文,
                 I_C_F_T_DATAS[i].詳細内容,
-                I_C_F_T_DATAS[i].つきつけるデータ
+                I_C_F_T_DATAS[i].コード
               ];
               Get_ICFT(DATAS);
               this._element.value = Button[2]._element.value+" 入手。";
@@ -3533,6 +3533,49 @@ function Game_load(width,height){
                 I_C_F_T_DATAS = result.フラグ類;
                 Speech_DATAS = result.吹き出し;
                 Interrogation_DATAS = result.尋問;
+                for (var i = 0; i < Image_DATAS.length; i++){
+                  if(Image_DATAS[i].url.substring(0,4)!="http"){
+                    Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+                  }
+                  else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
+                      Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
+                  }
+                  Image_urls[i] = Image_DATAS[i].url;
+                }
+                BGM_DATAS = [];
+                Sounds_urls = [];
+                Voice_DATAS = [];
+                Sound_effect_DATAS = [];
+                SE = [];
+                for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
+                  if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+                    Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+                  }
+                  switch (Sounds_DATAS[i].備考) {
+                    default:
+                      BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+                      k1++;
+                      break;
+                    case "音声":
+                      Sounds_urls[k0] = Sounds_DATAS[i].url;
+                      Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+                      SE[k0] = document.createElement("audio");
+                      SE[k0].src = Sounds_DATAS[i].url;
+                      SE[k0].title = Sounds_DATAS[i].名前;
+                      k0++;
+                      k2++;
+                      break;
+                    case "効果音":
+                      Sounds_urls[k0] = Sounds_DATAS[i].url;
+                      Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+                      SE[k0] = document.createElement("audio");
+                      SE[k0].src = Sounds_DATAS[i].url;
+                      SE[k0].title = Sounds_DATAS[i].名前;
+                      k0++;
+                      k3++;
+                      break;
+                  }
+                }
                 this._element.value = "シーンデータ更新完了。";
                 Sound_ON("セーブ");
                 Datakousin = false;
