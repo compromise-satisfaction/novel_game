@@ -856,7 +856,7 @@ function Game_load(width,height){
     }
     function have(a){
       for (var i = 0; i < Item_Flag.length; i++) {
-        if(Item_Flag[i][0]==a) return(true);
+        if(Item_Flag[i][5]==a) return(true);
       }
       for (var i = 0; i < Trophy_Flag.length; i++) {
         if(Trophy_Flag[i][0]==a) return(true);
