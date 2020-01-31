@@ -1141,12 +1141,12 @@ function Game_load(width,height){
           Button[submits].width = width/1.2;
           Button[submits].height = width/10;
           Button[submits]._element = document.createElement('input');
+          Button[submits]._element.value = a;
           if(a=="GASのURLを入力してこのボタンを押してね。"){
             Button[submits]._element.type = "submit";
-          }
-          Button[submits]._element.value = a;
-          if(window.localStorage.getItem("GAS")!=null){
-            Button[submits]._element.value = window.localStorage.getItem("GAS");
+            if(window.localStorage.getItem("GAS")!=null){
+              Button[submits]._element.value = window.localStorage.getItem("GAS");
+            }
           }
           scene.addChild(Button[submits]);
           if(a=="GASのURLを入力してこのボタンを押してね。"){
