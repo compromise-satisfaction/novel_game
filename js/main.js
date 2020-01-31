@@ -1791,7 +1791,8 @@ function Game_load(width,height){
             if(Text[k]._element.textContent.substring(0,2)==" 　") Text[k]._style.color = "blue";
             switch (Datas[8].substring(Time-1,Time)) {
                 case "(":
-                Text[k]._element.textContent = Text[k]._element.textContent+" 　(";
+                if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+" 　(";
+                else Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
                 break;
               default:
                 Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
