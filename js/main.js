@@ -1906,12 +1906,6 @@ function Game_load(width,height){
           ];
       if(have(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名)==false){
           Get_ICFT(DATAS);
-          var Trophy_Flag2 = [];
-          for (var i = 0; i < Trophy_Flag.length; i++) {
-          Trophy_Flag2[i] = Trophy_Flag[i] + "端";
-          }
-          if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
-          window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
           var Trophy_Time = 0;
           var Trophy = new Sprite();
           Trophy._element = document.createElement("img");
@@ -1945,6 +1939,13 @@ function Game_load(width,height){
           Trophy_text.opacity = 0;
           Trophy_text.tl.fadeIn(5);
           scene.addChild(Trophy_text);
+          
+          var Trophy_Flag2 = [];
+          for (var i = 0; i < Trophy_Flag.length; i++) {
+          Trophy_Flag2[i] = Trophy_Flag[i] + "端";
+          }
+          if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
+          window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
 
           Sound_ON("トロフィー");
           Trophy.addEventListener("enterframe",function(){
