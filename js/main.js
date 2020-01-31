@@ -720,6 +720,7 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Interrogation_DATAS.length; i++) {
         if(Number==Interrogation_DATAS[i].シーン名){
+          if(Interrogation_DATAS[i].セーブ!="無し") Setting_Flag[13] = "stand";
           BGM_ON(Interrogation_DATAS[i].BGM);
           Datas[0] = Interrogation_DATAS[i].人物;
           Datas[1] = Interrogation_DATAS[i].人物名;
