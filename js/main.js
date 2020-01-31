@@ -252,7 +252,7 @@ function Game_load(width,height){
     }
     function BGM_ON(BGM_Name){
       if(BGM_Name=="変化無し") BGM_Name = Setting_Flag[14];
-      else if(BGM_Name==""){
+      if(BGM_Name==""){
         if(BGM.paused==false) BGM.pause();
         BGM.title = "無";
       }
