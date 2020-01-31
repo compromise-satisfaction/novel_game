@@ -917,6 +917,7 @@ function Game_load(width,height){
     return Math.floor(Math.random() * (n + 1));
     }
     function GAS_nyuryoku(a){
+      GAS = a;
       fetch(a,
         {
           method: 'POST',
