@@ -1490,14 +1490,12 @@ function Game_load(width,height){
       White_Background.height = height-width/16*9;
       scene.addChild(White_Background);
 
-      if(Datas[7]!=""){
-        C_name = new Sprite();
-        C_name._element = document.createElement("innerHTML");
-        C_name._style.font  = width/20+"px monospace";
-        C_name._element.textContent = "【" + Datas[7].replace(/[㊧㊥㊨]/,"") + "】";
-        C_name.y = width/16*9+(width/25);
-        scene.addChild(C_name);//キャラ名
-      }
+      C_name = new Sprite();
+      C_name._element = document.createElement("innerHTML");
+      C_name._style.font  = width/20+"px monospace";
+      C_name._element.textContent = "【" + Datas[7].replace(/[㊧㊥㊨]/,"") + "】";
+      C_name.y = width/16*9+width/25;
+      if(Datas[7]!="") scene.addChild(C_name);//キャラ名
 
       if(Number=="赤き竜"){
 
@@ -1559,12 +1557,6 @@ function Game_load(width,height){
         scene.addChild(Text[i]);
       }//会話文
 
-      var Text =[];
-
-      for (var i = 0; i < 6; i++) {
-        Texts();
-      }
-
       var Time = 0;
       var k = 0;
       var Text_defined = true;
@@ -1574,6 +1566,21 @@ function Game_load(width,height){
         if(Datas[3]=="男主人公"||Datas[3]=="女主人公") Speak_Character = "㊥";
         if(Datas[5]=="男主人公"||Datas[5]=="女主人公") Speak_Character = "㊨";
       }
+
+      var Speak_Background1 = new Sprite();
+      Speak_Background1._element = document.createElement("img");
+      Speak_Background1._element.src = "../image/吹き出し枠.png";
+      Speak_Background1.width = width;
+      Speak_Background1.height = height;
+      if(Datas[8].substring(0,1)=="「"||Datas[8].substring(0,1)=="(") scene.addChild(Speak_Background1);
+
+      var Speak_Background2 = new Sprite();
+      Speak_Background2._element = document.createElement("img");
+      Speak_Background2._element.src = "../image/透明.png";
+      Speak_Background2.width = width/4;
+      Speak_Background2.height = height/5;
+      Speak_Background2.y = width/16*9+width/8-height/5;
+
       if(Speak_Character==""&&Datas[7]){
         switch (Datas[7]){
           case Datas[1]:
@@ -1586,16 +1593,40 @@ function Game_load(width,height){
             Speak_Character = "㊨";
             break;
           default:
+            Speak_Character = "無し";
             break;
         }
       }
+
+      switch(Speak_Character){
+        case "㊧":
+          Speak_Background2.x = width/2-width/8-width/4;
+          break;
+        case "㊥":
+          Speak_Background2.x = width/2-width/8;
+          break;
+        case "㊨":
+          Speak_Background2.x = width/2-width/8+width/4;
+          break;
+        default:
+          Speak_Character = "無し";
+          break;
+      }
+
       var Speak_Character_image = 0;
       var Winking_time = 0;
       var sese = 0;
 
+      var Text =[];
+
+      for (var i = 0; i < 6; i++) {
+        Texts();
+      }
+
       function T_D(){
         var s = true;
         var Itimozi = Datas[8].substring(Time,Time+1);
+        scene.addChild(Speak_Background2);
         switch (Itimozi) {
           case "§":
             s = false;
@@ -1622,6 +1653,7 @@ function Game_load(width,height){
                 Character3._element.src = conversion_url(Datas[5],"画像");
               }
             }
+            Speak_Background2._element.src = "../image/透明.png";
             break;
           case "↦":
           s = false;
@@ -1673,6 +1705,8 @@ function Game_load(width,height){
           case "・":
           case "!":
           case "！":
+          case "?":
+          case "？":
             if(Datas[1]){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
@@ -1691,6 +1725,7 @@ function Game_load(width,height){
                 Character3._element.src = conversion_url(Datas[5],"画像");
               }
             }
+            Speak_Background2._element.src = "../image/透明.png";
             break;
           default:
             if(Text[k]._element.textContent.substring(0,1)=="「"||Text[k]._element.textContent.substring(0,1)=="　"){
@@ -1722,6 +1757,12 @@ function Game_load(width,height){
                 default:
                   break;
               }
+              if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
+              else Speak_Background2._element.src = "../image/吹き出し1.png";
+            }
+            else if(Text[k]._element.textContent.substring(0,1)=="("||Text[k]._element.textContent.substring(0,1)==" "){
+              if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
+              else Speak_Background2._element.src = "../image/吹き出し2.png";
             }
             break;
         }
@@ -1732,8 +1773,9 @@ function Game_load(width,height){
             if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
               else{
-                Text[k]._element.textContent = " ";
+                Text[k]._element.textContent = " 　";
                 Text[k]._style.color = "blue";
+                Speak_Background2._element.src = "../image/吹き出し2.png";
               }
             }
             else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text[k-1]._element.textContent.substring(0,1)=="　"){
@@ -1741,12 +1783,20 @@ function Game_load(width,height){
               else{
                 Text[k]._element.textContent = "　";
                 Text[k]._style.color = "Black";
+                Speak_Background2._element.src = "../image/吹き出し1.png";
               }
             }
           }
           else if(Datas[8].substring(Time-1,Time)!=""){
-            if(Text[k]._element.textContent.substring(0,1)=="("||Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
-            Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
+            if(Text[k]._element.textContent.substring(0,2)==" 　") Text[k]._style.color = "blue";
+            switch (Datas[8].substring(Time-1,Time)) {
+                case "(":
+                Text[k]._element.textContent = Text[k]._element.textContent+" 　(";
+                break;
+              default:
+                Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
+                break;
+            }
             if(Return==false){
               if(Datas[19]){
                 if(Datas[19]=="メカ"){
@@ -1830,6 +1880,7 @@ function Game_load(width,height){
             if(Datas[1]) Character1._element.src = conversion_url(Datas[1],"画像");
             if(Datas[3]) Character2._element.src = conversion_url(Datas[3],"画像");
             if(Datas[5]) Character3._element.src = conversion_url(Datas[5],"画像");
+            Speak_Background2._element.src = "../image/透明.png";
           }
         }
       }
@@ -1939,7 +1990,7 @@ function Game_load(width,height){
           Trophy_text.opacity = 0;
           Trophy_text.tl.fadeIn(5);
           scene.addChild(Trophy_text);
-          
+
           var Trophy_Flag2 = [];
           for (var i = 0; i < Trophy_Flag.length; i++) {
           Trophy_Flag2[i] = Trophy_Flag[i] + "端";
@@ -2784,7 +2835,7 @@ function Game_load(width,height){
       function Touchs(x,y,width_t,height_t,Number){
         Touch[k] = new Sprite();
         Touch[k]._element = document.createElement("img");
-        Touch[k]._element.src = "../image/透明.png";
+        Touch[k]._element.src = "../image/半透明.png";
         Touch[k].x = x*width/NaturalWidth;
         Touch[k].y = y*width/16*9/NaturalHeight;
         Touch[k].width = width_t*width/NaturalWidth;
