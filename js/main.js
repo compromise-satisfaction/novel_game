@@ -880,6 +880,7 @@ function Game_load(width,height){
       window.localStorage.setItem("管理者","満足");
     }
     else window.localStorage.setItem("管理者","不満");
+    window.localStorage.setItem("GAS",GAS);
     window.localStorage.setItem(GAS+"Flag",Flag);
     window.localStorage.setItem(GAS+"Datas",Datas);
     window.localStorage.setItem(GAS+"Number",Number);
@@ -1144,6 +1145,9 @@ function Game_load(width,height){
             Button[submits]._element.type = "submit";
           }
           Button[submits]._element.value = a;
+          if(window.localStorage.getItem("GAS")!=null){
+            Button[submits]._element.value = window.localStorage.getItem("GAS");
+          }
           scene.addChild(Button[submits]);
           if(a=="GASのURLを入力してこのボタンを押してね。"){
             Button[0].addEventListener('touchstart',function(e){
