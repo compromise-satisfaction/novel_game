@@ -233,8 +233,8 @@ function Game_load(width,height){
       for (var i = 0; i < SE.length; i++) {
         if(SE[i].title == Sound_url) break;
       }
-      SE[i].volume = Volume;
       if(Volume){
+        SE[i].volume = Volume;
         if(SE[i].paused) SE[i].play();
         else SE[i].currentTime = 0;
       }
