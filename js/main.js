@@ -10,20 +10,7 @@ BGM.addEventListener("ended",function(e){
   console.log(BGM.currentTime);
 });
 
-switch (Foldar) {
-  case 1:
-    var GAS = "https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec";
-    break;
-  case 2:
-    var GAS = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
-    break;
-  case 3:
-    var GAS = "https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec";
-    break;
-  default:
-    console.log(Foldar);
-    break;
-}
+var GAS = Foldar;
 
 function Datas_load(width,height,GAS_URL){
   if(GAS_URL) GAS = GAS_URL;
@@ -303,7 +290,7 @@ function Game_load(width,height){
             if(Log_Flag[i]==DATAS[1]) return;
           }
           Log_Flag[Log_Flag.length] = DATAS[1];
-          window.localStorage.setItem("Log_Flag",Log_Flag);
+          window.localStorage.setItem(GAS+"Log_Flag",Log_Flag);
           return;
           break;
         case "人物":
@@ -433,7 +420,7 @@ function Game_load(width,height){
         }
         if(have(Number+"プレイ済み")==false){
           Log_Flag[Log_Flag.length] = Number+"プレイ済み";
-          window.localStorage.setItem("Log_Flag",Log_Flag);
+          window.localStorage.setItem(GAS+"Log_Flag",Log_Flag);
           console.log(Number);
         }
       }
@@ -447,7 +434,7 @@ function Game_load(width,height){
         }
         if(have(Number+"プレイ済み")==false){
           Log_Flag[Log_Flag.length] = Number+"プレイ済み";
-          window.localStorage.setItem("Log_Flag",Log_Flag);
+          window.localStorage.setItem(GAS+"Log_Flag",Log_Flag);
           console.log(Number);
         }
       }
@@ -459,7 +446,7 @@ function Game_load(width,height){
       var Person = www[rand(1)];
       var S_image = "男主人公";
       var S_Sound = "男主人公ポポポ";
-      if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"){
+      if(Surname=="不動"&&Name=="遊星"){
         var Person = "俺";
         var S_image = "蟹";
       }
@@ -474,7 +461,7 @@ function Game_load(width,height){
       var S_image = "../image/ユベル.png";
       var S_Sound = "未設定主人公ポポポ";
       }
-      if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"){
+      if(Surname=="妥協"&&Name=="満足"){
         var Person = "僕";
         var S_image = "満足";
         var S_Sound = "スナネコ";
@@ -786,16 +773,16 @@ function Game_load(width,height){
       return;
     }
     function Load_Datas(){
-      Flag = window.localStorage.getItem("Flag").split(",");
-      Log_Flag = window.localStorage.getItem("Log_Flag").split(",");
-      Setting_Flag = window.localStorage.getItem("Setting_Flag").split(",");
-      Datas = window.localStorage.getItem("Datas").split(",");
-      Number = window.localStorage.getItem("Number");
+      Flag = window.localStorage.getItem(GAS+"Flag").split(",");
+      Log_Flag = window.localStorage.getItem(GAS+"Log_Flag").split(",");
+      Setting_Flag = window.localStorage.getItem(GAS+"Setting_Flag").split(",");
+      Datas = window.localStorage.getItem(GAS+"Datas").split(",");
+      Number = window.localStorage.getItem(GAS+"Number");
       if(Number.replace(/\d/g,"").replace(/\./g,"")=="") Number = Number*1;
-      Item_Flag = window.localStorage.getItem("Item").split("端");
-      Trophy_Flag = window.localStorage.getItem("Trophy").split("端");
-      Character_Flag = window.localStorage.getItem("Character").split("端");
-      Favorability_Flag = window.localStorage.getItem("Favorability").split("端");
+      Item_Flag = window.localStorage.getItem(GAS+"Item").split("端");
+      Trophy_Flag = window.localStorage.getItem(GAS+"Trophy").split("端");
+      Character_Flag = window.localStorage.getItem(GAS+"Character").split("端");
+      Favorability_Flag = window.localStorage.getItem(GAS+"Favorability").split("端");
       for (var i = 0; i < Item_Flag.length; i++){
         Item_Flag[i] = Item_Flag[i].split(",");
       }
@@ -883,37 +870,47 @@ function Game_load(width,height){
       return(false);
     }
     function Save(Number){
-    window.localStorage.setItem("Flag",Flag);
-    window.localStorage.setItem("Datas",Datas);
-    window.localStorage.setItem("Number",Number);
-    window.localStorage.setItem("Version",Version);
-    window.localStorage.setItem("Log_Flag",Log_Flag);
-    window.localStorage.setItem("Setting_Flag",Setting_Flag);
+    if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"){
+      window.localStorage.setItem("管理者","満足");
+    }
+    else if(Setting_Flag[2]=="男"&&Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"){
+      window.localStorage.setItem("管理者","満足");
+    }
+    else if(Setting_Flag[1]=="テスト"&&Setting_Flag[0]=="プレイヤー"){
+      window.localStorage.setItem("管理者","満足");
+    }
+    else window.localStorage.setItem("管理者","不満");
+    window.localStorage.setItem(GAS+"Flag",Flag);
+    window.localStorage.setItem(GAS+"Datas",Datas);
+    window.localStorage.setItem(GAS+"Number",Number);
+    window.localStorage.setItem(GAS+"Version",Version);
+    window.localStorage.setItem(GAS+"Log_Flag",Log_Flag);
+    window.localStorage.setItem(GAS+"Setting_Flag",Setting_Flag);
     var Item_Flag2 = [];
     for (var i = 0; i < Item_Flag.length; i++) {
     Item_Flag2[i] = Item_Flag[i] + "端";
     }
     if(Item_Flag2==[]) Item_Flag2 = [[]+"端"]
-    window.localStorage.setItem("Item",Item_Flag2);
+    window.localStorage.setItem(GAS+"Item",Item_Flag2);
     var Character_Flag2 = [];
     for (var i = 0; i < Character_Flag.length; i++) {
     Character_Flag2[i] = Character_Flag[i] + "端";
     }
     if(Character_Flag2==[]) Character_Flag2 = [[]+"端"]
-    window.localStorage.setItem("Character",Character_Flag2);
+    window.localStorage.setItem(GAS+"Character",Character_Flag2);
     var Favorability_Flag2 = [];
     for (var i = 0; i < Favorability_Flag.length; i++) {
     Favorability_Flag2[i] = Favorability_Flag[i] + "端";
     }
     if(Favorability_Flag2==[]) Favorability_Flag2 = [[]+"端"]
-    window.localStorage.setItem("Favorability",Favorability_Flag2);
+    window.localStorage.setItem(GAS+"Favorability",Favorability_Flag2);
     var Trophy_Flag2 = [];
     for (var i = 0; i < Trophy_Flag.length; i++) {
     Trophy_Flag2[i] = Trophy_Flag[i] + "端";
     }
     if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
-    window.localStorage.setItem("Trophy",Trophy_Flag2);
-    window.localStorage.setItem("syoken",false);
+    window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
+    window.localStorage.setItem(GAS+"syoken",false);
     console.log(Datas);
     }//セーブ
     function rand(n) {
@@ -993,11 +990,11 @@ function Game_load(width,height){
     var TitleScene = function(){
 
       var scene = new Scene();                                // 新しいシーンを作る
-      if(window.localStorage.getItem("syoken")!="false"){
+      if(window.localStorage.getItem(GAS+"syoken")!="false"){
         var Data = false;
       }
       else{
-        if(window.localStorage.getItem("Version")==Version){
+        if(window.localStorage.getItem(GAS+"Version")==Version){
           var Version_new = true;
         }
         else var Version_new = false;
@@ -1084,26 +1081,22 @@ function Game_load(width,height){
       Submit("説明");
 
       if(Version_new){
-        Setting_Flag = window.localStorage.getItem("Setting_Flag").split(",");
-        if(Setting_Flag[1]=="不動"&&Setting_Flag[0]=="遊星"&&Setting_Flag[2]=="男") Submit("テスト用");
-        else if(Setting_Flag[1]=="テスト"&&Setting_Flag[0]=="プレイヤー") Submit("テスト用");
-        else if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足") Submit("テスト用");
+        if(window.localStorage.getItem("管理者")=="満足") Submit("テスト用");
         else if(Already);
         else {
           fetch(GAS,)
           .then(res => res.json())
           .then(result => {
           },);
-          console.log("管理者以外");
         }
       }
+      else if(window.localStorage.getItem("管理者")=="満足");
       else if(Already);
       else{
         fetch(GAS,)
         .then(res => res.json())
         .then(result => {
         },);
-        console.log("バージョンが古い");
       }
 
       var Set_button = new Entity();
@@ -1166,43 +1159,60 @@ function Game_load(width,height){
         Submit("GASのURLを入力してこのボタンを押してね。");
         Numbers += (width/20)+(width/25)+(width/25);
         Submit("ここにGASのURLを入力してね。");
-
-      Numbers += (width/20)+(width/25)+(width/25);
-
-      Button[submits] = new Entity();
-      Button[submits].moveTo(width/2-width/1.2/2,Numbers);
-      Button[submits].width = width/1.2;
-      Button[submits].height = width/10;
-      Button[submits]._element = document.createElement('input');
-      Button[submits]._element.type = "submit";
-      Button[submits]._element.value = "家庭用";
-      scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
-          if(Data_loading) return;
-          this._element.value = "読み込み中…………。";
-          Data_loading = true;
-          GAS_nyuryoku("https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec");
-          return;
-        });
-        submits++;
-        Numbers += (width/20)+(width/25)+(width/25);
-        Numbers += (width/20)+(width/25)+(width/25);
-
-        Button[submits] = new Entity();
-        Button[submits].moveTo(width/2-width/1.2/2,Numbers);
-        Button[submits].width = width/1.2;
-        Button[submits].height = width/10;
-        Button[submits]._element = document.createElement('input');
-        Button[submits]._element.type = "submit";
-        Button[submits]._element.value = "自分用";
-        scene.addChild(Button[submits]);
-        Button[submits].addEventListener('touchstart',function(e){
-          if(Data_loading) return;
-          this._element.value = "読み込み中…………。";
-          Data_loading = true;
-          GAS_nyuryoku("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec");
-          return;
-        });
+        if(window.localStorage.getItem("管理者")=="満足"){
+          Numbers += (width/20)+(width/25)+(width/25);
+          Button[submits] = new Entity();
+          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+          Button[submits].width = width/1.2;
+          Button[submits].height = width/10;
+          Button[submits]._element = document.createElement('input');
+          Button[submits]._element.type = "submit";
+          Button[submits]._element.value = "家庭用";
+          scene.addChild(Button[submits]);
+          Button[submits].addEventListener('touchstart',function(e){
+            if(Data_loading) return;
+            this._element.value = "読み込み中…………。";
+            Data_loading = true;
+            GAS_nyuryoku("https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec");
+            return;
+          });
+          submits++;
+          Numbers += (width/20)+(width/25)+(width/25);
+          Numbers += (width/20)+(width/25)+(width/25);
+          Button[submits] = new Entity();
+          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+          Button[submits].width = width/1.2;
+          Button[submits].height = width/10;
+          Button[submits]._element = document.createElement('input');
+          Button[submits]._element.type = "submit";
+          Button[submits]._element.value = "自分用";
+          scene.addChild(Button[submits]);
+          Button[submits].addEventListener('touchstart',function(e){
+            if(Data_loading) return;
+            this._element.value = "読み込み中…………。";
+            Data_loading = true;
+            GAS_nyuryoku("https://script.google.com/macros/s/AKfycbykP5rFHcjf_Sd-u0u5_iRoqUlHNl_A02IyjsECYOeaO_Vn00Ap/exec");
+            return;
+          });
+          submits++;
+          Numbers += (width/20)+(width/25)+(width/25);
+          Numbers += (width/20)+(width/25)+(width/25);
+          Button[submits] = new Entity();
+          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+          Button[submits].width = width/1.2;
+          Button[submits].height = width/10;
+          Button[submits]._element = document.createElement('input');
+          Button[submits]._element.type = "submit";
+          Button[submits]._element.value = "共有用";
+          scene.addChild(Button[submits]);
+          Button[submits].addEventListener('touchstart',function(e){
+            if(Data_loading) return;
+            this._element.value = "読み込み中…………。";
+            Data_loading = true;
+            GAS_nyuryoku("https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec");
+            return;
+          });
+        }
       }
 
       return scene;
@@ -1538,11 +1548,10 @@ function Game_load(width,height){
         Text[i]._element = document.createElement("innerHTML");
         Text[i]._style.font  = width/20+"px monospace";
         Text[i]._element.textContent = "";
-        Text[i].x = width/50;
         Text[i].y = Numbers;
         if(Datas[19]=="日付") Text[i]._style.color = "green";
         scene.addChild(Text[i]);
-      }
+      }//会話文
 
       var Text =[];
 
@@ -2303,11 +2312,10 @@ function Game_load(width,height){
         Text[i]._element = document.createElement("innerHTML");
         Text[i]._style.font  = width/20+"px monospace";
         Text[i]._element.textContent = a;
-        Text[i].x = width/50;
         Text[i].y = Numbers;
         Text[i]._style.color = "green";
         scene.addChild(Text[i]);
-      }
+      }//証言
 
       var Text = [];
       var Syougen = Datas[2].split("↓");
@@ -2446,7 +2454,7 @@ function Game_load(width,height){
                 scene.addChild(Button[7]);
                 scene.removeChild(Button[6]);
               }
-              window.localStorage.setItem("Setting_Flag",Setting_Flag);
+              window.localStorage.setItem(GAS+"Setting_Flag",Setting_Flag);
               break;
               case "プレイヤー設定":
                 Scene_kazu++;
@@ -2582,7 +2590,7 @@ function Game_load(width,height){
             Scene_kazu--;
             console.log("Scene数",Scene_kazu);
           }
-          window.localStorage.setItem("Setting_Flag",Setting_Flag);
+          window.localStorage.setItem(GAS+"Setting_Flag",Setting_Flag);
         });
         submits++;
       }
@@ -2726,7 +2734,7 @@ function Game_load(width,height){
               Sound_ON("音量調整用");
               break;
           }
-          window.localStorage.setItem("Setting_Flag",Setting_Flag);
+          window.localStorage.setItem(GAS+"Setting_Flag",Setting_Flag);
         });
         submits++;
       }

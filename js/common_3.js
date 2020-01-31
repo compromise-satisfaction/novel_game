@@ -1,5 +1,5 @@
 //enchantjsの画面サイズの設定
-var Foldar = 3;
+var Foldar = "https://script.google.com/macros/s/AKfycbyfEnjDE8FhsxIo97tN5hsvYF_nSW47gwYia54D0-JPgyWti0K4/exec";
 
 function resetScreen(gameWidth,gameHeight){
 
