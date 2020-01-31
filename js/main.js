@@ -1144,6 +1144,8 @@ function Game_load(width,height){
           Button[submits]._element.value = a;
           if(a=="GASのURLを入力してこのボタンを押してね。"){
             Button[submits]._element.type = "submit";
+          }
+          else {
             if(window.localStorage.getItem("GAS")!=null){
               Button[submits]._element.value = window.localStorage.getItem("GAS");
             }
