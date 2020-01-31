@@ -216,11 +216,11 @@ function Game_load(width,height){
       return(name);
     }
     function Sound_branch(Sound_url,Volume){
-      Volume /= 10;
       for (var i = 0; i < SE.length; i++) {
         if(SE[i].title == Sound_url) break;
       }
       if(Volume){
+        Volume /= 10;
         SE[i].volume = Volume;
         if(SE[i].paused) SE[i].play();
         else SE[i].currentTime = 0;
@@ -247,7 +247,7 @@ function Game_load(width,height){
           return;
         }
       }
-      Sound_branch("../sound/スカ.wav",Setting_Flag[10]);
+      Sound_branch("スカ",Setting_Flag[10]);
       return;
     }
     function BGM_ON(BGM_Name){
@@ -907,12 +907,6 @@ function Game_load(width,height){
     }
     if(Favorability_Flag2==[]) Favorability_Flag2 = [[]+"端"]
     window.localStorage.setItem(GAS+"Favorability",Favorability_Flag2);
-    var Trophy_Flag2 = [];
-    for (var i = 0; i < Trophy_Flag.length; i++) {
-    Trophy_Flag2[i] = Trophy_Flag[i] + "端";
-    }
-    if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
-    window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
     window.localStorage.setItem(GAS+"syoken",false);
     console.log(Datas);
     }//セーブ
@@ -986,6 +980,9 @@ function Game_load(width,height){
               break;
           }
         }
+        SE[k0] = document.createElement("audio");
+        SE[k0].src = "../sound/スカ.wav";
+        SE[k0].title = "スカ";
         Sound_ON("セーブ");
         game.replaceScene(TitleScene());
       },);
@@ -1909,6 +1906,12 @@ function Game_load(width,height){
           ];
       if(have(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名)==false){
           Get_ICFT(DATAS);
+          var Trophy_Flag2 = [];
+          for (var i = 0; i < Trophy_Flag.length; i++) {
+          Trophy_Flag2[i] = Trophy_Flag[i] + "端";
+          }
+          if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
+          window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
           var Trophy_Time = 0;
           var Trophy = new Sprite();
           Trophy._element = document.createElement("img");
