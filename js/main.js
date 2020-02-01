@@ -140,8 +140,6 @@ function Game_load(width,height){
       core.removeScene(core.loadingScene);
       core.dispatchEvent(e);
   });
-  game.preload("../image/カットイン.png");
-  game.preload("../image/Explosion.png");
   //game.preload("../image/リバーシ.png");
   //game.preload("../image/Set_button.png");
   //game.preload("../image/stone.png");
@@ -1282,35 +1280,30 @@ function Game_load(width,height){
         }
 
         if(Datas[0]=="カットイン"){
-          var ccx = game.assets["../image/カットイン.png"].width*3;
-          var ccy = game.assets["../image/カットイン.png"].height;
-          var Cut_in = new Sprite(ccx,ccy);
-          Cut_in.scaleX = width/ccx*3;
-          Cut_in.scaleY = width/16*9/ccy;
-          Cut_in.image = game.assets["../image/カットイン.png"];
           Cut_in_time += 10;
-          Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2-Cut_in_time;
-          Cut_in.y = (Cut_in.scaleY*ccy/2)-ccy/2;
+          var Cut_in = new Sprite();
+          Cut_in._element = document.createElement("img");
+          Cut_in._element.src = "../image/カットイン.png";
+          Cut_in.width = width*3;
+          Cut_in.height = width/16*9;
+          Cut_in.x = -Cut_in_time;
           scene.addChild(Cut_in);//背景
           Cut_in.addEventListener("enterframe",function(){
-            Cut_in_time += 10;
             Cut_in.x -= 10;
+            Cut_in_time += 10;
             if(Cut_in_time>width*2){
+              Cut_in.x = 0;
               Cut_in_time = 0;
-              Cut_in.x = (Cut_in.scaleX*ccx/2)-ccx/2;
             }
           })
         }
       }
 
-      var xxx = 80;
-      var yyy = 80;
-      var Explosion = new Sprite(xxx,yyy);
-      Explosion.scaleX = ((width/2)/xxx);
-      Explosion.scaleY = (((width/16)*9)/yyy);
-      Explosion.image = game.assets["../image/Explosion.png"];
-      Explosion.frame = 11;
-      Explosion.y = (Explosion.scaleY*yyy/2)-yyy/2;
+      var Explosion = new Sprite();
+      Explosion._element = document.createElement("img");
+      Explosion._element.src = "../image/透明.png";
+      Explosion.width = width/16*9;
+      Explosion.height = width/16*9;
       scene.addChild(Explosion);
 
       if(Datas[3]!=false){
@@ -1672,24 +1665,24 @@ function Game_load(width,height){
           case "㊨":
             s = false;
             if(Return==false){
-              Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/2);
-              Explosion.frame = 0;
+              Explosion.x = width/2-width/32;
+              Explosion._element.src = "../image/爆発.gif";
               Sound_ON("爆発");
             }
             break;
           case "㊥":
             s = false;
             if(Return==false){
-              Explosion.x = (Explosion.scaleX*80/2)-80/2+(width/4);
-              Explosion.frame = 0;
+              Explosion.x = width/4-width/32;
+              Explosion._element.src = "../image/爆発.gif";
               Sound_ON("爆発");
             }
             break;
           case "㊧":
           s = false;
             if(Return==false){
-              Explosion.x = (Explosion.scaleX*80/2)-80/2;
-              Explosion.frame = 0;
+              Explosion.x = -width/32;
+              Explosion._element.src = "../image/爆発.gif";
               Sound_ON("爆発");
             }
             break;
@@ -1890,7 +1883,6 @@ function Game_load(width,height){
       }
 
       White_Background.addEventListener("enterframe",function(){
-        if(Explosion.frame!=11) Explosion.frame++;
         if(Return!=true&&Text_defined){
           T_D();
         }
