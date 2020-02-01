@@ -1772,7 +1772,7 @@ function Game_load(width,height){
             if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
               else{
-                Text[k]._element.textContent = " 　";
+                Text[k]._element.textContent = " ";
                 Text[k]._style.color = "blue";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し2.png";
@@ -1790,10 +1790,10 @@ function Game_load(width,height){
             }
           }
           else if(Datas[8].substring(Time-1,Time)!=""){
-            if(Text[k]._element.textContent.substring(0,2)==" 　") Text[k]._style.color = "blue";
+            if(Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
             switch (Datas[8].substring(Time-1,Time)) {
                 case "(":
-                if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+" 　(";
+                if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+" (";
                 else Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
                 break;
               default:
