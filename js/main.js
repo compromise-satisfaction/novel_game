@@ -404,9 +404,9 @@ function Game_load(width,height){
           }
         }
     }
-    function Scene_loads(Number,Return,Item,Item_type){
+    function Scene_loads(Number,Return,Item,Item_type,Item_image){
       if(Item){
-        Setting_Flag[15] = Item;
+        if(Item_image) Setting_Flag[15] = Item_image;
         if(Item_type) Number = [Number+"で"+Item+"をつきつける",Number+"で"+Item_type+"をつきつける"];
         else Number = [Number.split("↓")[0]+"で"+Item+"を使用",Number.split("↓")[1]];
         Item = Number[1];
@@ -3156,7 +3156,7 @@ function Game_load(width,height){
                   Scene_kazu++;
                   console.log("Scene数",Scene_kazu);
                 }
-                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item,Type);
+                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item,Type,Choice_Item_Image);
                 else{
                   game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
                   Scene_kazu++;
@@ -3172,6 +3172,7 @@ function Game_load(width,height){
                   Button[i].backgroundColor = "buttonface";
                 }
                 Choice_Item = f[5];
+                Choice_Item_Image = f[2];
                 var Item_image_url = conversion_url(f[2],"画像");
                 Item_image._element.src = Item_image_url;
                 this.backgroundColor = "red";
@@ -3230,6 +3231,7 @@ function Game_load(width,height){
       var Item_Number = 0;
       var Numbers = (width/4);
       var Choice_Item = "未設定";
+      var Choice_Item_Image = "未設定";
 
       for (var i = 0; i < 5; i++) {
         if(Choice_Flag[i+Setting_Flag[PAGAS]]){
