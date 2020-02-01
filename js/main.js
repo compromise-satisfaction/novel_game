@@ -665,6 +665,21 @@ function Game_load(width,height){
             else Scene_loads(Branch_DATAS[i].ない,Return,Item);
             return;
           }
+          else if(Branch_DATAS[i].アイテムorフラグ名=="主人公が男"){
+            if(Gender=="男") Scene_loads(Branch_DATAS[i].ある,Return,Item);
+            else Scene_loads(Branch_DATAS[i].ない,Return,Item);
+            return;
+          }
+          else if(Branch_DATAS[i].アイテムorフラグ名=="主人公が女"){
+            if(Gender=="女") Scene_loads(Branch_DATAS[i].ある,Return,Item);
+            else Scene_loads(Branch_DATAS[i].ない,Return,Item);
+            return;
+          }
+          else if(Branch_DATAS[i].アイテムorフラグ名=="主人公が未設定"){
+            if(Gender=="男"||Gender=="女") Scene_loads(Branch_DATAS[i].ない,Return,Item);
+            else Scene_loads(Branch_DATAS[i].ある,Return,Item);
+            return;
+          }
           if(have(Branch_DATAS[i].アイテムorフラグ名)) Scene_loads(Branch_DATAS[i].ある,Return,Item);
           else Scene_loads(Branch_DATAS[i].ない,Return,Item);
           return;
