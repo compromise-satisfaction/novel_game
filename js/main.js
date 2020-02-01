@@ -162,9 +162,9 @@ function Game_load(width,height){
     var Syougen_time = 0;
     var Syougen_time2 = 1;
     var Datas = [];
-    var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","",0];
+    var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト"];
     var Favorability_Flag = [];//好感度
-    //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15ループ箇所];
+    //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム];
     var Flag = [];//フラグ
     var Log_Flag = [];//記録
     var Item_Flag = [];//所持アイテム
@@ -406,6 +406,7 @@ function Game_load(width,height){
     }
     function Scene_loads(Number,Return,Item,Item_type){
       if(Item){
+        Setting_Flag[15] = Item;
         if(Item_type) Number = [Number+"で"+Item+"をつきつける",Number+"で"+Item_type+"をつきつける"];
         else Number = [Number.split("↓")[0]+"で"+Item+"を使用",Number.split("↓")[1]];
         Item = Number[1];
@@ -590,7 +591,8 @@ function Game_load(width,height){
           Datas[12] = Main_DATAS[i].次;
           Datas[13] = Main_DATAS[i].次次;
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
-          Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
+          if(Main_DATAS[i].表示アイテム画像=="デフォルト") Datas[15] = conversion_url(Setting_Flag[15],"画像");
+          else Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
           Datas[16] = Main_DATAS[i].トロフィー;
           Datas[19] = Main_DATAS[i].文章音;
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
@@ -847,7 +849,7 @@ function Game_load(width,height){
         if(Setting_Flag[i]=="true") Setting_Flag[i] = true;
         else if(Setting_Flag[i]=="false") Setting_Flag[i] = false
         else if(Setting_Flag[i].replace(/\d/g,"").replace(/\./g,"")=="") Setting_Flag[i] = Setting_Flag[i]*1;
-        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15ループ箇所];
+        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム];
       }
       for (var i = 0; i < Datas.length; i++){
         if(Datas[i].replace(/\d/g,"").replace(/\./g,"")=="") Datas[i] = Datas[i]*1;
@@ -3431,8 +3433,8 @@ function Game_load(width,height){
         Data = false;
         window.localStorage.clear();
         Datas = [];
-        Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","",0];
-        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15ループ箇所];
+        Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト"];
+        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム];
         Flag = [];//フラグ
         Log_Flag = [];//記録
         Item_Flag = [];//所持アイテム
