@@ -907,6 +907,12 @@ function Game_load(width,height){
     }
     if(Favorability_Flag2==[]) Favorability_Flag2 = [[]+"端"]
     window.localStorage.setItem(GAS+"Favorability",Favorability_Flag2);
+    var Trophy_Flag2 = [];
+    for (var i = 0; i < Trophy_Flag.length; i++) {
+    Trophy_Flag2[i] = Trophy_Flag[i] + "端";
+    }
+    if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
+    window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
     window.localStorage.setItem(GAS+"syoken",false);
     console.log(Datas);
     }//セーブ
