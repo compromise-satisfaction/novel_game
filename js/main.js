@@ -1242,13 +1242,13 @@ function Game_load(width,height){
     var MainScene = function(Return,Number){
       var scene = new Scene();                                // 新しいシーンを作る
 
-      var Sound_effect = Datas[8].match(/\(♪[^♪]+♪\)/g);
-      Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
       if(Datas[8].substring(0,1)=="Θ"){
         Datas[8] = Datas[8].substring(1);
         var Play = false;
       }
       else var Play = true;
+      var Sound_effect = Datas[8].match(/\(♪[^♪]+♪\)/g);
+      Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
 
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
@@ -1761,6 +1761,7 @@ function Game_load(width,height){
               else{
                 Text[k]._element.textContent = " ";
                 Text[k]._style.color = "blue";
+                console.log("text");
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し2.png";
               }
