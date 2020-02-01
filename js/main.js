@@ -3200,7 +3200,7 @@ function Game_load(width,height){
         Text[i] = new Sprite();
         Text[i]._element = document.createElement("innerHTML");
         Text[i]._style.font  = width/20+"px monospace";
-        Text[i].width = width-width/4;
+        Text[i].width = width-width/8-width/20;
         Text[i].x = width/8;
         Text[i].y = (width/4) + ((width/20)+(width/25)*(18+i*2)) - (width/25);
         scene.addChild(Text[i]);
