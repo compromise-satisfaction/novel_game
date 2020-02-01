@@ -452,7 +452,7 @@ function Game_load(width,height){
         var S_Sound = "女主人公ポポポ";
       }
       else{
-        var S_image = "../image/ユベル.png";
+        var S_image = "未設定主人公";
         var S_Sound = "未設定主人公ポポポ";
       }
       if(Surname=="妥協"&&Name=="満足"){
