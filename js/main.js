@@ -155,10 +155,6 @@ function Game_load(width,height){
       return;
     });
 
-    var XXX = width;
-    var YYY = width/16*9;
-    var Rotation_Y = 0;
-    var Cut_in_time = 0;
     var Syougen_time = 0;
     var Syougen_time2 = 1;
     var Datas = [];
@@ -520,10 +516,10 @@ function Game_load(width,height){
           Get_ICFT2(Main_DATAS[i],Person,Get);
           game.fps = Main_DATAS[i].速度;
           Setting_Flag[3] = game.fps;
-          if(Main_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
+          if(Main_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
           else {
             if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
-            Datas[0] = conversion_url(Main_DATAS[i].背景,"画像");
+            Datas[0] = Main_DATAS[i].背景;
           }
           if(Main_DATAS[i].左側の人物.split("イン").length==1&&Main_DATAS[i].左側の人物.split("アウト").length==1&&Main_DATAS[i].左側の人物.split("点滅").length==1){
             Datas[1] = Main_DATAS[i].左側の人物;
@@ -1263,23 +1259,6 @@ function Game_load(width,height){
 
       if(Datas[0]){
         switch (Datas[0]) {
-          case "ヒント":
-            var Background = new Sprite();
-            Background._element = document.createElement("img");
-            Background._element.src = "../image/融合.png";
-            Background.width = width*1.2;
-            Background.height = width*1.2;
-            Background.x = (width - width*1.2)/2;
-            Background.y = (width - width*1.6)/2;
-            Rotation_Y -= 10;
-            Background.rotation = Rotation_Y;
-            scene.addChild(Background);//背景
-            Background.addEventListener("enterframe",function(){
-              Rotation_Y -= 10;
-              Background.rotation = Rotation_Y;
-              if(Rotation_Y==-360) Rotation_Y = 0;
-            });
-            break;
             case "Black":
             case "left":
             case "right":
@@ -1293,8 +1272,6 @@ function Game_load(width,height){
             Background.height = width/16*9;
             scene.addChild(Background);
             break;
-          case "カットイン":
-            break;
           default:
             var Background = new Sprite();
             Background._element = document.createElement("img");
@@ -1305,24 +1282,6 @@ function Game_load(width,height){
             break;
         }
 
-        if(Datas[0]=="カットイン"){
-          Cut_in_time += 10;
-          var Cut_in = new Sprite();
-          Cut_in._element = document.createElement("img");
-          Cut_in._element.src = "../image/カットイン.png";
-          Cut_in.width = width*3;
-          Cut_in.height = width/16*9;
-          Cut_in.x = -Cut_in_time;
-          scene.addChild(Cut_in);//背景
-          Cut_in.addEventListener("enterframe",function(){
-            Cut_in.x -= 10;
-            Cut_in_time += 10;
-            if(Cut_in_time>width*2){
-              Cut_in.x = 0;
-              Cut_in_time = 0;
-            }
-          })
-        }
       }
 
       var Explosion = new Sprite();
@@ -2119,23 +2078,6 @@ function Game_load(width,height){
       }
 
       switch (Datas[0]) {
-        case "ヒント":
-          var Background = new Sprite();
-          Background._element = document.createElement("img");
-          Background._element.src = "../image/融合.png";
-          Background.width = width*1.2;
-          Background.height = width*1.2;
-          Background.x = (width - width*1.2)/2;
-          Background.y = (width - width*1.6)/2;
-          Rotation_Y -= 10;
-          Background.rotation = Rotation_Y;
-          scene.addChild(Background);//背景
-          Background.addEventListener("enterframe",function(){
-            Rotation_Y -= 10;
-            Background.rotation = Rotation_Y;
-            if(Rotation_Y==-360) Rotation_Y = 0;
-          });
-          break;
           case "Black":
           case "left":
           case "right":
