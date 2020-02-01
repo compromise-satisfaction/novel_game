@@ -1543,10 +1543,12 @@ function Game_load(width,height){
         Numbers += width/20+width/25;
         Text[i] = new Sprite();
         Text[i]._element = document.createElement("innerHTML");
-        Text[i].width = width-width/10;
         Text[i]._style.font  = width/20+"px monospace";
         Text[i]._element.textContent = "";
-        if(Datas[8].replace(/[^\「\(\)\」]/g,"")!="") Text[i].x = width/20;
+        if(Datas[8].replace(/[^\「\(\)\」]/g,"")!=""){
+          Text[i].x = width/20;
+          Text[i].width = width-width/10;
+        }
         Text[i].y = Numbers;
         if(Datas[19]=="日付") Text[i]._style.color = "green";
         scene.addChild(Text[i]);
