@@ -1687,6 +1687,7 @@ function Game_load(width,height){
             }
             break;
           case "":
+          case "↓":
           case "…":
           case "\"":
           case "「":
