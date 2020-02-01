@@ -456,7 +456,6 @@ function Game_load(width,height){
         var S_Sound = "未設定主人公ポポポ";
       }
       if(Surname=="妥協"&&Name=="満足"){
-        var Person = "僕";
         var S_image = "満足";
         var S_Sound = "スナネコ";
       }
