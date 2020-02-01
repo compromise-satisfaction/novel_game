@@ -1700,6 +1700,7 @@ function Game_load(width,height){
           case "！":
           case "?":
           case "？":
+          case "。":
             if(Datas[1]){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
