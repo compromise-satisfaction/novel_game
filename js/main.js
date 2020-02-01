@@ -1248,7 +1248,7 @@ function Game_load(width,height){
         Datas[8] = Datas[8].substring(1);
         var Play = false;
       }
-      else Play = true;
+      else var Play = true;
 
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
