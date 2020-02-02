@@ -1249,6 +1249,8 @@ function Game_load(width,height){
       else var Play = true;
       var Sound_effect = Datas[8].match(/\(♪[^♪]+♪\)/g);
       Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
+      var Pose_change = Datas[8].match(/\(◀[^▶]+▶\)/g);
+      Datas[8] = Datas[8].replace(/\(◀[^▶]+▶\)/g,"Ψ");
 
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
@@ -1599,6 +1601,7 @@ function Game_load(width,height){
       var Speak_Character_image = 0;
       var Winking_time = 0;
       var sese = 0;
+      var pcpc = 0;
 
       var Text =[];
 
@@ -1615,6 +1618,24 @@ function Game_load(width,height){
             s = false;
             if(Return==false) Sound_ON(Sound_effect[sese].replace(/[\(♪\)]/g,""));
             sese++;
+            break;
+          case "Ψ":
+            s = false;
+            switch(Speak_Character){
+              case "㊧":
+                Datas[1] = Pose_change[pcpc].replace(/[\(◀▶\)]/g,"");
+                break;
+              case "㊥":
+                Datas[2] = Pose_change[pcpc].replace(/[\(◀▶\)]/g,"");
+                break;
+              case "㊨":
+                Datas[3] = Pose_change[pcpc].replace(/[\(◀▶\)]/g,"");
+                break;
+              default:
+                console.log(Pose_change[pcpc].replace(/[\(◀▶\)]/g,"")+"が選択されましたがスピークキャラがいません。");
+                break;
+            }
+            pcpc++;
             break;
           case "→":
             s = false;
