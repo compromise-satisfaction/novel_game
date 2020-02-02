@@ -1249,8 +1249,8 @@ function Game_load(width,height){
       else var Play = true;
       var Sound_effect = Datas[8].match(/\(♪[^♪]+♪\)/g);
       Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
-      var Pose_change = Datas[8].match(/\(◀[^▶]+▶\)/g);
-      Datas[8] = Datas[8].replace(/\(◀[^▶]+▶\)/g,"Ψ");
+      var Pose_change = Datas[8].match(/\([㊧㊥㊨][^㊧㊥㊨]+[㊧㊥㊨]\)/g);
+      Datas[8] = Datas[8].replace(/\([㊧㊥㊨][^㊧㊥㊨]+[㊧㊥㊨]\)/g,"Ψ");
 
       if(Datas[11]){
         if(Datas[11]=="無し") Datas[11] = Number;
@@ -1628,9 +1628,9 @@ function Game_load(width,height){
             break;
           case "Ψ":
             s = false;
-            switch(Speak_Character){
+            switch(Pose_change[pcpc].substring(1,2)){
               case "㊧":
-                if(Character1._element.title != Pose_change[pcpc].replace(/[\(◀▶\)]/g,"")){
+                if(Character1._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
                   Datas[1] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
                   Character1._element.title = Datas[1];
                   Character1._element.src = conversion_url(Datas[1],"画像");
@@ -1638,7 +1638,7 @@ function Game_load(width,height){
                 }
                 break;
               case "㊥":
-                if(Character2._element.title != Pose_change[pcpc].replace(/[\(◀▶\)]/g,"")){
+                if(Character2._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
                   Datas[3] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
                   Character2._element.title = Datas[3];
                   Character2._element.src = conversion_url(Datas[3],"画像");
@@ -1646,7 +1646,7 @@ function Game_load(width,height){
                 }
                 break;
               case "㊨":
-                if(Character3._element.title != Pose_change[pcpc].replace(/[\(◀▶\)]/g,"")){
+                if(Character3._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
                   Datas[5] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
                   Character3._element.title = Datas[5];
                   Character3._element.src = conversion_url(Datas[5],"画像");
@@ -1766,29 +1766,35 @@ function Game_load(width,height){
             if(Text[k]._element.textContent.substring(0,1)=="「"||Text[k]._element.textContent.substring(0,1)=="　"){
               switch(Speak_Character){
                 case "㊧":
-                  if(Character1._element.title != Datas[1]+"口パク"){
-                    if(conversion_url(Datas[1]+"口パク","画像")!=Datas[1]+"口パク"){
-                      Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
-                      Character1._element.title = Datas[1]+"口パク";
-                      console.log("左のキャラを"+Datas[1]+"口パクに変更");
+                  if(Datas[1]){
+                    if(Character1._element.title != Datas[1]+"口パク"){
+                      if(conversion_url(Datas[1]+"口パク","画像")!=Datas[1]+"口パク"){
+                        Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
+                        Character1._element.title = Datas[1]+"口パク";
+                        console.log("左のキャラを"+Datas[1]+"口パクに変更");
+                      }
                     }
                   }
                   break;
                 case "㊥":
-                  if(Character2._element.title != Datas[3]+"口パク"){
-                    if(conversion_url(Datas[3]+"口パク","画像")!=Datas[3]+"口パク"){
-                      Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
-                      Character2._element.title = Datas[3]+"口パク";
-                      console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
+                  if(Datas[3]){
+                    if(Character2._element.title != Datas[3]+"口パク"){
+                      if(conversion_url(Datas[3]+"口パク","画像")!=Datas[3]+"口パク"){
+                        Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
+                        Character2._element.title = Datas[3]+"口パク";
+                        console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
+                      }
                     }
                   }
                   break;
                 case "㊨":
-                  if(Character3._element.title != Datas[5]+"口パク"){
-                    if(conversion_url(Datas[5]+"口パク","画像")!=Datas[5]+"口パク"){
-                      Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
-                      Character3._element.title = Datas[5]+"口パク";
-                      console.log("右のキャラを"+Datas[5]+"口パクに変更");
+                  if(Datas[5]){
+                    if(Character3._element.title != Datas[5]+"口パク"){
+                      if(conversion_url(Datas[5]+"口パク","画像")!=Datas[5]+"口パク"){
+                        Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
+                        Character3._element.title = Datas[5]+"口パク";
+                        console.log("右のキャラを"+Datas[5]+"口パクに変更");
+                      }
                     }
                   }
                   break;
