@@ -1298,6 +1298,8 @@ function Game_load(width,height){
         var Character2 = new Sprite();
         Character2._element = document.createElement("img");
         Character2._element.src = conversion_url(Datas[3],"画像");
+        Character2._element.title = Datas[3];
+        console.log("真ん中のキャラを"+Datas[3]+"に設定");
         Character2.width = width/16*9;
         Character2.height = width/16*9;
         if(Datas[0]=="カットイン"){
@@ -1343,6 +1345,8 @@ function Game_load(width,height){
         var Character1 = new Sprite();
         Character1._element = document.createElement("img");
         Character1._element.src = conversion_url(Datas[1],"画像");
+        Character1._element.title = Datas[1];
+        console.log("左のキャラを"+Datas[1]+"に設定");
         Character1.width = width/16*9;
         Character1.height = width/16*9;
         if(Datas[0]=="カットイン"){
@@ -1395,6 +1399,8 @@ function Game_load(width,height){
         var Character3 = new Sprite();
         Character3._element = document.createElement("img");
         Character3._element.src = conversion_url(Datas[5],"画像");
+        Character3._element.title = Datas[5];
+        console.log("右のキャラを"+Datas[5]+"に設定");
         Character3.width = width/16*9;
         Character3.height = width/16*9;
         if(Datas[0]=="カットイン"){
@@ -1643,18 +1649,21 @@ function Game_load(width,height){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
                 Character1._element.src = conversion_url(Datas[1],"画像");
+                console.log("左のキャラを"+Datas[1]+"に変更");
               }
             }
             if(Datas[3]){
               if(Character2._element.title != Datas[3]){
                 Character2._element.title = Datas[3];
                 Character2._element.src = conversion_url(Datas[3],"画像");
+                console.log("真ん中のキャラを"+Datas[3]+"に変更");
               }
             }
             if(Datas[5]){
               if(Character3._element.title != Datas[5]){
                 Character3._element.title = Datas[5];
                 Character3._element.src = conversion_url(Datas[5],"画像");
+                console.log("真ん中のキャラを"+Datas[5]+"に変更");
               }
             }
             Speak_Background2._element.src = "../image/透明.png";
@@ -1718,18 +1727,21 @@ function Game_load(width,height){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
                 Character1._element.src = conversion_url(Datas[1],"画像");
+                console.log("左のキャラを"+Datas[1]+"に変更");
               }
             }
             if(Datas[3]){
               if(Character2._element.title != Datas[3]){
                 Character2._element.title = Datas[3];
                 Character2._element.src = conversion_url(Datas[3],"画像");
+                console.log("真ん中のキャラを"+Datas[3]+"に変更");
               }
             }
             if(Datas[5]){
               if(Character3._element.title != Datas[5]){
                 Character3._element.title = Datas[5];
                 Character3._element.src = conversion_url(Datas[5],"画像");
+                console.log("右のキャラを"+Datas[5]+"に変更");
               }
             }
             Speak_Background2._element.src = "../image/透明.png";
@@ -1742,6 +1754,7 @@ function Game_load(width,height){
                     if(conversion_url(Datas[1]+"口パク","画像")!=Datas[1]+"口パク"){
                       Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
                       Character1._element.title = Datas[1]+"口パク";
+                      console.log("左のキャラを"+Datas[1]+"口パクに変更");
                     }
                   }
                   break;
@@ -1750,6 +1763,7 @@ function Game_load(width,height){
                     if(conversion_url(Datas[3]+"口パク","画像")!=Datas[3]+"口パク"){
                       Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
                       Character2._element.title = Datas[3]+"口パク";
+                      console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
                     }
                   }
                   break;
@@ -1758,6 +1772,7 @@ function Game_load(width,height){
                     if(conversion_url(Datas[5]+"口パク","画像")!=Datas[5]+"口パク"){
                       Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
                       Character3._element.title = Datas[5]+"口パク";
+                      console.log("右のキャラを"+Datas[5]+"口パクに変更");
                     }
                   }
                   break;
@@ -1889,9 +1904,27 @@ function Game_load(width,height){
           }
           else if(Datas[8].substring(Time-1,Time)==""){
             Text_defined = false;
-            if(Datas[1]) Character1._element.src = conversion_url(Datas[1],"画像");
-            if(Datas[3]) Character2._element.src = conversion_url(Datas[3],"画像");
-            if(Datas[5]) Character3._element.src = conversion_url(Datas[5],"画像");
+            if(Datas[1]){
+              if(Character1._element.title != Datas[1]){
+                Character1._element.title = Datas[1];
+                Character1._element.src = conversion_url(Datas[1],"画像");
+                console.log("左のキャラを"+Datas[1]+"に変更");
+              }
+            }
+            if(Datas[3]){
+              if(Character2._element.title != Datas[3]){
+                Character2._element.title = Datas[3];
+                Character2._element.src = conversion_url(Datas[3],"画像");
+                console.log("真ん中のキャラを"+Datas[3]+"に変更");
+              }
+            }
+            if(Datas[5]){
+              if(Character3._element.title != Datas[5]){
+                Character3._element.title = Datas[5];
+                Character3._element.src = conversion_url(Datas[5],"画像");
+                console.log("右のキャラを"+Datas[5]+"に変更");
+              }
+            }
             Speak_Background2._element.src = "../image/透明.png";
           }
         }
