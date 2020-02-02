@@ -1289,6 +1289,7 @@ function Game_load(width,height){
 
       var Explosion = new Sprite();
       Explosion._element = document.createElement("img");
+      Explosion._element.title = "爆発";
       Explosion._element.src = "../image/透明.png";
       Explosion.width = width/16*9;
       Explosion.height = width/16*9;
@@ -1678,7 +1679,7 @@ function Game_load(width,height){
               if(Character3._element.title != Datas[5]){
                 Character3._element.title = Datas[5];
                 Character3._element.src = conversion_url(Datas[5],"画像");
-                console.log("真ん中のキャラを"+Datas[5]+"に変更");
+                console.log("右のキャラを"+Datas[5]+"に変更");
               }
             }
             Speak_Background2._element.src = "../image/透明.png";
