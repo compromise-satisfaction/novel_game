@@ -594,6 +594,7 @@ function Game_load(width,height){
           Datas[19] = Main_DATAS[i].文章音;
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
           Datas[21] = Main_DATAS[i].表示アイテムフェード;
+          Datas[22] = Main_DATAS[i].拡大;
           if(Datas[1]=="主人公") Datas[1] = S_image;
           if(Datas[3]=="主人公") Datas[3] = S_image;
           if(Datas[5]=="主人公") Datas[5] = S_image;
@@ -1021,6 +1022,9 @@ function Game_load(width,height){
       if(Data_loading){
         var Title = new Entity();
         Title._element = document.createElement("img");
+        for (var i = 0; i < Image_DATAS.length; i++) {
+          Title._element.src = Image_DATAS[i].url;
+        }
         Title._element.src = conversion_url("タイトル画面","画像");
         Title.width = width;
         Title.height = width/16*9;
@@ -1303,7 +1307,7 @@ function Game_load(width,height){
         console.log("真ん中のキャラを"+Datas[3]+"に設定");
         Character2.width = width/16*9;
         Character2.height = width/16*9;
-        if(Datas[0]=="カットイン"){
+        if(Datas[22]){
           Character2.width = width;
           Character2.height = width;
         }
@@ -1350,7 +1354,7 @@ function Game_load(width,height){
         console.log("左のキャラを"+Datas[1]+"に設定");
         Character1.width = width/16*9;
         Character1.height = width/16*9;
-        if(Datas[0]=="カットイン"){
+        if(Datas[22]){
           Character1.width = width;
           Character1.height = width;
           Character1.x = -width/3;
@@ -1404,7 +1408,7 @@ function Game_load(width,height){
         console.log("右のキャラを"+Datas[5]+"に設定");
         Character3.width = width/16*9;
         Character3.height = width/16*9;
-        if(Datas[0]=="カットイン"){
+        if(Datas[22]){
           Character3.width = width;
           Character3.height = width;
           Character3.x = width/3;
