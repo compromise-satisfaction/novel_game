@@ -1813,7 +1813,6 @@ function Game_load(width,height){
               else{
                 Text[k]._element.textContent = " ";
                 Text[k]._style.color = "blue";
-                console.log("text");
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し2.png";
               }
