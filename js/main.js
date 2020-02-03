@@ -1837,7 +1837,6 @@ function Game_load(width,height){
             if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
               else{
-                Time++;
                 Text[k]._element.textContent = " ";
                 Text[k]._style.color = "blue";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
@@ -1846,9 +1845,8 @@ function Game_load(width,height){
             }
             else{
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)=="」") Text[k]._element.textContent = "";
-              else{
-                Time++;
-                Text[k]._element.textContent = "　"+Datas[8].substring(Time-1,Time);
+              else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text[k-1]._element.textContent.substring(0,1)=="　"){
+                Text[k]._element.textContent = "　";
                 Text[k]._style.color = "Black";
                 Speak_Background2._element.src = "../image/吹き出し1.png";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
