@@ -1621,17 +1621,18 @@ function Game_load(width,height){
       }
 
       function T_D(){
-        var s = true;
         var Itimozi = Datas[8].substring(Time,Time+1);
         scene.addChild(Speak_Background2);
         switch (Itimozi) {
           case "§":
-            s = false;
+            Time++;
             if(Return==false) Sound_ON(Sound_effect[sese].substring(2,Sound_effect[sese].length-2));
             sese++;
+            T_D();
+            return;
             break;
           case "Ψ":
-            s = false;
+            Time++;
             switch(Pose_change[pcpc].substring(1,2)){
               case "㊧":
                 if(Character1._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
@@ -1662,9 +1663,11 @@ function Game_load(width,height){
                 break;
             }
             pcpc++;
+            T_D();
+            return;
             break;
           case "→":
-            s = false;
+            Time++;
             if(Datas[1]){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
@@ -1687,44 +1690,58 @@ function Game_load(width,height){
               }
             }
             Speak_Background2._element.src = "../image/透明.png";
+            return;
             break;
           case "↦":
-          s = false;
+            Time++;
             if(Return==false) game.fps += 200;
             Setting_Flag[3] = game.fps;
             console.log(game.fps);
+            T_D();
+            return;
             break;
           case "↤":
-          s = false;
-            game.fps = 10;
+            Time++;
+            if(Return==false) game.fps -= 200;
+            Setting_Flag[3] = game.fps;
+            T_D();
+            return;
             break;
           case "☞":
-            s = false;
+            Time++;
             if(Return==false) Scene_loads(Datas[12],false,false);
+            T_D();
+            return;
             break;
           case "㊨":
-            s = false;
+            Time++;
             if(Return==false){
               Explosion.x = width/2-width/32;
               Explosion._element.src = "../image/爆発.gif";
               Sound_ON("爆発");
             }
+            T_D();
+            return;
             break;
           case "㊥":
-            s = false;
+            Time++;
             if(Return==false){
               Explosion.x = width/4-width/32;
               Explosion._element.src = "../image/爆発.gif";
               Sound_ON("爆発");
             }
+            T_D();
+            return;
             break;
           case "㊧":
-          s = false;
+            Time++;
             if(Return==false){
               Explosion.x = -width/32;
               Explosion._element.src = "../image/爆発.gif";
               Sound_ON("爆発");
             }
+            T_D();
+            return;
             break;
           case "":
           case "↓":
@@ -1814,14 +1831,14 @@ function Game_load(width,height){
             }
             break;
         }
-        Time ++;
-        if(s){
-          if(Datas[8].substring(Time-1,Time)=="↓"){
+        Time++;
+        if(Datas[8].substring(Time-1,Time)=="↓"){
             k++;
             if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
               else{
-                Text[k]._element.textContent = " ";
+                Time++;
+                Text[k]._element.textContent = " "+Datas[8].substring(Time-1,Time);
                 Text[k]._style.color = "blue";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し2.png";
@@ -1830,127 +1847,127 @@ function Game_load(width,height){
             else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text[k-1]._element.textContent.substring(0,1)=="　"){
               if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)=="」") Text[k]._element.textContent = "";
               else{
-                Text[k]._element.textContent = "　";
+                Time++;
+                Text[k]._element.textContent = "　"+Datas[8].substring(Time-1,Time);
                 Text[k]._style.color = "Black";
                 Speak_Background2._element.src = "../image/吹き出し1.png";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し1.png";
               }
             }
-          }
-          else if(Datas[8].substring(Time-1,Time)!=""){
-            if(Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
-            switch (Datas[8].substring(Time-1,Time)) {
-                case "(":
-                if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+" (";
-                else Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
-                break;
-              default:
-                Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
-                break;
-            }
-            if(Return==false){
-              if(Datas[19]){
-                if(Datas[19]=="メカ"){
-                  switch(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1)){
-                    case "ア":
-                    case "イ":
-                    case "ウ":
-                    case "エ":
-                    case "オ":
-                    case "カ":
-                    case "キ":
-                    case "ク":
-                    case "ケ":
-                    case "コ":
-                    case "サ":
-                    case "シ":
-                    case "ス":
-                    case "セ":
-                    case "ソ":
-                    case "タ":
-                    case "チ":
-                    case "ツ":
-                    case "テ":
-                    case "ト":
-                    case "ナ":
-                    case "ニ":
-                    case "ヌ":
-                    case "ネ":
-                    case "ノ":
-                    case "ハ":
-                    case "ヒ":
-                    case "フ":
-                    case "ヘ":
-                    case "ホ":
-                    case "マ":
-                    case "ミ":
-                    case "ム":
-                    case "メ":
-                    case "モ":
-                    case "ヤ":
-                    case "ユ":
-                    case "ヨ":
-                    case "ラ":
-                    case "ラ":
-                    case "リ":
-                    case "ル":
-                    case "レ":
-                    case "ロ":
-                    case "ワ":
-                    case "ヲ":
-                    case "ン":
-                      Sound_ON(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1));
-                      break;
-                    default:
-                      break;
-                  }
-                }
-                else{
-                  switch(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1)){
-                    case "\"":
-                    case "「":
-                    case "　":
-                    case "」":
-                    case "(":
-                    case " ":
-                    case ")":
-                    case "・":
-                    case "!":
-                    case "！":
-                      break;
-                    default:
-                      Sound_ON(Datas[19]);
-                      break;
-                  }
-                }
-              }
+        }
+        else if(Datas[8].substring(Time-1,Time)==""){
+          Text_defined = false;
+          if(Datas[1]){
+            if(Character1._element.title != Datas[1]){
+              Character1._element.title = Datas[1];
+              Character1._element.src = conversion_url(Datas[1],"画像");
+              console.log("左のキャラを"+Datas[1]+"に変更");
             }
           }
-          else if(Datas[8].substring(Time-1,Time)==""){
-            Text_defined = false;
-            if(Datas[1]){
-              if(Character1._element.title != Datas[1]){
-                Character1._element.title = Datas[1];
-                Character1._element.src = conversion_url(Datas[1],"画像");
-                console.log("左のキャラを"+Datas[1]+"に変更");
+          if(Datas[3]){
+            if(Character2._element.title != Datas[3]){
+              Character2._element.title = Datas[3];
+              Character2._element.src = conversion_url(Datas[3],"画像");
+              console.log("真ん中のキャラを"+Datas[3]+"に変更");
+            }
+          }
+          if(Datas[5]){
+            if(Character3._element.title != Datas[5]){
+              Character3._element.title = Datas[5];
+              Character3._element.src = conversion_url(Datas[5],"画像");
+              console.log("右のキャラを"+Datas[5]+"に変更");
+            }
+          }
+          Speak_Background2._element.src = "../image/透明.png";
+        }
+        else{
+          if(Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
+          switch (Datas[8].substring(Time-1,Time)) {
+            case "(":
+            if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+" (";
+            else Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
+            break;
+            default:
+            Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
+            break;
+          }
+          if(Return==false){
+            if(Datas[19]){
+              if(Datas[19]=="メカ"){
+                switch(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1)){
+                  case "ア":
+                  case "イ":
+                  case "ウ":
+                  case "エ":
+                  case "オ":
+                  case "カ":
+                  case "キ":
+                  case "ク":
+                  case "ケ":
+                  case "コ":
+                  case "サ":
+                  case "シ":
+                  case "ス":
+                  case "セ":
+                  case "ソ":
+                  case "タ":
+                  case "チ":
+                  case "ツ":
+                  case "テ":
+                  case "ト":
+                  case "ナ":
+                  case "ニ":
+                  case "ヌ":
+                  case "ネ":
+                  case "ノ":
+                  case "ハ":
+                  case "ヒ":
+                  case "フ":
+                  case "ヘ":
+                  case "ホ":
+                  case "マ":
+                  case "ミ":
+                  case "ム":
+                  case "メ":
+                  case "モ":
+                  case "ヤ":
+                  case "ユ":
+                  case "ヨ":
+                  case "ラ":
+                  case "ラ":
+                  case "リ":
+                  case "ル":
+                  case "レ":
+                  case "ロ":
+                  case "ワ":
+                  case "ヲ":
+                  case "ン":
+                  Sound_ON(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1));
+                  break;
+                  default:
+                  break;
+                }
+              }
+              else{
+                switch(Text[k]._element.textContent.substring(Text[k]._element.textContent.length-1)){
+                  case "\"":
+                  case "「":
+                  case "　":
+                  case "」":
+                  case "(":
+                  case " ":
+                  case ")":
+                  case "・":
+                  case "!":
+                  case "！":
+                  break;
+                  default:
+                  Sound_ON(Datas[19]);
+                  break;
+                }
               }
             }
-            if(Datas[3]){
-              if(Character2._element.title != Datas[3]){
-                Character2._element.title = Datas[3];
-                Character2._element.src = conversion_url(Datas[3],"画像");
-                console.log("真ん中のキャラを"+Datas[3]+"に変更");
-              }
-            }
-            if(Datas[5]){
-              if(Character3._element.title != Datas[5]){
-                Character3._element.title = Datas[5];
-                Character3._element.src = conversion_url(Datas[5],"画像");
-                console.log("右のキャラを"+Datas[5]+"に変更");
-              }
-            }
-            Speak_Background2._element.src = "../image/透明.png";
           }
         }
       }
@@ -2991,18 +3008,15 @@ function Game_load(width,height){
       var Text_defined = true;
 
       function T_D(){
-        var s = true;
         Time ++;
-        if(s){
-          if(b.substring(Time-1,Time)=="↓"){
-            k++;
-          }
-          else if(b.substring(Time-1,Time)!=""){
-            Text[k]._element.textContent = Text[k]._element.textContent+b.substring(Time-1,Time);
-          }
-          else if(b.substring(Time-1,Time)==""){
-            Text_defined = false;
-          }
+        if(b.substring(Time-1,Time)=="↓"){
+          k++;
+        }
+        else if(b.substring(Time-1,Time)!=""){
+          Text[k]._element.textContent = Text[k]._element.textContent+b.substring(Time-1,Time);
+        }
+        else if(b.substring(Time-1,Time)==""){
+          Text_defined = false;
         }
       }
 
