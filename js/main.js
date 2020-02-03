@@ -1842,8 +1842,6 @@ function Game_load(width,height){
                 Text[k]._style.color = "blue";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し2.png";
-                T_D();
-                return;
               }
             }
             else{
@@ -1855,10 +1853,10 @@ function Game_load(width,height){
                 Speak_Background2._element.src = "../image/吹き出し1.png";
                 if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
                 else Speak_Background2._element.src = "../image/吹き出し1.png";
-                T_D();
-                return;
               }
             }
+            T_D();
+            return;
         }
         else if(Datas[8].substring(Time-1,Time)==""){
           Text_defined = false;
