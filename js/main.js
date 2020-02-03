@@ -519,50 +519,50 @@ function Game_load(width,height){
             if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
             Datas[0] = Main_DATAS[i].背景;
           }
-          if(Main_DATAS[i].左側の人物.split("イン").length==1&&Main_DATAS[i].左側の人物.split("アウト").length==1&&Main_DATAS[i].左側の人物.split("点滅").length==1){
+          if(Main_DATAS[i].左側の人物.split("in").length==1&&Main_DATAS[i].左側の人物.split("out").length==1&&Main_DATAS[i].左側の人物.split("点滅").length==1){
             Datas[1] = Main_DATAS[i].左側の人物;
             Datas[2] = 0;
           }
           else{
-            if(Main_DATAS[i].左側の人物.split("イン").length==2){
-              Datas[1] = Main_DATAS[i].左側の人物.split("イン")[0];
-              Datas[2] = Main_DATAS[i].左側の人物.split("イン")[1]*1;
+            if(Main_DATAS[i].左側の人物.split("in").length==2){
+              Datas[1] = Main_DATAS[i].左側の人物.split("in")[0];
+              Datas[2] = Main_DATAS[i].左側の人物.split("in")[1]*1;
             }
             else if(Main_DATAS[i].左側の人物.split("点滅").length==2){
               Datas[1] = Main_DATAS[i].左側の人物.split("点滅")[0];
               Datas[2] = "点滅";
             }
             else{
-              Datas[1] = Main_DATAS[i].左側の人物.split("アウト")[0];
-              Datas[2] = Main_DATAS[i].左側の人物.split("アウト")[1]*-1;
+              Datas[1] = Main_DATAS[i].左側の人物.split("out")[0];
+              Datas[2] = Main_DATAS[i].左側の人物.split("out")[1]*-1;
             }
           }
-          if(Main_DATAS[i].真ん中の人物.split("イン").length==1&&Main_DATAS[i].真ん中の人物.split("アウト").length==1){
+          if(Main_DATAS[i].真ん中の人物.split("in").length==1&&Main_DATAS[i].真ん中の人物.split("out").length==1){
             Datas[3] = Main_DATAS[i].真ん中の人物;
             Datas[4] = 0;
           }
           else{
-            if(Main_DATAS[i].真ん中の人物.split("イン").length==2){
-              Datas[3] = Main_DATAS[i].真ん中の人物.split("イン")[0];
-              Datas[4] = Main_DATAS[i].真ん中の人物.split("イン")[1]*1;
+            if(Main_DATAS[i].真ん中の人物.split("in").length==2){
+              Datas[3] = Main_DATAS[i].真ん中の人物.split("in")[0];
+              Datas[4] = Main_DATAS[i].真ん中の人物.split("in")[1]*1;
             }
             else{
-              Datas[3] = Main_DATAS[i].真ん中の人物.split("アウト")[0];
-              Datas[4] = Main_DATAS[i].真ん中の人物.split("アウト")[1]*-1;
+              Datas[3] = Main_DATAS[i].真ん中の人物.split("out")[0];
+              Datas[4] = Main_DATAS[i].真ん中の人物.split("out")[1]*-1;
             }
           }
-          if(Main_DATAS[i].右側の人物.split("イン").length==1&&Main_DATAS[i].右側の人物.split("アウト").length==1){
+          if(Main_DATAS[i].右側の人物.split("in").length==1&&Main_DATAS[i].右側の人物.split("out").length==1){
             Datas[5] = Main_DATAS[i].右側の人物;
             Datas[6] = 0;
           }
           else{
-            if(Main_DATAS[i].右側の人物.split("イン").length==2){
-              Datas[5] = Main_DATAS[i].右側の人物.split("イン")[0];
-              Datas[6] = Main_DATAS[i].右側の人物.split("イン")[1]*1;
+            if(Main_DATAS[i].右側の人物.split("in").length==2){
+              Datas[5] = Main_DATAS[i].右側の人物.split("in")[0];
+              Datas[6] = Main_DATAS[i].右側の人物.split("in")[1]*1;
             }
             else{
-              Datas[5] = Main_DATAS[i].右側の人物.split("アウト")[0];
-              Datas[6] = Main_DATAS[i].右側の人物.split("アウト")[1]*-1;
+              Datas[5] = Main_DATAS[i].右側の人物.split("out")[0];
+              Datas[6] = Main_DATAS[i].右側の人物.split("out")[1]*-1;
             }
           }
           if(Main_DATAS[i].人物名=="(主人公名前)") Datas[18] = true;
