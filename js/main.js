@@ -1,6 +1,6 @@
 enchant();
 //サウンド変更前
-var Version = "バージョン 6.7";
+var Version = "バージョン 6.8";
 var Already = false;
 var Data_loading = false;
 var BGM = document.createElement("audio");
