@@ -3712,6 +3712,21 @@ function Game_load(width,height){
               this._element.value = Button[2]._element.value+" 入手。";
               Sound_ON("セーブ");
               break;
+            case "記録追加 or 消去":
+              for (var i = 0; i < Log_Flag.length; i++){
+                if(Log_Flag[i]==Button[3]._element.value){
+                  Log_Flag.splice(i,1);
+                  this._element.value = Button[3]._element.value+" オフ。";
+                  Sound_ON("セーブ");
+                  console.log(Log_Flag);
+                  return;
+                }
+              }
+              Log_Flag[Log_Flag.length] = Button[3]._element.value;
+              this._element.value = Button[3]._element.value+" オン。";
+              Sound_ON("セーブ");
+              console.log(Log_Flag);
+              break;
             case "フラグ追加 or 消去":
               for (var i = 0; i < Flag.length; i++){
                 if(Flag[i]==Button[3]._element.value){
@@ -3749,7 +3764,7 @@ function Game_load(width,height){
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
-            case "記録削除":
+            case "記録リセット":
               Log_Flag = [];
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ");
@@ -3844,14 +3859,15 @@ function Game_load(width,height){
 
       var Option = [];
       var Choice_Transform = [
-        "シーンデータ更新",
         "フラグ類入手",
         "アイテム作成",
+        "シーンデータ更新",
+        "記録追加 or 消去",
         "フラグ追加 or 消去",
-        "記録削除",
-        "アイテムリセット",
         "人物リセット",
+        "記録リセット",
         "フラグリセット",
+        "アイテムリセット",
         "トロフィーリセット"
       ];
 
