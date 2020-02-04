@@ -357,7 +357,7 @@ function Game_load(width,height){
       }
       return;
     }//アイテム関連
-    function Get_ICFT2(DATAS,Person,Get){
+    function Get_ICFT2(DATAS,Get){
       if(DATAS.入手!=false){
         GET = DATAS.入手.replace(/↓/g,"\n");
         GET = GET.split("\n");
@@ -388,7 +388,7 @@ function Game_load(width,height){
             DATAS = [
               I_C_F_T_DATAS[k].タイプ,
               I_C_F_T_DATAS[k].アイテムor人物orフラグ名orトロフィー名,
-              I_C_F_T_DATAS[k].説明文.replace(/\n/g,"↓").replace(/\(一人称\)/g,Person),
+              I_C_F_T_DATAS[k].説明文,
               I_C_F_T_DATAS[k].画像,
               I_C_F_T_DATAS[k].詳細文,
               I_C_F_T_DATAS[k].詳細内容,
@@ -432,16 +432,11 @@ function Game_load(width,height){
           console.log(Number);
         }
       }
-      var Name = Setting_Flag[0];
-      var Gender = Setting_Flag[2];
-      var Surname = Setting_Flag[1];
-      var Person = Setting_Flag[16];
-      var Duo = Setting_Flag[17];
-      if(Gender=="男"){
+      if(Setting_Flag[2]=="男"){
         var S_image = "男主人公";
         var S_Sound = "男主人公ポポポ";
       }
-      else if(Gender=="女"){
+      else if(Setting_Flag[2]=="女"){
         var S_image = "女主人公";
         var S_Sound = "女主人公ポポポ";
       }
@@ -449,7 +444,7 @@ function Game_load(width,height){
         var S_image = "未設定主人公";
         var S_Sound = "未設定主人公ポポポ";
       }
-      if(Surname=="妥協"&&Name=="満足"){
+      if(Setting_Flag[1]=="妥協"&&Setting_Flag[0]=="満足"){
         var S_image = "満足";
         var S_Sound = "スナネコ";
       }
@@ -511,7 +506,7 @@ function Game_load(width,height){
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
           BGM_ON(Main_DATAS[i].BGM);
-          Get_ICFT2(Main_DATAS[i],Person,Get);
+          Get_ICFT2(Main_DATAS[i],Get);
           game.fps = Main_DATAS[i].速度;
           Setting_Flag[3] = game.fps;
           if(Main_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
@@ -566,16 +561,16 @@ function Game_load(width,height){
             }
           }
           if(Main_DATAS[i].人物名=="(主人公名前)") Datas[18] = true;
-          Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/,Name);
-          switch (Gender) {
+          Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/,Setting_Flag[0]);
+          switch (Setting_Flag[2]) {
             case "男":
-              Datas[8] = Main_DATAS[i].文章男.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/g,Name).replace(/\(一人称\)/g,Person).replace(/\(二人称\)/g,Duo);
+              Datas[8] = Main_DATAS[i].文章男.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]);
               break;
             case "女":
-              Datas[8] = Main_DATAS[i].文章女.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/g,Name).replace(/\(一人称\)/g,Person).replace(/\(二人称\)/g,Duo);
+              Datas[8] = Main_DATAS[i].文章女.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]);
               break;
             default:
-              Datas[8] = Main_DATAS[i].文章未設定.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Surname).replace(/\(主人公名前\)/g,Name).replace(/\(一人称\)/g,Person).replace(/\(二人称\)/g,Duo);
+              Datas[8] = Main_DATAS[i].文章未設定.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]);
               break;
           }
           for (var k = 0; k < Favorability_Flag.length; k++){
@@ -606,7 +601,7 @@ function Game_load(width,height){
       for (var i = 0; i < Choice_DATAS.length; i++) {
         if(Number==Choice_DATAS[i].シーン名){
           BGM_ON(Choice_DATAS[i].BGM);
-          Get_ICFT2(Choice_DATAS[i],Person,Get);
+          Get_ICFT2(Choice_DATAS[i],Get);
           if(Choice_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
           else {
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
@@ -660,17 +655,17 @@ function Game_load(width,height){
             return;
           }
           else if(Branch_DATAS[i].アイテムorフラグ名=="主人公が男"){
-            if(Gender=="男") Scene_loads(Branch_DATAS[i].ある,Return,Item);
+            if(Setting_Flag[2]=="男") Scene_loads(Branch_DATAS[i].ある,Return,Item);
             else Scene_loads(Branch_DATAS[i].ない,Return,Item);
             return;
           }
           else if(Branch_DATAS[i].アイテムorフラグ名=="主人公が女"){
-            if(Gender=="女") Scene_loads(Branch_DATAS[i].ある,Return,Item);
+            if(Setting_Flag[2]=="女") Scene_loads(Branch_DATAS[i].ある,Return,Item);
             else Scene_loads(Branch_DATAS[i].ない,Return,Item);
             return;
           }
           else if(Branch_DATAS[i].アイテムorフラグ名=="主人公が未設定"){
-            if(Gender=="男"||Gender=="女") Scene_loads(Branch_DATAS[i].ない,Return,Item);
+            if(Setting_Flag[2]=="男"||Setting_Flag[2]=="女") Scene_loads(Branch_DATAS[i].ない,Return,Item);
             else Scene_loads(Branch_DATAS[i].ある,Return,Item);
             return;
           }
@@ -681,7 +676,7 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Item_get_DATAS.length; i++) {
         if(Number==Item_get_DATAS[i].シーン名){
-          Get_ICFT2(Item_get_DATAS[i],Person,Get);
+          Get_ICFT2(Item_get_DATAS[i],Get);
           if(Get){
             game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
             Scene_kazu++;
@@ -3252,7 +3247,7 @@ function Game_load(width,height){
               default:
                 for (var i = 0; i < 5; i++) {
                   if(f[1].split("↓")[i]==undefined) Text[i]._element.textContent = "";
-                  else Text[i]._element.textContent = f[1].split("↓")[i];
+                  else Text[i]._element.textContent = f[1].split("↓")[i].replace(/\(一人称\)/g,Setting_Flag[16]);
                 }
                 for (var i = 0; i < submits; i++) {
                   Button[i].backgroundColor = "buttonface";
