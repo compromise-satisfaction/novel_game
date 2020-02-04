@@ -1066,8 +1066,6 @@ function Game_load(width,height){
             Log_Flag = [];//記録
             Item_Flag = [];//所持アイテム
             Character_Flag = [];//人物
-            Trophy_Flag = [];//トロフィー
-            Favorability_Flag = [];//好感度
             for (var i = 0; i < Main_DATAS.length; i++) {
               Log_Flag[i] = Main_DATAS[i].シーン名 + "プレイ済み";
             }
@@ -1077,9 +1075,9 @@ function Game_load(width,height){
             for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
               switch (I_C_F_T_DATAS[i].タイプ) {
                 case "アイテム":
-                  if(I_C_F_T_DATAS[i].画像){
+                  if(I_C_F_T_DATAS[i].画像.indexOf("消滅")==-1){
                     Item_Flag[Item_Flag.length] = [
-                      I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length],
+                      I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
                       I_C_F_T_DATAS[i].説明文,
                       I_C_F_T_DATAS[i].画像,
                       I_C_F_T_DATAS[i].詳細文,
@@ -1089,9 +1087,9 @@ function Game_load(width,height){
                   }
                   break;
                 case "人物":
-                  if(I_C_F_T_DATAS[i].画像){
+                  if(I_C_F_T_DATAS[i].画像.indexOf("消滅")==-1){
                     Character_Flag[Character_Flag.length] = [
-                      I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length],
+                      I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
                       I_C_F_T_DATAS[i].説明文,
                       I_C_F_T_DATAS[i].画像,
                       I_C_F_T_DATAS[i].詳細文,
