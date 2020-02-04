@@ -1746,7 +1746,6 @@ function Game_load(width,height){
           case "☞":
             Time++;
             if(Return==false) Scene_loads(Datas[12],false,false);
-            T_D();
             return;
             break;
           case "㊨":
