@@ -2464,7 +2464,7 @@ function Game_load(width,height){
 
       var Stand = new Entity();
       Stand._element = document.createElement("img");
-      Stand._element.src = conversion_url("stand(前背景)","画像");
+      Stand._element.src = conversion_url("stand(中背景)","画像");
       Stand.width = width;
       Stand.height = width/16*9;
       scene.addChild(Stand);
