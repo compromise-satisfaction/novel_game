@@ -2447,7 +2447,7 @@ function Game_load(width,height){
 
       var Background = new Entity();
       Background._element = document.createElement("img");
-      Background._element.src = "../image/背景/stand.png";
+      Background._element.src = conversion_url("証人席","画像");
       Background.width = width;
       Background.height = width/16*9;
       scene.addChild(Background);
@@ -2464,7 +2464,7 @@ function Game_load(width,height){
 
       var Stand = new Entity();
       Stand._element = document.createElement("img");
-      Stand._element.src = "../image/stand.png";
+      Stand._element.src = conversion_url("証言台","画像");
       Stand.width = width;
       Stand.height = width/16*9;
       scene.addChild(Stand);
