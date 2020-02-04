@@ -605,7 +605,7 @@ function Game_load(width,height){
           if(Choice_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
           else {
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
-            Datas[0] = conversion_url(Choice_DATAS[i].背景,"画像");
+            Datas[0] = Choice_DATAS[i].背景;
           }
           Datas[1] = Choice_DATAS[i].左側の人物;
           Datas[2] = Choice_DATAS[i].真ん中の人物;
@@ -692,9 +692,7 @@ function Game_load(width,height){
           Setting_Flag[12] = Number;
           if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = conversion_url(Setting_Flag[13],"画像");
           else {
-            if(Inspect_DATAS[i].背景=="留置所背景") Inspect[0] = "../image/背景/留置所背景.png";
-            else if (Inspect_DATAS[i].背景=="留置所") Inspect[0] = "../image/背景/留置所.png";
-            else Inspect[0] = Inspect_DATAS[i].背景;
+            Inspect[0] = Inspect_DATAS[i].背景;
             Setting_Flag[13] = Inspect[0];
           }
           if(Inspect_DATAS[i].x座標1) Inspect[1] = Inspect_DATAS[i].x座標1;
@@ -1308,30 +1306,12 @@ function Game_load(width,height){
       }
 
       if(Datas[0]){
-        switch (Datas[0]) {
-            case "Black":
-            case "left":
-            case "right":
-            case "stand":
-            case "留置所":
-            case "裁判長席":
-            var Background = new Sprite();
-            Background._element = document.createElement("img");
-            Background._element.src = "../image/背景/"+Datas[0]+".png";
-            Background.width = width;
-            Background.height = width/16*9;
-            scene.addChild(Background);
-            break;
-          default:
-            var Background = new Sprite();
-            Background._element = document.createElement("img");
-            Background._element.src = conversion_url(Datas[0],"画像");
-            Background.width = width;
-            Background.height = width/16*9;
-            scene.addChild(Background);
-            break;
-        }
-
+        var Background = new Sprite();
+        Background._element = document.createElement("img");
+        Background._element.src = conversion_url(Datas[0],"画像");
+        Background.width = width;
+        Background.height = width/16*9;
+        scene.addChild(Background);
       }
 
       var Explosion = new Sprite();
@@ -1374,19 +1354,13 @@ function Game_load(width,height){
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      switch (Datas[0]) {
-        case "stand":
-        case "留置所":
-        case "裁判長席":
-          var Stand = new Sprite();
-          Stand._element = document.createElement("img");
-          Stand._element.src = "../image/"+Datas[0]+".png";
-          Stand.width = width;
-          Stand.height = width/16*9;
-          scene.addChild(Stand);
-          break;
-        default:
-          break;
+      if(conversion_url(Datas[0]+"(中背景)","画像")!=Datas[0]+"(中背景)"){
+        var Background2 = new Sprite();
+        Background2._element = document.createElement("img");
+        Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
+        Background2.width = width;
+        Background2.height = width/16*9;
+        scene.addChild(Background2);
       }
 
       if(Datas[1]!=false){
@@ -1476,18 +1450,13 @@ function Game_load(width,height){
         scene.addChild(Character3);
       }//キャラ右
 
-      switch (Datas[0]) {
-        case "right":
-        case "left":
-          var Stand = new Sprite();
-          Stand._element = document.createElement("img");
-          Stand._element.src = "../image/"+Datas[0]+".png";
-          Stand.width = width;
-          Stand.height = width/16*9;
-          scene.addChild(Stand);
-          break;
-        default:
-          break;
+      if(conversion_url(Datas[0]+"(前背景)","画像")!=Datas[0]+"(前背景)"){
+        var Background3 = new Sprite();
+        Background3._element = document.createElement("img");
+        Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
+        Background3.width = width;
+        Background3.height = width/16*9;
+        scene.addChild(Background3);
       }
 
       if(Datas[14]!=undefined&&Datas[14]!=false){
@@ -2282,29 +2251,15 @@ function Game_load(width,height){
         }
       }
 
-      switch (Datas[0]) {
-          case "Black":
-          case "left":
-          case "right":
-          case "stand":
-          case "裁判長席":
-          case "留置所":
-          var Background = new Sprite();
-          Background._element = document.createElement("img");
-          Background._element.src = "../image/背景/"+Datas[0]+".png";
-          Background.width = width;
-          Background.height = width/16*9;
-          scene.addChild(Background);
-          break;
-        default:
-          var Background = new Sprite();
-          Background._element = document.createElement("img");
-          Background._element.src = conversion_url(Datas[0],"画像");
-          Background.width = width;
-          Background.height = width/16*9;
-          scene.addChild(Background);
-          break;
+      if(Datas[0]){
+        var Background = new Sprite();
+        Background._element = document.createElement("img");
+        Background._element.src = conversion_url(Datas[0],"画像");
+        Background.width = width;
+        Background.height = width/16*9;
+        scene.addChild(Background);
       }
+
       if(Datas[2]!=false){
         var Character2 = new Sprite();
         Character2._element = document.createElement("img");
@@ -2315,19 +2270,13 @@ function Game_load(width,height){
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      switch (Datas[0]) {
-        case "stand":
-        case "裁判長席":
-        case "留置所":
-          var Stand = new Sprite();
-          Stand._element = document.createElement("img");
-          Stand._element.src = "../image/"+Datas[0]+".png";
-          Stand.width = width;
-          Stand.height = width/16*9;
-          scene.addChild(Stand);
-          break;
-        default:
-          break;
+      if(conversion_url(Datas[0]+"(中背景)","画像")!=Datas[0]+"(中背景)"){
+        var Background2 = new Sprite();
+        Background2._element = document.createElement("img");
+        Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
+        Background2.width = width;
+        Background2.height = width/16*9;
+        scene.addChild(Background2);
       }
 
       if(Datas[1]!=false){
@@ -2350,18 +2299,13 @@ function Game_load(width,height){
         scene.addChild(Character3);
       }//キャラ右
 
-      switch (Datas[0]) {
-        case "right":
-        case "left":
-          var Stand = new Sprite();
-          Stand._element = document.createElement("img");
-          Stand._element.src = "../image/"+Datas[0]+".png";
-          Stand.width = width;
-          Stand.height = width/16*9;
-          scene.addChild(Stand);
-          break;
-        default:
-          break;
+      if(conversion_url(Datas[0]+"(前背景)","画像")!=Datas[0]+"(前背景)"){
+        var Background3 = new Sprite();
+        Background3._element = document.createElement("img");
+        Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
+        Background3.width = width;
+        Background3.height = width/16*9;
+        scene.addChild(Background3);
       }
 
       var White_Background = new Sprite();
@@ -2439,13 +2383,6 @@ function Game_load(width,height){
     };
     var PopScene = function(Number,Type,Sound){
       var scene = new Scene();                                // 新しいシーンを作る
-
-      switch (Type) {
-        case "異議あり！":
-        case "待った！":
-          Type = "../image/"+Type+".png";
-          break;
-      }
 
       switch (Sound) {
         case "主人公異議あり！":
