@@ -398,10 +398,10 @@ function Game_load(width,height){
           }
         }
     }
-    function Scene_loads(Number,Return,Item,Item_type,Item_image){
+    function Scene_loads(Number,Return,Item,Item_type,Item_image,Do){
       if(Item){
         if(Item_image) Setting_Flag[15] = Item_image;
-        if(Item_type) Number = [Number+"で"+Item+"をつきつける",Number+"で"+Item_type+"をつきつける"];
+        if(Item_type) Number = [Number+"で"+Item+"を"+Do,Number+"で"+Item_type+"を"+Do];
         else Number = [Number.split("↓")[0]+"で"+Item+"を使用",Number.split("↓")[1]];
         Item = Number[1];
         Number = Number[0];
@@ -2332,11 +2332,11 @@ function Game_load(width,height){
         }
         Text[submits].addEventListener('touchstart',function(e){
           if(a=="戻る") var ooo = "戻る";
-          else if(a == "つきつける") var ooo = "メニュー";
+          else if(b == "アイテム") var ooo = "メニュー";
           else var ooo = "選択音";
           if(Button_push(ooo)) return;
-          if (a == "つきつける"){
-            game.pushScene(ItemScene(Datas[6],"日常","アイテム"));
+          if (b == "アイテム"){
+            game.pushScene(ItemScene(Datas[6],"日常","アイテム",a));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
           }
@@ -2447,7 +2447,7 @@ function Game_load(width,height){
 
       var Background = new Entity();
       Background._element = document.createElement("img");
-      Background._element.src = conversion_url("証人席","画像");
+      Background._element.src = conversion_url("stand","画像");
       Background.width = width;
       Background.height = width/16*9;
       scene.addChild(Background);
@@ -2464,7 +2464,7 @@ function Game_load(width,height){
 
       var Stand = new Entity();
       Stand._element = document.createElement("img");
-      Stand._element.src = conversion_url("証言台","画像");
+      Stand._element.src = conversion_url("stand(前背景)","画像");
       Stand.width = width;
       Stand.height = width/16*9;
       scene.addChild(Stand);
@@ -2532,7 +2532,7 @@ function Game_load(width,height){
               break;
             case "つきつける":
               if(Button_push("メニュー")) return;
-              game.pushScene(ItemScene(Datas[7],Datas[8],"アイテム"));
+              game.pushScene(ItemScene(Datas[7],Datas[8],"アイテム","つきつける"));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
@@ -3128,7 +3128,7 @@ function Game_load(width,height){
       });//進む
       return scene;
     };
-    var ItemScene = function(Number,Ig,Type){
+    var ItemScene = function(Number,Ig,Type,Do){
 
       var scene = new Scene();                                // 新しいシーンを作る
       switch (Type) {
@@ -3206,7 +3206,7 @@ function Game_load(width,height){
           }
           if(Button_push(ooo)) return;
           if(this.backgroundColor=="red"){
-            game.replaceScene(ItemScene(Number,Ig,Type));
+            game.replaceScene(ItemScene(Number,Ig,Type,Do));
           }
           if(a=="詳細"){
             switch (Button[3]._element.value){
@@ -3244,7 +3244,7 @@ function Game_load(width,height){
                   if(Choice_Flag.length%5==0) Setting_Flag[PAGAS]-=5;
                 }
                 else Setting_Flag[PAGAS]-=5;
-                game.replaceScene(ItemScene(Number,Ig,Type));
+                game.replaceScene(ItemScene(Number,Ig,Type,Do));
                 break;
               case "▶":
                 if(Setting_Flag[PAGAS] == Choice_Flag.length-Choice_Flag.length%5) Setting_Flag[PAGAS] = 0;
@@ -3252,7 +3252,7 @@ function Game_load(width,height){
                   Setting_Flag[PAGAS]+=5;
                   if(Setting_Flag[PAGAS]==Choice_Flag.length) Setting_Flag[PAGAS] = 0;
                 }
-                game.replaceScene(ItemScene(Number,Ig,Type));
+                game.replaceScene(ItemScene(Number,Ig,Type,Do));
                 break;
               case "戻る":
                 game.fps = Setting_Flag[3];
@@ -3266,9 +3266,9 @@ function Game_load(width,height){
                 console.log("Scene数",Scene_kazu);
                 break;
               case Type2:
-                game.replaceScene(ItemScene(Number,Ig,Type2));
+                game.replaceScene(ItemScene(Number,Ig,Type2,Do));
                 break;
-              case "つきつける":
+              case Do:
                 game.popScene();
                 Scene_kazu--;
                 console.log("Scene数",Scene_kazu);
@@ -3284,7 +3284,7 @@ function Game_load(width,height){
                   Scene_kazu++;
                   console.log("Scene数",Scene_kazu);
                 }
-                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item,Type,Choice_Item_Image);
+                else if(Ig=="日常") Scene_loads(Number,false,Choice_Item,Type,Choice_Item_Image,Do);
                 else{
                   game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
                   Scene_kazu++;
@@ -3311,7 +3311,7 @@ function Game_load(width,height){
                 }
                 else scene.removeChild(Button[3]);
                 if(Ig){
-                  Button[4]._element.value = "つきつける";
+                  Button[4]._element.value = Do;
                   scene.addChild(Button[4]);
                 }
                 console.log(f);
@@ -3662,7 +3662,7 @@ function Game_load(width,height){
                 Button[4]._element.value,//画像
                 "詳細内容",//詳細文
                 Button[6]._element.value,//詳細内容
-                Button[3]._element.value//つきつけるデータ
+                Button[3]._element.value//コード
               ];
               this._element.value = Button[3]._element.value + " 入手。";
               Sound_ON("セーブ");
