@@ -1254,12 +1254,20 @@ function Game_load(width,height){
       if(Datas[11]){
         if(Datas[11]=="無し"){
           Datas[11] = Number;
-          if(have(Datas[12]+"プレイ済み")==false) Setting_Flag[19] = Number;
         }
         else{
           Setting_Flag[4] = Number;
           if(Setting_Flag[8]) Save(Datas[11]);
-          if(have(Datas[12]+"プレイ済み")==false) Setting_Flag[18] = Number;
+        }
+      }
+
+      if(have(Datas[13]+"プレイ済み")==false){
+        var Skip = null;
+        if(have(Datas[12]+"プレイ済み")==false){
+          Log_Flag[Log_Flag.length] = Datas[13]+"→"+Number;
+        }
+        for (var i = 0; i < Log_Flag.length; i++) {
+          if(Log_Flag[i].split("→")[0]==Datas[13]) Skip = Log_Flag[i].split("→")[1];
         }
       }
 
@@ -2086,12 +2094,7 @@ function Game_load(width,height){
           Button(4,"▶ ▶",Datas[13]);//進む2
         }
         else{
-          if(Datas[11]=="無し"){
-            if(Setting_Flag[19]&&Setting_Flag[19]!=Datas[11]&&Setting_Flag[19]!=Datas[12]) Button(4,"▶ ▶",Setting_Flag[19]);//進む2
-          }
-          else{
-            if(Setting_Flag[18]&&Setting_Flag[18]!=Datas[11]&&Setting_Flag[18]!=Datas[12]) Button(4,"▶ ▶",Setting_Flag[18]);//進む2
-          }
+          if(Skip&&Skip!=Number&&Skip!=Datas[12]) Button(4,"▶ ▶",Skip);//進む2
         }
       }
 
