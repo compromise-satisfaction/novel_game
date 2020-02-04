@@ -156,9 +156,9 @@ function Game_load(width,height){
     var Syougen_time = 0;
     var Syougen_time2 = 1;
     var Datas = [];
-    var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","我","君"];
+    var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","我","君",null,null];
     var Favorability_Flag = [];//好感度
-    //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称];
+    //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18スキップ位置,19スキップ位置2];
     var Flag = [];//フラグ
     var Log_Flag = [];//記録
     var Item_Flag = [];//所持アイテム
@@ -857,7 +857,7 @@ function Game_load(width,height){
         if(Setting_Flag[i]=="true") Setting_Flag[i] = true;
         else if(Setting_Flag[i]=="false") Setting_Flag[i] = false
         else if(Setting_Flag[i].replace(/\d/g,"").replace(/\./g,"")=="") Setting_Flag[i] = Setting_Flag[i]*1;
-        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称];
+        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18スキップ位置,19スキップ位置2];
       }
       for (var i = 0; i < Datas.length; i++){
         if(Datas[i].replace(/\d/g,"").replace(/\./g,"")=="") Datas[i] = Datas[i]*1;
@@ -1252,10 +1252,14 @@ function Game_load(width,height){
       Datas[8] = Datas[8].replace(/\([㊧㊥㊨][^㊧㊥㊨]+[㊧㊥㊨]\)/g,"Ψ");
 
       if(Datas[11]){
-        if(Datas[11]=="無し") Datas[11] = Number;
+        if(Datas[11]=="無し"){
+          Datas[11] = Number;
+          if(have(Datas[12]+"プレイ済み")==false) Setting_Flag[19] = Number;
+        }
         else{
-          Setting_Flag[4] = Datas[11];
+          Setting_Flag[4] = Number;
           if(Setting_Flag[8]) Save(Datas[11]);
+          if(have(Datas[12]+"プレイ済み")==false) Setting_Flag[18] = Number;
         }
       }
 
@@ -1615,10 +1619,34 @@ function Game_load(width,height){
         Texts();
       }
 
+      function gamenyurasi(){
+        if(Datas[1]){
+          Character1.x += width/200;
+          Character1.y += width/200;
+        }
+        if(Datas[3]){
+          Character2.x += width/200;
+          Character2.y += width/200;
+        }
+        if(Datas[5]){
+          Character3.x += width/200;
+          Character3.y += width/200;
+        }
+        Background.x += width/200;
+        Background.y += width/200;
+        return;
+      }
+
       function T_D(){
         var Itimozi = Datas[8].substring(Time,Time+1);
         scene.addChild(Speak_Background2);
         switch (Itimozi) {
+          case "Σ":
+            Time++;
+            gamenyurasi();
+            T_D();
+            return;
+            break;
           case "§":
             Time++;
             if(Return==false) Sound_ON(Sound_effect[sese].substring(2,Sound_effect[sese].length-2));
@@ -1968,6 +1996,38 @@ function Game_load(width,height){
       }
 
       White_Background.addEventListener("enterframe",function(){
+        if(Background.x==width/200){
+          if(Datas[1]){
+            Character1.x -= width/100;
+            Character1.y -= width/100;
+          }
+          if(Datas[3]){
+            Character2.x -= width/100;
+            Character2.y -= width/100;
+          }
+          if(Datas[5]){
+            Character3.x -= width/100;
+            Character3.y -= width/100;
+          }
+          Background.x -= width/100;
+          Background.y -= width/100;
+        }
+        else if(Background.x==-width/200){
+          if(Datas[1]){
+            Character1.x += width/200;
+            Character1.y += width/200;
+          }
+          if(Datas[3]){
+            Character2.x += width/200;
+            Character2.y += width/200;
+          }
+          if(Datas[5]){
+            Character3.x += width/200;
+            Character3.y += width/200;
+          }
+          Background.x += width/200;
+          Background.y += width/200;
+        }
         if(Return!=true&&Text_defined){
           T_D();
         }
@@ -2021,7 +2081,19 @@ function Game_load(width,height){
       if(Datas[10]!=false) Button(1,"◀",Datas[10]);//戻る2
       if(Datas[11]!=false) Button(2,"アイテム",Datas[11]);//設定
       if(Datas[12]!=false&&Play) Button(3,"▶",Datas[12]);//進む1
-      if(Datas[13]!=false&&have(Datas[13]+"プレイ済み")) Button(4,"▶ ▶",Datas[13]);//進む2
+      if(Datas[13]!=false){
+        if(have(Datas[13]+"プレイ済み")){
+          Button(4,"▶ ▶",Datas[13]);//進む2
+        }
+        else{
+          if(Datas[11]=="無し"){
+            if(Setting_Flag[19]&&Setting_Flag[19]!=Datas[11]&&Setting_Flag[19]!=Datas[12]) Button(4,"▶ ▶",Setting_Flag[19]);//進む2
+          }
+          else{
+            if(Setting_Flag[18]&&Setting_Flag[18]!=Datas[11]&&Setting_Flag[18]!=Datas[12]) Button(4,"▶ ▶",Setting_Flag[18]);//進む2
+          }
+        }
+      }
 
       if(Datas[16]!=false&&Datas[16]!=undefined){
           for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
@@ -3522,8 +3594,8 @@ function Game_load(width,height){
         Data = false;
         window.localStorage.clear();
         Datas = [];
-        Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","我","君"];
-        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称];
+        Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","我","君",null,null];
+        //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18スキップ位置,19スキップ位置2];
         Flag = [];//フラグ
         Log_Flag = [];//記録
         Item_Flag = [];//所持アイテム
