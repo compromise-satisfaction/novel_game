@@ -1075,7 +1075,7 @@ function Game_load(width,height){
             for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
               switch (I_C_F_T_DATAS[i].タイプ) {
                 case "アイテム":
-                  if(I_C_F_T_DATAS[i].画像.indexOf("消滅")==-1){
+                  if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("消滅")==-1){
                     Item_Flag[Item_Flag.length] = [
                       I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
                       I_C_F_T_DATAS[i].説明文,
@@ -1087,7 +1087,7 @@ function Game_load(width,height){
                   }
                   break;
                 case "人物":
-                  if(I_C_F_T_DATAS[i].画像.indexOf("消滅")==-1){
+                  if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("消滅")==-1){
                     Character_Flag[Character_Flag.length] = [
                       I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
                       I_C_F_T_DATAS[i].説明文,
