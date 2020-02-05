@@ -188,7 +188,6 @@ function Game_load(width,height){
           for (var i = 0; i < Image_DATAS.length; i++) {
             if(Image_DATAS[i].名前==name) return(Image_DATAS[i].url);
           }
-          return("../image/画像無.png");
           break;
         case "サウンド":
           for (var i = 0; i < Sounds_DATAS.length; i++) {
@@ -206,6 +205,7 @@ function Game_load(width,height){
           }
           break;
       }
+      if(Type=="画像") return("../image/画像無.png");
       return(name);
     }
     function Sound_branch(Sound_url,Volume){
