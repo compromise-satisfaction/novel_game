@@ -188,6 +188,7 @@ function Game_load(width,height){
           for (var i = 0; i < Image_DATAS.length; i++) {
             if(Image_DATAS[i].名前==name) return(Image_DATAS[i].url);
           }
+          return("../image/画像無.png");
           break;
         case "サウンド":
           for (var i = 0; i < Sounds_DATAS.length; i++) {
@@ -583,8 +584,8 @@ function Game_load(width,height){
           Datas[12] = Main_DATAS[i].次;
           Datas[13] = Main_DATAS[i].次次;
           Datas[14] = Main_DATAS[i].表示アイテムx座標;
-          if(Main_DATAS[i].表示アイテム画像=="デフォルト") Datas[15] = conversion_url(Setting_Flag[15],"画像");
-          else Datas[15] = conversion_url(Main_DATAS[i].表示アイテム画像,"画像");
+          if(Main_DATAS[i].表示アイテム画像=="デフォルト") Datas[15] = Setting_Flag[15];
+          else Datas[15] = Main_DATAS[i].表示アイテム画像;
           Datas[16] = Main_DATAS[i].トロフィー;
           Datas[19] = Main_DATAS[i].文章音;
           Datas[20] = Main_DATAS[i].表示アイテムy座標;
@@ -1354,7 +1355,7 @@ function Game_load(width,height){
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      if(conversion_url(Datas[0]+"(中背景)","画像")!=Datas[0]+"(中背景)"){
+      if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無.png"){
         var Background2 = new Sprite();
         Background2._element = document.createElement("img");
         Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
@@ -1450,7 +1451,7 @@ function Game_load(width,height){
         scene.addChild(Character3);
       }//キャラ右
 
-      if(conversion_url(Datas[0]+"(前背景)","画像")!=Datas[0]+"(前背景)"){
+      if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無.png"){
         var Background3 = new Sprite();
         Background3._element = document.createElement("img");
         Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
@@ -1824,7 +1825,7 @@ function Game_load(width,height){
                 case "㊧":
                   if(Datas[1]){
                     if(Character1._element.title != Datas[1]+"口パク"){
-                      if(conversion_url(Datas[1]+"口パク","画像")!=Datas[1]+"口パク"){
+                      if(conversion_url(Datas[1]+"口パク","画像")!="../image/画像無.png"){
                         Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
                         Character1._element.title = Datas[1]+"口パク";
                         console.log("左のキャラを"+Datas[1]+"口パクに変更");
@@ -1835,7 +1836,7 @@ function Game_load(width,height){
                 case "㊥":
                   if(Datas[3]){
                     if(Character2._element.title != Datas[3]+"口パク"){
-                      if(conversion_url(Datas[3]+"口パク","画像")!=Datas[3]+"口パク"){
+                      if(conversion_url(Datas[3]+"口パク","画像")!="../image/画像無.png"){
                         Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
                         Character2._element.title = Datas[3]+"口パク";
                         console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
@@ -1846,7 +1847,7 @@ function Game_load(width,height){
                 case "㊨":
                   if(Datas[5]){
                     if(Character3._element.title != Datas[5]+"口パク"){
-                      if(conversion_url(Datas[5]+"口パク","画像")!=Datas[5]+"口パク"){
+                      if(conversion_url(Datas[5]+"口パク","画像")!="../image/画像無.png"){
                         Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
                         Character3._element.title = Datas[5]+"口パク";
                         console.log("右のキャラを"+Datas[5]+"口パクに変更");
@@ -2269,7 +2270,7 @@ function Game_load(width,height){
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      if(conversion_url(Datas[0]+"(中背景)","画像")!=Datas[0]+"(中背景)"){
+      if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無.png"){
         var Background2 = new Sprite();
         Background2._element = document.createElement("img");
         Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
@@ -2298,7 +2299,7 @@ function Game_load(width,height){
         scene.addChild(Character3);
       }//キャラ右
 
-      if(conversion_url(Datas[0]+"(前背景)","画像")!=Datas[0]+"(前背景)"){
+      if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無.png"){
         var Background3 = new Sprite();
         Background3._element = document.createElement("img");
         Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
