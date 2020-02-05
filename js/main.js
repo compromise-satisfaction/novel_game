@@ -205,7 +205,6 @@ function Game_load(width,height){
           }
           break;
       }
-      if(Type=="画像") return("../image/画像無.png");
       return(name);
     }
     function Sound_branch(Sound_url,Volume){
