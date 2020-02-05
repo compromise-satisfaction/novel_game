@@ -188,6 +188,7 @@ function Game_load(width,height){
           for (var i = 0; i < Image_DATAS.length; i++) {
             if(Image_DATAS[i].名前==name) return(Image_DATAS[i].url);
           }
+          return("../image/画像無.png");
           break;
         case "サウンド":
           for (var i = 0; i < Sounds_DATAS.length; i++) {
@@ -2468,7 +2469,6 @@ function Game_load(width,height){
       Stand.width = width;
       Stand.height = width/16*9;
       scene.addChild(Stand);
-
 
       if(Datas[1]!=""){
         C_name = new Sprite();
