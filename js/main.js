@@ -1671,32 +1671,34 @@ function Game_load(width,height){
           case "Ψ":
             Time++;
             switch(Pose_change[pcpc].substring(1,2)){
+              Pose_change[pcpc] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
+              if(Pose_change[pcpc].substring(0,3)=="主人公") Pose_change[pcpc] = Setting_Flag[2]+Pose_change[pcpc];
               case "㊧":
-                if(Character1._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
-                  Datas[1] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
+                if(Character1._element.title != Pose_change[pcpc]){
+                  Datas[1] = Pose_change[pcpc];
                   Character1._element.title = Datas[1];
                   Character1._element.src = conversion_url(Datas[1],"画像");
                   console.log("左のキャラを"+Datas[1]+"に変更");
                 }
                 break;
               case "㊥":
-                if(Character2._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
-                  Datas[3] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
+                if(Character2._element.title != Pose_change[pcpc]){
+                  Datas[3] = Pose_change[pcpc];
                   Character2._element.title = Datas[3];
                   Character2._element.src = conversion_url(Datas[3],"画像");
                   console.log("真ん中のキャラを"+Datas[3]+"に変更");
                 }
                 break;
               case "㊨":
-                if(Character3._element.title != Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)){
-                  Datas[5] = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
+                if(Character3._element.title != Pose_change[pcpc]){
+                  Datas[5] = Pose_change[pcpc];
                   Character3._element.title = Datas[5];
                   Character3._element.src = conversion_url(Datas[5],"画像");
                   console.log("右のキャラを"+Datas[5]+"に変更");
                 }
                 break;
               default:
-                console.log(Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2)+"が選択されましたがスピークキャラがいません。");
+                console.log(Pose_change[pcpc]+"が選択されましたがスピークキャラがいません。");
                 break;
             }
             pcpc++;
