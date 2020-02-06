@@ -2220,11 +2220,11 @@ function Game_load(width,height){
       if(Datas[11]!=false) Button(2,"アイテム",Datas[11]);//設定
       if(Datas[12]!=false&&Play) Button(3,"▶",Datas[12]);//進む1
       if(Datas[13]!=false){
-        if(have(Datas[13]+"プレイ済み")){
+        if(have(Datas[13]+"プレイ済み")&&Datas[12]!=Datas[13]){
           Button(4,"▶ ▶",Datas[13]);//進む2
         }
         else{
-          if(Skip&&Skip!=Number&&Skip!=Datas[12]) Button(4,"▶ ▶",Skip);//進む2
+          if(Skip&&Skip!=Number&&Skip!=Datas[12]&&Datas[12]!=Datas[13]) Button(4,"▶ ▶",Skip);//進む2
         }
       }
 
