@@ -188,7 +188,7 @@ function Game_load(width,height){
           for (var i = 0; i < Image_DATAS.length; i++) {
             if(Image_DATAS[i].名前==name) return(Image_DATAS[i].url);
           }
-          return("../image/画像無.png");
+          return("../image/画像無し.gif");
           break;
         case "サウンド":
           for (var i = 0; i < Sounds_DATAS.length; i++) {
@@ -403,7 +403,7 @@ function Game_load(width,height){
       if(Item){
         if(Item_image) Setting_Flag[15] = Item_image;
         if(Item_type) Number = [Number+"で"+Item+"を"+Do,Number+"で"+Item_type+"を"+Do];
-        else Number = [Number.split("↓")[0]+"で"+Item+"を使用",Number.split("↓")[1]];
+        else Number = [Number.split("↓")[0]+"で"+Item+"を"+Do,Number.split("↓")[1]];
         Item = Number[1];
         Number = Number[0];
         if(have(Number+"既読")){
@@ -603,7 +603,7 @@ function Game_load(width,height){
         if(Number==Choice_DATAS[i].シーン名){
           BGM_ON(Choice_DATAS[i].BGM);
           Get_ICFT2(Choice_DATAS[i],Get);
-          if(Choice_DATAS[i].背景=="変化無し") Datas[0] = conversion_url(Setting_Flag[13],"画像");
+          if(Choice_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
           else {
             if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
             Datas[0] = Choice_DATAS[i].背景;
@@ -691,7 +691,7 @@ function Game_load(width,height){
         if(Number==Inspect_DATAS[i].シーン名){
           var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
           Setting_Flag[12] = Number;
-          if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = conversion_url(Setting_Flag[13],"画像");
+          if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = Setting_Flag[13];
           else {
             Inspect[0] = Inspect_DATAS[i].背景;
             Setting_Flag[13] = Inspect[0];
@@ -1355,7 +1355,7 @@ function Game_load(width,height){
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無.png"){
+      if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無し.gif"){
         var Background2 = new Sprite();
         Background2._element = document.createElement("img");
         Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
@@ -1451,7 +1451,7 @@ function Game_load(width,height){
         scene.addChild(Character3);
       }//キャラ右
 
-      if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無.png"){
+      if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無し.gif"){
         var Background3 = new Sprite();
         Background3._element = document.createElement("img");
         Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
@@ -1825,7 +1825,7 @@ function Game_load(width,height){
                 case "㊧":
                   if(Datas[1]){
                     if(Character1._element.title != Datas[1]+"口パク"){
-                      if(conversion_url(Datas[1]+"口パク","画像")!="../image/画像無.png"){
+                      if(conversion_url(Datas[1]+"口パク","画像")!="../image/画像無し.gif"){
                         Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
                         Character1._element.title = Datas[1]+"口パク";
                         console.log("左のキャラを"+Datas[1]+"口パクに変更");
@@ -1836,7 +1836,7 @@ function Game_load(width,height){
                 case "㊥":
                   if(Datas[3]){
                     if(Character2._element.title != Datas[3]+"口パク"){
-                      if(conversion_url(Datas[3]+"口パク","画像")!="../image/画像無.png"){
+                      if(conversion_url(Datas[3]+"口パク","画像")!="../image/画像無し.gif"){
                         Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
                         Character2._element.title = Datas[3]+"口パク";
                         console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
@@ -1847,7 +1847,7 @@ function Game_load(width,height){
                 case "㊨":
                   if(Datas[5]){
                     if(Character3._element.title != Datas[5]+"口パク"){
-                      if(conversion_url(Datas[5]+"口パク","画像")!="../image/画像無.png"){
+                      if(conversion_url(Datas[5]+"口パク","画像")!="../image/画像無し.gif"){
                         Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
                         Character3._element.title = Datas[5]+"口パク";
                         console.log("右のキャラを"+Datas[5]+"口パクに変更");
@@ -2270,7 +2270,7 @@ function Game_load(width,height){
         scene.addChild(Character2);
       }//キャラ真ん中
 
-      if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無.png"){
+      if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無し.gif"){
         var Background2 = new Sprite();
         Background2._element = document.createElement("img");
         Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
@@ -2299,7 +2299,7 @@ function Game_load(width,height){
         scene.addChild(Character3);
       }//キャラ右
 
-      if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無.png"){
+      if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無し.gif"){
         var Background3 = new Sprite();
         Background3._element = document.createElement("img");
         Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
@@ -3226,7 +3226,7 @@ function Game_load(width,height){
                   game.popScene();
                   Scene_kazu--;
                   console.log("Scene数",Scene_kazu);
-                  Scene_loads(Number+"↓"+Button[3].詳細,false,Choice_Item,false);
+                  Scene_loads(Number+"↓"+Button[3].詳細,false,Choice_Item,false,false,Button[3]._element.value);
                 }
                 else {
                   game.pushScene(DetailsScene(Button[3].詳細,0));
