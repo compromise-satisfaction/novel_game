@@ -244,8 +244,6 @@ function Game_load(width,height){
       return;
     }
     function BGM_ON(BGM_Name){
-      if(BGM_Name=="変化無し") BGM_Name = Setting_Flag[14];
-      else Setting_Flag[14] = BGM_Name;
       if(BGM_Name==""){
         if(BGM.paused==false) BGM.pause();
         BGM.title = "無";
@@ -475,7 +473,120 @@ function Game_load(width,height){
           Scene_loads(Number,true,false);
           return;
           break;
+        case "シーンデータ更新":
+          Datas = [];
+          Datas[0] = "stand";
+          Datas[1] = "";
+          Datas[2] = "";
+          Datas[3] = "";
+          Datas[4] = "";
+          Datas[5] = "";
+          Datas[6] = "";
+          Datas[7] = "";
+          Datas[8] = "シーンデータ更新中…";
+          Datas[9] = "";
+          Datas[10] = "";
+          Datas[11] = "";
+          Datas[12] = "";
+          Datas[13] = "";
+          Datas[14] = "";
+          Datas[15] = "";
+          Datas[16] = "";
+          Datas[17] = "";
+          Datas[18] = "";
+          Datas[19] = "日付";
+          Datas[20] = "";
+          Datas[21] = "";
+          Datas[22] = "";
+          game.replaceScene(MainScene(Return,Number));
+          fetch(GAS,
+            {
+              method: 'POST',
+              body: ""
+            }
+          )
+          .then(res => res.json())
+          .then(result => {
+            Move_DATAS = result.移動;
+            Image_DATAS = result.画像;
+            Main_DATAS = result.メイン;
+            Choice_DATAS = result.選択;
+            Branch_DATAS = result.分岐;
+            Item_get_DATAS = result.入手;
+            Inspect_DATAS = result.調べる;
+            I_C_F_T_DATAS = result.フラグ類;
+            Speech_DATAS = result.吹き出し;
+            Interrogation_DATAS = result.尋問;
+            for (var i = 0; i < Image_DATAS.length; i++){
+              if(Image_DATAS[i].url.substring(0,4)!="http"){
+                if(Image_DATAS[i].url.substring(0,3)!="../") Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+              }
+              else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
+                  Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
+              }
+            }
+            BGM_DATAS = [];
+            Sounds_urls = [];
+            Voice_DATAS = [];
+            Sound_effect_DATAS = [];
+            SE = [];
+            for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
+              if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+                Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+              }
+              switch (Sounds_DATAS[i].備考) {
+                default:
+                  BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+                  k1++;
+                  break;
+                case "音声":
+                  Sounds_urls[k0] = Sounds_DATAS[i].url;
+                  Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = Sounds_DATAS[i].url;
+                  SE[k0].title = Sounds_DATAS[i].名前;
+                  k0++;
+                  k2++;
+                  break;
+                case "効果音":
+                  Sounds_urls[k0] = Sounds_DATAS[i].url;
+                  Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = Sounds_DATAS[i].url;
+                  SE[k0].title = Sounds_DATAS[i].名前;
+                  k0++;
+                  k3++;
+                  break;
+              }
+            }
+            Sound_ON("セーブ");
+            Datas = [];
+            Datas[0] = "stand";
+            Datas[1] = "";
+            Datas[2] = "";
+            Datas[3] = "";
+            Datas[4] = "";
+            Datas[5] = "";
+            Datas[6] = "";
+            Datas[7] = "タイトルに戻る";
+            Datas[8] = "タイトル移動";
+            Datas[9] = "セーブ読み込み";
+            Datas[10] = "セーブ読み込み";
+            Datas[11] = "直前のシーンに戻る";
+            Datas[12] = "直前移動";
+            Datas[13] = "";
+            Datas[14] = "";
+            Datas[15] = "";
+            Datas[16] = "";
+            Datas[17] = "";
+            Datas[18] = "";
+            game.replaceScene(ChoiceScene(Number));
+            return;
+          },);
+          return;
+          break;
         case "調べる何もない":
+          BGM_ON(Setting_Flag[14]);
           Datas[1] = 0;
           Datas[2] = 0;
           Datas[3] = 0;
@@ -486,7 +597,7 @@ function Game_load(width,height){
           Datas[8] = "特に気になるものはない。";
           Datas[9] = 0;
           Datas[10] = 0;
-          Datas[11] = "無し";
+          Datas[11] = Number;
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
           Datas[19] = S_Sound;
@@ -506,13 +617,17 @@ function Game_load(width,height){
       Setting_Flag[3] = game.fps;
       for (var i = 0; i < Main_DATAS.length; i++) {
         if(Number==Main_DATAS[i].シーン名){
-          BGM_ON(Main_DATAS[i].BGM);
+          if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
+          else {
+            if(Main_DATAS[i].セーブ!="無し"&&Main_DATAS[i].セーブ) Setting_Flag[14] = Main_DATAS[i].BGM;
+            BGM_ON(Main_DATAS[i].BGM);
+          }
           Get_ICFT2(Main_DATAS[i],Get);
           game.fps = Main_DATAS[i].速度;
           Setting_Flag[3] = game.fps;
           if(Main_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
           else {
-            if(Main_DATAS[i].セーブ!="無し") Setting_Flag[13] = Main_DATAS[i].背景;
+            if(Main_DATAS[i].セーブ!="無し"&&Main_DATAS[i].セーブ) Setting_Flag[13] = Main_DATAS[i].背景;
             Datas[0] = Main_DATAS[i].背景;
           }
           if(Main_DATAS[i].左側の人物.split("in").length==1&&Main_DATAS[i].左側の人物.split("out").length==1&&Main_DATAS[i].左側の人物.split("点滅").length==1){
@@ -601,11 +716,15 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Choice_DATAS.length; i++) {
         if(Number==Choice_DATAS[i].シーン名){
-          BGM_ON(Choice_DATAS[i].BGM);
+          if(Choice_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
+          else {
+            if(Choice_DATAS[i].セーブ!="無し"&&Choice_DATAS[i].セーブ) Setting_Flag[14] = Choice_DATAS[i].BGM;
+            BGM_ON(Choice_DATAS[i].BGM);
+          }
           Get_ICFT2(Choice_DATAS[i],Get);
           if(Choice_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
           else {
-            if(Choice_DATAS[i].セーブ!="無し") Setting_Flag[13] = Choice_DATAS[i].背景;
+            if(Choice_DATAS[i].セーブ!="無し"&&Choice_DATAS[i].セーブ) Setting_Flag[13] = Choice_DATAS[i].背景;
             Datas[0] = Choice_DATAS[i].背景;
           }
           Datas[1] = Choice_DATAS[i].左側の人物;
@@ -722,14 +841,18 @@ function Game_load(width,height){
           if(Inspect_DATAS[i].高さ5) Inspect[24] = Inspect_DATAS[i].高さ5;
           if(Inspect_DATAS[i].移動先5) Inspect[25] = Inspect_DATAS[i].移動先5;
           Datas[0] = Inspect[0];
-          game.replaceScene(InspectScene(Inspect));
+          game.replaceScene(InspectScene(Inspect,Inspect_DATAS[i].前のシーン));
           return;
         }
       }
       for (var i = 0; i < Interrogation_DATAS.length; i++) {
         if(Number==Interrogation_DATAS[i].シーン名){
-          if(Interrogation_DATAS[i].セーブ!="無し") Setting_Flag[13] = "stand";
-          BGM_ON(Interrogation_DATAS[i].BGM);
+          if(Interrogation_DATAS[i].セーブ!="無し"&&Interrogation_DATAS[i].セーブ) Setting_Flag[13] = "stand";
+          if(Interrogation_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
+          else {
+            if(Interrogation_DATAS[i].セーブ!="無し"&&Interrogation_DATAS[i].セーブ) Setting_Flag[14] = Interrogation_DATAS[i].BGM;
+            BGM_ON(Interrogation_DATAS[i].BGM);
+          }
           Datas[0] = Interrogation_DATAS[i].人物;
           Datas[1] = Interrogation_DATAS[i].人物名;
           Datas[2] = Interrogation_DATAS[i].証言;
@@ -745,7 +868,7 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Speech_DATAS.length; i++) {
         if(Number==Speech_DATAS[i].シーン名){
-          Datas[0] = conversion_url(Speech_DATAS[i].吹き出し画像,"画像");
+          Datas[0] = Speech_DATAS[i].吹き出し画像;
           Datas[1] = Speech_DATAS[i].再生音声;
           Datas[2] = Speech_DATAS[i].次のシーン;
           Scene_kazu++;
@@ -2957,7 +3080,7 @@ function Game_load(width,height){
 
       return scene;
     };
-    var InspectScene = function(Inspect){
+    var InspectScene = function(Inspect,Return){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite();
@@ -3001,18 +3124,20 @@ function Game_load(width,height){
         k++;
       }
 
-      var Modoru = new Entity();
-      Modoru.moveTo(width/4,width/16*9+(width/30));
-      Modoru.width = width/2;
-      Modoru.height = (width/10);
-      Modoru._element = document.createElement('input');
-      Modoru._element.type = "submit";
-      Modoru._element.value = "戻る";
-      scene.addChild(Modoru);
-      Modoru.addEventListener('touchstart',function(e){
-        if(Button_push("戻る")) return;
-        Scene_loads(Setting_Flag[4],true,false);
-      });
+      if(Return){
+        var Modoru = new Entity();
+        Modoru.moveTo(width/4,width/16*9+(width/30));
+        Modoru.width = width/2;
+        Modoru.height = (width/10);
+        Modoru._element = document.createElement('input');
+        Modoru._element.type = "submit";
+        Modoru._element.value = "戻る";
+        scene.addChild(Modoru);
+        Modoru.addEventListener('touchstart',function(e){
+          if(Button_push("戻る")) return;
+          Scene_loads(Return,true,false);
+        });
+      }
 
       return scene;
     };
