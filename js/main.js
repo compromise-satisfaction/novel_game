@@ -721,7 +721,7 @@ function Game_load(width,height){
           if(Inspect_DATAS[i].幅5) Inspect[23] = Inspect_DATAS[i].幅5;
           if(Inspect_DATAS[i].高さ5) Inspect[24] = Inspect_DATAS[i].高さ5;
           if(Inspect_DATAS[i].移動先5) Inspect[25] = Inspect_DATAS[i].移動先5;
-          Datas[0] = conversion_url(Inspect[0],"画像");
+          Datas[0] = Inspect[0];
           game.replaceScene(InspectScene(Inspect));
           return;
         }
