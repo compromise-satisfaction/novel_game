@@ -3242,7 +3242,7 @@ function Game_load(width,height){
         Kettei._element.value = "決定";
         scene.addChild(Kettei);
         Kettei.addEventListener('touchstart',function(e){
-          for (var i = 0; i < Touch.length; i++) {
+          for (var i = Touch.length-1; i >= 0; i--) {
             Sound_ON("選択音");
             if(Touch[i].intersect(Touch_Pointer)){
               Scene_loads(Touch[i].シーン,false,false);
