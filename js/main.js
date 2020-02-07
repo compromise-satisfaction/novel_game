@@ -709,6 +709,49 @@ function Game_load(width,height){
           if(Datas[3]=="主人公") Datas[3] = S_image;
           if(Datas[5]=="主人公") Datas[5] = S_image;
           if(Datas[19]=="主人公") Datas[19] = S_Sound;
+          for (var k = 0; k < Inspect_DATAS.length; k++) {
+            if(Number==Inspect_DATAS[k].シーン名){
+              var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
+              Inspect[0] = Datas[0];
+              if(Inspect_DATAS[k].移動先1){
+                Inspect[1] = Inspect_DATAS[k].x座標1;
+                Inspect[2] = Inspect_DATAS[k].y座標1;
+                Inspect[3] = Inspect_DATAS[k].幅1;
+                Inspect[4] = Inspect_DATAS[k].高さ1;
+                Inspect[5] = Inspect_DATAS[k].移動先1;
+              }
+              if(Inspect_DATAS[k].移動先2){
+                Inspect[6] = Inspect_DATAS[k].x座標2;
+                Inspect[7] = Inspect_DATAS[k].y座標2;
+                Inspect[8] = Inspect_DATAS[k].幅2;
+                Inspect[9] = Inspect_DATAS[k].高さ2;
+                Inspect[10] = Inspect_DATAS[k].移動先2;
+              }
+              if(Inspect_DATAS[k].移動先3){
+                Inspect[11] = Inspect_DATAS[k].x座標3;
+                Inspect[12] = Inspect_DATAS[k].y座標3;
+                Inspect[13] = Inspect_DATAS[k].幅3;
+                Inspect[14] = Inspect_DATAS[k].高さ3;
+                Inspect[15] = Inspect_DATAS[k].移動先3;
+              }
+              if(Inspect_DATAS[k].移動先4){
+                Inspect[16] = Inspect_DATAS[k].x座標4;
+                Inspect[17] = Inspect_DATAS[k].y座標4;
+                Inspect[18] = Inspect_DATAS[k].幅4;
+                Inspect[19] = Inspect_DATAS[k].高さ4;
+                Inspect[20] = Inspect_DATAS[k].移動先4;
+              }
+              if(Inspect_DATAS[k].移動先5){
+                Inspect[21] = Inspect_DATAS[k].x座標5;
+                Inspect[22] = Inspect_DATAS[k].y座標5;
+                Inspect[23] = Inspect_DATAS[k].幅5;
+                Inspect[24] = Inspect_DATAS[k].高さ5;
+                Inspect[25] = Inspect_DATAS[k].移動先5;
+              }
+              game.replaceScene(MainScene(Return,Number,Inspect,Inspect_DATAS[k].可視化));
+              return;
+            }
+          }
           game.replaceScene(MainScene(Return,Number));
           return;
         }
@@ -1405,7 +1448,7 @@ function Game_load(width,height){
 
       return scene;
     };
-    var MainScene = function(Return,Number){
+    var MainScene = function(Return,Number,Inspect,can){
       var scene = new Scene();                                // 新しいシーンを作る
 
       if(Datas[8].substring(0,1)=="Θ"){
@@ -1447,13 +1490,46 @@ function Game_load(width,height){
         scene.addChild(Background);
       }
 
-      var Explosion = new Sprite();
-      Explosion._element = document.createElement("img");
-      Explosion._element.title = "爆発";
-      Explosion._element.src = "../image/透明.png";
-      Explosion.width = width/16*9;
-      Explosion.height = width/16*9;
-      scene.addChild(Explosion);
+      if(Inspect){
+        function Touchs(x,y,width_t,height_t,Number){
+          Touch[k] = new Sprite();
+          Touch[k]._element = document.createElement("img");
+          if(can) Touch[k]._element.src = "../image/半透明.png";
+          else Touch[k]._element.src = "../image/透明.png";
+          Touch[k].x = x*width/NaturalWidth;
+          Touch[k].y = y*width/16*9/NaturalHeight;
+          Touch[k].width = width_t*width/NaturalWidth;
+          Touch[k].height = height_t*width/16*9/NaturalHeight;
+          console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
+          scene.addChild(Touch[k]);
+          Touch[k].addEventListener('touchstart',function(e){
+            Sound_ON("選択音");
+            Scene_loads(Number,false,false);
+            return;
+          });
+          return;
+        }
+
+        var NaturalWidth = Background._element.naturalWidth;
+        var NaturalHeight = Background._element.naturalHeight;
+
+        var Touch = [];
+        var k = 0;
+
+        for (var i = 1; i < Inspect.length; i = i+5) {
+          Touchs(Inspect[i],Inspect[i+1],Inspect[i+2],Inspect[i+3],Inspect[i+4]);
+          k++;
+        }
+      }
+      else{
+        var Explosion = new Sprite();
+        Explosion._element = document.createElement("img");
+        Explosion._element.title = "爆発";
+        Explosion._element.src = "../image/透明.png";
+        Explosion.width = width/16*9;
+        Explosion.height = width/16*9;
+        scene.addChild(Explosion);
+      }
 
       if(Datas[3]!=false){
         var Character2 = new Sprite();
@@ -3099,19 +3175,23 @@ function Game_load(width,height){
       Background.height = width/16*9;
       scene.addChild(Background);
       Background.addEventListener('touchstart',function(e){
-        Sound_ON("選択音");
-        if(Inspect=="Black") Scene_loads("調べる出来てない",false,false);
-        else Scene_loads("調べる何もない",false,false);
+        if(can){
+          Sound_ON("選択音");
+          Scene_loads("調べる何もない",false,false);
+        }
+        return;
       });
 
       var NaturalWidth = Background._element.naturalWidth;
       var NaturalHeight = Background._element.naturalHeight;
+
 
       function Touchs(x,y,width_t,height_t,Number){
         Touch[k] = new Sprite();
         Touch[k]._element = document.createElement("img");
         if(can) Touch[k]._element.src = "../image/半透明.png";
         else Touch[k]._element.src = "../image/透明.png";
+        Touch[k].シーン = Number;
         Touch[k].x = x*width/NaturalWidth;
         Touch[k].y = y*width/16*9/NaturalHeight;
         Touch[k].width = width_t*width/NaturalWidth;
@@ -3119,8 +3199,10 @@ function Game_load(width,height){
         console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
         scene.addChild(Touch[k]);
         Touch[k].addEventListener('touchstart',function(e){
-          Sound_ON("選択音");
-          Scene_loads(Number,false,false);
+          if(can){
+            Sound_ON("選択音");
+            Scene_loads(Touch[k].シーン,false,false);
+          }
           return;
         });
         return;
@@ -3132,6 +3214,42 @@ function Game_load(width,height){
       for (var i = 1; i < Inspect.length; i = i+5) {
         Touchs(Inspect[i],Inspect[i+1],Inspect[i+2],Inspect[i+3],Inspect[i+4]);
         k++;
+      }
+
+      if(can==false){
+        var Touch_Pointer = new Sprite();
+        Touch_Pointer._element = document.createElement("img");
+        Touch_Pointer._element.src = "../image/ポイント.gif";
+        Touch_Pointer.width = width/36;
+        Touch_Pointer.height = width/36;
+        Touch_Pointer.x = width/2-width/36/2;
+        Touch_Pointer.y = width/16*9/2-width/36/2;
+        scene.addChild(Touch_Pointer);
+        scene.addEventListener('touchstart',function(e){
+          if(e.x<width&&e.y<width/16*9){
+            Sound_ON("選択音");
+            Touch_Pointer.x = e.x-width/36/2;
+            Touch_Pointer.y = e.y-width/36/2;
+          }
+          return;
+        });
+        var Kettei = new Entity();
+        Kettei.moveTo(width/4,width/16*9+(width/30)+width/5);
+        Kettei.width = width/2;
+        Kettei.height = (width/10);
+        Kettei._element = document.createElement('input');
+        Kettei._element.type = "submit";
+        Kettei._element.value = "決定";
+        scene.addChild(Kettei);
+        Kettei.addEventListener('touchstart',function(e){
+          for (var i = 0; i < Touch.length; i++) {
+            if(Touch[i].intersect(Touch_Pointer)){
+              Sound_ON("選択音");
+              Scene_loads(Touch[i].シーン,false,false);
+            }
+          }
+          return;
+        });
       }
 
       if(Return){
