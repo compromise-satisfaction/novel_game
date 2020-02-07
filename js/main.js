@@ -814,33 +814,43 @@ function Game_load(width,height){
             Inspect[0] = Inspect_DATAS[i].背景;
             Setting_Flag[13] = Inspect[0];
           }
-          if(Inspect_DATAS[i].x座標1) Inspect[1] = Inspect_DATAS[i].x座標1;
-          if(Inspect_DATAS[i].y座標1) Inspect[2] = Inspect_DATAS[i].y座標1;
-          if(Inspect_DATAS[i].幅1) Inspect[3] = Inspect_DATAS[i].幅1;
-          if(Inspect_DATAS[i].高さ1) Inspect[4] = Inspect_DATAS[i].高さ1;
-          if(Inspect_DATAS[i].移動先1) Inspect[5] = Inspect_DATAS[i].移動先1;
-          if(Inspect_DATAS[i].x座標2) Inspect[6] = Inspect_DATAS[i].x座標2;
-          if(Inspect_DATAS[i].y座標2) Inspect[7] = Inspect_DATAS[i].y座標2;
-          if(Inspect_DATAS[i].幅2) Inspect[8] = Inspect_DATAS[i].幅2;
-          if(Inspect_DATAS[i].高さ2) Inspect[9] = Inspect_DATAS[i].高さ2;
-          if(Inspect_DATAS[i].移動先2) Inspect[10] = Inspect_DATAS[i].移動先2;
-          if(Inspect_DATAS[i].x座標3) Inspect[11] = Inspect_DATAS[i].x座標3;
-          if(Inspect_DATAS[i].y座標3) Inspect[12] = Inspect_DATAS[i].y座標3;
-          if(Inspect_DATAS[i].幅3) Inspect[13] = Inspect_DATAS[i].幅3;
-          if(Inspect_DATAS[i].高さ3) Inspect[14] = Inspect_DATAS[i].高さ3;
-          if(Inspect_DATAS[i].移動先3) Inspect[15] = Inspect_DATAS[i].移動先3;
-          if(Inspect_DATAS[i].x座標4) Inspect[16] = Inspect_DATAS[i].x座標4;
-          if(Inspect_DATAS[i].y座標4) Inspect[17] = Inspect_DATAS[i].y座標4;
-          if(Inspect_DATAS[i].幅4) Inspect[18] = Inspect_DATAS[i].幅4;
-          if(Inspect_DATAS[i].高さ4) Inspect[19] = Inspect_DATAS[i].高さ4;
-          if(Inspect_DATAS[i].移動先4) Inspect[20] = Inspect_DATAS[i].移動先4;
-          if(Inspect_DATAS[i].x座標5) Inspect[21] = Inspect_DATAS[i].x座標5;
-          if(Inspect_DATAS[i].y座標5) Inspect[22] = Inspect_DATAS[i].y座標5;
-          if(Inspect_DATAS[i].幅5) Inspect[23] = Inspect_DATAS[i].幅5;
-          if(Inspect_DATAS[i].高さ5) Inspect[24] = Inspect_DATAS[i].高さ5;
-          if(Inspect_DATAS[i].移動先5) Inspect[25] = Inspect_DATAS[i].移動先5;
+          if(Inspect_DATAS[i].移動先1){
+            Inspect[1] = Inspect_DATAS[i].x座標1;
+            Inspect[2] = Inspect_DATAS[i].y座標1;
+            Inspect[3] = Inspect_DATAS[i].幅1;
+            Inspect[4] = Inspect_DATAS[i].高さ1;
+            Inspect[5] = Inspect_DATAS[i].移動先1;
+          }
+          if(Inspect_DATAS[i].移動先2){
+            Inspect[6] = Inspect_DATAS[i].x座標2;
+            Inspect[7] = Inspect_DATAS[i].y座標2;
+            Inspect[8] = Inspect_DATAS[i].幅2;
+            Inspect[9] = Inspect_DATAS[i].高さ2;
+            Inspect[10] = Inspect_DATAS[i].移動先2;
+          }
+          if(Inspect_DATAS[i].移動先3){
+            Inspect[11] = Inspect_DATAS[i].x座標3;
+            Inspect[12] = Inspect_DATAS[i].y座標3;
+            Inspect[13] = Inspect_DATAS[i].幅3;
+            Inspect[14] = Inspect_DATAS[i].高さ3;
+            Inspect[15] = Inspect_DATAS[i].移動先3;
+          }
+          if(Inspect_DATAS[i].移動先4){
+            Inspect[16] = Inspect_DATAS[i].x座標4;
+            Inspect[17] = Inspect_DATAS[i].y座標4;
+            Inspect[18] = Inspect_DATAS[i].幅4;
+            Inspect[19] = Inspect_DATAS[i].高さ4;
+            Inspect[20] = Inspect_DATAS[i].移動先4;
+          }
+          if(Inspect_DATAS[i].移動先5){
+            Inspect[21] = Inspect_DATAS[i].x座標5;
+            Inspect[22] = Inspect_DATAS[i].y座標5;
+            Inspect[23] = Inspect_DATAS[i].幅5;
+            Inspect[24] = Inspect_DATAS[i].高さ5;
+            Inspect[25] = Inspect_DATAS[i].移動先5;
+          }
           Datas[0] = Inspect[0];
-          game.replaceScene(InspectScene(Inspect,Inspect_DATAS[i].前のシーン));
+          game.replaceScene(InspectScene(Inspect,Inspect_DATAS[i].前のシーン,Inspect_DATAS[i].可視化));
           return;
         }
       }
@@ -3079,7 +3089,7 @@ function Game_load(width,height){
 
       return scene;
     };
-    var InspectScene = function(Inspect,Return){
+    var InspectScene = function(Inspect,Return,can){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Sprite();
@@ -3100,12 +3110,13 @@ function Game_load(width,height){
       function Touchs(x,y,width_t,height_t,Number){
         Touch[k] = new Sprite();
         Touch[k]._element = document.createElement("img");
-        Touch[k]._element.src = "../image/半透明.png";
+        if(can) Touch[k]._element.src = "../image/半透明.png";
+        else Touch[k]._element.src = "../image/透明.png";
         Touch[k].x = x*width/NaturalWidth;
         Touch[k].y = y*width/16*9/NaturalHeight;
         Touch[k].width = width_t*width/NaturalWidth;
         Touch[k].height = height_t*width/16*9/NaturalHeight;
-        console.log(Number);
+        console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
         scene.addChild(Touch[k]);
         Touch[k].addEventListener('touchstart',function(e){
           Sound_ON("選択音");
