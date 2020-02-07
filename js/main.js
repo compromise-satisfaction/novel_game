@@ -3201,7 +3201,7 @@ function Game_load(width,height){
         Touch[k].addEventListener('touchstart',function(e){
           if(can){
             Sound_ON("選択音");
-            Scene_loads(Touch[k].シーン,false,false);
+            Scene_loads(this.シーン,false,false);
           }
           return;
         });
