@@ -356,7 +356,7 @@ function Game_load(width,height){
       }
       return;
     }//アイテム関連
-    function Get_ICFT2(DATAS,Get){
+    function Get_ICFT2(DATAS){
       if(DATAS.入手!=false){
         GET = DATAS.入手.replace(/↓/g,"\n");
         GET = GET.split("\n");
@@ -375,7 +375,6 @@ function Game_load(width,height){
               continue;
               break;
             default:
-              if(Get==false) return;
               console.log(GET[l]);
               break;
             }
@@ -622,7 +621,7 @@ function Game_load(width,height){
             if(Main_DATAS[i].セーブ!="無し"&&Main_DATAS[i].セーブ) Setting_Flag[14] = Main_DATAS[i].BGM;
             BGM_ON(Main_DATAS[i].BGM);
           }
-          Get_ICFT2(Main_DATAS[i],Get);
+          if(Get) Get_ICFT2(Main_DATAS[i]);
           game.fps = Main_DATAS[i].速度;
           Setting_Flag[3] = game.fps;
           if(Main_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
@@ -721,7 +720,7 @@ function Game_load(width,height){
             if(Choice_DATAS[i].セーブ!="無し"&&Choice_DATAS[i].セーブ) Setting_Flag[14] = Choice_DATAS[i].BGM;
             BGM_ON(Choice_DATAS[i].BGM);
           }
-          Get_ICFT2(Choice_DATAS[i],Get);
+          if(Get) Get_ICFT2(Choice_DATAS[i]);
           if(Choice_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
           else {
             if(Choice_DATAS[i].セーブ!="無し"&&Choice_DATAS[i].セーブ) Setting_Flag[13] = Choice_DATAS[i].背景;
@@ -796,8 +795,8 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Item_get_DATAS.length; i++) {
         if(Number==Item_get_DATAS[i].シーン名){
-          Get_ICFT2(Item_get_DATAS[i],Get);
           if(Get){
+            Get_ICFT2(Item_get_DATAS[i]);
             game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
@@ -3344,7 +3343,7 @@ function Game_load(width,height){
                 console.log("Scene数",Scene_kazu);
                 break;
               case "改造":
-                game.replaceScene(TransformScene(Number,Ig));
+                game.replaceScene(TransformScene(Number,Ig,Do));
                 console.log("Scene数",Scene_kazu);
                 break;
               default:
@@ -3721,7 +3720,7 @@ function Game_load(width,height){
 
       return scene;
     };
-    var TransformScene = function(Number,Ig){
+    var TransformScene = function(Number,Ig,Do){
       var scene = new Scene();                                // 新しいシーンを作る
 
       var Background = new Entity();
@@ -3769,7 +3768,7 @@ function Game_load(width,height){
           Button[submits].addEventListener('touchstart',function(e){
             if(Button_push("戻る")) return;
             if(Datakousin) return;
-            game.replaceScene(ItemScene(Number,Ig,"アイテム"));
+            game.replaceScene(ItemScene(Number,Ig,"アイテム",Do));
           });
         }
         if(a=="実行する"){
