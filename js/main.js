@@ -3243,11 +3243,13 @@ function Game_load(width,height){
         scene.addChild(Kettei);
         Kettei.addEventListener('touchstart',function(e){
           for (var i = 0; i < Touch.length; i++) {
+            Sound_ON("選択音");
             if(Touch[i].intersect(Touch_Pointer)){
-              Sound_ON("選択音");
               Scene_loads(Touch[i].シーン,false,false);
+              return;
             }
           }
+          Scene_loads("調べる何もない",false,false);
           return;
         });
       }
