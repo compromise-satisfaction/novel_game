@@ -23,7 +23,7 @@ function Datas_load(width,height,GAS_URL){
   )
   .then(res => res.json())
   .then(result => {
-    Move_DATAS = result.移動;
+    Move_DATAS = result.移行;
     Sounds_DATAS = result.音;
     Image_DATAS = result.画像;
     Main_DATAS = result.メイン;
@@ -32,12 +32,12 @@ function Datas_load(width,height,GAS_URL){
     Item_get_DATAS = result.入手;
     Inspect_DATAS = result.調べる;
     I_C_F_T_DATAS = result.フラグ類;
-    Speech_DATAS = result.吹き出し;
     Kousin1 = result.更新[0].更新日;
     Interrogation_DATAS = result.尋問;
     for (var i = 0; i < Image_DATAS.length; i++){
       if(Image_DATAS[i].url.substring(0,4)!="http"){
-        if(Image_DATAS[i].url.substring(0,3)!="../") Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+        if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
+        else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
       }
       else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
           Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
@@ -415,6 +415,7 @@ function Game_load(width,height){
           window.localStorage.setItem(GAS+"Log_Flag",Log_Flag);
           console.log(Number);
         }
+        else console.log(Number,"プレイ済み");
       }
       else{
         if(have(Number+"既読")){
@@ -429,6 +430,7 @@ function Game_load(width,height){
           window.localStorage.setItem(GAS+"Log_Flag",Log_Flag);
           console.log(Number);
         }
+        else console.log(Number,"プレイ済み");
       }
       if(Setting_Flag[2]=="男"){
         var S_image = "男主人公";
@@ -506,7 +508,7 @@ function Game_load(width,height){
           )
           .then(res => res.json())
           .then(result => {
-            Move_DATAS = result.移動;
+            Move_DATAS = result.移行;
             Image_DATAS = result.画像;
             Main_DATAS = result.メイン;
             Choice_DATAS = result.選択;
@@ -514,11 +516,11 @@ function Game_load(width,height){
             Item_get_DATAS = result.入手;
             Inspect_DATAS = result.調べる;
             I_C_F_T_DATAS = result.フラグ類;
-            Speech_DATAS = result.吹き出し;
             Interrogation_DATAS = result.尋問;
             for (var i = 0; i < Image_DATAS.length; i++){
               if(Image_DATAS[i].url.substring(0,4)!="http"){
-                if(Image_DATAS[i].url.substring(0,3)!="../") Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+                if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
+                else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
               }
               else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
                   Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
@@ -796,10 +798,25 @@ function Game_load(width,height){
       }
       for (var i = 0; i < Move_DATAS.length; i++) {
         if(Number==Move_DATAS[i].シーン名){
-          Moves = Move_DATAS[i].移動先;
-          game.pushScene(MoveScene(10));
-          Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+          if(Move_DATAS[i].移動){
+            Moves = Move_DATAS[i].移動先;
+            game.pushScene(MoveScene(10));
+            Scene_kazu++;
+            console.log("Scene数",Scene_kazu);
+          }
+          else{
+            if(Move_DATAS[i].再生音声||Move_DATAS[i].吹き出し画像){
+              Datas[0] = Move_DATAS[i].吹き出し画像;
+              Datas[1] = Move_DATAS[i].再生音声;
+              Datas[2] = Move_DATAS[i].次のシーン;
+              Scene_kazu++;
+              console.log(Scene_kazu);
+              game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
+            }
+            else{
+              Scene_loads(Move_DATAS[i].移動先,Return,Item);
+            }
+          }
           return;
         }
       }
@@ -915,17 +932,6 @@ function Game_load(width,height){
           Datas[7] = Interrogation_DATAS[i].正解移動場所;
           Datas[8] = Interrogation_DATAS[i].正解アイテム;
           game.replaceScene(InterrogationScene(Number));
-          return;
-        }
-      }
-      for (var i = 0; i < Speech_DATAS.length; i++) {
-        if(Number==Speech_DATAS[i].シーン名){
-          Datas[0] = Speech_DATAS[i].吹き出し画像;
-          Datas[1] = Speech_DATAS[i].再生音声;
-          Datas[2] = Speech_DATAS[i].次のシーン;
-          Scene_kazu++;
-          console.log(Scene_kazu);
-          game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
           return;
         }
       }
@@ -1111,7 +1117,7 @@ function Game_load(width,height){
       )
       .then(res => res.json())
       .then(result => {
-        Move_DATAS = result.移動;
+        Move_DATAS = result.移行;
         Sounds_DATAS = result.音;
         Image_DATAS = result.画像;
         Main_DATAS = result.メイン;
@@ -1120,13 +1126,13 @@ function Game_load(width,height){
         Item_get_DATAS = result.入手;
         Inspect_DATAS = result.調べる;
         I_C_F_T_DATAS = result.フラグ類;
-        Speech_DATAS = result.吹き出し;
         Kousin1 = result.更新[0].更新日;
         Kousin2 = Kousin1+"↓"+Version;
         Interrogation_DATAS = result.尋問;
         for (var i = 0; i < Image_DATAS.length; i++){
           if(Image_DATAS[i].url.substring(0,4)!="http"){
-            if(Image_DATAS[i].url.substring(0,3)!="../") Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+            if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
+            else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
           }
           else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
               Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
@@ -4009,7 +4015,7 @@ function Game_load(width,height){
               )
               .then(res => res.json())
               .then(result => {
-                Move_DATAS = result.移動;
+                Move_DATAS = result.移行;
                 Image_DATAS = result.画像;
                 Main_DATAS = result.メイン;
                 Choice_DATAS = result.選択;
@@ -4017,11 +4023,11 @@ function Game_load(width,height){
                 Item_get_DATAS = result.入手;
                 Inspect_DATAS = result.調べる;
                 I_C_F_T_DATAS = result.フラグ類;
-                Speech_DATAS = result.吹き出し;
                 Interrogation_DATAS = result.尋問;
                 for (var i = 0; i < Image_DATAS.length; i++){
                   if(Image_DATAS[i].url.substring(0,4)!="http"){
-                    if(Image_DATAS[i].url.substring(0,3)!="../") Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+                    if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
+                    else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
                   }
                   else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
                       Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
