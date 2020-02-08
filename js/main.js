@@ -7,7 +7,7 @@ var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
   BGM.currentTime = BGM.id*1;
   BGM.play();
-  console.log(BGM.currentTime);
+  //console.log(BGM.currentTime);
 });
 
 var GAS = Foldar;
@@ -312,7 +312,7 @@ function Game_load(width,height){
               Favorability_Flag[i][1] = DATAS[1].split("→")[1]*1;
               break;
           }
-          console.log(Favorability_Flag);
+          //console.log(Favorability_Flag);
           return;
           break;
         default:
@@ -375,7 +375,7 @@ function Game_load(width,height){
               continue;
               break;
             default:
-              console.log(GET[l]);
+              //console.log(GET[l]);
               break;
             }
             for (var k = 0; k < I_C_F_T_DATAS.length; k++) {
@@ -453,7 +453,7 @@ function Game_load(width,height){
           Moves = Load_Datas();
           game.pushScene(MoveScene(10));
           Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
           return;
           break;
         case "タイトルに戻る":
@@ -466,11 +466,11 @@ function Game_load(width,height){
           if(Scene_kazu==2){
             game.popScene();
             Scene_kazu--;
-            console.log(Scene_kazu);
+            //console.log(Scene_kazu);
             return;
           }
           Number = Setting_Flag[4];
-          console.log("直前",Number);
+          //console.log("直前",Number);
           Scene_loads(Number,true,false);
           return;
           break;
@@ -802,7 +802,7 @@ function Game_load(width,height){
             Moves = Move_DATAS[i].移動先;
             game.pushScene(MoveScene(10));
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
           }
           else{
             if(Move_DATAS[i].再生音声||Move_DATAS[i].吹き出し画像){
@@ -810,11 +810,11 @@ function Game_load(width,height){
               Datas[1] = Move_DATAS[i].再生音声;
               Datas[2] = Move_DATAS[i].次のシーン;
               Scene_kazu++;
-              console.log(Scene_kazu);
+              //console.log(Scene_kazu);
               game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
             }
             else{
-              Scene_loads(Move_DATAS[i].移動先,Return,Item);
+              Scene_loads(Move_DATAS[i].移動先,Return,false);
             }
           }
           return;
@@ -859,7 +859,7 @@ function Game_load(width,height){
             Get_ICFT2(Item_get_DATAS[i]);
             game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
           }
           else Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
           return;
@@ -1102,7 +1102,7 @@ function Game_load(width,height){
     if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
     window.localStorage.setItem(GAS+"Trophy",Trophy_Flag2);
     window.localStorage.setItem(GAS+"syoken",false);
-    console.log(Datas);
+    //console.log(Datas);
     }//セーブ
     function rand(n) {
     return Math.floor(Math.random() * (n + 1));
@@ -1294,7 +1294,7 @@ function Game_load(width,height){
               case "データ初期化(推奨)":
               game.pushScene(ClearScene());
               Scene_kazu++;
-              console.log("Scene数",Scene_kazu);
+              //console.log("Scene数",Scene_kazu);
               break;
             default:
               Scene_loads(a,false,false);
@@ -1342,11 +1342,11 @@ function Game_load(width,height){
       //scene.addChild(Set_button);
 
       Set_button.addEventListener('touchstart',function(e){
-        console.log(Set_button);
+        //console.log(Set_button);
         return;
         game.pushScene(ReversiScene());
         Scene_kazu++;
-        console.log("Scene数",Scene_kazu);
+        //console.log("Scene数",Scene_kazu);
       });
 
       }
@@ -1506,7 +1506,7 @@ function Game_load(width,height){
           Touch[k].y = y*width/16*9/NaturalHeight;
           Touch[k].width = width_t*width/NaturalWidth;
           Touch[k].height = height_t*width/16*9/NaturalHeight;
-          console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
+          //console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
           scene.addChild(Touch[k]);
           Touch[k].addEventListener('touchstart',function(e){
             Sound_ON("選択音");
@@ -1542,7 +1542,7 @@ function Game_load(width,height){
         Character2._element = document.createElement("img");
         Character2._element.src = conversion_url(Datas[3],"画像");
         Character2._element.title = Datas[3];
-        console.log("真ん中のキャラを"+Datas[3]+"に設定");
+        //console.log("真ん中のキャラを"+Datas[3]+"に設定");
         Character2.width = width/16*9;
         Character2.height = width/16*9;
         if(Datas[22]){
@@ -1583,7 +1583,7 @@ function Game_load(width,height){
         Character1._element = document.createElement("img");
         Character1._element.src = conversion_url(Datas[1],"画像");
         Character1._element.title = Datas[1];
-        console.log("左のキャラを"+Datas[1]+"に設定");
+        //console.log("左のキャラを"+Datas[1]+"に設定");
         Character1.width = width/16*9;
         Character1.height = width/16*9;
         if(Datas[22]){
@@ -1637,7 +1637,7 @@ function Game_load(width,height){
         Character3._element = document.createElement("img");
         Character3._element.src = conversion_url(Datas[5],"画像");
         Character3._element.title = Datas[5];
-        console.log("右のキャラを"+Datas[5]+"に設定");
+        //console.log("右のキャラを"+Datas[5]+"に設定");
         Character3.width = width/16*9;
         Character3.height = width/16*9;
         if(Datas[22]){
@@ -1759,7 +1759,7 @@ function Game_load(width,height){
           Moves = S_Input1._element.value;
           game.pushScene(MoveScene(10));
           Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
         });
       }
 
@@ -1892,7 +1892,7 @@ function Game_load(width,height){
                   Datas[1] = Pose;
                   Character1._element.title = Datas[1];
                   Character1._element.src = conversion_url(Datas[1],"画像");
-                  console.log("左のキャラを"+Datas[1]+"に変更");
+                  //console.log("左のキャラを"+Datas[1]+"に変更");
                 }
                 break;
               case "㊥":
@@ -1900,7 +1900,7 @@ function Game_load(width,height){
                   Datas[3] = Pose;
                   Character2._element.title = Datas[3];
                   Character2._element.src = conversion_url(Datas[3],"画像");
-                  console.log("真ん中のキャラを"+Datas[3]+"に変更");
+                  //console.log("真ん中のキャラを"+Datas[3]+"に変更");
                 }
                 break;
               case "㊨":
@@ -1908,11 +1908,11 @@ function Game_load(width,height){
                   Datas[5] = Pose;
                   Character3._element.title = Datas[5];
                   Character3._element.src = conversion_url(Datas[5],"画像");
-                  console.log("右のキャラを"+Datas[5]+"に変更");
+                  //console.log("右のキャラを"+Datas[5]+"に変更");
                 }
                 break;
               default:
-                console.log(Pose+"が選択されましたがスピークキャラがいません。");
+                //console.log(Pose+"が選択されましたがスピークキャラがいません。");
                 break;
             }
             pcpc++;
@@ -1925,21 +1925,21 @@ function Game_load(width,height){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
                 Character1._element.src = conversion_url(Datas[1],"画像");
-                console.log("左のキャラを"+Datas[1]+"に変更");
+                //console.log("左のキャラを"+Datas[1]+"に変更");
               }
             }
             if(Datas[3]){
               if(Character2._element.title != Datas[3]){
                 Character2._element.title = Datas[3];
                 Character2._element.src = conversion_url(Datas[3],"画像");
-                console.log("真ん中のキャラを"+Datas[3]+"に変更");
+                //console.log("真ん中のキャラを"+Datas[3]+"に変更");
               }
             }
             if(Datas[5]){
               if(Character3._element.title != Datas[5]){
                 Character3._element.title = Datas[5];
                 Character3._element.src = conversion_url(Datas[5],"画像");
-                console.log("右のキャラを"+Datas[5]+"に変更");
+                //console.log("右のキャラを"+Datas[5]+"に変更");
               }
             }
             Speak_Background2._element.src = "../image/透明.png";
@@ -1949,7 +1949,7 @@ function Game_load(width,height){
             Time++;
             if(Return==false) game.fps += 200;
             Setting_Flag[3] = game.fps;
-            console.log(game.fps);
+            //console.log(game.fps);
             T_D();
             return;
             break;
@@ -2016,21 +2016,21 @@ function Game_load(width,height){
               if(Character1._element.title != Datas[1]){
                 Character1._element.title = Datas[1];
                 Character1._element.src = conversion_url(Datas[1],"画像");
-                console.log("左のキャラを"+Datas[1]+"に変更");
+                //console.log("左のキャラを"+Datas[1]+"に変更");
               }
             }
             if(Datas[3]){
               if(Character2._element.title != Datas[3]){
                 Character2._element.title = Datas[3];
                 Character2._element.src = conversion_url(Datas[3],"画像");
-                console.log("真ん中のキャラを"+Datas[3]+"に変更");
+                //console.log("真ん中のキャラを"+Datas[3]+"に変更");
               }
             }
             if(Datas[5]){
               if(Character3._element.title != Datas[5]){
                 Character3._element.title = Datas[5];
                 Character3._element.src = conversion_url(Datas[5],"画像");
-                console.log("右のキャラを"+Datas[5]+"に変更");
+                //console.log("右のキャラを"+Datas[5]+"に変更");
               }
             }
             Speak_Background2._element.src = "../image/透明.png";
@@ -2044,7 +2044,7 @@ function Game_load(width,height){
                       if(conversion_url(Datas[1]+"口パク","画像")!="../image/画像無し.gif"){
                         Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
                         Character1._element.title = Datas[1]+"口パク";
-                        console.log("左のキャラを"+Datas[1]+"口パクに変更");
+                        //console.log("左のキャラを"+Datas[1]+"口パクに変更");
                       }
                     }
                   }
@@ -2055,7 +2055,7 @@ function Game_load(width,height){
                       if(conversion_url(Datas[3]+"口パク","画像")!="../image/画像無し.gif"){
                         Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
                         Character2._element.title = Datas[3]+"口パク";
-                        console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
+                        //console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
                       }
                     }
                   }
@@ -2066,7 +2066,7 @@ function Game_load(width,height){
                       if(conversion_url(Datas[5]+"口パク","画像")!="../image/画像無し.gif"){
                         Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
                         Character3._element.title = Datas[5]+"口パク";
-                        console.log("右のキャラを"+Datas[5]+"口パクに変更");
+                        //console.log("右のキャラを"+Datas[5]+"口パクに変更");
                       }
                     }
                   }
@@ -2114,21 +2114,21 @@ function Game_load(width,height){
             if(Character1._element.title != Datas[1]){
               Character1._element.title = Datas[1];
               Character1._element.src = conversion_url(Datas[1],"画像");
-              console.log("左のキャラを"+Datas[1]+"に変更");
+              //console.log("左のキャラを"+Datas[1]+"に変更");
             }
           }
           if(Datas[3]){
             if(Character2._element.title != Datas[3]){
               Character2._element.title = Datas[3];
               Character2._element.src = conversion_url(Datas[3],"画像");
-              console.log("真ん中のキャラを"+Datas[3]+"に変更");
+              //console.log("真ん中のキャラを"+Datas[3]+"に変更");
             }
           }
           if(Datas[5]){
             if(Character3._element.title != Datas[5]){
               Character3._element.title = Datas[5];
               Character3._element.src = conversion_url(Datas[5],"画像");
-              console.log("右のキャラを"+Datas[5]+"に変更");
+              //console.log("右のキャラを"+Datas[5]+"に変更");
             }
           }
           Speak_Background2._element.src = "../image/透明.png";
@@ -2286,7 +2286,7 @@ function Game_load(width,height){
           if(a==2){
             game.pushScene(ItemScene(c,false,"アイテム"));
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
           }
           else if(a==3){
             if(Text_defined&&have(c+"プレイ済み")==false){
@@ -2432,7 +2432,7 @@ function Game_load(width,height){
         if(Button_push("進む")) return;
         game.popScene();
         Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
+        //console.log("Scene数",Scene_kazu);
         Scene_loads(Moves,false,false);
       });
 
@@ -2440,17 +2440,17 @@ function Game_load(width,height){
         if(Background.opacity == 1 && Out>0){
           game.popScene();
           Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
           Scene_loads(Moves,false,false);
           game.pushScene(MoveScene(-10));
           Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
         }
         if(Background.opacity == 0 && Out<0){
           game.fps = Setting_Flag[3];
           game.popScene();
           Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
         }
       })
 
@@ -2555,7 +2555,7 @@ function Game_load(width,height){
           if (b == "アイテム"){
             game.pushScene(ItemScene(Datas[6],"日常","アイテム",a));
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
           }
           else Scene_loads(b,false,false);
         });
@@ -2586,7 +2586,7 @@ function Game_load(width,height){
           if(b=="アイテム"){
             game.pushScene(ItemScene(c,false,b));
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
           }
           else Scene_loads(c,true,false);
         });
@@ -2637,7 +2637,7 @@ function Game_load(width,height){
           case 15:
             game.popScene();
             Scene_kazu--;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
             Scene_loads(Number,false,false);
             break;
           default:
@@ -2738,19 +2738,19 @@ function Game_load(width,height){
               if(Button_push("音無し")) return;
               game.pushScene(PopScene(c,"待った！","主人公待った！"));
               Scene_kazu++;
-              console.log("Scene数",Scene_kazu);
+              //console.log("Scene数",Scene_kazu);
               break;
             case "設定を開く":
               if(Button_push("メニュー")) return;
               game.pushScene(SettingScene(Datas[5]));
               Scene_kazu++;
-              console.log("Scene数",Scene_kazu);
+              //console.log("Scene数",Scene_kazu);
               break;
             case "つきつける":
               if(Button_push("メニュー")) return;
               game.pushScene(ItemScene(Datas[7],Datas[8],"アイテム","つきつける"));
               Scene_kazu++;
-              console.log("Scene数",Scene_kazu);
+              //console.log("Scene数",Scene_kazu);
               break;
             default:
               if(Button_push("進む")) return;
@@ -2812,7 +2812,7 @@ function Game_load(width,height){
             case "設定を閉じる":
             game.popScene();
             Scene_kazu--;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
             break;
             case "タイトルに戻る":
             game.popScene();
@@ -2821,13 +2821,13 @@ function Game_load(width,height){
               game.popScene();
               Scene_kazu--;
             }
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
             Scene_loads("タイトル移動",false,false,false);
             break;
             case "サウンド設定":
             game.pushScene(SoundSettingScene());
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
             break;
             case "セーブする":
               Save(Number);
@@ -2849,7 +2849,7 @@ function Game_load(width,height){
               break;
               case "プレイヤー設定":
                 Scene_kazu++;
-                console.log("Scene数",Scene_kazu);
+                //console.log("Scene数",Scene_kazu);
                 game.pushScene(PlayerSettingScene());
                 break;
               case "セーブデータ読み込み":
@@ -2859,7 +2859,7 @@ function Game_load(width,height){
                 game.popScene();
                 Scene_kazu--;
               }
-              console.log("Scene数",Scene_kazu);
+              //console.log("Scene数",Scene_kazu);
               Scene_loads("セーブ読み込み",false,false);
               break;
           }
@@ -3007,7 +3007,7 @@ function Game_load(width,height){
             }
             game.popScene();
             Scene_kazu--;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
           }
           window.localStorage.setItem(GAS+"Setting_Flag",Setting_Flag);
         });
@@ -3069,7 +3069,7 @@ function Game_load(width,height){
           if(Button_push("戻る")) return;
           game.popScene();
           Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
         });
         submits++;
       }
@@ -3202,7 +3202,7 @@ function Game_load(width,height){
         Touch[k].y = y*width/16*9/NaturalHeight;
         Touch[k].width = width_t*width/NaturalWidth;
         Touch[k].height = height_t*width/16*9/NaturalHeight;
-        console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
+        //console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
         scene.addChild(Touch[k]);
         Touch[k].addEventListener('touchstart',function(e){
           if(can){
@@ -3358,7 +3358,7 @@ function Game_load(width,height){
         if(Item.x<-width/2){
           game.popScene();
           Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
           Scene_loads(c,false,false);
         }
       })
@@ -3385,7 +3385,7 @@ function Game_load(width,height){
         else{
           game.popScene();
           Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
           Scene_loads(c,false,false);
         }
       });//進む
@@ -3477,24 +3477,24 @@ function Game_load(width,height){
                 OASOBI = true;
                 game.popScene();
                 game.pushScene(ReversiScene());
-                console.log("Scene数",Scene_kazu);
+                //console.log("Scene数",Scene_kazu);
                 break;
               case "改造":
                 game.replaceScene(TransformScene(Number,Ig,Do));
-                console.log("Scene数",Scene_kazu);
+                //console.log("Scene数",Scene_kazu);
                 break;
               default:
                 if(Button[3].詳細.substring(0,2)=="移動"){
                   Button[3].詳細 = Button[3].詳細.substring(2);
                   game.popScene();
                   Scene_kazu--;
-                  console.log("Scene数",Scene_kazu);
+                  //console.log("Scene数",Scene_kazu);
                   Scene_loads(Number+"↓"+Button[3].詳細,false,Choice_Item,false,false,Button[3]._element.value);
                 }
                 else {
                   game.pushScene(DetailsScene(Button[3].詳細,0));
                   Scene_kazu++;
-                  console.log("Scene数",Scene_kazu);
+                  //console.log("Scene数",Scene_kazu);
                 }
                 break;
             }
@@ -3521,12 +3521,12 @@ function Game_load(width,height){
                 game.fps = Setting_Flag[3];
                 game.popScene();
                 Scene_kazu--;
-                console.log("Scene数",Scene_kazu);
+                //console.log("Scene数",Scene_kazu);
                 break;
               case "設定を開く":
                 game.pushScene(SettingScene(Number));
                 Scene_kazu++;
-                console.log("Scene数",Scene_kazu);
+                //console.log("Scene数",Scene_kazu);
                 break;
               case Type2:
                 game.replaceScene(ItemScene(Number,Ig,Type2,Do));
@@ -3534,7 +3534,7 @@ function Game_load(width,height){
               case Do:
                 game.popScene();
                 Scene_kazu--;
-                console.log("Scene数",Scene_kazu);
+                //console.log("Scene数",Scene_kazu);
                 if(Ig==Choice_Item||(Ig!="日常"&&(Choice_Item=="強欲な壺"||Choice_Item=="万能"||Choice_Item=="ヒント"))){
                   if(Choice_Item=="ヒント"){
                     Scene_loads(Number+"のヒント",false,false);
@@ -3545,13 +3545,13 @@ function Game_load(width,height){
                   }
                   game.pushScene(PopScene(Number,"異議あり！","主人公異議あり！"));
                   Scene_kazu++;
-                  console.log("Scene数",Scene_kazu);
+                  //console.log("Scene数",Scene_kazu);
                 }
                 else if(Ig=="日常") Scene_loads(Number,false,Choice_Item,Type,Choice_Item_Image,Do);
                 else{
                   game.pushScene(PopScene("つきつけ失敗","異議あり！","主人公異議あり！"));
                   Scene_kazu++;
-                  console.log("Scene数",Scene_kazu);
+                  //console.log("Scene数",Scene_kazu);
                 }
                 break;
               default:
@@ -3577,7 +3577,7 @@ function Game_load(width,height){
                   Button[4]._element.value = Do;
                   scene.addChild(Button[4]);
                 }
-                console.log(f);
+                //console.log(f);
                 break;
             }
           }
@@ -3659,7 +3659,7 @@ function Game_load(width,height){
           if(BGM.paused&&BGM.title!="無") BGM.play();
           game.popScene();
           Scene_kazu--;
-          console.log("Scene数",Scene_kazu);
+          //console.log("Scene数",Scene_kazu);
         });
         submits++;
       }
@@ -3749,7 +3749,7 @@ function Game_load(width,height){
             Photo.addEventListener('touchstart',function(e){
               Sound_ON("戻る");
               Scene_kazu--;
-              console.log("Scene数",Scene_kazu);
+              //console.log("Scene数",Scene_kazu);
               game.popScene();
             });
           }
@@ -3771,7 +3771,7 @@ function Game_load(width,height){
           Photo.addEventListener('touchstart',function(e){
             Sound_ON("選択音");
             Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            //console.log("Scene数",Scene_kazu);
             game.pushScene(DetailsScene(Big_Photo,0,true));
           });
         }
@@ -3828,7 +3828,7 @@ function Game_load(width,height){
         if(Button_push("音無し")) return;
         game.popScene();
         Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
+        //console.log("Scene数",Scene_kazu);
         Data = false;
         window.localStorage.clear();
         Datas = [];
@@ -3851,7 +3851,7 @@ function Game_load(width,height){
         if(Button_push("戻る")) return;
         game.popScene();
         Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
+        //console.log("Scene数",Scene_kazu);
         return;
       });
 
@@ -3953,14 +3953,14 @@ function Game_load(width,height){
                   Log_Flag.splice(i,1);
                   this._element.value = Button[3]._element.value+" オフ。";
                   Sound_ON("セーブ");
-                  console.log(Log_Flag);
+                  //console.log(Log_Flag);
                   return;
                 }
               }
               Log_Flag[Log_Flag.length] = Button[3]._element.value;
               this._element.value = Button[3]._element.value+" オン。";
               Sound_ON("セーブ");
-              console.log(Log_Flag);
+              //console.log(Log_Flag);
               break;
             case "フラグ追加 or 消去":
               for (var i = 0; i < Flag.length; i++){
@@ -3968,14 +3968,14 @@ function Game_load(width,height){
                   Flag.splice(i,1);
                   this._element.value = Button[3]._element.value+" オフ。";
                   Sound_ON("セーブ");
-                  console.log(Flag);
+                  //console.log(Flag);
                   return;
                 }
               }
               Flag[Flag.length] = Button[3]._element.value;
               this._element.value = Button[3]._element.value+" オン。";
               Sound_ON("セーブ");
-              console.log(Flag);
+              //console.log(Flag);
               break;
             case "フラグリセット":
               Flag = [];
