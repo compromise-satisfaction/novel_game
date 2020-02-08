@@ -808,7 +808,7 @@ function Game_load(width,height){
             if(Move_DATAS[i].再生音声||Move_DATAS[i].吹き出し画像){
               Datas[0] = Move_DATAS[i].吹き出し画像;
               Datas[1] = Move_DATAS[i].再生音声;
-              Datas[2] = Move_DATAS[i].次のシーン;
+              Datas[2] = Move_DATAS[i].移動先;
               Scene_kazu++;
               //console.log(Scene_kazu);
               game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
