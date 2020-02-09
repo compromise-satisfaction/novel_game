@@ -1546,10 +1546,10 @@ function Game_load(width,height){
       if(have(Datas[13]+"プレイ済み")==false){
         var Skip = null;
         if(have(Datas[12]+"プレイ済み")==false){
-          Log_Flag[Log_Flag.length] = Datas[13]+"→"+Number;
+          Log_Flag[Log_Flag.length] = Words+Datas[13]+"→"+Number;
         }
         for (var i = 0; i < Log_Flag.length; i++) {
-          if(Log_Flag[i].split("→")[0]==Datas[13]) Skip = Log_Flag[i].split("→")[1];
+          if(Log_Flag[i].split("→")[0]==Words+Datas[13]) Skip = Log_Flag[i].split("→")[1];
         }
       }
 
