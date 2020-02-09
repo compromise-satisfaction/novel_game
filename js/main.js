@@ -1114,6 +1114,10 @@ function Game_load(width,height){
     return Math.floor(Math.random() * (n + 1));
     }
     function Sheet_nyuryoku(a){
+      if(a.substring(0,4)=="http"){
+        a = a.match(/\/d\/[^\/]+\//g)[0];
+        a = a.substring(3,a.length-1);
+      }
       Sheet = a;
       fetch("https://script.google.com/macros/s/AKfycbwGqfEmoT4wCUp_5yNXtkp_MHQIHwFCYDOTkTMkl9m6oPBpdcY/exec",
         {
