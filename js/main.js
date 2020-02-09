@@ -15,7 +15,7 @@ var Sheet = Foldar;
 function Datas_load(width,height,Sheet_URL){
   if(Sheet_URL) Sheet = Sheet_URL;
   Data_loading = true;
-  fetch("https://script.google.com/macros/s/AKfycbwGqfEmoT4wCUp_5yNXtkp_MHQIHwFCYDOTkTMkl9m6oPBpdcY/exec",
+  fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
     {
       method: 'POST',
       body: "シーンデータ読み込み" + Sheet
@@ -76,6 +76,9 @@ function Datas_load(width,height,Sheet_URL){
           k3++;
           break;
       }
+      SE[k0] = document.createElement("audio");
+      SE[k0].src = "../sound/スカ.wav";
+      SE[k0].title = "スカ";
     }
     Game_load(width,height);
   },);
@@ -159,6 +162,7 @@ function Game_load(width,height){
     var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","我","君",null,null];
     var Favorability_Flag = [];//好感度
     //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18スキップ位置,19スキップ位置2];
+    var Words = "無し";
     var Flag = [];//フラグ
     var Log_Flag = [];//記録
     var Item_Flag = [];//所持アイテム
@@ -177,6 +181,24 @@ function Game_load(width,height){
           default:
             Sound_ON(expression);
             break;
+        }
+        return(false);
+      }
+      else return(true);
+    }
+    function Button_push_title(e){
+      if(Button_time==Button_time_next){
+        game.fps = 10;
+        Button_time = 0;
+        if(e==false) return;
+        if(Setting_Flag[10]){
+          var Volume = Setting_Flag[10] / 10;
+          e.volume = Volume;
+          if(e.paused) e.play();
+          else e.currentTime = 0;
+        }
+        else{
+          if(e.paused==false) e.pause();
         }
         return(false);
       }
@@ -449,8 +471,82 @@ function Game_load(width,height){
         var S_Sound = "スナネコ";
       }
       switch (Number) {
-        case "セーブ読み込み":
-          Moves = Load_Datas();
+          case "セーブ読み込み":
+          fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+            {
+              method: 'POST',
+              body: "シーンデータ読み込み" + Words
+            }
+          )
+          .then(res => res.json())
+          .then(result => {
+            Move_DATAS = result.移行;
+            Sounds_DATAS = result.音;
+            Image_DATAS = result.画像;
+            Main_DATAS = result.メイン;
+            Choice_DATAS = result.選択;
+            Branch_DATAS = result.分岐;
+            Item_get_DATAS = result.入手;
+            Inspect_DATAS = result.調べる;
+            I_C_F_T_DATAS = result.フラグ類;
+            Kousin1 = result.更新[0].更新日;
+            Interrogation_DATAS = result.尋問;
+            for (var i = 0; i < Image_DATAS.length; i++){
+              if(Image_DATAS[i].url.substring(0,4)!="http"){
+                if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
+                else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+              }
+              else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
+                  Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
+              }
+            }
+            BGM_DATAS = [];
+            Sounds_urls = [];
+            Voice_DATAS = [];
+            Sound_effect_DATAS = [];
+            SE = [];
+            for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
+              if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+                Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+              }
+              switch (Sounds_DATAS[i].備考) {
+                default:
+                  BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+                  k1++;
+                  break;
+                case "音声":
+                  Sounds_urls[k0] = Sounds_DATAS[i].url;
+                  Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = Sounds_DATAS[i].url;
+                  SE[k0].title = Sounds_DATAS[i].名前;
+                  k0++;
+                  k2++;
+                  break;
+                case "効果音":
+                  Sounds_urls[k0] = Sounds_DATAS[i].url;
+                  Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = Sounds_DATAS[i].url;
+                  SE[k0].title = Sounds_DATAS[i].名前;
+                  k0++;
+                  k3++;
+                  break;
+              }
+              SE[k0] = document.createElement("audio");
+              SE[k0].src = "../sound/スカ.wav";
+              SE[k0].title = "スカ";
+            }
+            Moves = Load_Datas();
+            game.pushScene(MoveScene(10));
+            Scene_kazu++;
+            console.log("Scene数",Scene_kazu);
+            return;
+          },);
+          return;
+          break;
+        case "タイトル移動":
+          Moves = "タイトルに戻る";
           game.pushScene(MoveScene(10));
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
@@ -500,7 +596,7 @@ function Game_load(width,height){
           Datas[21] = "";
           Datas[22] = "";
           game.replaceScene(MainScene(Return,Number));
-          fetch("https://script.google.com/macros/s/AKfycbwGqfEmoT4wCUp_5yNXtkp_MHQIHwFCYDOTkTMkl9m6oPBpdcY/exec",
+          fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
             {
               method: 'POST',
               body: "シーンデータ読み込み" + Sheet
@@ -559,6 +655,9 @@ function Game_load(width,height){
                   k3++;
                   break;
               }
+              SE[k0] = document.createElement("audio");
+              SE[k0].src = "../sound/スカ.wav";
+              SE[k0].title = "スカ";
             }
             Sound_ON("セーブ");
             Datas = [];
@@ -963,6 +1062,7 @@ function Game_load(width,height){
       return;
     }
     function Load_Datas(){
+      Words = window.localStorage.getItem(Sheet+"Words");
       Flag = window.localStorage.getItem(Sheet+"Flag").split(",");
       Log_Flag = window.localStorage.getItem(Sheet+"Log_Flag").split(",");
       Setting_Flag = window.localStorage.getItem(Sheet+"Setting_Flag").split(",");
@@ -1071,6 +1171,7 @@ function Game_load(width,height){
     }
     else window.localStorage.setItem("管理者","不満");
     window.localStorage.setItem("Sheet",Sheet);
+    window.localStorage.setItem(Sheet+"Words",Words);
     window.localStorage.setItem(Sheet+"Flag",Flag);
     window.localStorage.setItem(Sheet+"Datas",Datas);
     window.localStorage.setItem(Sheet+"Number",Number);
@@ -1102,11 +1203,10 @@ function Game_load(width,height){
     if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"端"]
     window.localStorage.setItem(Sheet+"Trophy",Trophy_Flag2);
     window.localStorage.setItem(Sheet+"syoken",false);
-    console.log(Datas);
-    fetch("https://script.google.com/macros/s/AKfycbwGqfEmoT4wCUp_5yNXtkp_MHQIHwFCYDOTkTMkl9m6oPBpdcY/exec",
+    fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
       {
         method: 'POST',
-        body: Datas
+        body: Number
       }
     )
     }//セーブ
@@ -1119,73 +1219,21 @@ function Game_load(width,height){
         a = a.substring(3,a.length-1);
       }
       Sheet = a;
-      fetch("https://script.google.com/macros/s/AKfycbwGqfEmoT4wCUp_5yNXtkp_MHQIHwFCYDOTkTMkl9m6oPBpdcY/exec",
+      fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
         {
           method: 'POST',
-          body: "シーンデータ読み込み" + Sheet
+          body: "タイトルデータ読み込み" + Sheet
         }
       )
       .then(res => res.json())
       .then(result => {
-        Move_DATAS = result.移行;
-        Sounds_DATAS = result.音;
-        Image_DATAS = result.画像;
-        Main_DATAS = result.メイン;
-        Choice_DATAS = result.選択;
-        Branch_DATAS = result.分岐;
-        Item_get_DATAS = result.入手;
-        Inspect_DATAS = result.調べる;
-        I_C_F_T_DATAS = result.フラグ類;
-        Kousin1 = result.更新[0].更新日;
-        Kousin2 = Kousin1+"↓"+Version;
-        Interrogation_DATAS = result.尋問;
-        for (var i = 0; i < Image_DATAS.length; i++){
-          if(Image_DATAS[i].url.substring(0,4)!="http"){
-            if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
-            else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
-          }
-          else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
-              Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
-          }
-        }
-        BGM_DATAS = [];
-        Sounds_urls = [];
-        Voice_DATAS = [];
-        Sound_effect_DATAS = [];
-        SE = [];
-        for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
-          if(Sounds_DATAS[i].url.substring(0,4)!="http"){
-            Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
-          }
-          switch (Sounds_DATAS[i].備考) {
-            default:
-              BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
-              k1++;
-              break;
-            case "音声":
-              Sounds_urls[k0] = Sounds_DATAS[i].url;
-              Voice_DATAS[k2] = Sounds_DATAS[i].名前;
-              SE[k0] = document.createElement("audio");
-              SE[k0].src = Sounds_DATAS[i].url;
-              SE[k0].title = Sounds_DATAS[i].名前;
-              k0++;
-              k2++;
-              break;
-            case "効果音":
-              Sounds_urls[k0] = Sounds_DATAS[i].url;
-              Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
-              SE[k0] = document.createElement("audio");
-              SE[k0].src = Sounds_DATAS[i].url;
-              SE[k0].title = Sounds_DATAS[i].名前;
-              k0++;
-              k3++;
-              break;
-          }
-        }
-        SE[k0] = document.createElement("audio");
-        SE[k0].src = "../sound/スカ.wav";
-        SE[k0].title = "スカ";
-        Sound_ON("セーブ");
+        Title_DATAS = result;
+        Title_sound1 = document.createElement("audio");
+        Title_sound1.src = Title_DATAS[0].音URL;
+        Title_sound2 = document.createElement("audio");
+        Title_sound2.src = Title_DATAS[1].音URL;
+        Title_sound3 = document.createElement("audio");
+        Title_sound3.src = Title_DATAS[2].音URL;
         game.replaceScene(TitleScene());
       },);
       return;
@@ -1207,10 +1255,7 @@ function Game_load(width,height){
       if(Data_loading){
         var Title = new Entity();
         Title._element = document.createElement("img");
-        for (var i = 0; i < Image_DATAS.length; i++) {
-          Title._element.src = Image_DATAS[i].url;
-        }
-        Title._element.src = conversion_url("タイトル画面","画像");
+        Title._element.src = Title_DATAS[0].画像URL;
         Title.width = width;
         Title.height = width/16*9;
         scene.addChild(Title);
@@ -1238,13 +1283,16 @@ function Game_load(width,height){
           switch (a) {
             case "データ初期化":
             case "データ初期化(推奨)":
-              var ooo = "音無し";
+              var ooo = false;
+              break;
+            case "続きから":
+              var ooo = Title_sound2;
               break;
             default:
-              var ooo ="選択音";
+              var ooo = Title_sound1;
               break;
           }
-          if(Button_push(ooo)) return;
+          if(Button_push_title(ooo)) return;
           if(a!="データ初期化"&&a!="データ初期化(推奨)"&&Data) Load_Datas();
           if(a=="最初から"){
             Flag = [];//フラグ
@@ -1298,7 +1346,14 @@ function Game_load(width,height){
           }
           switch (a) {
             case "続きから":
+              if(this._element.value.substring(0,5)=="読み込み中") return;
               Scene_loads("セーブ読み込み",false,false);
+              this._element.value = "読み込み中";
+              for (var i = 0; i < Button.length; i++) {
+                if(Button[i]._element.value!="読み込み中"){
+                  scene.removeChild(Button[i]);
+                }
+              }
               break;
               case "データ初期化":
               case "データ初期化(推奨)":
@@ -1306,8 +1361,16 @@ function Game_load(width,height){
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
-            default:
-              Scene_loads(a,false,false);
+            case "最初から":
+              if(Title_DATAS[0].画像URL==Title_DATAS[1].画像URL){
+                game.replaceScene(Title_ChoiceScene());
+              }
+              else{
+                game.pushScene(Title_MoveScene(10));
+                Scene_kazu++;
+                console.log("Scene数",Scene_kazu);
+              }
+              return;
               break;
           }
         });
@@ -1349,104 +1412,109 @@ function Game_load(width,height){
 
       }
       else{
+        if(Foldar=="指定なし"){
+          var Background = new Entity();
+          Background._element = document.createElement("img");
+          Background._element.src = "../image/Background.png";
+          Background.width = width;
+          Background.height = height;
+          scene.addChild(Background);
 
-        var Background = new Entity();
-        Background._element = document.createElement("img");
-        Background._element.src = "../image/Background.png";
-        Background.width = width;
-        Background.height = height;
-        scene.addChild(Background);
+          var Numbers = (width/20);
 
-        var Numbers = (width/20);
-
-        var Datakousin = false;
-        var Button = [];
-        var submits = 0;
-        var Numbers = (width/10)+(width/30);
-        function Submit(a){
-          Button[submits] = new Entity();
-          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
-          Button[submits].width = width/1.2;
-          Button[submits].height = width/10;
-          Button[submits]._element = document.createElement('input');
-          Button[submits]._element.value = a;
-          if(a=="入力したらこのボタンを押してね。"){
-            Button[submits]._element.type = "submit";
-          }
-          else {
-            if(window.localStorage.getItem("Sheet")!=null){
-              Button[submits]._element.value = window.localStorage.getItem("Sheet");
+          var Datakousin = false;
+          var Button = [];
+          var submits = 0;
+          var Numbers = (width/10)+(width/30);
+          function Submit(a){
+            Button[submits] = new Entity();
+            Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+            Button[submits].width = width/1.2;
+            Button[submits].height = width/10;
+            Button[submits]._element = document.createElement('input');
+            Button[submits]._element.value = a;
+            if(a=="入力したらこのボタンを押してね。"){
+              Button[submits]._element.type = "submit";
             }
+            else {
+              if(window.localStorage.getItem("Sheet")!=null){
+                Button[submits]._element.value = window.localStorage.getItem("Sheet");
+              }
+            }
+            scene.addChild(Button[submits]);
+            if(a=="入力したらこのボタンを押してね。"){
+              Button[0].addEventListener('touchstart',function(e){
+                if(Data_loading) return;
+                this._element.value = "読み込み中…………。";
+                Data_loading = true;
+                Sheet_nyuryoku(Button[1]._element.value);
+                return;
+              });
+            }
+            submits++;
+            Numbers += (width/20)+(width/25)+(width/25);
           }
-          scene.addChild(Button[submits]);
-          if(a=="入力したらこのボタンを押してね。"){
-            Button[0].addEventListener('touchstart',function(e){
+          Submit("入力したらこのボタンを押してね。");
+          Numbers += (width/20)+(width/25)+(width/25);
+          Submit("ここにスプレッドシートのIDかURLを入力してね。");
+          if(window.localStorage.getItem("管理者")=="満足"){
+            Numbers += (width/20)+(width/25)+(width/25);
+            Button[submits] = new Entity();
+            Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+            Button[submits].width = width/1.2;
+            Button[submits].height = width/10;
+            Button[submits]._element = document.createElement('input');
+            Button[submits]._element.type = "submit";
+            Button[submits]._element.value = "家庭用";
+            scene.addChild(Button[submits]);
+            Button[submits].addEventListener('touchstart',function(e){
               if(Data_loading) return;
               this._element.value = "読み込み中…………。";
               Data_loading = true;
-              Sheet_nyuryoku(Button[1]._element.value);
+              Sheet_nyuryoku("1Y1F5h_SbFflEhJylFXHVQQmKvQrnvf-0wRmhN2ts8eQ");
+              return;
+            });
+            submits++;
+            Numbers += (width/20)+(width/25)+(width/25);
+            Numbers += (width/20)+(width/25)+(width/25);
+            Button[submits] = new Entity();
+            Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+            Button[submits].width = width/1.2;
+            Button[submits].height = width/10;
+            Button[submits]._element = document.createElement('input');
+            Button[submits]._element.type = "submit";
+            Button[submits]._element.value = "自分用";
+            scene.addChild(Button[submits]);
+            Button[submits].addEventListener('touchstart',function(e){
+              if(Data_loading) return;
+              this._element.value = "読み込み中…………。";
+              Data_loading = true;
+              Sheet_nyuryoku("1lrc_riQQYpyMsIs5l9TykJTF-6vXalMFmfaOmKx2GZM");
+              return;
+            });
+            submits++;
+            Numbers += (width/20)+(width/25)+(width/25);
+            Numbers += (width/20)+(width/25)+(width/25);
+            Button[submits] = new Entity();
+            Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+            Button[submits].width = width/1.2;
+            Button[submits].height = width/10;
+            Button[submits]._element = document.createElement('input');
+            Button[submits]._element.type = "submit";
+            Button[submits]._element.value = "共有用";
+            scene.addChild(Button[submits]);
+            Button[submits].addEventListener('touchstart',function(e){
+              if(Data_loading) return;
+              this._element.value = "読み込み中…………。";
+              Data_loading = true;
+              Sheet_nyuryoku("1aW_6TYbIHH5K3WX6Hu_oxheXH2I_0P3NkQfmDEROoUY");
               return;
             });
           }
-          submits++;
-          Numbers += (width/20)+(width/25)+(width/25);
         }
-        Submit("入力したらこのボタンを押してね。");
-        Numbers += (width/20)+(width/25)+(width/25);
-        Submit("ここにスプレッドシートのIDかURLを入力してね。");
-        if(window.localStorage.getItem("管理者")=="満足"){
-          Numbers += (width/20)+(width/25)+(width/25);
-          Button[submits] = new Entity();
-          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
-          Button[submits].width = width/1.2;
-          Button[submits].height = width/10;
-          Button[submits]._element = document.createElement('input');
-          Button[submits]._element.type = "submit";
-          Button[submits]._element.value = "家庭用";
-          scene.addChild(Button[submits]);
-          Button[submits].addEventListener('touchstart',function(e){
-            if(Data_loading) return;
-            this._element.value = "読み込み中…………。";
-            Data_loading = true;
-            Sheet_nyuryoku("1Y1F5h_SbFflEhJylFXHVQQmKvQrnvf-0wRmhN2ts8eQ");
-            return;
-          });
-          submits++;
-          Numbers += (width/20)+(width/25)+(width/25);
-          Numbers += (width/20)+(width/25)+(width/25);
-          Button[submits] = new Entity();
-          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
-          Button[submits].width = width/1.2;
-          Button[submits].height = width/10;
-          Button[submits]._element = document.createElement('input');
-          Button[submits]._element.type = "submit";
-          Button[submits]._element.value = "自分用";
-          scene.addChild(Button[submits]);
-          Button[submits].addEventListener('touchstart',function(e){
-            if(Data_loading) return;
-            this._element.value = "読み込み中…………。";
-            Data_loading = true;
-            Sheet_nyuryoku("1lrc_riQQYpyMsIs5l9TykJTF-6vXalMFmfaOmKx2GZM");
-            return;
-          });
-          submits++;
-          Numbers += (width/20)+(width/25)+(width/25);
-          Numbers += (width/20)+(width/25)+(width/25);
-          Button[submits] = new Entity();
-          Button[submits].moveTo(width/2-width/1.2/2,Numbers);
-          Button[submits].width = width/1.2;
-          Button[submits].height = width/10;
-          Button[submits]._element = document.createElement('input');
-          Button[submits]._element.type = "submit";
-          Button[submits]._element.value = "共有用";
-          scene.addChild(Button[submits]);
-          Button[submits].addEventListener('touchstart',function(e){
-            if(Data_loading) return;
-            this._element.value = "読み込み中…………。";
-            Data_loading = true;
-            Sheet_nyuryoku("1aW_6TYbIHH5K3WX6Hu_oxheXH2I_0P3NkQfmDEROoUY");
-            return;
-          });
+        else{
+          Data_loading = true;
+          Sheet_nyuryoku(Foldar);
         }
       }
 
@@ -1783,9 +1851,9 @@ function Game_load(width,height){
       var Text_defined = true;
       var Speak_Character = Datas[7].replace(/[^㊧㊥㊨]/g,"");
       if(Datas[18]){
-        if(Datas[1]=="男主人公"||Datas[1]=="女主人公") Speak_Character = "㊧";
-        if(Datas[3]=="男主人公"||Datas[3]=="女主人公") Speak_Character = "㊥";
-        if(Datas[5]=="男主人公"||Datas[5]=="女主人公") Speak_Character = "㊨";
+        if(Datas[1].substring(Datas[1].length-3,Datas[1].length)=="主人公") Speak_Character = "㊧";
+        if(Datas[3].substring(Datas[3].length-3,Datas[5].length)=="主人公") Speak_Character = "㊥";
+        if(Datas[5].substring(Datas[3].length-3,Datas[5].length)=="主人公") Speak_Character = "㊨";
       }
 
       var Speak_Background1 = new Sprite();
@@ -2451,6 +2519,209 @@ function Game_load(width,height){
           console.log("Scene数",Scene_kazu);
         }
       })
+
+      return scene;
+    };
+    var Title_MoveScene = function(Out){
+      var scene = new Scene();                                // 新しいシーンを作る
+
+      game.fps = 10;
+
+      var Background = new Sprite();
+      Background._element = document.createElement("img");
+      Background._element.src = "../image/黒.png";
+      Background.width = width;
+      Background.height = width/16*9;
+      scene.addChild(Background);
+
+      if(Out!=0){
+        if(Out>0){
+            Background.opacity = 0;
+            Background.tl.fadeIn(Out);
+        }
+        else{
+            Background.tl.fadeOut(Out*-1);
+        }
+      }
+      scene.addChild(Background);//背景
+
+      var White_Background = new Sprite();
+      White_Background._element = document.createElement("img");
+      White_Background._element.src = "../image/白.png";
+      White_Background.y = width/16*9;
+      White_Background.width = width;
+      White_Background.height = height - width/16*9;
+      scene.addChild(White_Background);//白地
+
+      var Buttons = new Entity();
+      Buttons.moveTo((width/5)*3,height-(width/5));
+      Buttons.width = (width/5);
+      Buttons.height = (width/5);
+      Buttons._element = document.createElement('input');
+      Buttons._element.type = "submit";
+      Buttons._element.value = "▶";
+      scene.addChild(Buttons);
+
+      Buttons.addEventListener('touchstart',function(e){
+        if(Button_push_title(Title_sound3)) return;
+        game.popScene();
+        Scene_kazu--;
+        console.log("Scene数",Scene_kazu);
+        game.replaceScene(Title_ChoiceScene());
+        return;
+      });
+
+      Background.addEventListener("enterframe",function(){
+        if(Background.opacity == 1 && Out>0){
+          game.popScene();
+          Scene_kazu--;
+          console.log("Scene数",Scene_kazu);
+          game.replaceScene(Title_ChoiceScene());
+          game.pushScene(Title_MoveScene(-10));
+          Scene_kazu++;
+          console.log("Scene数",Scene_kazu);
+        }
+        if(Background.opacity == 0 && Out<0){
+          game.fps = Setting_Flag[3];
+          game.popScene();
+          Scene_kazu--;
+          console.log("Scene数",Scene_kazu);
+        }
+      })
+
+      return scene;
+    };
+    var Title_ChoiceScene = function(){
+      var scene = new Scene();                                // 新しいシーンを作る
+
+      var Background = new Sprite();
+      Background._element = document.createElement("img");
+      Background._element.src = Title_DATAS[1].画像URL;
+      Background.width = width;
+      Background.height = width/16*9;
+      scene.addChild(Background);
+
+      var White_Background = new Sprite();
+      White_Background._element = document.createElement("img");
+      White_Background._element.src = "../image/白.png";
+      White_Background.y = width/16*9;
+      White_Background.width = width;
+      White_Background.height = height-width/16*9;
+      scene.addChild(White_Background);
+
+      var submits = 0;
+      var Numbers = width/16*9+(width/30);
+      function Submit(a,b){
+        Text[submits] = new Entity();
+        Text[submits].moveTo(0,Numbers);
+        Text[submits].width = width;
+        Text[submits].height = width/10;
+        Text[submits]._element = document.createElement('input');
+        Text[submits]._element.type = "submit";
+        Text[submits]._element.value = a;
+        if(a) scene.addChild(Text[submits]);
+        Text[submits].addEventListener('touchstart',function(e){
+          if(this._element.value.substring(0,5)=="読み込み中") return;
+          this._element.value = "読み込み中";
+          for (var i = 0; i < Text.length; i++) {
+            if(Text[i]._element.value!="読み込み中"){
+              scene.removeChild(Text[i]);
+            }
+          }
+          if(Button_push_title(Title_sound2));
+          fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+            {
+              method: 'POST',
+              body: "シーンデータ読み込み" + b
+            }
+          )
+          .then(res => res.json())
+          .then(result => {
+            Words = b;
+            Move_DATAS = result.移行;
+            Sounds_DATAS = result.音;
+            Image_DATAS = result.画像;
+            Main_DATAS = result.メイン;
+            Choice_DATAS = result.選択;
+            Branch_DATAS = result.分岐;
+            Item_get_DATAS = result.入手;
+            Inspect_DATAS = result.調べる;
+            I_C_F_T_DATAS = result.フラグ類;
+            Kousin1 = result.更新[0].更新日;
+            Interrogation_DATAS = result.尋問;
+            for (var i = 0; i < Image_DATAS.length; i++){
+              if(Image_DATAS[i].url.substring(0,4)!="http"){
+                if(Image_DATAS[i].備考=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
+                else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
+              }
+              else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
+                  Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
+              }
+            }
+            BGM_DATAS = [];
+            Sounds_urls = [];
+            Voice_DATAS = [];
+            Sound_effect_DATAS = [];
+            SE = [];
+            for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
+              if(Sounds_DATAS[i].url.substring(0,4)!="http"){
+                Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
+              }
+              switch (Sounds_DATAS[i].備考) {
+                default:
+                  BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考];
+                  k1++;
+                  break;
+                case "音声":
+                  Sounds_urls[k0] = Sounds_DATAS[i].url;
+                  Voice_DATAS[k2] = Sounds_DATAS[i].名前;
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = Sounds_DATAS[i].url;
+                  SE[k0].title = Sounds_DATAS[i].名前;
+                  k0++;
+                  k2++;
+                  break;
+                case "効果音":
+                  Sounds_urls[k0] = Sounds_DATAS[i].url;
+                  Sound_effect_DATAS[k3] = Sounds_DATAS[i].名前;
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = Sounds_DATAS[i].url;
+                  SE[k0].title = Sounds_DATAS[i].名前;
+                  k0++;
+                  k3++;
+                  break;
+              }
+              SE[k0] = document.createElement("audio");
+              SE[k0].src = "../sound/スカ.wav";
+              SE[k0].title = "スカ";
+            }
+            Scene_loads("最初",false,false);
+          },);
+        });
+        submits++;
+        Numbers += (width/20)+(width/25)+(width/25);
+      }
+
+      var Text = [];
+
+      if(Title_DATAS[2].第一選択肢==false||have(Title_DATAS[2].第一選択肢)){
+        Submit(Title_DATAS[0].第一選択肢,Title_DATAS[1].第一選択肢);
+      }
+      if(Title_DATAS[2].第二選択肢==false||have(Title_DATAS[2].第二選択肢)){
+        Submit(Title_DATAS[0].第二選択肢,Title_DATAS[1].第二選択肢);
+      }
+      if(Title_DATAS[2].第三選択肢==false||have(Title_DATAS[2].第三選択肢)){
+        Submit(Title_DATAS[0].第三選択肢,Title_DATAS[1].第三選択肢);
+      }
+      if(Title_DATAS[2].第四選択肢==false||have(Title_DATAS[2].第四選択肢)){
+        Submit(Title_DATAS[0].第四選択肢,Title_DATAS[1].第四選択肢);
+      }
+      if(Title_DATAS[2].第五選択肢==false||have(Title_DATAS[2].第五選択肢)){
+        Submit(Title_DATAS[0].第五選択肢,Title_DATAS[1].第五選択肢);
+      }
+      if(Title_DATAS[2].第六選択肢==false||have(Title_DATAS[2].第六選択肢)){
+        Submit(Title_DATAS[0].第六選択肢,Title_DATAS[1].第六選択肢);
+      }
 
       return scene;
     };
@@ -3832,6 +4103,7 @@ function Game_load(width,height){
         Datas = [];
         Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","我","君",null,null];
         //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18スキップ位置,19スキップ位置2];
+        Words = "無し";
         Flag = [];//フラグ
         Log_Flag = [];//記録
         Item_Flag = [];//所持アイテム
@@ -4005,7 +4277,7 @@ function Game_load(width,height){
             case "シーンデータ更新":
               Datakousin = true;
               this._element.value = Button[1]._element.value+"中……";
-              fetch("https://script.google.com/macros/s/AKfycbwGqfEmoT4wCUp_5yNXtkp_MHQIHwFCYDOTkTMkl9m6oPBpdcY/exec",
+              fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
                 {
                   method: 'POST',
                   body: "シーンデータ読み込み" + Sheet
@@ -4064,6 +4336,9 @@ function Game_load(width,height){
                       k3++;
                       break;
                   }
+                  SE[k0] = document.createElement("audio");
+                  SE[k0].src = "../sound/スカ.wav";
+                  SE[k0].title = "スカ";
                 }
                 this._element.value = "シーンデータ更新完了。";
                 Sound_ON("セーブ");

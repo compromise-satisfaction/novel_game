@@ -1,5 +1,5 @@
 //enchantjsの画面サイズの設定
-var Foldar = "https://script.google.com/macros/s/AKfycbwpMKf5237VlebQuUNjHKYGvLrOi3bdGV1Oa2CKsKAMmv_-mpM/exec";
+var Foldar = "12-ESzeqaV3uEtLDAoCIDPVU18MahgfcB3IOInm0scj8";
 
 function resetScreen(gameWidth,gameHeight){
 
@@ -100,7 +100,7 @@ $(function(){
   //余白部分をドラッグすることによるスクロールを無効にする
   //$("#base").on("touchstart",function(event){event.preventDefault();});
   //ゲームを実行する
-  Datas_load(gameWidth,gameHeight);
+  Game_load(gameWidth,gameHeight);
   //初回時のスクリーン設定
   orientationChange();
 });
