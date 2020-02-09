@@ -1206,7 +1206,7 @@ function Game_load(width,height){
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
       {
         method: 'POST',
-        body: Number
+        body: Number+" "+Setting_Flag[1]+" "+Setting_Flag[0]
       }
     )
     }//セーブ
