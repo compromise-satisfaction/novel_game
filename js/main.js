@@ -528,9 +528,32 @@ function Game_load(width,height,private){
           Scene_loads(Number,true,false);
           return;
           break;
+        case "未完成":
+          Datas[0] = "黒背景";
+          Datas[1] = "";
+          Datas[2] = "";
+          Datas[3] = "";
+          Datas[4] = "";
+          Datas[5] = "";
+          Datas[6] = "";
+          Datas[7] = "タイトルに戻る";
+          Datas[8] = "タイトルに戻る";
+          Datas[9] = "セーブ読み込み";
+          Datas[10] = "セーブ読み込み";
+          Datas[11] = "直前のシーンに戻る";
+          Datas[12] = "直前移動";
+          Datas[13] = "";
+          Datas[14] = "";
+          Datas[15] = "";
+          Datas[16] = "";
+          Datas[17] = "";
+          Datas[18] = "";
+          game.replaceScene(ChoiceScene(Number));
+          return;
+          break;
         case "シーンデータ更新":
           Datas = [];
-          Datas[0] = "stand";
+          Datas[0] = "黒背景";
           Datas[1] = "";
           Datas[2] = "";
           Datas[3] = "";
@@ -909,15 +932,15 @@ function Game_load(width,height,private){
         Scene_loads(Item,false,false);
         return;
       }
-      Datas[0] = "Black";
+      Datas[0] = "黒背景";
       Datas[1] = "";
       Datas[2] = "";
       Datas[3] = "";
       Datas[4] = "";
       Datas[5] = "";
       Datas[6] = "";
-      Datas[7] = "製作者";
-      Datas[8] = "ここから先は出来ていません。↓更新をお待ちください。↓" + Kousin2;
+      Datas[7] = "";
+      Datas[8] = "ここから先は出来ていません。↓更新をお待ちください。";
       Datas[9] = "";
       Datas[10] = "";
       Datas[11] = "";
@@ -1643,7 +1666,7 @@ function Game_load(width,height,private){
       C_name.y = width/16*9+width/25;
       if(Datas[7]!="") scene.addChild(C_name);//キャラ名
 
-      if(Number=="テスト用"){
+      if(Number=="テスト"){
 
         var S_Input1 = new Entity();
         S_Input1.moveTo((width/4),width/16*9+(width/20)+(width/25)+(width/25));
