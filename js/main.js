@@ -1388,6 +1388,9 @@ function Game_load(width,height,private){
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
+              case "説明":
+              Datas_load(Title_DATAS[0].説明,"シーンデータ読み込み");
+              break;
               case "最初から":
               game.replaceScene(Title_ChoiceScene(false));
               break;
