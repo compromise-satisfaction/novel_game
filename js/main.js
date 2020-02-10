@@ -1167,7 +1167,7 @@ function Game_load(width,height,private){
         scene.addChild(Text[submits]);
         Text[submits].addEventListener('touchstart',function(e){
           if(b=="戻る"){
-            if(Button_push_title(Title_sound3));
+            if(Button_push_title(Title_sound3)) return;
             game.replaceScene(TitleScene());
           }
           else{
@@ -1176,7 +1176,7 @@ function Game_load(width,height,private){
                 scene.removeChild(Text[i]);
               }
             }
-            if(Button_push_title(Title_sound2));
+            if(Button_push_title(Title_sound2)) return;
             Datas_load(b,"シーンデータ読み込み",test);
           }
           return;
