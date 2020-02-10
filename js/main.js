@@ -52,7 +52,8 @@ function Game_load(width,height,private){
       }
       else if(Type=="シーンデータ読み込み"){
         if(Play_Sheet==ID){
-          Scene_loads("最初",false,false,false,false,false);
+          if(test) Scene_loads("テスト用",false,false,false,false,false);
+          else Scene_loads("最初",false,false,false,false,false);
           return;
         }
       }
@@ -174,6 +175,8 @@ function Game_load(width,height,private){
                     break;
                 }
               }
+              Scene_loads("テスト用",false,false,false,false,false);
+              return;
             }
             if(Type=="シーンデータ読み込み") Scene_loads("最初",false,false,false,false,false);
             else Scene_loads(Number,false,false,false,false,false);
@@ -1304,6 +1307,11 @@ function Game_load(width,height,private){
               break;
               case "続きから":
               case "説明":
+              for (var i = 0; i < Button.length; i++) {
+                if(Button[i]!=this){
+                  scene.removeChild(Button[i]);
+                }
+              }
               var ooo = Title_sound2;
               break;
             default:
@@ -1635,7 +1643,7 @@ function Game_load(width,height,private){
       C_name.y = width/16*9+width/25;
       if(Datas[7]!="") scene.addChild(C_name);//キャラ名
 
-      if(Number=="赤き竜"){
+      if(Number=="テスト用"){
 
         var S_Input1 = new Entity();
         S_Input1.moveTo((width/4),width/16*9+(width/20)+(width/25)+(width/25));
