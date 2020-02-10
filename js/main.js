@@ -98,6 +98,11 @@ function Game_load(width,height,private){
           return;
         }
       }
+      else if(Type=="シーンデータ更新"){
+        ID = Play_Sheet;
+        Type = "セーブデータ読み込み"
+        Number = "直前移動";
+      }
       game.pushScene(LoadingScene());
       Scene_kazu++;
       console.log("Scene数",Scene_kazu);
@@ -539,9 +544,16 @@ function Game_load(width,height,private){
         var S_Sound = "スナネコ";
       }
       switch (Number) {
-          case "セーブ読み込み":
-          Load_Datas();
-          Datas_load(false,"セーブデータ読み込み");
+        case "セーブ読み込み":
+        Load_Datas();
+        Datas_load(false,"セーブデータ読み込み");
+        return;
+        break;
+        case "直前移動":
+          Moves = "直前";
+          game.pushScene(MoveScene(10));
+          Scene_kazu++;
+          console.log("Scene数",Scene_kazu);
           return;
           break;
         case "タイトル移動":
@@ -570,29 +582,6 @@ function Game_load(width,height,private){
           return;
           break;
         case "未完成":
-          Datas[0] = "黒背景";
-          Datas[1] = "";
-          Datas[2] = "";
-          Datas[3] = "";
-          Datas[4] = "";
-          Datas[5] = "";
-          Datas[6] = "";
-          Datas[7] = "タイトルに戻る";
-          Datas[8] = "タイトルに戻る";
-          Datas[9] = "セーブ読み込み";
-          Datas[10] = "セーブ読み込み";
-          Datas[11] = "直前のシーンに戻る";
-          Datas[12] = "直前移動";
-          Datas[13] = "";
-          Datas[14] = "";
-          Datas[15] = "";
-          Datas[16] = "";
-          Datas[17] = "";
-          Datas[18] = "";
-          game.replaceScene(ChoiceScene(Number));
-          return;
-          break;
-        case "シーンデータ更新":
           Datas = [];
           Datas[0] = "黒背景";
           Datas[1] = "";
@@ -601,23 +590,23 @@ function Game_load(width,height,private){
           Datas[4] = "";
           Datas[5] = "";
           Datas[6] = "";
-          Datas[7] = "";
-          Datas[8] = "シーンデータ更新中…";
-          Datas[9] = "";
-          Datas[10] = "";
-          Datas[11] = "";
-          Datas[12] = "";
-          Datas[13] = "";
-          Datas[14] = "";
+          Datas[7] = "タイトルに戻る";
+          Datas[8] = "タイトル移動";
+          Datas[9] = "セーブ読み込み";
+          Datas[10] = "セーブ読み込み";
+          Datas[11] = "直前のシーンに戻る";
+          Datas[12] = "直前移動";
+          Datas[13] = "シーンデータを更新して直前のシーンに戻る";
+          Datas[14] = "シーンデータ更新";
           Datas[15] = "";
           Datas[16] = "";
           Datas[17] = "";
           Datas[18] = "";
-          Datas[19] = "日付";
-          Datas[20] = "";
-          Datas[21] = "";
-          Datas[22] = "";
-          game.replaceScene(MainScene(Return,Number));
+          game.replaceScene(ChoiceScene(Number));
+          return;
+          break;
+        case "シーンデータ更新":
+          Datas_load(false,Number);
           return;
           break;
         case "調べる何もない":
