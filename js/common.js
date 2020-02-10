@@ -1,7 +1,5 @@
 //enchantjsの画面サイズの設定
 
-var Foldar = "指定なし";
-
 function resetScreen(gameWidth,gameHeight){
 
   //ベースの幅を画面いっぱいに広げる
@@ -101,7 +99,7 @@ $(function(){
   //余白部分をドラッグすることによるスクロールを無効にする
   //$("#base").on("touchstart",function(event){event.preventDefault();});
   //ゲームを実行する
-  Game_load(gameWidth,gameHeight);
+  Game_load(gameWidth,gameHeight,false);
   //初回時のスクリーン設定
   orientationChange();
 });
