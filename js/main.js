@@ -1171,12 +1171,12 @@ function Game_load(width,height,private){
             game.replaceScene(TitleScene());
           }
           else{
+            if(Button_push_title(Title_sound2)) return;
             for (var i = 0; i < Text.length; i++) {
               if(Text[i]!=this){
                 scene.removeChild(Text[i]);
               }
             }
-            if(Button_push_title(Title_sound2)) return;
             Datas_load(b,"シーンデータ読み込み",test);
           }
           return;
