@@ -1129,7 +1129,7 @@ function Game_load(width,height,private){
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
       {
         method: 'POST',
-        body: Title_Sheet+" "+Number+" "+Setting_Flag[1]+" "+Setting_Flag[0]
+        body: Play_Sheet+" "+Number+" "+Setting_Flag[1]+" "+Setting_Flag[0]
       }
     )
     }//セーブ
