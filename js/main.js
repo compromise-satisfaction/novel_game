@@ -583,7 +583,7 @@ function Game_load(width,height,private){
           break;
         case "未完成":
           Datas = [];
-          Datas[0] = "黒背景";
+          Datas[0] = "画像無し";
           Datas[1] = "";
           Datas[2] = "";
           Datas[3] = "";
@@ -621,7 +621,7 @@ function Game_load(width,height,private){
           Datas[8] = "特に気になるものはない。";
           Datas[9] = 0;
           Datas[10] = 0;
-          Datas[11] = Number;
+          Datas[11] = "無し";
           Datas[12] = Setting_Flag[12];
           Datas[13] = 0;
           Datas[19] = S_Sound;
@@ -821,6 +821,7 @@ function Game_load(width,height,private){
       }
       for (var i = 0; i < Move_DATAS.length; i++) {
         if(Number==Move_DATAS[i].シーン名){
+          if(Get) Get_ICFT2(Move_DATAS[i]);
           if(Move_DATAS[i].移動){
             Moves = Move_DATAS[i].移動先;
             game.pushScene(MoveScene(10));
@@ -962,7 +963,7 @@ function Game_load(width,height,private){
         Scene_loads(Item,false,false);
         return;
       }
-      Datas[0] = "黒背景";
+      Datas[0] = "画像無し";
       Datas[1] = "";
       Datas[2] = "";
       Datas[3] = "";
@@ -1128,7 +1129,7 @@ function Game_load(width,height,private){
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
       {
         method: 'POST',
-        body: Number+" "+Setting_Flag[1]+" "+Setting_Flag[0]
+        body: Title_Sheet+" "+Number+" "+Setting_Flag[1]+" "+Setting_Flag[0]
       }
     )
     }//セーブ
@@ -1455,7 +1456,7 @@ function Game_load(width,height,private){
           Datas[11] = Number;
         }
         else{
-          Setting_Flag[4] = Number;
+          Setting_Flag[4] = Datas[11];
           if(Setting_Flag[8]) Save(Datas[11]);
         }
       }
@@ -1479,46 +1480,13 @@ function Game_load(width,height,private){
         scene.addChild(Background);
       }
 
-      if(Inspect){
-        function Touchs(x,y,width_t,height_t,Number){
-          Touch[k] = new Sprite();
-          Touch[k]._element = document.createElement("img");
-          if(can) Touch[k]._element.src = "../image/半透明(赤).png";
-          else Touch[k]._element.src = "../image/透明.png";
-          Touch[k].x = x*width/NaturalWidth;
-          Touch[k].y = y*width/16*9/NaturalHeight;
-          Touch[k].width = width_t*width/NaturalWidth;
-          Touch[k].height = height_t*width/16*9/NaturalHeight;
-          console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
-          scene.addChild(Touch[k]);
-          Touch[k].addEventListener('touchstart',function(e){
-            Sound_ON("選択音");
-            Scene_loads(Number,false,false);
-            return;
-          });
-          return;
-        }
-
-        var NaturalWidth = Background._element.naturalWidth;
-        var NaturalHeight = Background._element.naturalHeight;
-
-        var Touch = [];
-        var k = 0;
-
-        for (var i = 1; i < Inspect.length; i = i+5) {
-          Touchs(Inspect[i],Inspect[i+1],Inspect[i+2],Inspect[i+3],Inspect[i+4]);
-          k++;
-        }
-      }
-      else{
-        var Explosion = new Sprite();
-        Explosion._element = document.createElement("img");
-        Explosion._element.title = "爆発";
-        Explosion._element.src = "../image/透明.png";
-        Explosion.width = width/16*9;
-        Explosion.height = width/16*9;
-        scene.addChild(Explosion);
-      }
+      var Explosion = new Sprite();
+      Explosion._element = document.createElement("img");
+      Explosion._element.title = "爆発";
+      Explosion._element.src = "../image/透明.png";
+      Explosion.width = width/16*9;
+      Explosion.height = width/16*9;
+      scene.addChild(Explosion);
 
       if(Datas[3]!=false){
         var Character2 = new Sprite();
@@ -2369,6 +2337,37 @@ function Game_load(width,height,private){
           })
         }
       }//トロフィー
+      if(Inspect){
+        function Touchs(x,y,width_t,height_t,Number){
+          Touch[tk] = new Sprite();
+          Touch[tk]._element = document.createElement("img");
+          if(can) Touch[tk]._element.src = "../image/半透明(赤).png";
+          else Touch[tk]._element.src = "../image/透明.png";
+          Touch[tk].x = x*width/NaturalWidth;
+          Touch[tk].y = y*width/16*9/NaturalHeight;
+          Touch[tk].width = width_t*width/NaturalWidth;
+          Touch[tk].height = height_t*width/16*9/NaturalHeight;
+          console.log(Touch[tk].x,Touch[tk].y,Touch[tk].width,Touch[tk].height,Number);
+          scene.addChild(Touch[tk]);
+          Touch[tk].addEventListener('touchstart',function(e){
+            Sound_ON("選択音");
+            Scene_loads(Number,false,false);
+            return;
+          });
+          return;
+        }
+
+        var NaturalWidth = Background._element.naturalWidth;
+        var NaturalHeight = Background._element.naturalHeight;
+
+        var Touch = [];
+        var tk = 0;
+
+        for (var i = 1; i < Inspect.length; i = i+5) {
+          Touchs(Inspect[i],Inspect[i+1],Inspect[i+2],Inspect[i+3],Inspect[i+4]);
+          tk++;
+        }
+      }
       return scene;
     };
     var MoveScene = function(Out){
