@@ -1986,8 +1986,8 @@ function Game_load(width,height,private){
     var Speak_Character = Datas[7].replace(/[^㊧㊥㊨]/g,"");
     if(Datas[18]){
       if(Datas[1].substring(Datas[1].length-3,Datas[1].length)=="主人公") Speak_Character = "㊧";
-      if(Datas[3].substring(Datas[3].length-3,Datas[5].length)=="主人公") Speak_Character = "㊥";
-      if(Datas[5].substring(Datas[3].length-3,Datas[5].length)=="主人公") Speak_Character = "㊨";
+      if(Datas[3].substring(Datas[3].length-3,Datas[3].length)=="主人公") Speak_Character = "㊥";
+      if(Datas[5].substring(Datas[5].length-3,Datas[5].length)=="主人公") Speak_Character = "㊨";
     }
 
     var Speak_Background1 = new Sprite();
