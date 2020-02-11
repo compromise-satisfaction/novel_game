@@ -1699,6 +1699,8 @@ function Game_load(width,height,private){
     Datas[8] = Datas[8].replace(/\(♪[^♪]+♪\)/g,"§");
     var Pose_change = Datas[8].match(/\([㊧㊥㊨][^㊧㊥㊨]+[㊧㊥㊨]\)/g);
     Datas[8] = Datas[8].replace(/\([㊧㊥㊨][^㊧㊥㊨]+[㊧㊥㊨]\)/g,"Ψ");
+    var Speech_bubble = Datas[8].match(/\(↑[^↑]+↑\)/g);
+    Datas[8] = Datas[8].replace(/\(↑[^↑]+↑\)/g,"↑");
 
     if(Datas[11]){
       if(Datas[11]=="無し"){
@@ -1731,7 +1733,6 @@ function Game_load(width,height,private){
 
     var Explosion = new Sprite();
     Explosion._element = document.createElement("img");
-    Explosion._element.title = "爆発";
     Explosion._element.src = "../image/透明.png";
     Explosion.width = width/16*9;
     Explosion.height = width/16*9;
@@ -2004,6 +2005,13 @@ function Game_load(width,height,private){
     Speak_Background2.height = height/5;
     Speak_Background2.y = width/16*9+width/8-height/5;
 
+    var Speech_bubble_image = new Sprite();
+    Speech_bubble_image._element = document.createElement("img");
+    Speech_bubble_image._element.src = "../image/透明.png";
+    Speech_bubble_image.width = width;
+    Speech_bubble_image.height = width/16*9;
+    scene.addChild(Speech_bubble_image);
+
     if(Speak_Character==""&&Datas[7]){
       switch (Datas[7]){
         case Datas[1]:
@@ -2040,6 +2048,7 @@ function Game_load(width,height,private){
     var Winking_time = 0;
     var sese = 0;
     var pcpc = 0;
+    var ksks = 0;
 
     var Text =[];
 
@@ -2075,9 +2084,22 @@ function Game_load(width,height,private){
           T_D();
           return;
           break;
+        case "↑":
+          Time++;
+          var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2;
+          if(Return==false){
+            if(Image=="消滅") Speech_bubble_image._element.src = "../image/透明.png";
+            else Speech_bubble_image._element.src = conversion_url(Image,"画像");
+          }
+          ksks++;
+          T_D();
+          return;
+          break;
         case "§":
           Time++;
-          if(Return==false) Sound_ON(Sound_effect[sese].substring(2,Sound_effect[sese].length-2));
+          var Sound = Sound_effect[sese].substring(2,Sound_effect[sese].length-2);
+          if(Sound.substring(0,3)=="主人公") Sound = Setting_Flag[2]+Sound;
+          if(Return==false) Sound_ON(Sound);
           sese++;
           T_D();
           return;
