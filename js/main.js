@@ -106,6 +106,7 @@ function Game_load(width,height,private){
       game.pushScene(LoadingScene());
       Scene_kazu++;
       console.log("Scene数",Scene_kazu);
+      console.log(ID);
       Sheet = ID;
       if(Sheet.substring(0,4)=="http"){
         Sheet = Sheet.match(/\/d\/[^\/]+\//g)[0];
@@ -120,7 +121,7 @@ function Game_load(width,height,private){
         .then(res => res.json())
         .then(result => {
         if(Type=="シーンデータ読み込み"||Type=="セーブデータ読み込み"){
-          Play_Sheet = Sheet;
+          Play_Sheet = ID;
           var k0 = 0;
           var k1 = 0;
           var k2 = 0;
