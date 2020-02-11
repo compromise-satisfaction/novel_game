@@ -106,7 +106,6 @@ function Game_load(width,height,private){
       game.pushScene(LoadingScene());
       Scene_kazu++;
       console.log("Scene数",Scene_kazu);
-      console.log(ID);
       Sheet = ID;
       if(Sheet.substring(0,4)=="http"){
         Sheet = Sheet.match(/\/d\/[^\/]+\//g)[0];
@@ -447,7 +446,12 @@ for (var k = 0; k < result[i].length; k++) {
               return;
             }
             if(Type=="シーンデータ読み込み") Scene_loads("最初",false,false,false,false,false);
-            else Scene_loads(Number,false,false,false,false,false);
+            else{
+              Moves = Number;
+              game.pushScene(MoveScene(10));
+              Scene_kazu++;
+              console.log("Scene数",Scene_kazu);
+            }
         }
         else{
           Title_Sheet = Sheet;
