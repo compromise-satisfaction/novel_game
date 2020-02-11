@@ -1455,6 +1455,29 @@ for (var k = 0; k < result[i].length; k++) {
       var scene = new Scene();
 
       if(a){
+        var Background = new Entity();
+        Background._element = document.createElement("img");
+        Background._element.src = "../image/Background.png";
+        Background.width = width;
+        Background.height = height;
+        scene.addChild(Background);
+
+        var Background2 = new Entity();
+        Background2._element = document.createElement("img");
+        Background2._element.src = "../image/半透明(黒).png";
+        Background2.width = width;
+        Background2.height = height;
+        scene.addChild(Background2);
+
+        var Loading = new Entity();
+        Loading._element = document.createElement("img");
+        Loading._element.src = "../image/読み込み中.gif";
+        Loading.x = width/2-width/4;
+        Loading.y = height/2-width/20;
+        Loading.width = width/2;
+        Loading.height = width/10;
+        scene.addChild(Loading);
+
         Datas_load(a,"タイトルデータ読み込み");
       }
       else{
