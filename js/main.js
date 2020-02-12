@@ -2633,8 +2633,10 @@ function Game_load(width,height,private){
         return;
       }
 
-      var NaturalWidth = Background._element.naturalWidth;
-      var NaturalHeight = Background._element.naturalHeight;
+      if(Background._element.naturalWidth) var NaturalWidth = Background._element.naturalWidth;
+      else var NaturalWidth = conversion_url(Inspect[0],"比率").split("×")[0];
+      if(Background._element.naturalHeight) var NaturalHeight = Background._element.naturalHeight;
+      else var NaturalHeight = conversion_url(Inspect[0],"比率").split("×")[1];
 
       var Touch = [];
       var tk = 0;
@@ -3446,9 +3448,10 @@ function Game_load(width,height,private){
       return;
     });
 
-    var NaturalWidth = Background._element.naturalWidth;
-    var NaturalHeight = Background._element.naturalHeight;
-
+    if(Background._element.naturalWidth) var NaturalWidth = Background._element.naturalWidth;
+    else var NaturalWidth = conversion_url(Inspect[0],"比率").split("×")[0];
+    if(Background._element.naturalHeight) var NaturalHeight = Background._element.naturalHeight;
+    else var NaturalHeight = conversion_url(Inspect[0],"比率").split("×")[1];
 
     function Touchs(x,y,width_t,height_t,Number){
       Touch[k] = new Sprite();
