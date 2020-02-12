@@ -20,7 +20,7 @@ function Game_load(width,height,private){
 
     game.addEventListener("enterframe", function(){
       if(Button_time==Button_time_next) return;
-      else Button_time++;
+      else if(game.fps==10) Button_time++;
       return;
     });
 
@@ -2177,7 +2177,7 @@ function Game_load(width,height,private){
           break;
         case "↤":
           Time++;
-          if(Return==false) game.fps = 10;
+          game.fps = 10;
           Setting_Flag[3] = game.fps;
           T_D();
           return;
@@ -2332,6 +2332,8 @@ function Game_load(width,height,private){
       }
       else if(Datas[8].substring(Time-1,Time)==""){
         Text_defined = false;
+        game.fps = 10;
+        Setting_Flag[3] = game.fps;
         if(Datas[1]){
           if(Character1._element.title != Datas[1]){
             Character1._element.title = Datas[1];
