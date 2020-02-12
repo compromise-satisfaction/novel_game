@@ -2572,7 +2572,7 @@ function Game_load(width,height,private){
         Trophy.opacity = 0;
         Trophy.tl.fadeIn(5);
         scene.addChild(Trophy);
-        Datas[17] = conversion_url(I_C_F_T_DATAS[i].画像,"画像");
+        Datas[17] = I_C_F_T_DATAS[i].画像;
         var Trophy_image = new Sprite();
         Trophy_image._element = document.createElement("img");
         Trophy_image._element.src = Datas[17];
@@ -3825,7 +3825,8 @@ function Game_load(width,height,private){
               }
               Choice_Item = f[5];
               Choice_Item_Image = f[2];
-              var Item_image_url = conversion_url(f[2],"画像");
+              if(conversion_url(f[2],"画像")=="../image/画像無し.gif") Item_image_url = Choice_Item_Image;
+              else var Item_image_url = conversion_url(f[2],"画像");
               Item_image._element.src = Item_image_url;
               this.backgroundColor = "red";
               if(f[3]){
@@ -3993,8 +3994,12 @@ function Game_load(width,height,private){
         Text[i]._element.textContent = "";
         var Photo = new Sprite();
         Photo._element = document.createElement("img");
-        Photo._element.src = conversion_url(Photo_url,"画像");
-        if(conversion_url(Photo_url,"比率")=="正方形"||Photo._element.NaturalWidth==Photo._element.naturalHeight){
+        if(conversion_url(Photo_url,"比率")=="正方形"||conversion_url(Photo_url,"比率").split("×")[0]==conversion_url(Photo_url,"比率").split("×")[1]){
+          var Seihoukei = true;
+        }
+        if(conversion_url(Photo_url,"画像")!="../image/画像無し.gif") var Photo_url = conversion_url(Photo_url,"画像");
+        Photo._element.src = Photo_url;
+        if(Seihoukei||(Photo._element.naturalWidth==Photo._element.naturalHeight&&Photo._element.naturalWidth!=0)){
           Photo.width = width*0.8;
           Photo.height = width*0.8;
           Photo.x = width/10;
@@ -4018,7 +4023,7 @@ function Game_load(width,height,private){
       }
       else if(Text[i]._element.textContent.substring(0,3)=="小画像"){
         var Photo_url = Text[i]._element.textContent.substring(3);
-        Photo_url = conversion_url(Photo_url,"画像");
+        if(conversion_url(Photo_url,"画像")!="../image/画像無し.gif") var Photo_url = conversion_url(Photo_url,"画像");
         var Big_Photo = Text[i]._element.textContent.substring(1);
         Text[i]._element.textContent = "";
         var Photo = new Sprite();
