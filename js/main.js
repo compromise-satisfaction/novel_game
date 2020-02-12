@@ -101,7 +101,7 @@ function Game_load(width,height,private){
       else if(Type=="シーンデータ更新"){
         ID = Play_Sheet;
         Type = "セーブデータ読み込み"
-        Number = "直前移動";
+        Number = "直前";
       }
       game.pushScene(LoadingScene());
       Scene_kazu++;
