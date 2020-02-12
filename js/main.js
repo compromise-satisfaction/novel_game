@@ -2086,21 +2086,23 @@ function Game_load(width,height,private){
           break;
         case "↑":
           Time++;
-          var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
           if(Return==false){
+            var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
             if(Image=="消滅") Speech_bubble_image._element.src = "../image/透明.png";
             else Speech_bubble_image._element.src = conversion_url(Image,"画像");
+            ksks++;
           }
-          ksks++;
           T_D();
           return;
           break;
         case "§":
           Time++;
-          var Sound = Sound_effect[sese].substring(2,Sound_effect[sese].length-2);
-          if(Sound.substring(0,3)=="主人公") Sound = Setting_Flag[2]+Sound;
-          if(Return==false) Sound_ON(Sound);
-          sese++;
+          if(Return==false){
+            var Sound = Sound_effect[sese].substring(2,Sound_effect[sese].length-2);
+            if(Sound.substring(0,3)=="主人公") Sound = Setting_Flag[2]+Sound;
+            Sound_ON(Sound);
+            sese++;
+          }
           T_D();
           return;
           break;
@@ -2521,6 +2523,7 @@ function Game_load(width,height,private){
             }
             Time = 0;
             k = 0;
+            pcpc = 0;
             for (var i = 0; i < Datas[8].length+1; i++) {
               T_D();
             }
