@@ -2808,9 +2808,19 @@ function Game_load(width,height,private){
         Text[submits].backgroundColor = "red";
       }
       Text[submits].addEventListener('touchstart',function(e){
-        if(a=="戻る") var ooo = "戻る";
-        else if(b == "アイテム") var ooo = "メニュー";
-        else var ooo = "選択音";
+        switch (a) {
+          case "戻る":
+          case "やめる":
+          case "やめとく":
+            var ooo = "戻る";
+            break;
+          case "アイテム":
+            var ooo = "メニュー";
+            break;
+          default:
+            var ooo = "選択音";
+            break;
+        }
         if(Button_push(ooo)) return;
         if (b == "アイテム"){
           game.pushScene(ItemScene(Datas[6],"日常","アイテム",a));
