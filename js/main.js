@@ -872,8 +872,7 @@ function Game_load(width,height,private){
           if(Main_DATAS[i].セーブ!="無し"&&Main_DATAS[i].セーブ) Setting_Flag[14] = Main_DATAS[i].BGM;
           BGM_ON(Main_DATAS[i].BGM);
         }
-        if(Get) Get_ICFT2(Main_DATAS[i]);
-        if(Main_DATAS[i].セーブ=="無し"||Main_DATAS[i].セーブ==false) Get_ICFT2(Main_DATAS[i]);
+        if(Get||Main_DATAS[i].セーブ=="無し"||Main_DATAS[i].セーブ==false) Get_ICFT2(Main_DATAS[i]);
         game.fps = Main_DATAS[i].速度;
         Setting_Flag[3] = game.fps;
         if(Main_DATAS[i].背景=="変化無し") Datas[0] = Setting_Flag[13];
