@@ -2177,7 +2177,7 @@ function Game_load(width,height,private){
           break;
         case "↤":
           Time++;
-          if(Return==false) game.fps -= 200;
+          if(Return==false) game.fps = 10;
           Setting_Flag[3] = game.fps;
           T_D();
           return;
