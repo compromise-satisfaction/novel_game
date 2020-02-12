@@ -2086,7 +2086,7 @@ function Game_load(width,height,private){
           break;
         case "↑":
           Time++;
-          var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2;
+          var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
           if(Return==false){
             if(Image=="消滅") Speech_bubble_image._element.src = "../image/透明.png";
             else Speech_bubble_image._element.src = conversion_url(Image,"画像");
