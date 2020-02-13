@@ -1376,7 +1376,24 @@ function Game_load(width,height,private){
     return(false);
   }
   function saves(Type){
-
+    switch (Type) {
+      case "記録":
+        fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+          {
+            method: 'POST',
+            body: "記録更新(改行)"+Log_Flag+"(改行)"+Title_Sheet+"(改行)"+Save_Data_Number
+          }
+        )
+        break;
+      case "トロフィー":
+        fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+          {
+            method: 'POST',
+            body: "トロフィー更新(改行)"+Trophy_Flag+"(改行)"+Title_Sheet+"(改行)"+Save_Data_Number
+          }
+        )
+        break;
+    }
     return;
   }
   function Save(Number){
