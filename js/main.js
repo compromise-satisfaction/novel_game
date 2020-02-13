@@ -1494,7 +1494,12 @@ function Game_load(width,height,private){
               Save_Data_Number = this.ナンバー;
               console.log("セーブデータ",Save_Data_Number);
               if(Load=="読み込み") Scene_loads("セーブ読み込み完了");
-              else game.replaceScene(Title_ChoiceScene(Load));
+              else{
+                Flag = [];//フラグ
+                Item_Flag = [];//所持アイテム
+                Character_Flag = [];//人物
+                game.replaceScene(Title_ChoiceScene(Load));
+              }
               return;
             },);
             return;
