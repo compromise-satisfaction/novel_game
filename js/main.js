@@ -1419,7 +1419,7 @@ function Game_load(width,height,private){
     Title_DATAS[Save_Data_Number-1].セーブデータ = Showing_name + "　" + Setting_Flag[1] + "　" + Setting_Flag[0];
     var BoDy = Flag+"(改行)"+Number+"(改行)"+Log_Flag+"(改行)"+Play_Sheet+"(改行)"+Setting_Flag+"(改行)";
     BoDy += Item_Flag2+"(改行)"+Character_Flag2+"(改行)"+Favorability_Flag2+"(改行)"+Trophy_Flag2+"(改行)";
-    BoDy += Title_Sheet+"(改行)"+Save_Data_Number+"(改行)"+Title_DATAS[Save_Data_Number-1].セーブデータ;
+    BoDy += Title_Sheet+"(改行)"+(Save_Data_Number+1)+"(改行)"+Title_DATAS[Save_Data_Number-1].セーブデータ;
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
           {
             method: 'POST',
