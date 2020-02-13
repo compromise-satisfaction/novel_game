@@ -485,6 +485,7 @@ function Game_load(width,height,private){
     }
     Flag[i] = result[i].フラグ;
   }
+  Flag.splice(i,Flag.length);
   for (var i = 0; i < result.length; i++) {
     if(result[i].記録=="コマンド終了"){
       if(i==0) Log_Flag = [];
@@ -492,6 +493,7 @@ function Game_load(width,height,private){
     }
     Log_Flag[i] = result[i].記録;
   }
+  Log_Flag.splice(i,Log_Flag.length);
   for (var i = 0; i < 20; i++) {
     Setting_Flag[i] = result[i].設定;
   }
@@ -502,6 +504,7 @@ function Game_load(width,height,private){
     }
     Item_Flag[i] = result[i].アイテム.split(",");
   }
+  Item_Flag.splice(i,Item_Flag.length);
   for (var i = 0; i < result.length; i++) {
     if(result[i].人物=="コマンド終了"){
       if(i==0) Character_Flag = [];
@@ -509,6 +512,7 @@ function Game_load(width,height,private){
     }
     Character_Flag[i] = result[i].人物.split(",");
   }
+  Character_Flag.splice(i,Character_Flag.length);
   for (var i = 0; i < result.length; i++) {
     if(result[i].好感度=="コマンド終了"){
       if(i==0) Favorability_Flag = [];
@@ -516,6 +520,7 @@ function Game_load(width,height,private){
     }
     Favorability_Flag[i] = result[i].好感度.split(",");
   }
+  Favorability_Flag.splice(i,Favorability_Flag.length);
   for (var i = 0; i < result.length; i++) {
     if(result[i].トロフィー=="コマンド終了"){
       if(i==0) Trophy_Flag = [];
@@ -523,6 +528,7 @@ function Game_load(width,height,private){
     }
     Trophy_Flag[i] = result[i].トロフィー.split(",");
   }
+  Trophy_Flag.splice(i,Trophy_Flag.length);
   return;
   //Flag = ウインドウ.localStorage.getItem(Title_Sheet+"Flag").split(",");
   //Log_Flag = ウインドウ.localStorage.getItem(Title_Sheet+"Log_Flag").split(",");
