@@ -37,6 +37,7 @@ function Game_load(width,height,private){
   var OASOBI = false;
   var Play_Sheet = "無し";
   var Play_Sheet2 = "無し";
+  var Showing_name = "表示名";
   var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
   if(window.localStorage.getItem("管理者")=="true") var Manager = true;//これはいい
   else var Manager = false;
@@ -153,28 +154,29 @@ function Game_load(width,height,private){
             Main_DATAS[k1] = document.createElement("void");
             Main_DATAS[k1].入手 = result[i][0];
             Main_DATAS[k1].BGM = result[i][1];
-            Main_DATAS[k1].シーン名 = result[i][2];
-            Main_DATAS[k1].背景 = result[i][3];
-            Main_DATAS[k1].左側の人物 = result[i][4];
-            Main_DATAS[k1].真ん中の人物 = result[i][5];
-            Main_DATAS[k1].右側の人物 = result[i][6];
-            Main_DATAS[k1].拡大 = result[i][7];
-            Main_DATAS[k1].人物名 = result[i][8];
-            Main_DATAS[k1].文章音 = result[i][9];
-            Main_DATAS[k1].速度 = result[i][10];
-            Main_DATAS[k1].文章男 = result[i][11];
-            Main_DATAS[k1].文章女 = result[i][12];
-            Main_DATAS[k1].文章未設定 = result[i][13];
-            Main_DATAS[k1].前前 = result[i][14];
-            Main_DATAS[k1].前 = result[i][15];
-            Main_DATAS[k1].セーブ = result[i][16];
-            Main_DATAS[k1].次 = result[i][17];
-            Main_DATAS[k1].次次 = result[i][18];
-            Main_DATAS[k1].表示アイテムx座標 = result[i][19];
-            Main_DATAS[k1].表示アイテムy座標 = result[i][20];
-            Main_DATAS[k1].表示アイテムフェード = result[i][21];
-            Main_DATAS[k1].表示アイテム画像 = result[i][22];
-            Main_DATAS[k1].トロフィー = result[i][23];
+            Main_DATAS[k1].表示名 = result[i][2];
+            Main_DATAS[k1].シーン名 = result[i][3];
+            Main_DATAS[k1].背景 = result[i][4];
+            Main_DATAS[k1].左側の人物 = result[i][5];
+            Main_DATAS[k1].真ん中の人物 = result[i][6];
+            Main_DATAS[k1].右側の人物 = result[i][7];
+            Main_DATAS[k1].拡大 = result[i][8];
+            Main_DATAS[k1].人物名 = result[i][9];
+            Main_DATAS[k1].文章音 = result[i][10];
+            Main_DATAS[k1].速度 = result[i][11];
+            Main_DATAS[k1].文章男 = result[i][12];
+            Main_DATAS[k1].文章女 = result[i][13];
+            Main_DATAS[k1].文章未設定 = result[i][14];
+            Main_DATAS[k1].前前 = result[i][15];
+            Main_DATAS[k1].前 = result[i][16];
+            Main_DATAS[k1].セーブ = result[i][17];
+            Main_DATAS[k1].次 = result[i][18];
+            Main_DATAS[k1].次次 = result[i][19];
+            Main_DATAS[k1].表示アイテムx座標 = result[i][20];
+            Main_DATAS[k1].表示アイテムy座標 = result[i][21];
+            Main_DATAS[k1].表示アイテムフェード = result[i][22];
+            Main_DATAS[k1].表示アイテム画像 = result[i][23];
+            Main_DATAS[k1].トロフィー = result[i][24];
             k1++;
             break;
           case "音":
@@ -284,26 +286,27 @@ function Game_load(width,height,private){
             Choice_DATAS[k8] = document.createElement("void");
             Choice_DATAS[k8].入手 = result[i][0];
             Choice_DATAS[k8].BGM = result[i][1];
-            Choice_DATAS[k8].シーン名 = result[i][2];
-            Choice_DATAS[k8].背景 = result[i][3];
-            Choice_DATAS[k8].左側の人物 = result[i][4];
-            Choice_DATAS[k8].真ん中の人物 = result[i][5];
-            Choice_DATAS[k8].右側の人物 = result[i][6];
-            Choice_DATAS[k8].前前 = result[i][7];
-            Choice_DATAS[k8].前 = result[i][8];
-            Choice_DATAS[k8].セーブ = result[i][9];
-            Choice_DATAS[k8].選択肢1 = result[i][10];
-            Choice_DATAS[k8].選択肢1移動先 = result[i][11];
-            Choice_DATAS[k8].選択肢2 = result[i][12];
-            Choice_DATAS[k8].選択肢2移動先 = result[i][13];
-            Choice_DATAS[k8].選択肢3 = result[i][14];
-            Choice_DATAS[k8].選択肢3移動先 = result[i][15];
-            Choice_DATAS[k8].選択肢4 = result[i][16];
-            Choice_DATAS[k8].選択肢4移動先 = result[i][17];
-            Choice_DATAS[k8].選択肢5 = result[i][18];
-            Choice_DATAS[k8].選択肢5移動先 = result[i][19];
-            Choice_DATAS[k8].選択肢6 = result[i][20];
-            Choice_DATAS[k8].選択肢6移動先 = result[i][21];
+            Choice_DATAS[k8].表示名 = result[i][2];
+            Choice_DATAS[k8].シーン名 = result[i][3];
+            Choice_DATAS[k8].背景 = result[i][4];
+            Choice_DATAS[k8].左側の人物 = result[i][5];
+            Choice_DATAS[k8].真ん中の人物 = result[i][6];
+            Choice_DATAS[k8].右側の人物 = result[i][7];
+            Choice_DATAS[k8].前前 = result[i][8];
+            Choice_DATAS[k8].前 = result[i][9];
+            Choice_DATAS[k8].セーブ = result[i][10];
+            Choice_DATAS[k8].選択肢1 = result[i][11];
+            Choice_DATAS[k8].選択肢1移動先 = result[i][12];
+            Choice_DATAS[k8].選択肢2 = result[i][13];
+            Choice_DATAS[k8].選択肢2移動先 = result[i][14];
+            Choice_DATAS[k8].選択肢3 = result[i][15];
+            Choice_DATAS[k8].選択肢3移動先 = result[i][16];
+            Choice_DATAS[k8].選択肢4 = result[i][17];
+            Choice_DATAS[k8].選択肢4移動先 = result[i][18];
+            Choice_DATAS[k8].選択肢5 = result[i][19];
+            Choice_DATAS[k8].選択肢5移動先 = result[i][20];
+            Choice_DATAS[k8].選択肢6 = result[i][21];
+            Choice_DATAS[k8].選択肢6移動先 = result[i][22];
             k8++;
             break;
           case "フラグ類":
@@ -1004,6 +1007,7 @@ function Game_load(width,height,private){
     Setting_Flag[3] = game.fps;
     for (var i = 0; i < Main_DATAS.length; i++) {
       if(Number==Main_DATAS[i].シーン名){
+        Showing_name = Main_DATAS[i].表示名;
         if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
         else {
           if(Main_DATAS[i].セーブ!="無し"&&Main_DATAS[i].セーブ) Setting_Flag[14] = Main_DATAS[i].BGM;
@@ -1146,6 +1150,7 @@ function Game_load(width,height,private){
     }
     for (var i = 0; i < Choice_DATAS.length; i++) {
       if(Number==Choice_DATAS[i].シーン名){
+        Showing_name = Choice_DATAS[i].表示名;
         if(Choice_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
         else {
           if(Choice_DATAS[i].セーブ!="無し"&&Choice_DATAS[i].セーブ) Setting_Flag[14] = Choice_DATAS[i].BGM;
@@ -1411,9 +1416,10 @@ function Game_load(width,height,private){
     if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"(端)"]
     //ウインドウ.localStorage.setItem(Title_Sheet+"Trophy",Trophy_Flag2);
     //ウインドウ.localStorage.setItem(Title_Sheet+"syoken",false);
+    Title_DATAS[Save_Data_Number-1].セーブデータ = Showing_name + "　" + Setting_Flag[1] + "　" + Setting_Flag[0];
     var BoDy = Flag+"(改行)"+Number+"(改行)"+Log_Flag+"(改行)"+Play_Sheet+"(改行)"+Setting_Flag+"(改行)";
     BoDy += Item_Flag2+"(改行)"+Character_Flag2+"(改行)"+Favorability_Flag2+"(改行)"+Trophy_Flag2+"(改行)";
-    BoDy += Title_Sheet+"(改行)"+Save_Data_Number;
+    BoDy += Title_Sheet+"(改行)"+Save_Data_Number+"(改行)"+Title_DATAS[Save_Data_Number-1].セーブデータ;
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
           {
             method: 'POST',
