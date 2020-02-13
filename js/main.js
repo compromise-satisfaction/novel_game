@@ -874,8 +874,8 @@ function Game_load(width,height,private){
       }
       if(have(Play_Sheet+Number+"プレイ済み")==false){
         Log_Flag[Log_Flag.length] = Play_Sheet+Number+"プレイ済み";
-        saves("記録");
         console.log(Number);
+        saves("記録");
       }
       else console.log(Number,"プレイ済み");
     }
@@ -889,8 +889,8 @@ function Game_load(width,height,private){
       }
       if(have(Play_Sheet+Number+"プレイ済み")==false){
         Log_Flag[Log_Flag.length] = Play_Sheet+Number+"プレイ済み";
-        saves("記録");
         console.log(Number);
+        if(Number!="セーブ読み込み") saves("記録");
       }
       else console.log(Number,"プレイ済み");
     }
@@ -1375,7 +1375,7 @@ function Game_load(width,height,private){
     }
     return(false);
   }
-  function saves(Type){
+  function saves(Type,a){
     switch (Type) {
       case "記録":
         fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
@@ -1389,7 +1389,7 @@ function Game_load(width,height,private){
         fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
           {
             method: 'POST',
-            body: "トロフィー更新(改行)"+Trophy_Flag+"(改行)"+Title_Sheet+"(改行)"+Save_Data_Number
+            body: "トロフィー更新(改行)"+a+"(改行)"+Title_Sheet+"(改行)"+Save_Data_Number
           }
         )
         break;
@@ -2752,7 +2752,7 @@ function Game_load(width,height,private){
           Trophy_Flag2[i] = Trophy_Flag[i] + "(端)";
         }
         if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"(端)"]
-        saves("トロフィー");
+        saves("トロフィー",Trophy_Flag2);
 
         Sound_ON("トロフィー");
         Trophy.addEventListener("enterframe",function(){
