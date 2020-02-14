@@ -1089,6 +1089,7 @@ function Game_load(width,height,private){
         for (var k = 0; k < Favorability_Flag.length; k++){
           var Favorability = "("+Favorability_Flag[k][0]+"好感度)";
           Datas[8] = Datas[8].replace(Favorability,Favorability_Flag[k][1]);
+          Showing_name = Showing_name.replace(Favorability,Favorability_Flag[k][1]);
         }
         Datas[9] = Main_DATAS[i].前前;
         Datas[10] = Main_DATAS[i].前;
@@ -1167,6 +1168,10 @@ function Game_load(width,height,private){
         else {
           if(Choice_DATAS[i].セーブ!="無し"&&Choice_DATAS[i].セーブ) Setting_Flag[13] = Choice_DATAS[i].背景;
           Datas[0] = Choice_DATAS[i].背景;
+        }
+        for (var k = 0; k < Favorability_Flag.length; k++){
+          var Favorability = "("+Favorability_Flag[k][0]+"好感度)";
+          Showing_name = Showing_name.replace(Favorability,Favorability_Flag[k][1]);
         }
         Datas[1] = Choice_DATAS[i].左側の人物;
         Datas[2] = Choice_DATAS[i].真ん中の人物;
