@@ -4321,6 +4321,17 @@ function Game_load(width,height,private){
               Get_ICFT(DATAS);
               this._element.value = Button[2]._element.value+" 入手。";
               Sound_ON("セーブ");
+              switch (I_C_F_T_DATAS[i].タイプ) {
+                case "フラグ":
+                  console.log(Flag);
+                  break;
+                case "好感度":
+                  console.log(Favorability_Flag);
+                  break;
+                case "記録":
+                  console.log(Log_Flag);
+                  break;
+              }
               break;
             case "記録追加 or 消去":
               for (var i = 0; i < Log_Flag.length; i++){
