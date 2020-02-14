@@ -1898,14 +1898,13 @@ function Game_load(width,height,private){
       }
     }
 
-    if(Datas[0]){
-      var Background = new Sprite();
-      Background._element = document.createElement("img");
-      Background._element.src = conversion_url(Datas[0],"画像");
-      Background.width = width;
-      Background.height = width/16*9;
-      scene.addChild(Background);
-    }
+    var Background = new Sprite();
+    Background._element = document.createElement("img");
+    if(Datas[0]) Background._element.src = conversion_url(Datas[0],"画像");
+    else Background._element.src = "../image/黒.png";
+    Background.width = width;
+    Background.height = width/16*9;
+    scene.addChild(Background);
 
     var Explosion = new Sprite();
     Explosion._element = document.createElement("img");
@@ -2916,14 +2915,13 @@ function Game_load(width,height,private){
       }
     }
 
-    if(Datas[0]){
-      var Background = new Sprite();
-      Background._element = document.createElement("img");
-      Background._element.src = conversion_url(Datas[0],"画像");
-      Background.width = width;
-      Background.height = width/16*9;
-      scene.addChild(Background);
-    }
+    var Background = new Sprite();
+    Background._element = document.createElement("img");
+    if(Datas[0]) Background._element.src = conversion_url(Datas[0],"画像");
+    else Background._element.src = "../image/黒.png";
+    Background.width = width;
+    Background.height = width/16*9;
+    scene.addChild(Background);
 
     if(Datas[2]!=false){
       var Character2 = new Sprite();
