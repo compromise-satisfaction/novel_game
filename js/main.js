@@ -293,23 +293,26 @@ function Game_load(width,height,private){
             Choice_DATAS[k8].シーン名 = result[i][3];
             Choice_DATAS[k8].背景 = result[i][4];
             Choice_DATAS[k8].左側の人物 = result[i][5];
-            Choice_DATAS[k8].真ん中の人物 = result[i][6];
-            Choice_DATAS[k8].右側の人物 = result[i][7];
-            Choice_DATAS[k8].前前 = result[i][8];
-            Choice_DATAS[k8].前 = result[i][9];
-            Choice_DATAS[k8].セーブ = result[i][10];
-            Choice_DATAS[k8].選択肢1 = result[i][11];
-            Choice_DATAS[k8].選択肢1移動先 = result[i][12];
-            Choice_DATAS[k8].選択肢2 = result[i][13];
-            Choice_DATAS[k8].選択肢2移動先 = result[i][14];
-            Choice_DATAS[k8].選択肢3 = result[i][15];
-            Choice_DATAS[k8].選択肢3移動先 = result[i][16];
-            Choice_DATAS[k8].選択肢4 = result[i][17];
-            Choice_DATAS[k8].選択肢4移動先 = result[i][18];
-            Choice_DATAS[k8].選択肢5 = result[i][19];
-            Choice_DATAS[k8].選択肢5移動先 = result[i][20];
-            Choice_DATAS[k8].選択肢6 = result[i][21];
-            Choice_DATAS[k8].選択肢6移動先 = result[i][22];
+            Choice_DATAS[k8].左倍率 = result[i][6];
+            Choice_DATAS[k8].真ん中の人物 = result[i][7];
+            Choice_DATAS[k8].中倍率 = result[i][8];
+            Choice_DATAS[k8].右側の人物 = result[i][9];
+            Choice_DATAS[k8].右倍率 = result[i][10];
+            Choice_DATAS[k8].前前 = result[i][11];
+            Choice_DATAS[k8].前 = result[i][12];
+            Choice_DATAS[k8].セーブ = result[i][13];
+            Choice_DATAS[k8].選択肢1 = result[i][14];
+            Choice_DATAS[k8].選択肢1移動先 = result[i][15];
+            Choice_DATAS[k8].選択肢2 = result[i][16];
+            Choice_DATAS[k8].選択肢2移動先 = result[i][17];
+            Choice_DATAS[k8].選択肢3 = result[i][18];
+            Choice_DATAS[k8].選択肢3移動先 = result[i][19];
+            Choice_DATAS[k8].選択肢4 = result[i][20];
+            Choice_DATAS[k8].選択肢4移動先 = result[i][21];
+            Choice_DATAS[k8].選択肢5 = result[i][22];
+            Choice_DATAS[k8].選択肢5移動先 = result[i][23];
+            Choice_DATAS[k8].選択肢6 = result[i][24];
+            Choice_DATAS[k8].選択肢6移動先 = result[i][25];
             k8++;
             break;
           case "フラグ類":
@@ -338,13 +341,14 @@ function Game_load(width,height,private){
             Interrogation_DATAS[k0].シーン名 = result[i][1];
             Interrogation_DATAS[k0].人物 = result[i][2];
             Interrogation_DATAS[k0].人物名 = result[i][3];
-            Interrogation_DATAS[k0].証言 = result[i][4];
-            Interrogation_DATAS[k0].待った移動場所 = result[i][5];
-            Interrogation_DATAS[k0].前 = result[i][6];
-            Interrogation_DATAS[k0].セーブ = result[i][7];
-            Interrogation_DATAS[k0].次 = result[i][8];
-            Interrogation_DATAS[k0].正解移動場所 = result[i][9];
-            Interrogation_DATAS[k0].正解アイテム = result[i][10];
+            Interrogation_DATAS[k0].倍率 = result[i][4];
+            Interrogation_DATAS[k0].証言 = result[i][5];
+            Interrogation_DATAS[k0].待った移動場所 = result[i][6];
+            Interrogation_DATAS[k0].前 = result[i][7];
+            Interrogation_DATAS[k0].セーブ = result[i][8];
+            Interrogation_DATAS[k0].次 = result[i][9];
+            Interrogation_DATAS[k0].正解移動場所 = result[i][10];
+            Interrogation_DATAS[k0].正解アイテム = result[i][11];
             k0++;
             break
         }
@@ -966,18 +970,21 @@ function Game_load(width,height,private){
         Datas[4] = "";
         Datas[5] = "";
         Datas[6] = "";
-        Datas[7] = "タイトルに戻る";
-        Datas[8] = "タイトル移動";
-        Datas[9] = "セーブ読み込み";
-        Datas[10] = "セーブ読み込み";
-        Datas[11] = "直前のシーンに戻る";
-        Datas[12] = "直前移動";
-        Datas[13] = "シーンデータを更新して直前のシーンに戻る";
-        Datas[14] = "シーンデータ更新";
-        Datas[15] = "";
-        Datas[16] = "";
-        Datas[17] = "";
+        Datas[7] = "";
+        Datas[8] = "";
+        Datas[9] = "";
+        Datas[10] = "タイトルに戻る";
+        Datas[11] = "タイトル移動";
+        Datas[12] = "セーブ読み込み";
+        Datas[13] = "セーブ読み込み";
+        Datas[14] = "直前のシーンに戻る";
+        Datas[15] = "直前移動";
+        Datas[16] = "シーンデータを更新して直前のシーンに戻る";
+        Datas[17] = "シーンデータ更新";
         Datas[18] = "";
+        Datas[19] = "";
+        Datas[20] = "";
+        Datas[21] = "";
         game.replaceScene(ChoiceScene(Number));
         return;
         break;
@@ -1185,18 +1192,21 @@ function Game_load(width,height,private){
         Datas[4] = Choice_DATAS[i].前前;
         Datas[5] = Choice_DATAS[i].前;
         Datas[6] = Choice_DATAS[i].セーブ;
-        Datas[7] = Choice_DATAS[i].選択肢1;
-        Datas[8] = Choice_DATAS[i].選択肢1移動先;
-        Datas[9] = Choice_DATAS[i].選択肢2;
-        Datas[10] = Choice_DATAS[i].選択肢2移動先;
-        Datas[11] = Choice_DATAS[i].選択肢3;
-        Datas[12] = Choice_DATAS[i].選択肢3移動先;
-        Datas[13] = Choice_DATAS[i].選択肢4;
-        Datas[14] = Choice_DATAS[i].選択肢4移動先;
-        Datas[15] = Choice_DATAS[i].選択肢5;
-        Datas[16] = Choice_DATAS[i].選択肢5移動先;
-        Datas[17] = Choice_DATAS[i].選択肢6;
-        Datas[18] = Choice_DATAS[i].選択肢6移動先;
+        Datas[7] = Choice_DATAS[i].左倍率;
+        Datas[8] = Choice_DATAS[i].中倍率;
+        Datas[9] = Choice_DATAS[i].右倍率;
+        Datas[10] = Choice_DATAS[i].選択肢1;
+        Datas[11] = Choice_DATAS[i].選択肢1移動先;
+        Datas[12] = Choice_DATAS[i].選択肢2;
+        Datas[13] = Choice_DATAS[i].選択肢2移動先;
+        Datas[14] = Choice_DATAS[i].選択肢3;
+        Datas[15] = Choice_DATAS[i].選択肢3移動先;
+        Datas[16] = Choice_DATAS[i].選択肢4;
+        Datas[17] = Choice_DATAS[i].選択肢4移動先;
+        Datas[18] = Choice_DATAS[i].選択肢5;
+        Datas[19] = Choice_DATAS[i].選択肢5移動先;
+        Datas[20] = Choice_DATAS[i].選択肢6;
+        Datas[21] = Choice_DATAS[i].選択肢6移動先;
         if(Datas[1]=="主人公") Datas[1] = S_image;
         if(Datas[2]=="主人公") Datas[2] = S_image;
         if(Datas[3]=="主人公") Datas[3] = S_image;
@@ -1340,6 +1350,7 @@ function Game_load(width,height,private){
         Datas[6] = Interrogation_DATAS[i].次;
         Datas[7] = Interrogation_DATAS[i].正解移動場所;
         Datas[8] = Interrogation_DATAS[i].正解アイテム;
+        Datas[9] = Interrogation_DATAS[i].倍率;
         game.replaceScene(InterrogationScene(Number));
         return;
       }
@@ -1911,9 +1922,10 @@ function Game_load(width,height,private){
       console.log("真ん中のキャラを"+Datas[3]+"に設定");
       Character2.width = width/16*9;
       Character2.height = width/16*9;
-      Character2.width*=Datas[23];
-      Character2.height*=Datas[23];
+      Character2.width*=Datas[23].split("→")[0];
+      Character2.height*=Datas[23].split("→")[0];
       Character2.x = (width-Character2.width)/2;
+      if(Datas[23].split("→")[1]) Character2.y =  Datas[23].split("→")[1]*(width/16/100);
       if(Datas[4]!=0){
         if(Datas[4]>0){
           if(Return!=true){
@@ -1948,9 +1960,10 @@ function Game_load(width,height,private){
       console.log("左のキャラを"+Datas[1]+"に設定");
       Character1.width = width/16*9;
       Character1.height = width/16*9;
-      Character1.width*=Datas[22];
-      Character1.height*=Datas[22];
+      Character1.width*=Datas[22].split("→")[0];
+      Character1.height*=Datas[22].split("→")[0];
       Character1.x = (width-Character1.width)/2-width/4;
+      if(Datas[22].split("→")[1]) Character1.y =  Datas[22].split("→")[1]*(width/16/100);
       if(Datas[2]!=0){
         if(Datas[2]=="点滅"){
           Character1.opacity = Syougen_time;
@@ -1997,9 +2010,10 @@ function Game_load(width,height,private){
       console.log("右のキャラを"+Datas[5]+"に設定");
       Character3.width = width/16*9;
       Character3.height = width/16*9;
-      Character3.width*=Datas[24];
-      Character3.height*=Datas[24];
+      Character3.width*=Datas[24].split("→")[0];
+      Character3.height*=Datas[24].split("→")[0];
       Character3.x = (width-Character3.width)/2+width/4;
+      if(Datas[24].split("→")[1]) Character3.y =  Datas[24].split("→")[1]*(width/16/100);
       if(Datas[6]!=0){
         if(Datas[6]>0){
           if(Return!=true){
@@ -2917,7 +2931,10 @@ function Game_load(width,height,private){
       Character2._element.src = conversion_url(Datas[2],"画像");
       Character2.width = width/16*9;
       Character2.height = width/16*9;
-      Character2.x = width/4-width/32;
+      Character2.width*=Datas[8].split("→")[0];
+      Character2.height*=Datas[8].split("→")[0];
+      Character2.x = (width-Character2.width)/2;
+      if(Datas[8].split("→")[1]) Character2.y =  Datas[8].split("→")[1]*(width/16/100);
       scene.addChild(Character2);
     }//キャラ真ん中
 
@@ -2936,7 +2953,10 @@ function Game_load(width,height,private){
       Character1._element.src = conversion_url(Datas[1],"画像");
       Character1.width = width/16*9;
       Character1.height = width/16*9;
-      Character1.x = -width/32;
+      Character1.width*=Datas[7].split("→")[0];
+      Character1.height*=Datas[7].split("→")[0];
+      Character1.x = (width-Character1.width)/2-width/4;
+      if(Datas[7].split("→")[1]) Character1.y =  Datas[7].split("→")[1]*(width/16/100);
       scene.addChild(Character1);
     }//キャラ左
 
@@ -2946,7 +2966,10 @@ function Game_load(width,height,private){
       Character3._element.src = conversion_url(Datas[3],"画像");
       Character3.width = width/16*9;
       Character3.height = width/16*9;
-      Character3.x = width/2-width/32;
+      Character3.width*=Datas[9].split("→")[0];
+      Character3.height*=Datas[9].split("→")[0];
+      Character3.x = (width-Character3.width)/2+width/4;
+      if(Datas[9].split("→")[1]) Character3.y =  Datas[9].split("→")[1]*(width/16/100);
       scene.addChild(Character3);
     }//キャラ右
 
@@ -3009,7 +3032,7 @@ function Game_load(width,height,private){
     }
 
     var Text = [];
-    for (var i = 7; i < Datas.length; i = i+2) {
+    for (var i = 10; i < Datas.length; i = i+2) {
       Submit(Datas[i],Datas[i+1]);
     }
 
@@ -3119,7 +3142,10 @@ function Game_load(width,height,private){
     Character._element.src = conversion_url(Datas[0],"画像");
     Character.width = width/16*9;
     Character.height = width/16*9;
-    Character.x = width/4-width/32;
+    Character.width*=Datas[9].split("→")[0];
+    Character.height*=Datas[9].split("→")[0];
+    Character.x = (width-Character.width)/2;
+    if(Datas[9].split("→")[1]) Character.y =  Datas[9].split("→")[1]*(width/16/100);
     scene.addChild(Character);
 
     var Speak_Character_image = 0;
@@ -3139,6 +3165,14 @@ function Game_load(width,height,private){
       C_name.y = width/16*9+(width/25);
       scene.addChild(C_name);//キャラ名
     }
+
+    var White_Background = new Sprite();
+    White_Background._element = document.createElement("img");
+    White_Background._element.src = "../image/白.png";
+    White_Background.y = width/16*9;
+    White_Background.width = width;
+    White_Background.height = height-width/16*9;
+    scene.addChild(White_Background);
 
     var Numbers = width/16*9+(width/20)+(width/25);
 
