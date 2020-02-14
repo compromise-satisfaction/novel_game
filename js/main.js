@@ -4358,9 +4358,7 @@ function Game_load(width,height,private){
               Sound_ON("セーブ");
               break;
             case "アイテムリセット":
-              Item_Flag = [
-                ["万能ツール","色々出来るぞ。↓つきつけても無敵。","万能ツール","改造","画像万能ツール","万能"]
-              ];
+              Item_Flag = [];
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
@@ -4376,6 +4374,11 @@ function Game_load(width,height,private){
               break;
             case "記録リセット":
               Log_Flag = [];
+              this._element.value = Button[1]._element.value;
+              Sound_ON("セーブ");
+              break;
+            case "好感度消去":
+              Favorability_Flag = [];
               this._element.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
@@ -4409,7 +4412,8 @@ function Game_load(width,height,private){
       "記録リセット",
       "フラグリセット",
       "アイテムリセット",
-      "トロフィーリセット"
+      "トロフィーリセット",
+      "好感度消去"
     ];
 
     for (var i = 0; i < Choice_Transform.length; i++){
