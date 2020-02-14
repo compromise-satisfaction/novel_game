@@ -1853,6 +1853,8 @@ function Game_load(width,height,private){
     Datas[8] = Datas[8].replace(/\([㊧㊥㊨][^㊧㊥㊨]+[㊧㊥㊨]\)/g,"Ψ");
     var Speech_bubble = Datas[8].match(/\(↑[^↑]+↑\)/g);
     Datas[8] = Datas[8].replace(/\(↑[^↑]+↑\)/g,"↑");
+    var Text_sound = Datas[8].match(/\(¶[^¶]+¶\)/g);
+    Datas[8] = Datas[8].replace(/\(¶[^¶]+¶\)/g,"¶");
 
     if(Datas[11]){
       if(Datas[11]=="無し"){
@@ -2201,6 +2203,7 @@ function Game_load(width,height,private){
     var sese = 0;
     var pcpc = 0;
     var ksks = 0;
+    var vcvc = 0;
 
     var Text =[];
 
@@ -2233,6 +2236,29 @@ function Game_load(width,height,private){
         case "Σ":
           Time++;
           gamenyurasi();
+          T_D();
+          return;
+          break;
+        case "¶":
+          Time++;
+          if(Return==false){
+            var Sound = Text_sound[vcvc].substring(2,Text_sound[vcvc].length-2);
+            if(Sound=="無し") Datas[19] = "";
+            else if(Sound=="主人公"){
+              if(Setting_Flag[2]=="男"){
+                var S_Sound = "男主人公ポポポ";
+              }
+              else if(Setting_Flag[2]=="女"){
+                var S_Sound = "女主人公ポポポ";
+              }
+              else{
+                var S_Sound = "未設定主人公ポポポ";
+              }
+              Datas[19] = S_Sound;
+            }
+            else Datas[19] = Sound;
+            vcvc++;
+          }
           T_D();
           return;
           break;
