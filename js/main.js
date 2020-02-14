@@ -732,7 +732,7 @@ function Game_load(width,height,private){
           }
           if(Flag[i]==DATAS[1]) return;
         }
-        Flag[Flag.length] = DATAS[1];
+        if(DATAS[1].split("→")[1]!="消滅") Flag[Flag.length] = DATAS[1];
         return;
         break;
       case "記録":
@@ -743,7 +743,7 @@ function Game_load(width,height,private){
           }
           if(Log_Flag[i]==DATAS[1]) return;
         }
-        Log_Flag[Log_Flag.length] = DATAS[1];
+        if(DATAS[1].split("→")[1]!="消滅") Log_Flag[Log_Flag.length] = DATAS[1];
         saves("記録");
         return;
         break;
