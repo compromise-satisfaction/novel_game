@@ -158,25 +158,27 @@ function Game_load(width,height,private){
             Main_DATAS[k1].シーン名 = result[i][3];
             Main_DATAS[k1].背景 = result[i][4];
             Main_DATAS[k1].左側の人物 = result[i][5];
-            Main_DATAS[k1].真ん中の人物 = result[i][6];
-            Main_DATAS[k1].右側の人物 = result[i][7];
-            Main_DATAS[k1].拡大 = result[i][8];
-            Main_DATAS[k1].人物名 = result[i][9];
-            Main_DATAS[k1].文章音 = result[i][10];
-            Main_DATAS[k1].速度 = result[i][11];
-            Main_DATAS[k1].文章男 = result[i][12];
-            Main_DATAS[k1].文章女 = result[i][13];
-            Main_DATAS[k1].文章未設定 = result[i][14];
-            Main_DATAS[k1].前前 = result[i][15];
-            Main_DATAS[k1].前 = result[i][16];
-            Main_DATAS[k1].セーブ = result[i][17];
-            Main_DATAS[k1].次 = result[i][18];
-            Main_DATAS[k1].次次 = result[i][19];
-            Main_DATAS[k1].表示アイテムx座標 = result[i][20];
-            Main_DATAS[k1].表示アイテムy座標 = result[i][21];
-            Main_DATAS[k1].表示アイテムフェード = result[i][22];
-            Main_DATAS[k1].表示アイテム画像 = result[i][23];
-            Main_DATAS[k1].トロフィー = result[i][24];
+            Main_DATAS[k1].左倍率 = result[i][6];
+            Main_DATAS[k1].真ん中の人物 = result[i][7];
+            Main_DATAS[k1].中倍率 = result[i][8];
+            Main_DATAS[k1].右側の人物 = result[i][9];
+            Main_DATAS[k1].右倍率 = result[i][10];
+            Main_DATAS[k1].人物名 = result[i][11];
+            Main_DATAS[k1].文章音 = result[i][12];
+            Main_DATAS[k1].速度 = result[i][13];
+            Main_DATAS[k1].文章男 = result[i][14];
+            Main_DATAS[k1].文章女 = result[i][15];
+            Main_DATAS[k1].文章未設定 = result[i][16];
+            Main_DATAS[k1].前前 = result[i][17];
+            Main_DATAS[k1].前 = result[i][18];
+            Main_DATAS[k1].セーブ = result[i][19];
+            Main_DATAS[k1].次 = result[i][20];
+            Main_DATAS[k1].次次 = result[i][21];
+            Main_DATAS[k1].表示アイテムx座標 = result[i][22];
+            Main_DATAS[k1].表示アイテムy座標 = result[i][23];
+            Main_DATAS[k1].表示アイテムフェード = result[i][24];
+            Main_DATAS[k1].表示アイテム画像 = result[i][25];
+            Main_DATAS[k1].トロフィー = result[i][26];
             k1++;
             break;
           case "音":
@@ -1103,7 +1105,9 @@ function Game_load(width,height,private){
         Datas[19] = Main_DATAS[i].文章音;
         Datas[20] = Main_DATAS[i].表示アイテムy座標;
         Datas[21] = Main_DATAS[i].表示アイテムフェード;
-        Datas[22] = Main_DATAS[i].拡大;
+        Datas[22] = Main_DATAS[i].左倍率;
+        Datas[23] = Main_DATAS[i].中倍率;
+        Datas[24] = Main_DATAS[i].右倍率;
         if(Datas[1]=="主人公") Datas[1] = S_image;
         if(Datas[3]=="主人公") Datas[3] = S_image;
         if(Datas[5]=="主人公") Datas[5] = S_image;
@@ -1905,13 +1909,9 @@ function Game_load(width,height,private){
       console.log("真ん中のキャラを"+Datas[3]+"に設定");
       Character2.width = width/16*9;
       Character2.height = width/16*9;
-      if(Datas[22]){
-        Character2.width = width;
-        Character2.height = width;
-      }
-      else {
-        Character2.x = width/4-width/32;
-      }
+      Character2.width*=Datas[23];
+      Character2.height*=Datas[23];
+      Character2.x = (width-Character2.width)/2;
       if(Datas[4]!=0){
         if(Datas[4]>0){
           if(Return!=true){
@@ -1946,14 +1946,9 @@ function Game_load(width,height,private){
       console.log("左のキャラを"+Datas[1]+"に設定");
       Character1.width = width/16*9;
       Character1.height = width/16*9;
-      if(Datas[22]){
-        Character1.width = width;
-        Character1.height = width;
-        Character1.x = -width/3;
-      }
-      else {
-        Character1.x = -width/32;
-      }
+      Character1.width*=Datas[22];
+      Character1.height*=Datas[22];
+      Character1.x = (width-Character1.width)/2-width/3;
       if(Datas[2]!=0){
         if(Datas[2]=="点滅"){
           Character1.opacity = Syougen_time;
@@ -2000,14 +1995,9 @@ function Game_load(width,height,private){
       console.log("右のキャラを"+Datas[5]+"に設定");
       Character3.width = width/16*9;
       Character3.height = width/16*9;
-      if(Datas[22]){
-        Character3.width = width;
-        Character3.height = width;
-        Character3.x = width/3;
-      }
-      else {
-        Character3.x = width/2-width/32;
-      }
+      Character3.width*=Datas[24];
+      Character3.height*=Datas[24];
+      Character3.x = (width-Character3.width)/2+width/3;
       if(Datas[6]!=0){
         if(Datas[6]>0){
           if(Return!=true){
