@@ -496,7 +496,8 @@ function Game_load(width,height,private){
     Log_Flag[i] = result[i].記録;
   }
   Log_Flag.splice(i,Log_Flag.length);
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < result.length; i++) {
+    if(result[i].設定=="コマンド終了") break;
     Setting_Flag[i] = result[i].設定;
   }
   for (var i = 0; i < result.length; i++) {
@@ -1948,7 +1949,7 @@ function Game_load(width,height,private){
       Character1.height = width/16*9;
       Character1.width*=Datas[22];
       Character1.height*=Datas[22];
-      Character1.x = (width-Character1.width)/2-width/3;
+      Character1.x = (width-Character1.width)/2-width/4;
       if(Datas[2]!=0){
         if(Datas[2]=="点滅"){
           Character1.opacity = Syougen_time;
@@ -1997,7 +1998,7 @@ function Game_load(width,height,private){
       Character3.height = width/16*9;
       Character3.width*=Datas[24];
       Character3.height*=Datas[24];
-      Character3.x = (width-Character3.width)/2+width/3;
+      Character3.x = (width-Character3.width)/2+width/4;
       if(Datas[6]!=0){
         if(Datas[6]>0){
           if(Return!=true){
