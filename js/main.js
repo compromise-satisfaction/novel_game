@@ -38,6 +38,7 @@ function Game_load(width,height,private){
   var Play_Sheet = "無し";
   var Play_Sheet2 = "無し";
   var Showing_name = "表示名";
+  var Save_Data_Number = 1;
   var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
   if(window.localStorage.getItem("管理者")=="true") var Manager = true;//これはいい
   else var Manager = false;
