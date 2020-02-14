@@ -3189,7 +3189,7 @@ function Game_load(width,height,private){
 
     return scene;
   };
-  var SettingScene = function(Number){
+  var SettingScene = function(Number,Ig,Type,Do){
     var scene = new Scene();                                // 新しいシーンを作る
 
     var Background = new Entity();
@@ -3210,12 +3210,14 @@ function Game_load(width,height,private){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
+      Button[submits].ナンバー　= submits;
       scene.addChild(Button[submits]);
       Button[submits].addEventListener('touchstart',function(e){
         switch (a) {
           case "設定を閉じる":
             if(Button_push("戻る")) return;
             break;
+          case "改造":
           case "サウンド設定":
           case "プレイヤー設定":
             if(Button_push("メニュー")) return;
@@ -3231,6 +3233,12 @@ function Game_load(width,height,private){
             break;
         }
         switch(a){
+          case "改造":
+            game.popScene();
+            Scene_kazu--;
+            console.log("Scene数",Scene_kazu);
+            game.replaceScene(TransformScene(Number,Ig,Type,Do));
+            break;
           case "設定を閉じる":
             game.popScene();
             Scene_kazu--;
@@ -3257,15 +3265,15 @@ function Game_load(width,height,private){
             break;
           case "セーブ方法の切り替え":
             if(Setting_Flag[8]){
-              Button[6]._element.value = "セーブする";
+              Button[this.ナンバー+1]._element.value = "セーブする";
               Setting_Flag[8] = false;
-              scene.addChild(Button[6]);
-              scene.removeChild(Button[7]);
+              scene.addChild(Button[this.ナンバー+1]);
+              scene.removeChild(Button[this.ナンバー+2]);
             }
             else{
               Setting_Flag[8] = true;
-              scene.addChild(Button[7]);
-              scene.removeChild(Button[6]);
+              scene.addChild(Button[this.ナンバー+2]);
+              scene.removeChild(Button[this.ナンバー+1]);
             }
             saves("設定");
             break;
@@ -3292,6 +3300,7 @@ function Game_load(width,height,private){
 
     Submit("設定を閉じる");
     Numbers += (width/20)+(width/25)+(width/25);
+    if(Manager) Submit("改造");
     Submit("タイトルに戻る");
     Submit("サウンド設定");
     Submit("プレイヤー設定");
@@ -3300,8 +3309,8 @@ function Game_load(width,height,private){
     Submit("セーブする");
     Numbers -= (width/20)+(width/25)+(width/25);
     Submit("現在はオートセーブです。");
-    if(Setting_Flag[8]) scene.removeChild(Button[6]);
-    else scene.removeChild(Button[7]);
+    if(Setting_Flag[8]) scene.removeChild(Button[submits-2]);
+    else scene.removeChild(Button[submits-1]);
 
     return scene;
   };
@@ -3903,7 +3912,7 @@ function Game_load(width,height,private){
               console.log("Scene数",Scene_kazu);
               break;
             case "改造":
-              game.replaceScene(TransformScene(Number,Ig,Do));
+              game.replaceScene(TransformScene(Number,Ig,Type,Do));
               console.log("Scene数",Scene_kazu);
               break;
             default:
@@ -3947,7 +3956,7 @@ function Game_load(width,height,private){
               console.log("Scene数",Scene_kazu);
               break;
             case "設定を開く":
-              game.pushScene(SettingScene(Number));
+              game.pushScene(SettingScene(Number,Ig,Type,Do));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
               break;
@@ -4223,7 +4232,7 @@ function Game_load(width,height,private){
 
     return scene;
   };
-  var TransformScene = function(Number,Ig,Do){
+  var TransformScene = function(Number,Ig,Type2,Do){
     var scene = new Scene();                                // 新しいシーンを作る
 
     var Background = new Entity();
@@ -4271,7 +4280,7 @@ function Game_load(width,height,private){
         Button[submits].addEventListener('touchstart',function(e){
           if(Button_push("戻る")) return;
           if(Datakousin) return;
-          game.replaceScene(ItemScene(Number,Ig,"アイテム",Do));
+          game.replaceScene(ItemScene(Number,Ig,Type2,Do));
         });
       }
       if(a=="実行する"){
