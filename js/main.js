@@ -1093,13 +1093,13 @@ function Game_load(width,height,private,Manager){
         Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/,Setting_Flag[0]).replace(/\(自由\)/g,Setting_Flag[19]);
         switch (Setting_Flag[2]) {
           case "男":
-            Datas[8] = Main_DATAS[i].文章男.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17].replace(/\(自由\)/g,Setting_Flag[19]);
+            Datas[8] = Main_DATAS[i].文章男.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由\)/g,Setting_Flag[19]);
             break;
           case "女":
-            Datas[8] = Main_DATAS[i].文章女.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17].replace(/\(自由\)/g,Setting_Flag[19]);
+            Datas[8] = Main_DATAS[i].文章女.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由\)/g,Setting_Flag[19]);
             break;
           default:
-            Datas[8] = Main_DATAS[i].文章未設定.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17].replace(/\(自由\)/g,Setting_Flag[19]);
+            Datas[8] = Main_DATAS[i].文章未設定.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由\)/g,Setting_Flag[19]);
             break;
         }
         Send_text = Datas[8];
