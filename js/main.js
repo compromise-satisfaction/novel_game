@@ -1574,7 +1574,7 @@ function Game_load(width,height,private,Manager){
             )
             .then(res => res.json())
             .then(result => {
-                Showing_name = Showing_name.substring(0,Showing_name.indexOf("　"+result[1].設定)-1);
+                Showing_name = Showing_name.substring(0,Showing_name.indexOf("　"+result[1].設定));
                 Load_Datas(result);
                 game.popScene();
                 game.popScene();
