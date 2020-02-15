@@ -1530,6 +1530,8 @@ function Game_load(width,height,private){
             )
             .then(res => res.json())
             .then(result => {
+              Showing_name = Title_DATAS[this.ナンバー-1].セーブデータ;
+              Showing_name = Showing_name.substring(0,Showing_name.indexOf("　"+result[1].設定)-1);
               Load_Datas(result);
               game.popScene();
               game.popScene();
