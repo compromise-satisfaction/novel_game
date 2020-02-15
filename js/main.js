@@ -3594,7 +3594,7 @@ function Game_load(width,height,private,Manager){
     S_Input5.width = width/2;
     S_Input5.height = width/10;
     S_Input5._element = document.createElement('input');
-    S_Input5._element.value = Setting_Flag[17];
+    S_Input5._element.value = Setting_Flag[19];
     S_Input5._element.placeholder = "？？？を入力";
     scene.addChild(S_Input5);
 
@@ -3620,12 +3620,13 @@ function Game_load(width,height,private,Manager){
           Setting_Flag[0] = S_Input2._element.value;
           Setting_Flag[16] = S_Input3._element.value;
           Setting_Flag[17] = S_Input4._element.value;
+          Setting_Flag[19] = S_Input5._element.value;
           if(Gender._element.value=="男"){
             Setting_Flag[2] = "男";
             if(S_Input1._element.value=="") Setting_Flag[1] = "若辻";
             if(S_Input2._element.value=="") Setting_Flag[0] = "俛人";
             if(S_Input3._element.value=="") Setting_Flag[16] = "俺";
-            if(S_Input4._element.value=="") Setting_Flag[17] = "あなた";
+            if(S_Input4._element.value=="") Setting_Flag[17] = "きみ";
           }
           else if(Gender._element.value=="女"){
             Setting_Flag[2] = "女";
@@ -3636,11 +3637,13 @@ function Game_load(width,height,private,Manager){
           }
           else{
             Setting_Flag[2] = "未設定";
-            if(S_Input1._element.value=="") Setting_Flag[1] = "カードの精霊";
-            if(S_Input2._element.value=="") Setting_Flag[0] = "ユベル";
-            if(S_Input3._element.value=="") Setting_Flag[16] = "ボク";
-            if(S_Input4._element.value=="") Setting_Flag[17] = "キミ";
+            if(S_Input1._element.value=="") Setting_Flag[1] = "未設定";
+            if(S_Input2._element.value=="") Setting_Flag[0] = "未設定";
+            if(S_Input3._element.value=="") Setting_Flag[16] = "未設定";
+            if(S_Input4._element.value=="") Setting_Flag[17] = "未設定";
+            if(S_Input4._element.value=="") Setting_Flag[19] = "未設定";
           }
+          if(S_Input4._element.value=="") Setting_Flag[19] = "？？？";
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3675,7 +3678,7 @@ function Game_load(width,height,private,Manager){
     Texts("名前",S_Input2.y);
     Texts("一人称",S_Input3.y);
     Texts("二人称",S_Input4.y);
-    Texts("？？？",S_Input5.y);
+    Texts("自由",S_Input5.y);
     Texts(",(カンマ)は使用できません。",width/3,width/20);
 
     return scene;
