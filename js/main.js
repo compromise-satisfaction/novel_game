@@ -26,9 +26,9 @@ function Game_load(width,height,private,Manager){
   var Syougen_time2 = 1;
   var Datas = [];
   var Send_text = "選択シーンです。";
-  var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"？？？"];
+  var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"？？？","？？？"];
   //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,
-  //9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18演出スキップ,19自由];
+  //9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18演出スキップ,19自由,20自由];
   var Favorability_Flag = [];//好感度
   var Flag = [];//フラグ
   var Log_Flag = [];//記録
@@ -340,7 +340,7 @@ function Game_load(width,height,private,Manager){
             Interrogation_DATAS[k0].BGM = result[i][0];
             Interrogation_DATAS[k0].シーン名 = result[i][1];
             Interrogation_DATAS[k0].人物 = result[i][2];
-            Interrogation_DATAS[k0].人物名 = result[i][3].replace(/\(自由\)/g,Setting_Flag[19]);
+            Interrogation_DATAS[k0].人物名 = result[i][3];
             Interrogation_DATAS[k0].倍率 = result[i][4];
             Interrogation_DATAS[k0].証言 = result[i][5];
             Interrogation_DATAS[k0].待った移動場所 = result[i][6];
@@ -509,7 +509,7 @@ function Game_load(width,height,private,Manager){
   Log_Flag.splice(i,Log_Flag.length);
   for (var i = 0; i < result.length; i++) {
     if(result[i].設定=="コマンド終了"){
-      if(i==0) Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"？？？"];
+      if(i==0) Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"？？？","？？？"];
       break;
     }
     Setting_Flag[i] = result[i].設定;
@@ -1090,16 +1090,16 @@ function Game_load(width,height,private,Manager){
           }
         }
         if(Main_DATAS[i].人物名=="(主人公名前)") Datas[18] = true;
-        Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/,Setting_Flag[0]).replace(/\(自由\)/g,Setting_Flag[19]);
+        Datas[7] = Main_DATAS[i].人物名.replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/,Setting_Flag[0]).replace(/\(自由1\)/g,Setting_Flag[19]).replace(/\(自由2\)/g,Setting_Flag[20]);
         switch (Setting_Flag[2]) {
           case "男":
-            Datas[8] = Main_DATAS[i].文章男.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由\)/g,Setting_Flag[19]);
+            Datas[8] = Main_DATAS[i].文章男.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由1\)/g,Setting_Flag[19]).replace(/\(自由2\)/g,Setting_Flag[20]);
             break;
           case "女":
-            Datas[8] = Main_DATAS[i].文章女.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由\)/g,Setting_Flag[19]);
+            Datas[8] = Main_DATAS[i].文章女.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由1\)/g,Setting_Flag[19]).replace(/\(自由2\)/g,Setting_Flag[20]);
             break;
           default:
-            Datas[8] = Main_DATAS[i].文章未設定.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由\)/g,Setting_Flag[19]);
+            Datas[8] = Main_DATAS[i].文章未設定.replace(/\n/g,"↓").replace(/\(主人公苗字\)/g,Setting_Flag[1]).replace(/\(主人公名前\)/g,Setting_Flag[0]).replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(二人称\)/g,Setting_Flag[17]).replace(/\(自由1\)/g,Setting_Flag[19]).replace(/\(自由2\)/g,Setting_Flag[20]);
             break;
         }
         Send_text = Datas[8];
@@ -1551,7 +1551,7 @@ function Game_load(width,height,private,Manager){
               Trophy_Flag = [];//トロフィー
               Character_Flag = [];//人物
               Favorability_Flag = [];//好感度
-              Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"？？？"];
+              Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"？？？","？？？"];
               game.popScene();
               Scene_kazu--;
               console.log("Scene数",Scene_kazu);
@@ -2007,7 +2007,7 @@ function Game_load(width,height,private,Manager){
     if(have(Play_Sheet+Datas[13]+"プレイ済み")==false){
       var Skip = null;
       if(have(Play_Sheet+Datas[12]+"プレイ済み")==false){
-        Log_Flag[Log_Flag.length] = Play_Sheet+Datas[13]+"→"+Number;
+        Log_Flag[Log_Flag.length] = Play_Sheet+Datas[13]+"→"+Datas[11];
       }
       for (var i = 0; i < Log_Flag.length; i++) {
         if(Log_Flag[i].split("→")[0]==Play_Sheet+Datas[13]) Skip = Log_Flag[i].split("→")[1];
@@ -2846,7 +2846,7 @@ function Game_load(width,height,private,Manager){
         Button(4,"▶ ▶",Datas[13]);//進む2
       }
       else{
-        if(Skip&&Skip!=Number&&Skip!=Datas[12]&&Datas[12]!=Datas[13]) Button(4,"▶ ▶",Skip);//進む2
+        if(Skip&&Skip!=Number&&Skip!=Datas[11]&&Skip!=Datas[12]&&Datas[12]!=Datas[13]) Button(4,"▶ ▶",Skip);//進む2
       }
     }
 
@@ -3596,7 +3596,18 @@ function Game_load(width,height,private,Manager){
     S_Input5._element = document.createElement('input');
     S_Input5._element.value = Setting_Flag[19];
     S_Input5._element.placeholder = "？？？を入力";
+    Numbers += width/20+width/25+width/25;
     scene.addChild(S_Input5);
+
+    var S_Input6 = new Entity();
+    S_Input6.moveTo(width/4+width/20+width/10,Numbers);
+    S_Input6.width = width/2;
+    S_Input6.height = width/10;
+    S_Input6._element = document.createElement('input');
+    S_Input6._element.value = Setting_Flag[20];
+    S_Input6._element.placeholder = "？？？を入力";
+    Numbers += width/20+width/25+width/25;
+    scene.addChild(S_Input6);
 
     Numbers = (width/10)+(width/30);
     var Button = [];
@@ -3612,8 +3623,8 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Button[submits]);
       Button[submits].addEventListener('touchstart',function(e){
         if(Button_push("戻る")) return;
-        if(S_Input1._element.value.replace(/[^,]/g,"")!=""||S_Input2._element.value.replace(/[^,]/g,"")!=""||S_Input3._element.value.replace(/[^,]/g,"")!=""||S_Input4._element.value.replace(/[^,]/g,"")!=""){
-          scene.addChild(Text[5]);
+        if(S_Input1._element.value.replace(/[^,]/g,"")!=""||S_Input2._element.value.replace(/[^,]/g,"")!=""||S_Input3._element.value.replace(/[^,]/g,"")!=""||S_Input4._element.value.replace(/[^,]/g,"")!=""||S_Input5._element.value.replace(/[^,]/g,"")!=""||S_Input6._element.value.replace(/[^,]/g,"")!=""){
+          scene.addChild(Text[7]);
         }
         else{
           Setting_Flag[1] = S_Input1._element.value;
@@ -3621,6 +3632,7 @@ function Game_load(width,height,private,Manager){
           Setting_Flag[16] = S_Input3._element.value;
           Setting_Flag[17] = S_Input4._element.value;
           Setting_Flag[19] = S_Input5._element.value;
+          Setting_Flag[20] = S_Input6._element.value;
           if(Gender._element.value=="男"){
             Setting_Flag[2] = "男";
             if(S_Input1._element.value=="") Setting_Flag[1] = "若辻";
@@ -3641,9 +3653,11 @@ function Game_load(width,height,private,Manager){
             if(S_Input2._element.value=="") Setting_Flag[0] = "未設定";
             if(S_Input3._element.value=="") Setting_Flag[16] = "未設定";
             if(S_Input4._element.value=="") Setting_Flag[17] = "未設定";
-            if(S_Input4._element.value=="") Setting_Flag[19] = "未設定";
+            if(S_Input5._element.value=="") Setting_Flag[19] = "未設定";
+            if(S_Input6._element.value=="") Setting_Flag[20] = "未設定";
           }
-          if(S_Input4._element.value=="") Setting_Flag[19] = "？？？";
+          if(S_Input5._element.value=="") Setting_Flag[19] = "？？？";
+          if(S_Input6._element.value=="") Setting_Flag[20] = "？？？";
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
@@ -3678,7 +3692,8 @@ function Game_load(width,height,private,Manager){
     Texts("名前",S_Input2.y);
     Texts("一人称",S_Input3.y);
     Texts("二人称",S_Input4.y);
-    Texts("自由",S_Input5.y);
+    Texts("自由1",S_Input5.y);
+    Texts("自由2",S_Input6.y);
     Texts(",(カンマ)は使用できません。",width/3,width/20);
 
     return scene;
@@ -4064,11 +4079,16 @@ function Game_load(width,height,private,Manager){
     var Item_image = new Sprite();
     Item_image._element = document.createElement("img");
     Item_image._element.src = "../image/白.png";
+    /*
     Item_image.width = width/4;
     Item_image.height = width/4;
     Item_image.x = width/1.6;
     Item_image.y = width/4+width/20+width/25;
-    Item_image.border = 2;
+    */
+    Item_image.x = width/2+width/20;
+    Item_image.y = width/4;
+    Item_image.width = width/2.5+width/12-width/8;
+    Item_image.height = Item_image.width;
     scene.addChild(Item_image);
 
     var Button = [];
@@ -4080,7 +4100,7 @@ function Game_load(width,height,private,Manager){
       Button[submits].height = e;
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
-      Button[submits]._element.value = a;
+      Button[submits]._element.value = a.replace(/\(自由1\)/g,Setting_Flag[19]).replace(/\(自由2\)/g,Setting_Flag[20]);;
       if(a){
         if((a=="設定を開く"&&Ig)==false&&a!="詳細") scene.addChild(Button[submits]);
       }
@@ -4198,7 +4218,7 @@ function Game_load(width,height,private,Manager){
             default:
               for (var i = 0; i < 5; i++) {
                 if(f[1].split("↓")[i]==undefined) Text[i]._element.textContent = "";
-                else Text[i]._element.textContent = f[1].split("↓")[i].replace(/\(一人称\)/g,Setting_Flag[16]);
+                else Text[i]._element.textContent = f[1].split("↓")[i].replace(/\(一人称\)/g,Setting_Flag[16]).replace(/\(自由1\)/g,Setting_Flag[19]).replace(/\(自由2\)/g,Setting_Flag[20]);
               }
               for (var i = 0; i < submits; i++) {
                 Button[i].backgroundColor = "buttonface";
@@ -4208,6 +4228,14 @@ function Game_load(width,height,private,Manager){
               if(conversion_url(f[2],"画像")=="../image/画像無し.gif") Item_image_url = Choice_Item_Image;
               else var Item_image_url = conversion_url(f[2],"画像");
               Item_image._element.src = Item_image_url;
+              if(Item_image._element.naturalWidth!=Item_image._element.naturalHeight&&Item_image._element.naturalWidth!=0){
+                Item_image.height = Item_image.width/16*9;
+                Item_image.y = width/4+Item_image.height/2;
+              }
+              else{
+                Item_image.y = width/4;
+                Item_image.height = Item_image.width;
+              }
               this.backgroundColor = "red";
               if(f[3]){
                 Button[3]._element.value = f[3];
