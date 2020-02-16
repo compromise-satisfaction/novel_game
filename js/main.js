@@ -1726,22 +1726,22 @@ function Game_load(width,height,private,Manager){
 
     var Text = [];
 
-    if(Title_DATAS[2].第一選択肢==false||have(Title_DATAS[2].第一選択肢)){
+    if(Title_DATAS[2].第一選択肢==false||have(Title_DATAS[2].第一選択肢)||test){
       if(Title_DATAS[0].第一選択肢) Submit(Title_DATAS[0].第一選択肢,Title_DATAS[1].第一選択肢);
     }
-    if(Title_DATAS[2].第二選択肢==false||have(Title_DATAS[2].第二選択肢)){
+    if(Title_DATAS[2].第二選択肢==false||have(Title_DATAS[2].第二選択肢)||test){
       if(Title_DATAS[0].第二選択肢) Submit(Title_DATAS[0].第二選択肢,Title_DATAS[1].第二選択肢);
     }
-    if(Title_DATAS[2].第三選択肢==false||have(Title_DATAS[2].第三選択肢)){
+    if(Title_DATAS[2].第三選択肢==false||have(Title_DATAS[2].第三選択肢)||test){
       if(Title_DATAS[0].第三選択肢)　Submit(Title_DATAS[0].第三選択肢,Title_DATAS[1].第三選択肢);
     }
-    if(Title_DATAS[2].第四選択肢==false||have(Title_DATAS[2].第四選択肢)){
+    if(Title_DATAS[2].第四選択肢==false||have(Title_DATAS[2].第四選択肢)||test){
       if(Title_DATAS[0].第四選択肢)　Submit(Title_DATAS[0].第四選択肢,Title_DATAS[1].第四選択肢);
     }
-    if(Title_DATAS[2].第五選択肢==false||have(Title_DATAS[2].第五選択肢)){
+    if(Title_DATAS[2].第五選択肢==false||have(Title_DATAS[2].第五選択肢)||test){
       if(Title_DATAS[0].第五選択肢)　Submit(Title_DATAS[0].第五選択肢,Title_DATAS[1].第五選択肢);
     }
-    if(Title_DATAS[2].第六選択肢==false||have(Title_DATAS[2].第六選択肢)){
+    if(Title_DATAS[2].第六選択肢==false||have(Title_DATAS[2].第六選択肢)||test){
       if(Title_DATAS[0].第六選択肢)　Submit(Title_DATAS[0].第六選択肢,Title_DATAS[1].第六選択肢);
     }
     Submit("戻る","戻る");
@@ -4089,7 +4089,6 @@ function Game_load(width,height,private,Manager){
     Item_image.y = width/4;
     Item_image.width = width/2.5+width/12-width/8;
     Item_image.height = Item_image.width;
-    scene.addChild(Item_image);
 
     var Button = [];
     var submits = 0;
@@ -4228,7 +4227,7 @@ function Game_load(width,height,private,Manager){
               if(conversion_url(f[2],"画像")=="../image/画像無し.gif") Item_image_url = Choice_Item_Image;
               else var Item_image_url = conversion_url(f[2],"画像");
               Item_image._element.src = Item_image_url;
-              if(Item_image._element.naturalWidth!=Item_image._element.naturalHeight&&Item_image._element.naturalWidth!=0){
+              if(Item_image._element.naturalWidth!=Item_image._element.naturalHeight){
                 Item_image.height = Item_image.width/16*9;
                 Item_image.y = width/4+Item_image.height/2;
               }
@@ -4236,6 +4235,7 @@ function Game_load(width,height,private,Manager){
                 Item_image.y = width/4;
                 Item_image.height = Item_image.width;
               }
+              scene.addChild(Item_image);
               this.backgroundColor = "red";
               if(f[3]){
                 Button[3]._element.value = f[3];
