@@ -3397,7 +3397,7 @@ function Game_load(width,height,private,Manager){
             if(Button_push("セーブ")) return;
             break;
           case "現在はオートセーブです。":
-            if(Button_push("お任せなのだ")) return;
+            if(Button_push("オートセーブ")) return;
             break;
           default:
             if(Button_push("選択音")) return;
