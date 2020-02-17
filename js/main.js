@@ -467,6 +467,7 @@ function Game_load(width,height,private,Manager){
     }
     else{
       Title_Sheet = Sheet;
+      window.localStorage.clear();
       window.localStorage.setItem("Title_Sheet",Title_Sheet);//これはいい
       Title_DATAS = result;
       Title_sound1 = document.createElement("audio");
