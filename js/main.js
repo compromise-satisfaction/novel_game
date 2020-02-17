@@ -1294,9 +1294,14 @@ function Game_load(width,height,private,Manager){
       if(Number==Item_get_DATAS[i].シーン名){
         if(Get){
           Get_ICFT2(Item_get_DATAS[i]);
-          game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
-          Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+          if(Setting_Flag[18]){
+            Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
+          }
+          else{
+            game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
+            Scene_kazu++;
+            console.log("Scene数",Scene_kazu);
+          }
         }
         else Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
         return;
