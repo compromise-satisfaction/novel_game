@@ -2037,8 +2037,15 @@ function Game_load(width,height,private,Manager){
       console.log("真ん中のキャラを"+Datas[3]+"に設定");
       Character2.width = width/16*9;
       Character2.height = width/16*9;
-      Character2.width*=Datas[23].split("→")[0];
-      Character2.height*=Datas[23].split("→")[0];
+      if(Datas[23].split("→")[0]>0){
+        Character2.width*=Datas[23].split("→")[0];
+        Character2.height*=Datas[23].split("→")[0];
+      }
+      else{
+        Character2.width*=-Datas[23].split("→")[0];
+        Character2.height*=-Datas[23].split("→")[0];
+        Character2.scaleX = -1;
+      }
       Character2.x = (width-Character2.width)/2;
       if(Datas[23].split("→")[1]) Character2.y =  Datas[23].split("→")[1]*(width/16/100);
       if(Datas[4]!=0){
@@ -2075,8 +2082,15 @@ function Game_load(width,height,private,Manager){
       console.log("左のキャラを"+Datas[1]+"に設定");
       Character1.width = width/16*9;
       Character1.height = width/16*9;
-      Character1.width*=Datas[22].split("→")[0];
-      Character1.height*=Datas[22].split("→")[0];
+      if(Datas[22].split("→")[0]>0){
+        Character1.width*=Datas[22].split("→")[0];
+        Character1.height*=Datas[22].split("→")[0];
+      }
+      else{
+        Character1.width*=-Datas[22].split("→")[0];
+        Character1.height*=-Datas[22].split("→")[0];
+        Character1.scaleX = -1;
+      }
       Character1.x = (width-Character1.width)/2-width/4;
       if(Datas[22].split("→")[1]) Character1.y =  Datas[22].split("→")[1]*(width/16/100);
       if(Datas[2]!=0){
@@ -2125,8 +2139,15 @@ function Game_load(width,height,private,Manager){
       console.log("右のキャラを"+Datas[5]+"に設定");
       Character3.width = width/16*9;
       Character3.height = width/16*9;
-      Character3.width*=Datas[24].split("→")[0];
-      Character3.height*=Datas[24].split("→")[0];
+      if(Datas[24].split("→")[0]>0){
+        Character3.width*=Datas[24].split("→")[0];
+        Character3.height*=Datas[24].split("→")[0];
+      }
+      else{
+        Character3.width*=-Datas[24].split("→")[0];
+        Character3.height*=-Datas[24].split("→")[0];
+        Character3.scaleX = -1;
+      }
       Character3.x = (width-Character3.width)/2+width/4;
       if(Datas[24].split("→")[1]) Character3.y =  Datas[24].split("→")[1]*(width/16/100);
       if(Datas[6]!=0){
@@ -3045,8 +3066,15 @@ function Game_load(width,height,private,Manager){
       Character2._element.src = conversion_url(Datas[2],"画像");
       Character2.width = width/16*9;
       Character2.height = width/16*9;
-      Character2.width*=Datas[8].split("→")[0];
-      Character2.height*=Datas[8].split("→")[0];
+      if(Datas[8].split("→")[0]>0){
+        Character2.width*=Datas[8].split("→")[0];
+        Character2.height*=Datas[8].split("→")[0];
+      }
+      else{
+        Character2.width*=-Datas[8].split("→")[0];
+        Character2.height*=-Datas[8].split("→")[0];
+        Character2.scaleX = -1;
+      }
       Character2.x = (width-Character2.width)/2;
       if(Datas[8].split("→")[1]) Character2.y =  Datas[8].split("→")[1]*(width/16/100);
       scene.addChild(Character2);
@@ -3067,8 +3095,15 @@ function Game_load(width,height,private,Manager){
       Character1._element.src = conversion_url(Datas[1],"画像");
       Character1.width = width/16*9;
       Character1.height = width/16*9;
-      Character1.width*=Datas[7].split("→")[0];
-      Character1.height*=Datas[7].split("→")[0];
+      if(Datas[7].split("→")[0]>0){
+        Character1.width*=Datas[7].split("→")[0];
+        Character1.height*=Datas[7].split("→")[0];
+      }
+      else{
+        Character1.width*=-Datas[7].split("→")[0];
+        Character1.height*=-Datas[7].split("→")[0];
+        Character1.scaleX = -1;
+      }
       Character1.x = (width-Character1.width)/2-width/4;
       if(Datas[7].split("→")[1]) Character1.y =  Datas[7].split("→")[1]*(width/16/100);
       scene.addChild(Character1);
@@ -3080,8 +3115,15 @@ function Game_load(width,height,private,Manager){
       Character3._element.src = conversion_url(Datas[3],"画像");
       Character3.width = width/16*9;
       Character3.height = width/16*9;
-      Character3.width*=Datas[9].split("→")[0];
-      Character3.height*=Datas[9].split("→")[0];
+      if(Datas[9].split("→")[0]>0){
+        Character3.width*=Datas[9].split("→")[0];
+        Character3.height*=Datas[9].split("→")[0];
+      }
+      else{
+        Character3.width*=-Datas[9].split("→")[0];
+        Character3.height*=-Datas[9].split("→")[0];
+        Character3.scaleX = -1;
+      }
       Character3.x = (width-Character3.width)/2+width/4;
       if(Datas[9].split("→")[1]) Character3.y =  Datas[9].split("→")[1]*(width/16/100);
       scene.addChild(Character3);
@@ -3256,11 +3298,18 @@ function Game_load(width,height,private,Manager){
     Character._element.src = conversion_url(Datas[0],"画像");
     Character.width = width/16*9;
     Character.height = width/16*9;
-    Character.width*=Datas[9].split("→")[0];
-    Character.height*=Datas[9].split("→")[0];
+    if(Datas[9].split("→")[0]>0){
+      Character.width*=Datas[9].split("→")[0];
+      Character.height*=Datas[9].split("→")[0];
+    }
+    else{
+      Character.width*=-Datas[9].split("→")[0];
+      Character.height*=-Datas[9].split("→")[0];
+      Character.scaleX = -1;
+    }
     Character.x = (width-Character.width)/2;
     if(Datas[9].split("→")[1]) Character.y =  Datas[9].split("→")[1]*(width/16/100);
-    scene.addChild(Character);
+    scene.addChild(Character);//証人
 
     var Speak_Character_image = 0;
 
@@ -3277,7 +3326,7 @@ function Game_load(width,height,private,Manager){
       C_name._style.font  = width/20+"px monospace";
       C_name._element.textContent = "【" + Datas[1] + "】";
       C_name.y = width/16*9+(width/25);
-      scene.addChild(C_name);//キャラ名
+      scene.addChild(C_name);//証人名
     }
 
     var White_Background = new Sprite();
