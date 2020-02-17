@@ -3550,9 +3550,9 @@ function Game_load(width,height,private,Manager){
       Numbers -= (width/20)+(width/25)+(width/25);
       Submit("改造");
     }
-    Submit("タイトルに戻る");
-    Submit("サウンド設定");
     Submit("プレイヤー設定");
+    Submit("サウンド設定");
+    Submit("タイトルに戻る");
     Submit("セーブデータ読み込み");
     Submit("セーブ方法の切り替え");
     Submit("セーブする");
