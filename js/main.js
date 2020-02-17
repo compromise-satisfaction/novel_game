@@ -1224,7 +1224,7 @@ function Game_load(width,height,private,Manager){
     for (var i = 0; i < Move_DATAS.length; i++) {
       if(Number==Move_DATAS[i].シーン名){
         if(Get) Get_ICFT2(Move_DATAS[i]);
-        if(Move_DATAS[i].移動){
+        if(Move_DATAS[i].移動&&Setting_Flag[18]==false){
           Moves = Move_DATAS[i].移動先;
           game.pushScene(MoveScene(10));
           Scene_kazu++;
@@ -1979,6 +1979,7 @@ function Game_load(width,height,private,Manager){
     var scene = new Scene();                                // 新しいシーンを作る
 
     if(Setting_Flag[18]&&have(Play_Sheet+Datas[12]+"プレイ済み")) Return = true;
+    if(Setting_Flag[18]) Return = true;
 
     if(Datas[8].substring(0,1)=="Θ"){
       Datas[8] = Datas[8].substring(1);
