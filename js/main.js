@@ -1915,11 +1915,6 @@ function Game_load(width,height,private,Manager){
             var ooo = Title_sound5;
             break;
           case "説明":
-            for (var i = 0; i < Button.length; i++) {
-              if(Button[i]!=this){
-                scene.removeChild(Button[i]);
-              }
-            }
             var ooo = Title_sound2;
             break;
           default:
@@ -1928,16 +1923,21 @@ function Game_load(width,height,private,Manager){
         }
         if(Button_push_title(ooo)) return;
         switch (a) {
-          case "続きから":
-            Scene_loads("セーブ読み込み",false,false,false,false,false);
-            break;
-          case "説明":
-            Datas_load(Title_DATAS[0].説明,"シーンデータ読み込み");
-            break;
           case "最初から":
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
             game.pushScene(Save_ChoiceScene(false));
+            break;
+          case "続きから":
+            Scene_loads("セーブ読み込み",false,false,false,false,false);
+            break;
+          case "説明":
+            for (var i = 0; i < Button.length; i++) {
+              if(Button[i]!=this){
+                scene.removeChild(Button[i]);
+              }
+            }
+            Datas_load(Title_DATAS[0].説明,"シーンデータ読み込み");
             break;
           case "テスト用":
             Scene_kazu++;
