@@ -911,18 +911,6 @@ function Game_load(width,height,private,Manager){
       }
       else console.log(Number,"プレイ済み");
     }
-    if(Setting_Flag[2]=="男"){
-      var S_image = "男主人公";
-      var S_Sound = "男主人公ポポポ";
-    }
-    else if(Setting_Flag[2]=="女"){
-      var S_image = "女主人公";
-      var S_Sound = "女主人公ポポポ";
-    }
-    else{
-      var S_image = "未設定主人公";
-      var S_Sound = "未設定主人公ポポポ";
-    }
     switch (Number) {
       case "セーブ読み込み完了":
         Datas_load(false,"セーブデータ読み込み");
@@ -1124,10 +1112,10 @@ function Game_load(width,height,private,Manager){
         Datas[22] = Main_DATAS[i].左倍率;
         Datas[23] = Main_DATAS[i].中倍率;
         Datas[24] = Main_DATAS[i].右倍率;
-        if(Datas[1]=="主人公") Datas[1] = S_image;
-        if(Datas[3]=="主人公") Datas[3] = S_image;
-        if(Datas[5]=="主人公") Datas[5] = S_image;
-        if(Datas[19]=="主人公") Datas[19] = S_Sound;
+        if(Datas[1].substring(0,3)=="主人公") Datas[1] = Setting_Flag[2]+Datas[1];
+        if(Datas[3].substring(0,3)=="主人公") Datas[3] = Setting_Flag[2]+Datas[3];
+        if(Datas[5].substring(0,3)=="主人公") Datas[5] = Setting_Flag[2]+Datas[5];
+        if(Datas[19]=="主人公") Datas[19] = Setting_Flag[2]+"主人公ポポポ";
         for (var k = 0; k < Inspect_DATAS.length; k++) {
           if(Number==Inspect_DATAS[k].シーン名){
             var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
@@ -1214,9 +1202,9 @@ function Game_load(width,height,private,Manager){
         Datas[19] = Choice_DATAS[i].選択肢5移動先;
         Datas[20] = Choice_DATAS[i].選択肢6;
         Datas[21] = Choice_DATAS[i].選択肢6移動先;
-        if(Datas[1]=="主人公") Datas[1] = S_image;
-        if(Datas[2]=="主人公") Datas[2] = S_image;
-        if(Datas[3]=="主人公") Datas[3] = S_image;
+        if(Datas[1].substring(0,3)=="主人公") Datas[1] = Datas[1] = Setting_Flag[2]+Datas[1];
+        if(Datas[2].substring(0,3)=="主人公") Datas[2] = Datas[2] = Setting_Flag[2]+Datas[2];
+        if(Datas[3].substring(0,3)=="主人公") Datas[3] = Datas[3] = Setting_Flag[2]+Datas[3];
         game.replaceScene(ChoiceScene(Number));
         return;
       }
@@ -1224,23 +1212,28 @@ function Game_load(width,height,private,Manager){
     for (var i = 0; i < Move_DATAS.length; i++) {
       if(Number==Move_DATAS[i].シーン名){
         if(Get) Get_ICFT2(Move_DATAS[i]);
-        if(Move_DATAS[i].移動&&Setting_Flag[18]==false){
-          Moves = Move_DATAS[i].移動先;
-          game.pushScene(MoveScene(10));
-          Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
+        if(Setting_Flag[18]){
+          Scene_loads(Move_DATAS[i].移動先,Return,false);
         }
         else{
-          if(Move_DATAS[i].再生音声||Move_DATAS[i].吹き出し画像){
-            Datas[0] = Move_DATAS[i].吹き出し画像;
-            Datas[1] = Move_DATAS[i].再生音声;
-            Datas[2] = Move_DATAS[i].移動先;
+          if(Move_DATAS[i].移動){
+            Moves = Move_DATAS[i].移動先;
+            game.pushScene(MoveScene(10));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
-            game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
           }
           else{
-            Scene_loads(Move_DATAS[i].移動先,Return,false);
+            if(Move_DATAS[i].再生音声||Move_DATAS[i].吹き出し画像){
+              Datas[0] = Move_DATAS[i].吹き出し画像;
+              Datas[1] = Move_DATAS[i].再生音声;
+              Datas[2] = Move_DATAS[i].移動先;
+              Scene_kazu++;
+              console.log("Scene数",Scene_kazu);
+              game.pushScene(PopScene(Datas[2],Datas[0],Datas[1]));
+            }
+            else{
+              Scene_loads(Move_DATAS[i].移動先,Return,false);
+            }
           }
         }
         return;
