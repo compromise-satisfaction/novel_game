@@ -987,26 +987,6 @@ function Game_load(width,height,private,Manager){
         Datas_load(false,Number);
         return;
         break;
-      case "調べる何もない":
-        BGM_ON(Setting_Flag[14]);
-        Datas[0] = Setting_Flag[13];
-        Datas[1] = 0;
-        Datas[2] = 0;
-        Datas[3] = 0;
-        Datas[4] = 0;
-        Datas[5] = 0;
-        Datas[6] = 0;
-        Datas[7] = "";
-        Datas[8] = "特に気になるものはない。";
-        Datas[9] = 0;
-        Datas[10] = 0;
-        Datas[11] = "無し";
-        Datas[12] = Setting_Flag[12];
-        Datas[13] = 0;
-        Datas[19] = S_Sound;
-        game.replaceScene(MainScene(Return,Number));
-        return;
-        break;
       case "調べる":
         Number = Setting_Flag[12];
         Scene_loads(Number,false,false);
@@ -1020,7 +1000,7 @@ function Game_load(width,height,private,Manager){
     Setting_Flag[3] = game.fps;
     for (var i = 0; i < Main_DATAS.length; i++) {
       if(Number==Main_DATAS[i].シーン名){
-        Showing_name = Main_DATAS[i].表示名;
+        if(Main_DATAS[i].表示名!="変化無し") Showing_name = Main_DATAS[i].表示名;
         if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
         else {
           if(Main_DATAS[i].セーブ!="無し"&&Main_DATAS[i].セーブ) Setting_Flag[14] = Main_DATAS[i].BGM;
