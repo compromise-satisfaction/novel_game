@@ -90,7 +90,9 @@ function Game_load(width,height,private,Manager){
                 }
                 break;
               case "フラグ":
-                Flag[Flag.length] = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+                if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("→")==-1){
+                  Flag[Flag.length] = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+                }
                 break;
               default:
                 break;
