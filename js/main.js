@@ -2359,7 +2359,6 @@ function Game_load(width,height,private,Manager){
     }
 
     function T_D(){
-      console.log(Time);
       var Itimozi = Datas[8].substring(Time,Time+1);
       scene.addChild(Speak_Background2);
       switch (Itimozi) {
@@ -3318,7 +3317,7 @@ function Game_load(width,height,private,Manager){
     C_name._element.textContent = "【" + Datas[1] + "】";
     C_name.y = width/16*9+width/25;
     if(Datas[1]!="") scene.addChild(C_name);//証人名
-    
+
     var Numbers = width/16*9+(width/20)+(width/25);
 
     function Texts(a){
