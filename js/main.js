@@ -2359,6 +2359,7 @@ function Game_load(width,height,private,Manager){
     }
 
     function T_D(){
+      console.log(Time);
       var Itimozi = Datas[8].substring(Time,Time+1);
       scene.addChild(Speak_Background2);
       switch (Itimozi) {
@@ -3302,14 +3303,6 @@ function Game_load(width,height,private,Manager){
     Stand.height = width/16*9;
     scene.addChild(Stand);
 
-    if(Datas[1]!=""){
-      C_name = new Sprite();
-      C_name._element = document.createElement("innerHTML");
-      C_name._style.font  = width/20+"px monospace";
-      C_name._element.textContent = "【" + Datas[1] + "】";
-      C_name.y = width/16*9+(width/25);
-      scene.addChild(C_name);//証人名
-    }
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
@@ -3319,6 +3312,13 @@ function Game_load(width,height,private,Manager){
     White_Background.height = height-width/16*9;
     scene.addChild(White_Background);
 
+    C_name = new Sprite();
+    C_name._element = document.createElement("innerHTML");
+    C_name._style.font  = width/20+"px monospace";
+    C_name._element.textContent = "【" + Datas[1] + "】";
+    C_name.y = width/16*9+width/25;
+    if(Datas[1]!="") scene.addChild(C_name);//証人名
+    
     var Numbers = width/16*9+(width/20)+(width/25);
 
     function Texts(a){
@@ -3383,11 +3383,11 @@ function Game_load(width,height,private,Manager){
         }
       });
     }
-    Button(0,"ゆさぶる",Datas[3]);//ゆさぶる
+    if(Datas[3]!=false) Button(0,"ゆさぶる",Datas[3]);//ゆさぶる
     if(Datas[4]!=false) Button(1,"◀",Datas[4]);//戻る
-    Button(2,"設定を開く",Datas[5]);//設定
-    Button(3,"▶",Datas[6]);//進む
-    Button(4,"つきつける",Datas[7]);//つきつける
+    if(Datas[5]!=false) Button(2,"設定を開く",Datas[5]);//設定
+    if(Datas[6]!=false) Button(3,"▶",Datas[6]);//進む
+    if(Datas[7]!=false) Button(4,"つきつける",Datas[7]);//つきつける
 
     return scene;
   };
