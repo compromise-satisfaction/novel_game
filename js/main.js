@@ -1624,6 +1624,9 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.正解移動場所,"正解移動場所"];
         Make_datas[Make_datas.length] = [make_data.正解アイテム,"正解アイテム"];
         break
+      default:
+        console.log(make_data);
+        break;
     }
 
     var Numbers = 0;
@@ -1796,6 +1799,19 @@ function Game_load(width,height,private,Manager,make){
           Interrogation_DATAS[i].次 = S_Input[9]._element.value;
           Interrogation_DATAS[i].正解移動場所 = S_Input[10]._element.value;
           Interrogation_DATAS[i].正解アイテム = S_Input[11]._element.value;
+          break;
+        case "移行":
+          for (var i = 0; i < Move_DATAS.length; i++) {
+            if(S_Input[1]._element.value==Move_DATAS[i].シーン名) break;
+          }
+          if(i==Move_DATAS.length) Move_DATAS[i] = document.createElement("void");
+          Move_DATAS[i].入手 = S_Input[0]._element.value;
+          Move_DATAS[i].シーン名 = S_Input[1]._element.value;
+          Scene_name = Move_DATAS[i].シーン名;
+          Move_DATAS[i].移動先 = S_Input[2]._element.value;
+          Move_DATAS[i].移動 = S_Input[3]._element.value;
+          Move_DATAS[i].吹き出し画像 = S_Input[4]._element.value;
+          Move_DATAS[i].再生音声 = S_Input[5]._element.value;
           break;
       }
       Scene_loads(Scene_name,false,false);
@@ -3448,6 +3464,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var MoveScene = function(Out){
     var scene = new Scene();                                // 新しいシーンを作る
+
     if(make) makes(M_M,scene);
 
     game.fps = 10;
@@ -3495,8 +3512,7 @@ function Game_load(width,height,private,Manager,make){
       Scene_loads(Moves,false,false);
     });
 
-    if(make==false){
-      Background.addEventListener("enterframe",function(){
+    Background.addEventListener("enterframe",function(){
         if(Background.opacity == 1 && Out>0){
           game.popScene();
           Scene_kazu--;
@@ -3512,8 +3528,7 @@ function Game_load(width,height,private,Manager,make){
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
         }
-      })
-    }
+  })
 
     return scene;
   };
@@ -3700,7 +3715,6 @@ function Game_load(width,height,private,Manager,make){
   };
   var PopScene = function(Number,Type,Sound){
     var scene = new Scene();                                // 新しいシーンを作る
-    if(make) makes(M_M,scene);
 
     switch (Sound) {
       case "主人公異議あり！":
