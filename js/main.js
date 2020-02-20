@@ -1374,6 +1374,10 @@ function Game_load(width,height,private,Manager,make){
       Scene_loads(Item,false,false);
       return;
     }
+    if(make){
+
+      return;
+    }
     Datas[0] = "画像無し";
     Datas[1] = "";
     Datas[2] = "";
@@ -1482,6 +1486,8 @@ function Game_load(width,height,private,Manager,make){
   }
   function makes(make_data,scene){
 
+    if(make_data==undefined) return;
+
     var Background = new Entity();
     Background._element = document.createElement("img");
     Background._element.src = "../画像/白.png";
@@ -1494,121 +1500,121 @@ function Game_load(width,height,private,Manager,make){
 
     switch (make_data.タイプ) {
       case "メイン":
-        Make_datas[Make_datas.length] = make_data.入手;
-        Make_datas[Make_datas.length] = make_data.BGM;
-        Make_datas[Make_datas.length] = make_data.表示名;
-        Make_datas[Make_datas.length] = make_data.シーン名;
-        Make_datas[Make_datas.length] = make_data.背景;
-        Make_datas[Make_datas.length] = make_data.左側の人物;
-        Make_datas[Make_datas.length] = make_data.左倍率;
-        Make_datas[Make_datas.length] = make_data.真ん中の人物;
-        Make_datas[Make_datas.length] = make_data.中倍率;
-        Make_datas[Make_datas.length] = make_data.右側の人物;
-        Make_datas[Make_datas.length] = make_data.右倍率;
-        Make_datas[Make_datas.length] = make_data.人物名;
-        Make_datas[Make_datas.length] = make_data.文章音;
-        Make_datas[Make_datas.length] = make_data.速度;
-        Make_datas[Make_datas.length] = make_data.文章男;
-        Make_datas[Make_datas.length] = make_data.文章女;
-        Make_datas[Make_datas.length] = make_data.文章未設定;
-        Make_datas[Make_datas.length] = make_data.前前;
-        Make_datas[Make_datas.length] = make_data.前;
-        Make_datas[Make_datas.length] = make_data.セーブ;
-        Make_datas[Make_datas.length] = make_data.次;
-        Make_datas[Make_datas.length] = make_data.次次;
-        Make_datas[Make_datas.length] = make_data.表示アイテムx座標;
-        Make_datas[Make_datas.length] = make_data.表示アイテムy座標;
-        Make_datas[Make_datas.length] = make_data.表示アイテムフェード;
-        Make_datas[Make_datas.length] = make_data.表示アイテム画像;
-        Make_datas[Make_datas.length] = make_data.トロフィー;
+        Make_datas[Make_datas.length] = [make_data.入手,"入手"];
+        Make_datas[Make_datas.length] = [make_data.BGM,"ミュージック"];
+        Make_datas[Make_datas.length] = [make_data.表示名,"表示名"];
+        Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
+        Make_datas[Make_datas.length] = [make_data.背景,"背景"];
+        Make_datas[Make_datas.length] = [make_data.左側の人物,"左側の人物"];
+        Make_datas[Make_datas.length] = [make_data.左倍率,"左倍率"];
+        Make_datas[Make_datas.length] = [make_data.真ん中の人物,"真ん中の人物"];
+        Make_datas[Make_datas.length] = [make_data.中倍率,"中倍率"];
+        Make_datas[Make_datas.length] = [make_data.右側の人物,"右側の人物"];
+        Make_datas[Make_datas.length] = [make_data.右倍率,"右倍率"];
+        Make_datas[Make_datas.length] = [make_data.人物名,"人物名"];
+        Make_datas[Make_datas.length] = [make_data.文章音,"文章音"];
+        Make_datas[Make_datas.length] = [make_data.速度,"速度"];
+        Make_datas[Make_datas.length] = [make_data.文章男.replace(/\n/g,"↓"),"文章男"];
+        Make_datas[Make_datas.length] = [make_data.文章女.replace(/\n/g,"↓"),"文章女"];
+        Make_datas[Make_datas.length] = [make_data.文章未設定.replace(/\n/g,"↓"),"文章未設定"];
+        Make_datas[Make_datas.length] = [make_data.前前,"前前"];
+        Make_datas[Make_datas.length] = [make_data.前,"前"];
+        Make_datas[Make_datas.length] = [make_data.セーブ,"セーブ"];
+        Make_datas[Make_datas.length] = [make_data.次,"次"];
+        Make_datas[Make_datas.length] = [make_data.次次,"次次"];
+        Make_datas[Make_datas.length] = [make_data.表示アイテムx座標,"表示アイテム横座標"];
+        Make_datas[Make_datas.length] = [make_data.表示アイテムy座標,"表示アイテム縦座標"];
+        Make_datas[Make_datas.length] = [make_data.表示アイテムフェード,"表示アイテムフェード"];
+        Make_datas[Make_datas.length] = [make_data.表示アイテム画像,"表示アイテム画像"];
+        Make_datas[Make_datas.length] = [make_data.トロフィー,"トロフィー"];
         break;
       case "移行":
-        Make_datas[Make_datas.length] = make_data.入手;
-        Make_datas[Make_datas.length] = make_data.シーン名;
-        Make_datas[Make_datas.length] = make_data.移動先;
-        Make_datas[Make_datas.length] = make_data.移動;
-        Make_datas[Make_datas.length] = make_data.吹き出し画像;
-        Make_datas[Make_datas.length] = make_data.再生音声;
+        Make_datas[Make_datas.length] = [make_data.入手,"入手"];
+        Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
+        Make_datas[Make_datas.length] = [make_data.移動先,"移動先"];
+        Make_datas[Make_datas.length] = [make_data.移動,"移動"];
+        Make_datas[Make_datas.length] = [make_data.吹き出し画像,"吹き出し画像"];
+        Make_datas[Make_datas.length] = [make_data.再生音声,"再生音声"];
         break;
       case "入手":
-        Make_datas[Make_datas.length] = make_data.入手;
-        Make_datas[Make_datas.length] = make_data.シーン名;
-        Make_datas[Make_datas.length] = make_data.画像;
-        Make_datas[Make_datas.length] = make_data.文章;
-        Make_datas[Make_datas.length] = make_data.次のシーン;
+        Make_datas[Make_datas.length] = [make_data.入手,"入手"];
+        Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
+        Make_datas[Make_datas.length] = [make_data.画像,"画像"];
+        Make_datas[Make_datas.length] = [make_data.文章,"文章"];
+        Make_datas[Make_datas.length] = [make_data.次のシーン,"次のシーン"];
         break;
       case "調べる":
-        Make_datas[Make_datas.length] = make_data.シーン名;
-        Make_datas[Make_datas.length] = make_data.背景;
-        Make_datas[Make_datas.length] = make_data.可視化;
-        Make_datas[Make_datas.length] = make_data.前のシーン;
-        Make_datas[Make_datas.length] = make_data.x座標1;
-        Make_datas[Make_datas.length] = make_data.y座標1;
-        Make_datas[Make_datas.length] = make_data.幅1;
-        Make_datas[Make_datas.length] = make_data.高さ1;
-        Make_datas[Make_datas.length] = make_data.移動先1;
-        Make_datas[Make_datas.length] = make_data.x座標2;
-        Make_datas[Make_datas.length] = make_data.y座標2;
-        Make_datas[Make_datas.length] = make_data.幅2;
-        Make_datas[Make_datas.length] = make_data.高さ2;
-        Make_datas[Make_datas.length] = make_data.移動先2;
-        Make_datas[Make_datas.length] = make_data.x座標3;
-        Make_datas[Make_datas.length] = make_data.y座標3;
-        Make_datas[Make_datas.length] = make_data.幅3;
-        Make_datas[Make_datas.length] = make_data.高さ3;
-        Make_datas[Make_datas.length] = make_data.移動先3;
-        Make_datas[Make_datas.length] = make_data.x座標4;
-        Make_datas[Make_datas.length] = make_data.y座標4;
-        Make_datas[Make_datas.length] = make_data.幅4;
-        Make_datas[Make_datas.length] = make_data.高さ4;
-        Make_datas[Make_datas.length] = make_data.移動先4;
-        Make_datas[Make_datas.length] = make_data.x座標5;
-        Make_datas[Make_datas.length] = make_data.y座標5;
-        Make_datas[Make_datas.length] = make_data.幅5;
-        Make_datas[Make_datas.length] = make_data.高さ5;
-        Make_datas[Make_datas.length] = make_data.移動先5;
+        Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
+        Make_datas[Make_datas.length] = [make_data.背景,"背景"];
+        Make_datas[Make_datas.length] = [make_data.可視化,"可視化"];
+        Make_datas[Make_datas.length] = [make_data.前のシーン,"前のシーン"];
+        Make_datas[Make_datas.length] = [make_data.x座標1,"横座標一"];
+        Make_datas[Make_datas.length] = [make_data.y座標1,"縦座標一"];
+        Make_datas[Make_datas.length] = [make_data.幅1,"幅一"];
+        Make_datas[Make_datas.length] = [make_data.高さ1,"高さ一"];
+        Make_datas[Make_datas.length] = [make_data.移動先1,"移動先一"];
+        Make_datas[Make_datas.length] = [make_data.x座標2,"横座標二"];
+        Make_datas[Make_datas.length] = [make_data.y座標2,"縦座標二"];
+        Make_datas[Make_datas.length] = [make_data.幅2,"幅二"];
+        Make_datas[Make_datas.length] = [make_data.高さ2,"高さ二"];
+        Make_datas[Make_datas.length] = [make_data.移動先2,"移動先二"];
+        Make_datas[Make_datas.length] = [make_data.x座標3,"横座標三"];
+        Make_datas[Make_datas.length] = [make_data.y座標3,"縦座標三"];
+        Make_datas[Make_datas.length] = [make_data.幅3,"幅三"];
+        Make_datas[Make_datas.length] = [make_data.高さ3,"高さ三"];
+        Make_datas[Make_datas.length] = [make_data.移動先3,"移動先三"];
+        Make_datas[Make_datas.length] = [make_data.x座標4,"横座標四"];
+        Make_datas[Make_datas.length] = [make_data.y座標4,"縦座標四"];
+        Make_datas[Make_datas.length] = [make_data.幅4,"幅四"];
+        Make_datas[Make_datas.length] = [make_data.高さ4,"高さ四"];
+        Make_datas[Make_datas.length] = [make_data.移動先4,"移動先四"];
+        Make_datas[Make_datas.length] = [make_data.x座標5,"横座標五"];
+        Make_datas[Make_datas.length] = [make_data.y座標5,"縦座標五"];
+        Make_datas[Make_datas.length] = [make_data.幅5,"幅五"];
+        Make_datas[Make_datas.length] = [make_data.高さ5,"高さ五"];
+        Make_datas[Make_datas.length] = [make_data.移動先5,"移動先五"];
         break;
       case "選択":
-        Make_datas[Make_datas.length] = make_data.入手;
-        Make_datas[Make_datas.length] = make_data.BGM;
-        Make_datas[Make_datas.length] = make_data.表示名;
-        Make_datas[Make_datas.length] = make_data.シーン名;
-        Make_datas[Make_datas.length] = make_data.背景;
-        Make_datas[Make_datas.length] = make_data.左側の人物;
-        Make_datas[Make_datas.length] = make_data.左倍率;
-        Make_datas[Make_datas.length] = make_data.真ん中の人物;
-        Make_datas[Make_datas.length] = make_data.中倍率;
-        Make_datas[Make_datas.length] = make_data.右側の人物;
-        Make_datas[Make_datas.length] = make_data.右倍率;
-        Make_datas[Make_datas.length] = make_data.前前;
-        Make_datas[Make_datas.length] = make_data.前;
-        Make_datas[Make_datas.length] = make_data.セーブ;
-        Make_datas[Make_datas.length] = make_data.選択肢1;
-        Make_datas[Make_datas.length] = make_data.選択肢1移動先;
-        Make_datas[Make_datas.length] = make_data.選択肢2;
-        Make_datas[Make_datas.length] = make_data.選択肢2移動先;
-        Make_datas[Make_datas.length] = make_data.選択肢3;
-        Make_datas[Make_datas.length] = make_data.選択肢3移動先;
-        Make_datas[Make_datas.length] = make_data.選択肢4;
-        Make_datas[Make_datas.length] = make_data.選択肢4移動先;
-        Make_datas[Make_datas.length] = make_data.選択肢5;
-        Make_datas[Make_datas.length] = make_data.選択肢5移動先;
-        Make_datas[Make_datas.length] = make_data.選択肢6;
-        Make_datas[Make_datas.length] = make_data.選択肢6移動先;
+        Make_datas[Make_datas.length] = [make_data.入手,"入手"];
+        Make_datas[Make_datas.length] = [make_data.BGM,"ミュージック"];
+        Make_datas[Make_datas.length] = [make_data.表示名,"表示名"];
+        Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
+        Make_datas[Make_datas.length] = [make_data.背景,"背景"];
+        Make_datas[Make_datas.length] = [make_data.左側の人物,"左側の人物"];
+        Make_datas[Make_datas.length] = [make_data.左倍率,"左倍率"];
+        Make_datas[Make_datas.length] = [make_data.真ん中の人物,"真ん中の人物"];
+        Make_datas[Make_datas.length] = [make_data.中倍率,"中倍率"];
+        Make_datas[Make_datas.length] = [make_data.右側の人物,"右側の人物"];
+        Make_datas[Make_datas.length] = [make_data.右倍率,"右倍率"];
+        Make_datas[Make_datas.length] = [make_data.前前,"前前"];
+        Make_datas[Make_datas.length] = [make_data.前,"前"];
+        Make_datas[Make_datas.length] = [make_data.セーブ,"セーブ"];
+        Make_datas[Make_datas.length] = [make_data.選択肢1,"選択肢一"];
+        Make_datas[Make_datas.length] = [make_data.選択肢1移動先,"移動先一"];
+        Make_datas[Make_datas.length] = [make_data.選択肢2,"選択肢二"];
+        Make_datas[Make_datas.length] = [make_data.選択肢2移動先,"移動先二"];
+        Make_datas[Make_datas.length] = [make_data.選択肢3,"選択肢三"];
+        Make_datas[Make_datas.length] = [make_data.選択肢3移動先,"移動先三"];
+        Make_datas[Make_datas.length] = [make_data.選択肢4,"選択肢四"];
+        Make_datas[Make_datas.length] = [make_data.選択肢4移動先,"移動先四"];
+        Make_datas[Make_datas.length] = [make_data.選択肢5,"選択肢五"];
+        Make_datas[Make_datas.length] = [make_data.選択肢5移動先,"移動先五"];
+        Make_datas[Make_datas.length] = [make_data.選択肢6,"選択肢六"];
+        Make_datas[Make_datas.length] = [make_data.選択肢6移動先,"移動先六"];
         break;
       case "尋問":
-        Make_datas[Make_datas.length] = make_data.BGM;
-        Make_datas[Make_datas.length] = make_data.シーン名;
-        Make_datas[Make_datas.length] = make_data.人物;
-        Make_datas[Make_datas.length] = make_data.人物名;
-        Make_datas[Make_datas.length] = make_data.倍率;
-        Make_datas[Make_datas.length] = make_data.証言;
-        Make_datas[Make_datas.length] = make_data.待った移動場所;
-        Make_datas[Make_datas.length] = make_data.前;
-        Make_datas[Make_datas.length] = make_data.セーブ;
-        Make_datas[Make_datas.length] = make_data.次;
-        Make_datas[Make_datas.length] = make_data.正解移動場所;
-        Make_datas[Make_datas.length] = make_data.正解アイテム;
+        Make_datas[Make_datas.length] = [make_data.BGM,"ミュージック"];
+        Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
+        Make_datas[Make_datas.length] = [make_data.人物,"証人"];
+        Make_datas[Make_datas.length] = [make_data.人物名,"証人名"];
+        Make_datas[Make_datas.length] = [make_data.倍率,"倍率"];
+        Make_datas[Make_datas.length] = [make_data.証言,"証言"];
+        Make_datas[Make_datas.length] = [make_data.待った移動場所,"待った"];
+        Make_datas[Make_datas.length] = [make_data.前,"前"];
+        Make_datas[Make_datas.length] = [make_data.セーブ,"セーブ"];
+        Make_datas[Make_datas.length] = [make_data.次,"次"];
+        Make_datas[Make_datas.length] = [make_data.正解移動場所,"正解移動場所"];
+        Make_datas[Make_datas.length] = [make_data.正解アイテム,"正解アイテム"];
         break
     }
 
@@ -1618,12 +1624,12 @@ function Game_load(width,height,private,Manager,make){
 
     function S_Inputs(i){
       S_Input[i] = new Entity();
-      S_Input[i].moveTo(width/4+width,Numbers);
+      S_Input[i].moveTo(width/2+width,Numbers);
       S_Input[i].width = width/2;
       S_Input[i].height = width/20;
       S_Input[i]._element = document.createElement('input');
-      S_Input[i]._element.value = Make_datas[i];
-      S_Input[i]._element.placeholder = "データ"+i+"を入力";
+      S_Input[i]._element.value = Make_datas[i][0];
+      S_Input[i]._element.placeholder = Make_datas[i][1]+"を入力";
       Numbers += width/20;
       scene.addChild(S_Input[i]);
     }
@@ -1632,24 +1638,54 @@ function Game_load(width,height,private,Manager,make){
       S_Inputs(i);
     }
 
-    var M_Button = [];
-    var submits = 0;
-    function M_Submit(a){
-      M_Button[submits] = new Entity();
-      M_Button[submits].moveTo(width/4+width,Numbers);
-      M_Button[submits].width = width/2;
-      M_Button[submits].height = width/20;
-      M_Button[submits]._element = document.createElement('input');
-      M_Button[submits]._element.type = "submit";
-      M_Button[submits]._element.value = a;
-      scene.addChild(M_Button[submits]);
-      M_Button[submits].addEventListener('touchstart',function(e){
-        if(Button_push("セーブ")) return;
-      });
-      submits++;
-    }
-
-    M_Submit("決定");
+    var M_Button = new Entity();
+    M_Button.moveTo(width/4+width,Numbers);
+    M_Button.width = width/2;
+    M_Button.height = width/20;
+    M_Button._element = document.createElement('input');
+    M_Button._element.type = "submit";
+    M_Button._element.value = "決定";
+    scene.addChild(M_Button);
+    M_Button.addEventListener('touchstart',function(e){
+      if(Button_push("セーブ")) return;
+      switch (make_data.タイプ) {
+        case "メイン":
+          for (var i = 0; i < Main_DATAS.length; i++) {
+            if(S_Input[3]._element.value==Main_DATAS[i].シーン名) break;
+          }
+          if(i==Main_DATAS.length) Main_DATAS[i] = document.createElement("void");
+          Main_DATAS[i].タイプ = "メイン";
+          Main_DATAS[i].入手 = S_Input[0]._element.value;
+          Main_DATAS[i].BGM = S_Input[1]._element.value;
+          Main_DATAS[i].表示名 = S_Input[2]._element.value;
+          Main_DATAS[i].シーン名 = S_Input[3]._element.value;
+          Main_DATAS[i].背景 = S_Input[4]._element.value;
+          Main_DATAS[i].左側の人物 = S_Input[5]._element.value;
+          Main_DATAS[i].左倍率 = S_Input[6]._element.value;
+          Main_DATAS[i].真ん中の人物 = S_Input[7]._element.value;
+          Main_DATAS[i].中倍率 = S_Input[8]._element.value;
+          Main_DATAS[i].右側の人物 = S_Input[9]._element.value;
+          Main_DATAS[i].右倍率 = S_Input[10]._element.value;
+          Main_DATAS[i].人物名 = S_Input[11]._element.value;
+          Main_DATAS[i].文章音 = S_Input[12]._element.value;
+          Main_DATAS[i].速度 = S_Input[13]._element.value;
+          Main_DATAS[i].文章男 = S_Input[14]._element.value;
+          Main_DATAS[i].文章女 = S_Input[15]._element.value;
+          Main_DATAS[i].文章未設定 = S_Input[16]._element.value;
+          Main_DATAS[i].前前 = S_Input[17]._element.value;
+          Main_DATAS[i].前 = S_Input[18]._element.value;
+          Main_DATAS[i].セーブ = S_Input[19]._element.value;
+          Main_DATAS[i].次 = S_Input[20]._element.value;
+          Main_DATAS[i].次次 = S_Input[21]._element.value;
+          Main_DATAS[i].表示アイテムx座標 = S_Input[22]._element.value;
+          Main_DATAS[i].表示アイテムy座標 = S_Input[23]._element.value;
+          Main_DATAS[i].表示アイテムフェード = S_Input[24]._element.value;
+          Main_DATAS[i].表示アイテム画像 = S_Input[25]._element.value;
+          Main_DATAS[i].トロフィー = S_Input[26]._element.value;
+          break;
+      }
+      Scene_loads(S_Input[3]._element.value,false,false);
+    });
 
     var M_Text = [];
 
@@ -1658,14 +1694,15 @@ function Game_load(width,height,private,Manager,make){
       M_Text[i]._element = document.createElement("innerHTML");
       M_Text[i]._style.font  = width/20+"px monospace";
       M_Text[i]._element.textContent = a;
-      M_Text[i].x = width/20+width;
+      M_Text[i].x = width/2+width-width/20*a.length;
       M_Text[i].y = b;
       scene.addChild(M_Text[i]);
       i++;
     }
 
+
     for (var i = 0; i < Make_datas.length; i++) {
-      M_Texts("データ"+i,S_Input[i].y,i);
+      M_Texts(Make_datas[i][1],S_Input[i].y,i);
     }
 
     return;
@@ -3864,9 +3901,10 @@ function Game_load(width,height,private,Manager,make){
 
     Submit("設定を閉じる");
     Numbers += (width/20)+(width/25)+(width/25);
-    if(Manager){
+    if(make){
       Numbers -= (width/20)+(width/25)+(width/25);
-      Submit("改造");
+      if(Manager) Submit("改造");
+      else Submit("シーンデータを保存");
     }
     Submit("プレイヤー設定");
     Submit("サウンド設定");
@@ -4571,14 +4609,13 @@ function Game_load(width,height,private,Manager,make){
               game.popScene();
               Scene_kazu--;
               console.log("Scene数",Scene_kazu);
-              if(Ig==Choice_Item||(Ig!="日常"&&(Choice_Item=="強欲な壺"||Choice_Item=="万能"||Choice_Item=="ヒント"))){
-                if(Choice_Item=="ヒント"){
-                  Scene_loads(Number+"のヒント",false,false);
-                  return;
+              for (var i = 0; i < Ig.split("↓").length; i++) {
+                if(Ig.split("↓")[i]==Choice_Item){
+                  Choice_Item = "正解アイテム";
+                  break;
                 }
-                if(Choice_Item=="強欲な壺"){
-                  Get_ICFT(["アイテム","強欲な壺→強欲なカケラ","強欲な壺を使った証。","強欲なカケラ","","","強欲なカケラ"]);
-                }
+              }
+              if(Choice_Item=="正解アイテム"){
                 game.pushScene(PopScene(Number,"異議あり！","主人公異議あり！"));
                 Scene_kazu++;
                 console.log("Scene数",Scene_kazu);
