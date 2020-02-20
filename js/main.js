@@ -41,7 +41,8 @@ function Game_load(width,height,private,Manager){
   var Play_Sheet2 = "無し";
   var Showing_name = "表示名";
   var Save_Data_Number = "";
-  var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
+  if(Manager) var Title_Sheet = "170Ui3JDGJRt-VARJnWb19Drmy14gkp-pReAN-BTSjGI";
+  else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
   function Datas_load(ID,Type,test){
     if(Type=="セーブデータ読み込み"){
@@ -1998,7 +1999,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Sprite();
     Background._element = document.createElement("img");
-    if(Datas[0]) Background._element.src = conversion_url(Datas[0],"画像");
+    if(Datas[0].split("→")[0]) Background._element.src = conversion_url(Datas[0].split("→")[0],"画像");
     else Background._element.src = "../image/黒.png";
     Background.width = width;
     Background.height = width/16*9;
@@ -2047,10 +2048,10 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character2);
     }//キャラ真ん中
 
-    if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[1],"画像")!="../image/画像無し.gif"){
       var Background2 = new Sprite();
       Background2._element = document.createElement("img");
-      Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
+      Background2._element.src = conversion_url(Datas[0].split("→")[1],"画像");
       Background2.width = width;
       Background2.height = width/16*9;
       scene.addChild(Background2);
@@ -2149,10 +2150,10 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character3);
     }//キャラ右
 
-    if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[2],"画像")!="../image/画像無し.gif"){
       var Background3 = new Sprite();
       Background3._element = document.createElement("img");
-      Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
+      Background3._element.src = conversion_url(Datas[0].split("→")[2],"画像");
       Background3.width = width;
       Background3.height = width/16*9;
       scene.addChild(Background3);
@@ -3036,7 +3037,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Sprite();
     Background._element = document.createElement("img");
-    if(Datas[0]) Background._element.src = conversion_url(Datas[0],"画像");
+    if(Datas[0].split("→")[0]) Background._element.src = conversion_url(Datas[0].split("→")[0],"画像");
     else Background._element.src = "../image/黒.png";
     Background.width = width;
     Background.height = width/16*9;
@@ -3062,10 +3063,10 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character2);
     }//キャラ真ん中
 
-    if(conversion_url(Datas[0]+"(中背景)","画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[1],"画像")!="../image/画像無し.gif"){
       var Background2 = new Sprite();
       Background2._element = document.createElement("img");
-      Background2._element.src = conversion_url(Datas[0]+"(中背景)","画像");
+      Background2._element.src = conversion_url(Datas[0].split("→")[1],"画像");
       Background2.width = width;
       Background2.height = width/16*9;
       scene.addChild(Background2);
@@ -3111,10 +3112,10 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character3);
     }//キャラ右
 
-    if(conversion_url(Datas[0]+"(前背景)","画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[2],"画像")!="../image/画像無し.gif"){
       var Background3 = new Sprite();
       Background3._element = document.createElement("img");
-      Background3._element.src = conversion_url(Datas[0]+"(前背景)","画像");
+      Background3._element.src = conversion_url(Datas[0].split("→")[2],"画像");
       Background3.width = width;
       Background3.height = width/16*9;
       scene.addChild(Background3);
@@ -3270,7 +3271,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = conversion_url("stand","画像");
+    Background._element.src = conversion_url("証人席","画像");
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
@@ -3297,7 +3298,7 @@ function Game_load(width,height,private,Manager){
 
     var Stand = new Entity();
     Stand._element = document.createElement("img");
-    Stand._element.src = conversion_url("stand(中背景)","画像");
+    Stand._element.src = conversion_url("証言台","画像");
     Stand.width = width;
     Stand.height = width/16*9;
     scene.addChild(Stand);
