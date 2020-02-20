@@ -2033,7 +2033,7 @@ function Game_load(width,height,private,Manager,make){
         Option[i+1] = document.createElement("option");
         Option[i+1].text = Image_DATAS[i].名前;
         Option[i+1].value = Image_DATAS[i].名前;
-        Make_left._element.appendChild(Option[i+1]);
+        Make_middle._element.appendChild(Option[i+1]);
       }
       scene.addChild(Make_middle);
 
@@ -2054,7 +2054,7 @@ function Game_load(width,height,private,Manager,make){
         Option[i+1] = document.createElement("option");
         Option[i+1].text = Image_DATAS[i].名前;
         Option[i+1].value = Image_DATAS[i].名前;
-        Make_left._element.appendChild(Option[i+1]);
+        Make_right._element.appendChild(Option[i+1]);
       }
       scene.addChild(Make_right);
 
