@@ -42,6 +42,7 @@ function Game_load(width,height,private,Manager,make){
   var Play_Sheet2 = "無し";
   var Showing_name = "表示名";
   var Save_Data_Number = "";
+  var M_M = 0;
   if(Manager) var Title_Sheet = "170Ui3JDGJRt-VARJnWb19Drmy14gkp-pReAN-BTSjGI";
   else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
@@ -127,7 +128,7 @@ function Game_load(width,height,private,Manager,make){
          )
     .then(res => res.json())
     .then(result => {
-          if(Type=="シーンデータ読み込み"||Type=="セーブデータ読み込み"){
+    if(Type=="シーンデータ読み込み"||Type=="セーブデータ読み込み"){
       Play_Sheet = ID;
       var k0 = 0;
       var k1 = 0;
@@ -157,6 +158,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Main_DATAS[k1] = document.createElement("void");
+            Main_DATAS[k1].タイプ = "メイン";
             Main_DATAS[k1].入手 = result[i][0];
             Main_DATAS[k1].BGM = result[i][1];
             Main_DATAS[k1].表示名 = result[i][2];
@@ -215,6 +217,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Move_DATAS[k4] = document.createElement("void");
+            Move_DATAS[k4].タイプ = "移行";
             Move_DATAS[k4].入手 = result[i][0];
             Move_DATAS[k4].シーン名 = result[i][1];
             Move_DATAS[k4].移動先 = result[i][2];
@@ -229,6 +232,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Branch_DATAS[k5] = document.createElement("void");
+            Branch_DATAS[k5].タイプ = "分岐";
             Branch_DATAS[k5].シーン名 = result[i][0];
             Branch_DATAS[k5].アイテムorフラグ名 = result[i][1];
             Branch_DATAS[k5].ない = result[i][2];
@@ -241,6 +245,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Item_get_DATAS[k6] = document.createElement("void");
+            Item_get_DATAS[k6].タイプ = "入手";
             Item_get_DATAS[k6].入手 = result[i][0];
             Item_get_DATAS[k6].シーン名 = result[i][1];
             Item_get_DATAS[k6].画像 = result[i][2];
@@ -254,6 +259,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Inspect_DATAS[k7] = document.createElement("void");
+            Inspect_DATAS[k7].タイプ = "調べる";
             Inspect_DATAS[k7].シーン名 = result[i][0];
             Inspect_DATAS[k7].背景 = result[i][1];
             Inspect_DATAS[k7].可視化 = result[i][2];
@@ -291,6 +297,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Choice_DATAS[k8] = document.createElement("void");
+            Choice_DATAS[k8].タイプ = "選択";
             Choice_DATAS[k8].入手 = result[i][0];
             Choice_DATAS[k8].BGM = result[i][1];
             Choice_DATAS[k8].表示名 = result[i][2];
@@ -341,6 +348,7 @@ function Game_load(width,height,private,Manager,make){
               if(result[i][k]=="false") result[i][k] = false;
             }
             Interrogation_DATAS[k0] = document.createElement("void");
+            Interrogation_DATAS[k0].タイプ = "尋問";
             Interrogation_DATAS[k0].BGM = result[i][0];
             Interrogation_DATAS[k0].シーン名 = result[i][1];
             Interrogation_DATAS[k0].人物 = result[i][2];
@@ -1002,6 +1010,7 @@ function Game_load(width,height,private,Manager,make){
     Setting_Flag[3] = game.fps;
     for (var i = 0; i < Main_DATAS.length; i++) {
       if(Number==Main_DATAS[i].シーン名){
+        if(make) M_M = Main_DATAS[i];
         if(Main_DATAS[i].表示名!="変化無し") Showing_name = Main_DATAS[i].表示名;
         if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
         else {
@@ -1149,6 +1158,7 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Choice_DATAS.length; i++) {
       if(Number==Choice_DATAS[i].シーン名){
+        if(make) M_M = Choice_DATAS[i];
         Showing_name = Choice_DATAS[i].表示名;
         if(Choice_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
         else {
@@ -1195,6 +1205,7 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Move_DATAS.length; i++) {
       if(Number==Move_DATAS[i].シーン名){
+        if(make) M_M = Move_DATAS[i];
         if(Get) Get_ICFT2(Move_DATAS[i]);
         if(Setting_Flag[18]){
           Scene_loads(Move_DATAS[i].移動先,Return,false);
@@ -1225,6 +1236,7 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Branch_DATAS.length; i++) {
       if(Number==Branch_DATAS[i].シーン名){
+        if(make) M_M = Branch_DATAS[i];
         if(Branch_DATAS[i].アイテムorフラグ名.split(">").length==2){
           for (var k = 0; k < Favorability_Flag.length; k++){
             if(Favorability_Flag[k][0]==Branch_DATAS[i].アイテムorフラグ名.split(">")[0]) break;
@@ -1269,6 +1281,7 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Item_get_DATAS.length; i++) {
       if(Number==Item_get_DATAS[i].シーン名){
+        if(make) M_M = Item_get_DATAS[i];
         if(Get){
           Get_ICFT2(Item_get_DATAS[i]);
           if(Setting_Flag[18]){
@@ -1286,6 +1299,7 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Inspect_DATAS.length; i++) {
       if(Number==Inspect_DATAS[i].シーン名){
+        if(make) M_M = (Inspect_DATAS[i]);
         var Inspect = ["背景ナンバー","(幅,高さ,x座標,y座標,シーンナンバー)"];
         Setting_Flag[12] = Number;
         if(Inspect_DATAS[i].背景=="変化無し") Inspect[0] = Setting_Flag[13];
@@ -1335,6 +1349,7 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Interrogation_DATAS.length; i++) {
       if(Number==Interrogation_DATAS[i].シーン名){
+        if(make) M_M = Interrogation_DATAS[i];
         if(Interrogation_DATAS[i].セーブ!="無し"&&Interrogation_DATAS[i].セーブ) Setting_Flag[13] = "stand";
         if(Interrogation_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
         else {
@@ -1464,6 +1479,196 @@ function Game_load(width,height,private,Manager,make){
   }//セーブ
   function rand(n) {
     return Math.floor(Math.random() * (n + 1));
+  }
+  function makes(make_data,scene){
+
+    var Background = new Entity();
+    Background._element = document.createElement("img");
+    Background._element.src = "../画像/白.png";
+    Background.x = width;
+    Background.width = width;
+    Background.height = height;
+    scene.addChild(Background);
+
+    var Make_datas = [];
+
+    switch (make_data.タイプ) {
+      case "メイン":
+        Make_datas[Make_datas.length] = make_data.入手;
+        Make_datas[Make_datas.length] = make_data.BGM;
+        Make_datas[Make_datas.length] = make_data.表示名;
+        Make_datas[Make_datas.length] = make_data.シーン名;
+        Make_datas[Make_datas.length] = make_data.背景;
+        Make_datas[Make_datas.length] = make_data.左側の人物;
+        Make_datas[Make_datas.length] = make_data.左倍率;
+        Make_datas[Make_datas.length] = make_data.真ん中の人物;
+        Make_datas[Make_datas.length] = make_data.中倍率;
+        Make_datas[Make_datas.length] = make_data.右側の人物;
+        Make_datas[Make_datas.length] = make_data.右倍率;
+        Make_datas[Make_datas.length] = make_data.人物名;
+        Make_datas[Make_datas.length] = make_data.文章音;
+        Make_datas[Make_datas.length] = make_data.速度;
+        Make_datas[Make_datas.length] = make_data.文章男;
+        Make_datas[Make_datas.length] = make_data.文章女;
+        Make_datas[Make_datas.length] = make_data.文章未設定;
+        Make_datas[Make_datas.length] = make_data.前前;
+        Make_datas[Make_datas.length] = make_data.前;
+        Make_datas[Make_datas.length] = make_data.セーブ;
+        Make_datas[Make_datas.length] = make_data.次;
+        Make_datas[Make_datas.length] = make_data.次次;
+        Make_datas[Make_datas.length] = make_data.表示アイテムx座標;
+        Make_datas[Make_datas.length] = make_data.表示アイテムy座標;
+        Make_datas[Make_datas.length] = make_data.表示アイテムフェード;
+        Make_datas[Make_datas.length] = make_data.表示アイテム画像;
+        Make_datas[Make_datas.length] = make_data.トロフィー;
+        break;
+      case "移行":
+        Make_datas[Make_datas.length] = make_data.入手;
+        Make_datas[Make_datas.length] = make_data.シーン名;
+        Make_datas[Make_datas.length] = make_data.移動先;
+        Make_datas[Make_datas.length] = make_data.移動;
+        Make_datas[Make_datas.length] = make_data.吹き出し画像;
+        Make_datas[Make_datas.length] = make_data.再生音声;
+        break;
+      case "入手":
+        Make_datas[Make_datas.length] = make_data.入手;
+        Make_datas[Make_datas.length] = make_data.シーン名;
+        Make_datas[Make_datas.length] = make_data.画像;
+        Make_datas[Make_datas.length] = make_data.文章;
+        Make_datas[Make_datas.length] = make_data.次のシーン;
+        break;
+      case "調べる":
+        Make_datas[Make_datas.length] = make_data.シーン名;
+        Make_datas[Make_datas.length] = make_data.背景;
+        Make_datas[Make_datas.length] = make_data.可視化;
+        Make_datas[Make_datas.length] = make_data.前のシーン;
+        Make_datas[Make_datas.length] = make_data.x座標1;
+        Make_datas[Make_datas.length] = make_data.y座標1;
+        Make_datas[Make_datas.length] = make_data.幅1;
+        Make_datas[Make_datas.length] = make_data.高さ1;
+        Make_datas[Make_datas.length] = make_data.移動先1;
+        Make_datas[Make_datas.length] = make_data.x座標2;
+        Make_datas[Make_datas.length] = make_data.y座標2;
+        Make_datas[Make_datas.length] = make_data.幅2;
+        Make_datas[Make_datas.length] = make_data.高さ2;
+        Make_datas[Make_datas.length] = make_data.移動先2;
+        Make_datas[Make_datas.length] = make_data.x座標3;
+        Make_datas[Make_datas.length] = make_data.y座標3;
+        Make_datas[Make_datas.length] = make_data.幅3;
+        Make_datas[Make_datas.length] = make_data.高さ3;
+        Make_datas[Make_datas.length] = make_data.移動先3;
+        Make_datas[Make_datas.length] = make_data.x座標4;
+        Make_datas[Make_datas.length] = make_data.y座標4;
+        Make_datas[Make_datas.length] = make_data.幅4;
+        Make_datas[Make_datas.length] = make_data.高さ4;
+        Make_datas[Make_datas.length] = make_data.移動先4;
+        Make_datas[Make_datas.length] = make_data.x座標5;
+        Make_datas[Make_datas.length] = make_data.y座標5;
+        Make_datas[Make_datas.length] = make_data.幅5;
+        Make_datas[Make_datas.length] = make_data.高さ5;
+        Make_datas[Make_datas.length] = make_data.移動先5;
+        break;
+      case "選択":
+        Make_datas[Make_datas.length] = make_data.入手;
+        Make_datas[Make_datas.length] = make_data.BGM;
+        Make_datas[Make_datas.length] = make_data.表示名;
+        Make_datas[Make_datas.length] = make_data.シーン名;
+        Make_datas[Make_datas.length] = make_data.背景;
+        Make_datas[Make_datas.length] = make_data.左側の人物;
+        Make_datas[Make_datas.length] = make_data.左倍率;
+        Make_datas[Make_datas.length] = make_data.真ん中の人物;
+        Make_datas[Make_datas.length] = make_data.中倍率;
+        Make_datas[Make_datas.length] = make_data.右側の人物;
+        Make_datas[Make_datas.length] = make_data.右倍率;
+        Make_datas[Make_datas.length] = make_data.前前;
+        Make_datas[Make_datas.length] = make_data.前;
+        Make_datas[Make_datas.length] = make_data.セーブ;
+        Make_datas[Make_datas.length] = make_data.選択肢1;
+        Make_datas[Make_datas.length] = make_data.選択肢1移動先;
+        Make_datas[Make_datas.length] = make_data.選択肢2;
+        Make_datas[Make_datas.length] = make_data.選択肢2移動先;
+        Make_datas[Make_datas.length] = make_data.選択肢3;
+        Make_datas[Make_datas.length] = make_data.選択肢3移動先;
+        Make_datas[Make_datas.length] = make_data.選択肢4;
+        Make_datas[Make_datas.length] = make_data.選択肢4移動先;
+        Make_datas[Make_datas.length] = make_data.選択肢5;
+        Make_datas[Make_datas.length] = make_data.選択肢5移動先;
+        Make_datas[Make_datas.length] = make_data.選択肢6;
+        Make_datas[Make_datas.length] = make_data.選択肢6移動先;
+        break;
+      case "尋問":
+        Make_datas[Make_datas.length] = make_data.BGM;
+        Make_datas[Make_datas.length] = make_data.シーン名;
+        Make_datas[Make_datas.length] = make_data.人物;
+        Make_datas[Make_datas.length] = make_data.人物名;
+        Make_datas[Make_datas.length] = make_data.倍率;
+        Make_datas[Make_datas.length] = make_data.証言;
+        Make_datas[Make_datas.length] = make_data.待った移動場所;
+        Make_datas[Make_datas.length] = make_data.前;
+        Make_datas[Make_datas.length] = make_data.セーブ;
+        Make_datas[Make_datas.length] = make_data.次;
+        Make_datas[Make_datas.length] = make_data.正解移動場所;
+        Make_datas[Make_datas.length] = make_data.正解アイテム;
+        break
+    }
+
+    var Numbers = 0;
+
+    var S_Input = [];
+
+    function S_Inputs(i){
+      S_Input[i] = new Entity();
+      S_Input[i].moveTo(width/4+width,Numbers);
+      S_Input[i].width = width/2;
+      S_Input[i].height = width/20;
+      S_Input[i]._element = document.createElement('input');
+      S_Input[i]._element.value = Make_datas[i];
+      S_Input[i]._element.placeholder = "データ"+i+"を入力";
+      Numbers += width/20;
+      scene.addChild(S_Input[i]);
+    }
+
+    for (var i = 0; i < Make_datas.length; i++) {
+      S_Inputs(i);
+    }
+
+    var M_Button = [];
+    var submits = 0;
+    function M_Submit(a){
+      M_Button[submits] = new Entity();
+      M_Button[submits].moveTo(width/4+width,Numbers);
+      M_Button[submits].width = width/2;
+      M_Button[submits].height = width/20;
+      M_Button[submits]._element = document.createElement('input');
+      M_Button[submits]._element.type = "submit";
+      M_Button[submits]._element.value = a;
+      scene.addChild(M_Button[submits]);
+      M_Button[submits].addEventListener('touchstart',function(e){
+        if(Button_push("セーブ")) return;
+      });
+      submits++;
+    }
+
+    M_Submit("決定");
+
+    var M_Text = [];
+
+    function M_Texts(a,b,i){
+      M_Text[i] = new Sprite();
+      M_Text[i]._element = document.createElement("innerHTML");
+      M_Text[i]._style.font  = width/20+"px monospace";
+      M_Text[i]._element.textContent = a;
+      M_Text[i].x = width/20+width;
+      M_Text[i].y = b;
+      scene.addChild(M_Text[i]);
+      i++;
+    }
+
+    for (var i = 0; i < Make_datas.length; i++) {
+      M_Texts("データ"+i,S_Input[i].y,i);
+    }
+
+    return;
   }
   var Save_ChoiceScene = function(Load){
     var scene = new Scene();                                // 新しいシーンを作る
@@ -1959,170 +2164,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var MainScene = function(Return,Number,Inspect,can){
     var scene = new Scene();                                // 新しいシーンを作る
-
-    if(make){
-
-      var Numbers = (width/10);
-
-      var S_Input1 = new Entity();
-      S_Input1.moveTo(width/2+width,Numbers);
-      S_Input1.width = width/2;
-      S_Input1.height = width/10;
-      S_Input1._element = document.createElement('input');
-      S_Input1._element.value = Number;
-      S_Input1._element.placeholder = "シーン名を入力";
-      Numbers += width/20+width/25+width/25;
-      scene.addChild(S_Input1);
-
-      var Make_background = new Entity();
-      Make_background.moveTo(width/2+width,Numbers);
-      Make_background.width = width/2;
-      Make_background.height = width/10;
-      Make_background._element = document.createElement("select");
-      Numbers += width/20+width/25+width/25;
-
-      var Option = [];
-      Option[0] = document.createElement("option");
-      Option[0].text = Datas[0];
-      Option[0].value = Datas[0];
-      Make_background._element.appendChild(Option[0]);
-
-      for (var i = 0; i < Image_DATAS.length; i++){
-        Option[i+1] = document.createElement("option");
-        Option[i+1].text = Image_DATAS[i].名前;
-        Option[i+1].value = Image_DATAS[i].名前;
-        Make_background._element.appendChild(Option[i+1]);
-      }
-      scene.addChild(Make_background);
-
-      var Make_left = new Entity();
-      Make_left.moveTo(width/2+width,Numbers);
-      Make_left.width = width/2;
-      Make_left.height = width/10;
-      Make_left._element = document.createElement("select");
-      Numbers += width/20+width/25+width/25;
-
-      Option = [];
-      Option[0] = document.createElement("option");
-      Option[0].text = Datas[1];
-      Option[0].value = Datas[1];
-      Make_left._element.appendChild(Option[0]);
-
-      for (var i = 0; i < Image_DATAS.length; i++){
-        Option[i+1] = document.createElement("option");
-        Option[i+1].text = Image_DATAS[i].名前;
-        Option[i+1].value = Image_DATAS[i].名前;
-        Make_left._element.appendChild(Option[i+1]);
-      }
-      scene.addChild(Make_left);
-
-      var Make_middle = new Entity();
-      Make_middle.moveTo(width/2+width,Numbers);
-      Make_middle.width = width/2;
-      Make_middle.height = width/10;
-      Make_middle._element = document.createElement("select");
-      Numbers += width/20+width/25+width/25;
-
-      Option = [];
-      Option[0] = document.createElement("option");
-      Option[0].text = Datas[3];
-      Option[0].value = Datas[3];
-      Make_middle._element.appendChild(Option[0]);
-
-      for (var i = 0; i < Image_DATAS.length; i++){
-        Option[i+1] = document.createElement("option");
-        Option[i+1].text = Image_DATAS[i].名前;
-        Option[i+1].value = Image_DATAS[i].名前;
-        Make_middle._element.appendChild(Option[i+1]);
-      }
-      scene.addChild(Make_middle);
-
-      var Make_right = new Entity();
-      Make_right.moveTo(width/2+width,Numbers);
-      Make_right.width = width/2;
-      Make_right.height = width/10;
-      Make_right._element = document.createElement("select");
-      Numbers += width/20+width/25+width/25;
-
-      Option = [];
-      Option[0] = document.createElement("option");
-      Option[0].text = Datas[5];
-      Option[0].value = Datas[5];
-      Make_right._element.appendChild(Option[0]);
-
-      for (var i = 0; i < Image_DATAS.length; i++){
-        Option[i+1] = document.createElement("option");
-        Option[i+1].text = Image_DATAS[i].名前;
-        Option[i+1].value = Image_DATAS[i].名前;
-        Make_right._element.appendChild(Option[i+1]);
-      }
-      scene.addChild(Make_right);
-
-      var S_Input2 = new Entity();
-      S_Input2.moveTo(width/2+width,Numbers);
-      S_Input2.width = width/2;
-      S_Input2.height = width/10;
-      S_Input2._element = document.createElement('input');
-      S_Input2._element.value = Datas[7];
-      S_Input2._element.placeholder = "キャラ名";
-      Numbers += width/20+width/25+width/25;
-      scene.addChild(S_Input2);
-
-      var S_Input3 = new Entity();
-      S_Input3.moveTo(width/2+width,Numbers);
-      S_Input3.width = width/2;
-      S_Input3.height = width/10;
-      S_Input3._element = document.createElement('input');
-      S_Input3._element.value = Datas[8];
-      S_Input3._element.placeholder = "文章";
-      Numbers += width/20+width/25+width/25;
-      scene.addChild(S_Input3);
-
-      var M_Button = [];
-      var submits = 0;
-      function M_Submit(a){
-        M_Button[submits] = new Entity();
-        M_Button[submits].moveTo(width/4+width,Numbers);
-        M_Button[submits].width = width/2;
-        M_Button[submits].height = (width/10);
-        M_Button[submits]._element = document.createElement('input');
-        M_Button[submits]._element.type = "submit";
-        M_Button[submits]._element.value = a;
-        scene.addChild(M_Button[submits]);
-        M_Button[submits].addEventListener('touchstart',function(e){
-          if(Button_push("セーブ")) return;
-        });
-        submits++;
-      }
-
-      M_Submit("決定");
-
-      function M_Texts(a,b,c){
-        M_Text[i] = new Sprite();
-        M_Text[i]._element = document.createElement("innerHTML");
-        M_Text[i]._style.font  = width/10+"px monospace";
-        M_Text[i]._element.textContent = a;
-        M_Text[i].x = width/15+width;
-        M_Text[i].y = b;
-        if(c!=undefined){
-          M_Text[i].x = width/7;
-          M_Text[i]._style.color = 'red';
-          M_Text[i]._style.font = c+"px monospace";
-        }
-        else scene.addChild(M_Text[i]);
-        i++;
-      }
-
-      var i = 0;
-      var M_Text = [];
-      M_Texts("背景",Make_background.y);
-      M_Texts("シーン名",S_Input1.y);
-      M_Texts("左人",Make_left.y);
-      M_Texts("中人",Make_middle.y);
-      M_Texts("右人",Make_right.y);
-      M_Texts("キャラ名",S_Input2.y);
-      M_Texts("文章",S_Input3.y);
-    }
+    if(make) makes(M_M,scene);
 
     if(Setting_Flag[18]&&have(Play_Sheet+Datas[12]+"プレイ済み")) Return = true;
     if(Setting_Flag[18]) Return = true;
@@ -3255,6 +3297,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var MoveScene = function(Out){
     var scene = new Scene();                                // 新しいシーンを作る
+    if(make) makes(M_M,scene);
 
     game.fps = 10;
 
@@ -3323,6 +3366,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var ChoiceScene = function(Number){
     var scene = new Scene();                                // 新しいシーンを作る
+    if(make) makes(M_M,scene);
 
     if(Datas[6]){
       if(Datas[6]=="無し") Datas[6] = Number;
@@ -3503,6 +3547,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var PopScene = function(Number,Type,Sound){
     var scene = new Scene();                                // 新しいシーンを作る
+    if(make) makes(M_M,scene);
 
     switch (Sound) {
       case "主人公異議あり！":
@@ -3555,6 +3600,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var InterrogationScene = function(Number){
     var scene = new Scene();                                // 新しいシーンを作る
+    if(make) makes(M_M,scene);
 
     if(Datas[5]){
       if(Datas[5]=="無し") Datas[5] = Number;
@@ -4156,6 +4202,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var InspectScene = function(Inspect,Return,can){
     var scene = new Scene();                                // 新しいシーンを作る
+    if(make) makes(M_M,scene);
 
     var Background = new Sprite();
     Background._element = document.createElement("img");
@@ -4263,6 +4310,7 @@ function Game_load(width,height,private,Manager,make){
   };
   var ItemgetScene = function(a,b,c){
     var scene = new Scene();                                // 新しいシーンを作る
+    if(make) makes(M_M,scene);
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
@@ -4376,8 +4424,8 @@ function Game_load(width,height,private,Manager,make){
     return scene;
   };
   var ItemScene = function(Number,Ig,Type,Do){
-
     var scene = new Scene();                                // 新しいシーンを作る
+
     switch (Type) {
       case "アイテム":
         var Pages = 5;
