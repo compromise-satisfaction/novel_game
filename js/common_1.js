@@ -73,7 +73,7 @@ $(function(){
   //ゲーム内の画面サイズ
   var gameWidth = 1072;
   var gameWidth = 1072/4;
-  var gameWidth = 405;
+  var gameWidth = 405*2;
   var gameHeight = 1560;
   var gameHeight = 1560/4;
   var gameHeight = 600;
@@ -99,7 +99,7 @@ $(function(){
   //余白部分をドラッグすることによるスクロールを無効にする
   //$("#base").on("touchstart",function(event){event.preventDefault();});
   //ゲームを実行する
-  Game_load(gameWidth,gameHeight,"11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k",false);
+  Game_load(gameWidth,gameHeight,"11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k",false,true);
   //初回時のスクリーン設定
   orientationChange();
 });

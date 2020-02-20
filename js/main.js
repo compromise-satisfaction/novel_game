@@ -10,8 +10,9 @@ BGM.addEventListener("ended",function(e){
 var Button_time_next = 3;
 var Button_time = Button_time_next;
 
-function Game_load(width,height,private,Manager){
+function Game_load(width,height,private,Manager,make){
   var game = new Game(width, height);
+  if(make) width/=2;
 
   game.fps = 10;
   game.onload = function(){
@@ -412,7 +413,7 @@ function Game_load(width,height,private,Manager){
         }
       }
       SE[k0] = document.createElement("audio");
-      SE[k0].src = "../sound/スカ.wav";
+      SE[k0].src = "../スカ.wav";
       SE[k0].title = "スカ";
       game.popScene();
       Scene_kazu--;
@@ -670,7 +671,7 @@ function Game_load(width,height,private,Manager){
         for (var i = 0; i < Image_DATAS.length; i++) {
           if(Image_DATAS[i].名前==name) return(Image_DATAS[i].url);
         }
-        return("../image/画像無し.gif");
+        return("../画像/画像無し.gif");
         break;
       case "サウンド":
         for (var i = 0; i < Sounds_DATAS.length; i++) {
@@ -1469,7 +1470,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
@@ -1591,7 +1592,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
@@ -1669,7 +1670,7 @@ function Game_load(width,height,private,Manager){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../image/白.png";
+    White_Background._element.src = "../画像/白.png";
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -1735,14 +1736,14 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/半透明(黒).png";
+    Background._element.src = "../画像/半透明(黒).png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
 
     var Loading = new Entity();
     Loading._element = document.createElement("img");
-    Loading._element.src = "../image/読み込み中.gif";
+    Loading._element.src = "../画像/読み込み中.gif";
     Loading.x = width/2-width/4;
     Loading.y = height/2-width/20;
     Loading.width = width/2;
@@ -1757,21 +1758,21 @@ function Game_load(width,height,private,Manager){
     if(a){
       var Background = new Entity();
       Background._element = document.createElement("img");
-      Background._element.src = "../image/Background.png";
+      Background._element.src = "../画像/メニュー背景.png";
       Background.width = width;
       Background.height = height;
       scene.addChild(Background);
 
       var Background2 = new Entity();
       Background2._element = document.createElement("img");
-      Background2._element.src = "../image/半透明(黒).png";
+      Background2._element.src = "../画像/半透明(黒).png";
       Background2.width = width;
       Background2.height = height;
       scene.addChild(Background2);
 
       var Loading = new Entity();
       Loading._element = document.createElement("img");
-      Loading._element.src = "../image/読み込み中.gif";
+      Loading._element.src = "../画像/読み込み中.gif";
       Loading.x = width/2-width/4;
       Loading.y = height/2-width/20;
       Loading.width = width/2;
@@ -1783,7 +1784,7 @@ function Game_load(width,height,private,Manager){
     else{
       var Background = new Entity();
       Background._element = document.createElement("img");
-      Background._element.src = "../image/Background.png";
+      Background._element.src = "../画像/メニュー背景.png";
       Background.width = width;
       Background.height = height;
       scene.addChild(Background);
@@ -1938,7 +1939,7 @@ function Game_load(width,height,private,Manager){
     /*
     var Set_button = new Entity();
     Set_button._element = document.createElement("img");
-    Set_button._element.src = "../image/リバーシ.gif";
+    Set_button._element.src = "../画像/リバーシ.gif";
     Set_button.x = 105;
     Set_button.y = 455;
     Set_button.width = 195;
@@ -1958,6 +1959,170 @@ function Game_load(width,height,private,Manager){
   };
   var MainScene = function(Return,Number,Inspect,can){
     var scene = new Scene();                                // 新しいシーンを作る
+
+    if(make){
+
+      var Numbers = (width/10);
+
+      var S_Input1 = new Entity();
+      S_Input1.moveTo(width/2+width,Numbers);
+      S_Input1.width = width/2;
+      S_Input1.height = width/10;
+      S_Input1._element = document.createElement('input');
+      S_Input1._element.value = Number;
+      S_Input1._element.placeholder = "シーン名を入力";
+      Numbers += width/20+width/25+width/25;
+      scene.addChild(S_Input1);
+
+      var Make_background = new Entity();
+      Make_background.moveTo(width/2+width,Numbers);
+      Make_background.width = width/2;
+      Make_background.height = width/10;
+      Make_background._element = document.createElement("select");
+      Numbers += width/20+width/25+width/25;
+
+      var Option = [];
+      Option[0] = document.createElement("option");
+      Option[0].text = Datas[0];
+      Option[0].value = Datas[0];
+      Make_background._element.appendChild(Option[0]);
+
+      for (var i = 0; i < Image_DATAS.length; i++){
+        Option[i+1] = document.createElement("option");
+        Option[i+1].text = Image_DATAS[i].名前;
+        Option[i+1].value = Image_DATAS[i].名前;
+        Make_background._element.appendChild(Option[i+1]);
+      }
+      scene.addChild(Make_background);
+
+      var Make_left = new Entity();
+      Make_left.moveTo(width/2+width,Numbers);
+      Make_left.width = width/2;
+      Make_left.height = width/10;
+      Make_left._element = document.createElement("select");
+      Numbers += width/20+width/25+width/25;
+
+      Option = [];
+      Option[0] = document.createElement("option");
+      Option[0].text = Datas[1];
+      Option[0].value = Datas[1];
+      Make_left._element.appendChild(Option[0]);
+
+      for (var i = 0; i < Image_DATAS.length; i++){
+        Option[i+1] = document.createElement("option");
+        Option[i+1].text = Image_DATAS[i].名前;
+        Option[i+1].value = Image_DATAS[i].名前;
+        Make_left._element.appendChild(Option[i+1]);
+      }
+      scene.addChild(Make_left);
+
+      var Make_middle = new Entity();
+      Make_middle.moveTo(width/2+width,Numbers);
+      Make_middle.width = width/2;
+      Make_middle.height = width/10;
+      Make_middle._element = document.createElement("select");
+      Numbers += width/20+width/25+width/25;
+
+      Option = [];
+      Option[0] = document.createElement("option");
+      Option[0].text = Datas[3];
+      Option[0].value = Datas[3];
+      Make_middle._element.appendChild(Option[0]);
+
+      for (var i = 0; i < Image_DATAS.length; i++){
+        Option[i+1] = document.createElement("option");
+        Option[i+1].text = Image_DATAS[i].名前;
+        Option[i+1].value = Image_DATAS[i].名前;
+        Make_left._element.appendChild(Option[i+1]);
+      }
+      scene.addChild(Make_middle);
+
+      var Make_right = new Entity();
+      Make_right.moveTo(width/2+width,Numbers);
+      Make_right.width = width/2;
+      Make_right.height = width/10;
+      Make_right._element = document.createElement("select");
+      Numbers += width/20+width/25+width/25;
+
+      Option = [];
+      Option[0] = document.createElement("option");
+      Option[0].text = Datas[5];
+      Option[0].value = Datas[5];
+      Make_right._element.appendChild(Option[0]);
+
+      for (var i = 0; i < Image_DATAS.length; i++){
+        Option[i+1] = document.createElement("option");
+        Option[i+1].text = Image_DATAS[i].名前;
+        Option[i+1].value = Image_DATAS[i].名前;
+        Make_left._element.appendChild(Option[i+1]);
+      }
+      scene.addChild(Make_right);
+
+      var S_Input2 = new Entity();
+      S_Input2.moveTo(width/2+width,Numbers);
+      S_Input2.width = width/2;
+      S_Input2.height = width/10;
+      S_Input2._element = document.createElement('input');
+      S_Input2._element.value = Datas[7];
+      S_Input2._element.placeholder = "キャラ名";
+      Numbers += width/20+width/25+width/25;
+      scene.addChild(S_Input2);
+
+      var S_Input3 = new Entity();
+      S_Input3.moveTo(width/2+width,Numbers);
+      S_Input3.width = width/2;
+      S_Input3.height = width/10;
+      S_Input3._element = document.createElement('input');
+      S_Input3._element.value = Datas[8];
+      S_Input3._element.placeholder = "文章";
+      Numbers += width/20+width/25+width/25;
+      scene.addChild(S_Input3);
+
+      var M_Button = [];
+      var submits = 0;
+      function M_Submit(a){
+        M_Button[submits] = new Entity();
+        M_Button[submits].moveTo(width/4+width,Numbers);
+        M_Button[submits].width = width/2;
+        M_Button[submits].height = (width/10);
+        M_Button[submits]._element = document.createElement('input');
+        M_Button[submits]._element.type = "submit";
+        M_Button[submits]._element.value = a;
+        scene.addChild(M_Button[submits]);
+        M_Button[submits].addEventListener('touchstart',function(e){
+          if(Button_push("セーブ")) return;
+        });
+        submits++;
+      }
+
+      M_Submit("決定");
+
+      function M_Texts(a,b,c){
+        M_Text[i] = new Sprite();
+        M_Text[i]._element = document.createElement("innerHTML");
+        M_Text[i]._style.font  = width/10+"px monospace";
+        M_Text[i]._element.textContent = a;
+        M_Text[i].x = width/15+width;
+        M_Text[i].y = b;
+        if(c!=undefined){
+          M_Text[i].x = width/7;
+          M_Text[i]._style.color = 'red';
+          M_Text[i]._style.font = c+"px monospace";
+        }
+        else scene.addChild(M_Text[i]);
+        i++;
+      }
+
+      var i = 0;
+      var M_Text = [];
+      M_Texts("背景",Make_background.y);
+      M_Texts("シーン名",S_Input1.y);
+      M_Texts("左人",Make_left.y);
+      M_Texts("中人",Make_middle.y);
+      M_Texts("右人",Make_right.y);
+      M_Texts("キャラ名",S_Input2.y);
+      M_Texts("文章",S_Input3.y);
+    }
 
     if(Setting_Flag[18]&&have(Play_Sheet+Datas[12]+"プレイ済み")) Return = true;
     if(Setting_Flag[18]) Return = true;
@@ -2000,14 +2165,14 @@ function Game_load(width,height,private,Manager){
     var Background = new Sprite();
     Background._element = document.createElement("img");
     if(Datas[0].split("→")[0]) Background._element.src = conversion_url(Datas[0].split("→")[0],"画像");
-    else Background._element.src = "../image/黒.png";
+    else Background._element.src = "../画像/黒.png";
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
 
     var Explosion = new Sprite();
     Explosion._element = document.createElement("img");
-    Explosion._element.src = "../image/透明.png";
+    Explosion._element.src = "../画像/透明.png";
     Explosion.width = width/16*9;
     Explosion.height = width/16*9;
     scene.addChild(Explosion);
@@ -2048,7 +2213,7 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character2);
     }//キャラ真ん中
 
-    if(conversion_url(Datas[0].split("→")[1],"画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[1],"画像")!="../画像/画像無し.gif"){
       var Background2 = new Sprite();
       Background2._element = document.createElement("img");
       Background2._element.src = conversion_url(Datas[0].split("→")[1],"画像");
@@ -2150,7 +2315,7 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character3);
     }//キャラ右
 
-    if(conversion_url(Datas[0].split("→")[2],"画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[2],"画像")!="../画像/画像無し.gif"){
       var Background3 = new Sprite();
       Background3._element = document.createElement("img");
       Background3._element.src = conversion_url(Datas[0].split("→")[2],"画像");
@@ -2188,7 +2353,7 @@ function Game_load(width,height,private,Manager){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../image/白.png";
+    White_Background._element.src = "../画像/白.png";
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -2277,21 +2442,21 @@ function Game_load(width,height,private,Manager){
 
     var Speak_Background1 = new Sprite();
     Speak_Background1._element = document.createElement("img");
-    Speak_Background1._element.src = "../image/吹き出し枠.png";
+    Speak_Background1._element.src = "../画像/吹き出し枠.png";
     Speak_Background1.width = width;
     Speak_Background1.height = height;
     if(Datas[8].replace(/[^\「\(\)\」]/g,"")!="") scene.addChild(Speak_Background1);
 
     var Speak_Background2 = new Sprite();
     Speak_Background2._element = document.createElement("img");
-    Speak_Background2._element.src = "../image/透明.png";
+    Speak_Background2._element.src = "../画像/透明.png";
     Speak_Background2.width = width/4;
     Speak_Background2.height = height/5;
     Speak_Background2.y = width/16*9+width/8-height/5;
 
     var Speech_bubble_image = new Sprite();
     Speech_bubble_image._element = document.createElement("img");
-    Speech_bubble_image._element.src = "../image/透明.png";
+    Speech_bubble_image._element.src = "../画像/透明.png";
     Speech_bubble_image.width = width;
     Speech_bubble_image.height = width/16*9;
     scene.addChild(Speech_bubble_image);
@@ -2396,7 +2561,7 @@ function Game_load(width,height,private,Manager){
           Time++;
           if(Return==false){
             var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
-            if(Image=="消滅") Speech_bubble_image._element.src = "../image/透明.png";
+            if(Image=="消滅") Speech_bubble_image._element.src = "../画像/透明.png";
             else Speech_bubble_image._element.src = conversion_url(Image,"画像");
             ksks++;
           }
@@ -2474,7 +2639,7 @@ function Game_load(width,height,private,Manager){
               console.log("右のキャラを"+Datas[5]+"に変更");
             }
           }
-          Speak_Background2._element.src = "../image/透明.png";
+          Speak_Background2._element.src = "../画像/透明.png";
           return;
           break;
         case "↦":
@@ -2501,7 +2666,7 @@ function Game_load(width,height,private,Manager){
           Time++;
           if(Return==false){
             Explosion.x = width/2-width/32;
-            Explosion._element.src = "../image/爆発.gif";
+            Explosion._element.src = "../画像/爆発.gif";
             Sound_ON("爆発");
           }
           T_D();
@@ -2511,7 +2676,7 @@ function Game_load(width,height,private,Manager){
           Time++;
           if(Return==false){
             Explosion.x = width/4-width/32;
-            Explosion._element.src = "../image/爆発.gif";
+            Explosion._element.src = "../画像/爆発.gif";
             Sound_ON("爆発");
           }
           T_D();
@@ -2521,7 +2686,7 @@ function Game_load(width,height,private,Manager){
           Time++;
           if(Return==false){
             Explosion.x = -width/32;
-            Explosion._element.src = "../image/爆発.gif";
+            Explosion._element.src = "../画像/爆発.gif";
             Sound_ON("爆発");
           }
           T_D();
@@ -2565,7 +2730,7 @@ function Game_load(width,height,private,Manager){
               console.log("右のキャラを"+Datas[5]+"に変更");
             }
           }
-          Speak_Background2._element.src = "../image/透明.png";
+          Speak_Background2._element.src = "../画像/透明.png";
           break;
         default:
           if(Text[k]._element.textContent.substring(0,1)=="「"||Text[k]._element.textContent.substring(0,1)=="　"){
@@ -2573,7 +2738,7 @@ function Game_load(width,height,private,Manager){
               case "㊧":
                 if(Datas[1]){
                   if(Character1._element.title != Datas[1]+"口パク"){
-                    if(conversion_url(Datas[1]+"口パク","画像")!="../image/画像無し.gif"){
+                    if(conversion_url(Datas[1]+"口パク","画像")!="../画像/画像無し.gif"){
                       Character1._element.src = conversion_url(Datas[1]+"口パク","画像");
                       Character1._element.title = Datas[1]+"口パク";
                       console.log("左のキャラを"+Datas[1]+"口パクに変更");
@@ -2584,7 +2749,7 @@ function Game_load(width,height,private,Manager){
               case "㊥":
                 if(Datas[3]){
                   if(Character2._element.title != Datas[3]+"口パク"){
-                    if(conversion_url(Datas[3]+"口パク","画像")!="../image/画像無し.gif"){
+                    if(conversion_url(Datas[3]+"口パク","画像")!="../画像/画像無し.gif"){
                       Character2._element.src = conversion_url(Datas[3]+"口パク","画像");
                       Character2._element.title = Datas[3]+"口パク";
                       console.log("真ん中のキャラを"+Datas[3]+"口パクに変更");
@@ -2595,7 +2760,7 @@ function Game_load(width,height,private,Manager){
               case "㊨":
                 if(Datas[5]){
                   if(Character3._element.title != Datas[5]+"口パク"){
-                    if(conversion_url(Datas[5]+"口パク","画像")!="../image/画像無し.gif"){
+                    if(conversion_url(Datas[5]+"口パク","画像")!="../画像/画像無し.gif"){
                       Character3._element.src = conversion_url(Datas[5]+"口パク","画像");
                       Character3._element.title = Datas[5]+"口パク";
                       console.log("右のキャラを"+Datas[5]+"口パクに変更");
@@ -2606,12 +2771,12 @@ function Game_load(width,height,private,Manager){
               default:
                 break;
             }
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
-            else Speak_Background2._element.src = "../image/吹き出し1.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            else Speak_Background2._element.src = "../画像/吹き出し1.png";
           }
           else if(Text[k]._element.textContent.substring(0,1)=="("||Text[k]._element.textContent.substring(0,1)==" "){
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
-            else Speak_Background2._element.src = "../image/吹き出し2.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            else Speak_Background2._element.src = "../画像/吹き出し2.png";
           }
           break;
       }
@@ -2623,8 +2788,8 @@ function Game_load(width,height,private,Manager){
           else{
             Text[k]._element.textContent = " ";
             Text[k]._style.color = "blue";
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
-            else Speak_Background2._element.src = "../image/吹き出し2.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            else Speak_Background2._element.src = "../画像/吹き出し2.png";
           }
         }
         else{
@@ -2632,9 +2797,9 @@ function Game_load(width,height,private,Manager){
           else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text[k-1]._element.textContent.substring(0,1)=="　"){
             Text[k]._element.textContent = "　";
             Text[k]._style.color = "Black";
-            Speak_Background2._element.src = "../image/吹き出し1.png";
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../image/透明.png";
-            else Speak_Background2._element.src = "../image/吹き出し1.png";
+            Speak_Background2._element.src = "../画像/吹き出し1.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            else Speak_Background2._element.src = "../画像/吹き出し1.png";
           }
         }
         T_D();
@@ -2665,7 +2830,7 @@ function Game_load(width,height,private,Manager){
             console.log("右のキャラを"+Datas[5]+"に変更");
           }
         }
-        Speak_Background2._element.src = "../image/透明.png";
+        Speak_Background2._element.src = "../画像/透明.png";
       }
       else{
         if(Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
@@ -2873,7 +3038,7 @@ function Game_load(width,height,private,Manager){
         var Trophy_Time = 0;
         var Trophy = new Sprite();
         Trophy._element = document.createElement("img");
-        Trophy._element.src = "../image/Trophy.png";
+        Trophy._element.src = "../画像/トロフィー.png";
         Trophy.width = width/3.61;
         Trophy.height = width/14.15;
         Trophy.x = width-width/3.5;
@@ -2926,8 +3091,8 @@ function Game_load(width,height,private,Manager){
       function Touchs(x,y,width_t,height_t,Number){
         Touch[tk] = new Sprite();
         Touch[tk]._element = document.createElement("img");
-        if(can) Touch[tk]._element.src = "../image/半透明(赤).png";
-        else Touch[tk]._element.src = "../image/透明.png";
+        if(can) Touch[tk]._element.src = "../画像/半透明(赤).png";
+        else Touch[tk]._element.src = "../画像/透明.png";
         Touch[tk].x = x*width/NaturalWidth;
         Touch[tk].y = y*width/16*9/NaturalHeight;
         Touch[tk].width = width_t*width/NaturalWidth;
@@ -3085,6 +3250,7 @@ function Game_load(width,height,private,Manager){
         }
       }
     }
+
     return scene;
   };
   var MoveScene = function(Out){
@@ -3094,7 +3260,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Sprite();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/黒.png";
+    Background._element.src = "../画像/黒.png";
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
@@ -3112,7 +3278,7 @@ function Game_load(width,height,private,Manager){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../image/白.png";
+    White_Background._element.src = "../画像/白.png";
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height - width/16*9;
@@ -3169,7 +3335,7 @@ function Game_load(width,height,private,Manager){
     var Background = new Sprite();
     Background._element = document.createElement("img");
     if(Datas[0].split("→")[0]) Background._element.src = conversion_url(Datas[0].split("→")[0],"画像");
-    else Background._element.src = "../image/黒.png";
+    else Background._element.src = "../画像/黒.png";
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
@@ -3194,7 +3360,7 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character2);
     }//キャラ真ん中
 
-    if(conversion_url(Datas[0].split("→")[1],"画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[1],"画像")!="../画像/画像無し.gif"){
       var Background2 = new Sprite();
       Background2._element = document.createElement("img");
       Background2._element.src = conversion_url(Datas[0].split("→")[1],"画像");
@@ -3243,7 +3409,7 @@ function Game_load(width,height,private,Manager){
       scene.addChild(Character3);
     }//キャラ右
 
-    if(conversion_url(Datas[0].split("→")[2],"画像")!="../image/画像無し.gif"){
+    if(conversion_url(Datas[0].split("→")[2],"画像")!="../画像/画像無し.gif"){
       var Background3 = new Sprite();
       Background3._element = document.createElement("img");
       Background3._element.src = conversion_url(Datas[0].split("→")[2],"画像");
@@ -3254,7 +3420,7 @@ function Game_load(width,height,private,Manager){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../image/白.png";
+    White_Background._element.src = "../画像/白.png";
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -3437,7 +3603,7 @@ function Game_load(width,height,private,Manager){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../image/白.png";
+    White_Background._element.src = "../画像/白.png";
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -3527,7 +3693,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
@@ -3676,7 +3842,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
@@ -3865,7 +4031,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
@@ -4013,8 +4179,8 @@ function Game_load(width,height,private,Manager){
     function Touchs(x,y,width_t,height_t,Number){
       Touch[k] = new Sprite();
       Touch[k]._element = document.createElement("img");
-      if(can) Touch[k]._element.src = "../image/半透明(赤).png";
-      else Touch[k]._element.src = "../image/透明.png";
+      if(can) Touch[k]._element.src = "../画像/半透明(赤).png";
+      else Touch[k]._element.src = "../画像/透明.png";
       Touch[k].シーン = Number;
       Touch[k].x = x*width/NaturalWidth;
       Touch[k].y = y*width/16*9/NaturalHeight;
@@ -4043,7 +4209,7 @@ function Game_load(width,height,private,Manager){
     if(can==false){
       var Touch_Pointer = new Sprite();
       Touch_Pointer._element = document.createElement("img");
-      Touch_Pointer._element.src = "../image/ポイント.gif";
+      Touch_Pointer._element.src = "../画像/ポイント.gif";
       Touch_Pointer.width = width/36;
       Touch_Pointer.height = width/36;
       Touch_Pointer.x = width/2-width/36/2;
@@ -4100,7 +4266,7 @@ function Game_load(width,height,private,Manager){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../image/白.png";
+    White_Background._element.src = "../画像/白.png";
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -4233,14 +4399,14 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
 
     var Item_image = new Sprite();
     Item_image._element = document.createElement("img");
-    Item_image._element.src = "../image/白.png";
+    Item_image._element.src = "../画像/白.png";
     /*
     Item_image.width = width/4;
     Item_image.height = width/4;
@@ -4386,7 +4552,7 @@ function Game_load(width,height,private,Manager){
               }
               Choice_Item = f[5];
               Choice_Item_Image = f[2];
-              if(conversion_url(f[2],"画像")=="../image/画像無し.gif") Item_image_url = Choice_Item_Image;
+              if(conversion_url(f[2],"画像")=="../画像/画像無し.gif") Item_image_url = Choice_Item_Image;
               else var Item_image_url = conversion_url(f[2],"画像");
               Item_image._element.src = Item_image_url;
               if(Item_image._element.naturalWidth!=Item_image._element.naturalHeight){
@@ -4470,7 +4636,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
@@ -4567,7 +4733,7 @@ function Game_load(width,height,private,Manager){
         if(conversion_url(Photo_url,"比率")=="正方形"||conversion_url(Photo_url,"比率").split("×")[0]==conversion_url(Photo_url,"比率").split("×")[1]){
           var Seihoukei = true;
         }
-        if(conversion_url(Photo_url,"画像")!="../image/画像無し.gif") var Photo_url = conversion_url(Photo_url,"画像");
+        if(conversion_url(Photo_url,"画像")!="../画像/画像無し.gif") var Photo_url = conversion_url(Photo_url,"画像");
         Photo._element.src = Photo_url;
         if(Seihoukei||(Photo._element.naturalWidth==Photo._element.naturalHeight&&Photo._element.naturalWidth!=0)){
           Photo.width = width*0.8;
@@ -4593,7 +4759,7 @@ function Game_load(width,height,private,Manager){
       }
       else if(Text[i]._element.textContent.substring(0,3)=="小画像"){
         var Photo_url = Text[i]._element.textContent.substring(3);
-        if(conversion_url(Photo_url,"画像")!="../image/画像無し.gif") var Photo_url = conversion_url(Photo_url,"画像");
+        if(conversion_url(Photo_url,"画像")!="../画像/画像無し.gif") var Photo_url = conversion_url(Photo_url,"画像");
         var Big_Photo = Text[i]._element.textContent.substring(1);
         Text[i]._element.textContent = "";
         var Photo = new Sprite();
@@ -4636,7 +4802,7 @@ function Game_load(width,height,private,Manager){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../image/Background.png";
+    Background._element.src = "../画像/メニュー背景.png";
     Background.width = width;
     Background.height = height;
     scene.addChild(Background);
