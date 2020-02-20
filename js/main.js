@@ -341,28 +341,28 @@ function Game_load(width,height,private,Manager,make){
             I_C_F_T_DATAS[k9].詳細文 = result[i][6];
             I_C_F_T_DATAS[k9].詳細内容 = result[i][7];
             k9++;
-            break
-            case "尋問":
-            result[i] = result[i].データ.split(",");
-            for (var k = 0; k < result[i].length; k++) {
-              if(result[i][k]=="false") result[i][k] = false;
-            }
-            Interrogation_DATAS[k0] = document.createElement("void");
-            Interrogation_DATAS[k0].タイプ = "尋問";
-            Interrogation_DATAS[k0].BGM = result[i][0];
-            Interrogation_DATAS[k0].シーン名 = result[i][1];
-            Interrogation_DATAS[k0].人物 = result[i][2];
-            Interrogation_DATAS[k0].人物名 = result[i][3];
-            Interrogation_DATAS[k0].倍率 = result[i][4];
-            Interrogation_DATAS[k0].証言 = result[i][5];
-            Interrogation_DATAS[k0].待った移動場所 = result[i][6];
-            Interrogation_DATAS[k0].前 = result[i][7];
-            Interrogation_DATAS[k0].セーブ = result[i][8];
-            Interrogation_DATAS[k0].次 = result[i][9];
-            Interrogation_DATAS[k0].正解移動場所 = result[i][10];
-            Interrogation_DATAS[k0].正解アイテム = result[i][11];
-            k0++;
-            break
+            break;
+          case "尋問":
+          result[i] = result[i].データ.split(",");
+          for (var k = 0; k < result[i].length; k++) {
+            if(result[i][k]=="false") result[i][k] = false;
+          }
+          Interrogation_DATAS[k0] = document.createElement("void");
+          Interrogation_DATAS[k0].タイプ = "尋問";
+          Interrogation_DATAS[k0].BGM = result[i][0];
+          Interrogation_DATAS[k0].シーン名 = result[i][1];
+          Interrogation_DATAS[k0].人物 = result[i][2];
+          Interrogation_DATAS[k0].人物名 = result[i][3];
+          Interrogation_DATAS[k0].倍率 = result[i][4];
+          Interrogation_DATAS[k0].証言 = result[i][5];
+          Interrogation_DATAS[k0].待った移動場所 = result[i][6];
+          Interrogation_DATAS[k0].前 = result[i][7];
+          Interrogation_DATAS[k0].セーブ = result[i][8];
+          Interrogation_DATAS[k0].次 = result[i][9];
+          Interrogation_DATAS[k0].正解移動場所 = result[i][10];
+          Interrogation_DATAS[k0].正解アイテム = result[i][11];
+          k0++;
+            break;
         }
       }
       /*
@@ -1288,12 +1288,20 @@ function Game_load(width,height,private,Manager,make){
             Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
           }
           else{
-            game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
-            Scene_kazu++;
-            console.log("Scene数",Scene_kazu);
+            if(make) game.replaceScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
+            else{
+              game.pushScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
+              Scene_kazu++;
+              console.log("Scene数",Scene_kazu);
+            }
           }
         }
-        else Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
+        else{
+          if(make) game.replaceScene(ItemgetScene(conversion_url(Item_get_DATAS[i].画像,"画像"),Item_get_DATAS[i].文章,Item_get_DATAS[i].次のシーン));
+          else{
+            Scene_loads(Item_get_DATAS[i].次のシーン,false,false);
+          }
+        }
         return;
       }
     }
@@ -1375,7 +1383,7 @@ function Game_load(width,height,private,Manager,make){
       return;
     }
     if(make){
-
+      game.replaceScene(SceneSettingScene(Number));
       return;
     }
     Datas[0] = "画像無し";
@@ -1659,6 +1667,7 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].BGM = S_Input[1]._element.value;
           Main_DATAS[i].表示名 = S_Input[2]._element.value;
           Main_DATAS[i].シーン名 = S_Input[3]._element.value;
+          Scene_name = Main_DATAS[i].シーン名;
           Main_DATAS[i].背景 = S_Input[4]._element.value;
           Main_DATAS[i].左側の人物 = S_Input[5]._element.value;
           Main_DATAS[i].左倍率 = S_Input[6]._element.value;
@@ -1683,8 +1692,113 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].表示アイテム画像 = S_Input[25]._element.value;
           Main_DATAS[i].トロフィー = S_Input[26]._element.value;
           break;
+        case "選択":
+          for (var i = 0; i < Choice_DATAS.length; i++) {
+            if(S_Input[3]._element.value==Choice_DATAS[i].シーン名) break;
+          }
+          if(i==Choice_DATAS.length) Choice_DATAS[i] = document.createElement("void");
+          Choice_DATAS[i].タイプ = "選択";
+          Choice_DATAS[i].入手 = S_Input[0]._element.value;
+          Choice_DATAS[i].BGM = S_Input[1]._element.value;
+          Choice_DATAS[i].表示名 = S_Input[2]._element.value;
+          Choice_DATAS[i].シーン名 = S_Input[3]._element.value;
+          Scene_name = Choice_DATAS[i].シーン名;
+          Choice_DATAS[i].背景 = S_Input[4]._element.value;
+          Choice_DATAS[i].左側の人物 = S_Input[5]._element.value;
+          Choice_DATAS[i].左倍率 = S_Input[6]._element.value;
+          Choice_DATAS[i].真ん中の人物 = S_Input[7]._element.value;
+          Choice_DATAS[i].中倍率 = S_Input[8]._element.value;
+          Choice_DATAS[i].右側の人物 = S_Input[9]._element.value;
+          Choice_DATAS[i].右倍率 = S_Input[10]._element.value;
+          Choice_DATAS[i].前前 = S_Input[11]._element.value;
+          Choice_DATAS[i].前 = S_Input[12]._element.value;
+          Choice_DATAS[i].セーブ = S_Input[13]._element.value;
+          Choice_DATAS[i].選択肢1 = S_Input[14]._element.value;
+          Choice_DATAS[i].選択肢1移動先 = S_Input[15]._element.value;
+          Choice_DATAS[i].選択肢2 = S_Input[16]._element.value;
+          Choice_DATAS[i].選択肢2移動先 = S_Input[17]._element.value;
+          Choice_DATAS[i].選択肢3 = S_Input[18]._element.value;
+          Choice_DATAS[i].選択肢3移動先 = S_Input[19]._element.value;
+          Choice_DATAS[i].選択肢4 = S_Input[20]._element.value;
+          Choice_DATAS[i].選択肢4移動先 = S_Input[21]._element.value;
+          Choice_DATAS[i].選択肢5 = S_Input[22]._element.value;
+          Choice_DATAS[i].選択肢5移動先 = S_Input[23]._element.value;
+          Choice_DATAS[i].選択肢6 = S_Input[24]._element.value;
+          Choice_DATAS[i].選択肢6移動先 = S_Input[25]._element.value;
+          break;
+        case "入手":
+          for (var i = 0; i < Item_get_DATAS.length; i++) {
+            if(S_Input[1]._element.value==Item_get_DATAS[i].シーン名) break;
+          }
+          if(i==Item_get_DATAS.length) Item_get_DATAS[i] = document.createElement("void");
+          Item_get_DATAS[i].タイプ = "入手";
+          Item_get_DATAS[i].入手 = S_Input[0]._element.value;
+          Item_get_DATAS[i].シーン名 = S_Input[1]._element.value;
+          Scene_name = Item_get_DATAS[i].シーン名;
+          Item_get_DATAS[i].画像 = S_Input[2]._element.value;
+          Item_get_DATAS[i].文章 = S_Input[3]._element.value;
+          Item_get_DATAS[i].次のシーン = S_Input[4]._element.value;
+          break;
+        case "調べる":
+          for (var i = 0; i < Inspect_DATAS.length; i++) {
+            if(S_Input[0]._element.value==Inspect_DATAS[i].シーン名) break;
+          }
+          if(i==Inspect_DATAS.length) Inspect_DATAS[i] = document.createElement("void");
+          Inspect_DATAS[i].タイプ = "調べる";
+          Inspect_DATAS[i].シーン名 = S_Input[0]._element.value;
+          Scene_name = Inspect_DATAS[i].シーン名;
+          Inspect_DATAS[i].背景 = S_Input[1]._element.value;
+          if(S_Input[2]._element.value=="しない"||S_Input[2]._element.value=="false") Inspect_DATAS[i].可視化 = false;
+          else Inspect_DATAS[i].可視化 = true;
+          Inspect_DATAS[i].前のシーン = S_Input[3]._element.value;
+          Inspect_DATAS[i].x座標1 = S_Input[4]._element.value;
+          Inspect_DATAS[i].y座標1 = S_Input[5]._element.value;
+          Inspect_DATAS[i].幅1 = S_Input[6]._element.value;
+          Inspect_DATAS[i].高さ1 = S_Input[7]._element.value;
+          Inspect_DATAS[i].移動先1 = S_Input[8]._element.value;
+          Inspect_DATAS[i].x座標2 = S_Input[9]._element.value;
+          Inspect_DATAS[i].y座標2 = S_Input[10]._element.value;
+          Inspect_DATAS[i].幅2 = S_Input[11]._element.value;
+          Inspect_DATAS[i].高さ2 = S_Input[12]._element.value;
+          Inspect_DATAS[i].移動先2 = S_Input[13]._element.value;
+          Inspect_DATAS[i].x座標3 = S_Input[14]._element.value;
+          Inspect_DATAS[i].y座標3 = S_Input[15]._element.value;
+          Inspect_DATAS[i].幅3 = S_Input[16]._element.value;
+          Inspect_DATAS[i].高さ3 = S_Input[17]._element.value;
+          Inspect_DATAS[i].移動先3 = S_Input[18]._element.value;
+          Inspect_DATAS[i].x座標4 = S_Input[19]._element.value;
+          Inspect_DATAS[i].y座標4 = S_Input[20]._element.value;
+          Inspect_DATAS[i].幅4 = S_Input[21]._element.value;
+          Inspect_DATAS[i].高さ4 = S_Input[22]._element.value;
+          Inspect_DATAS[i].移動先4 = S_Input[23]._element.value;
+          Inspect_DATAS[i].x座標5 = S_Input[24]._element.value;
+          Inspect_DATAS[i].y座標5 = S_Input[25]._element.value;
+          Inspect_DATAS[i].幅5 = S_Input[26]._element.value;
+          Inspect_DATAS[i].高さ5 = S_Input[27]._element.value;
+          Inspect_DATAS[i].移動先5 = S_Input[28]._element.value;
+          break;
+        case "尋問":
+          for (var i = 0; i < Interrogation_DATAS.length; i++) {
+            if(S_Input[1]._element.value==Interrogation_DATAS[i].シーン名) break;
+          }
+          if(i==Interrogation_DATAS.length) Interrogation_DATAS[i] = document.createElement("void");
+          Interrogation_DATAS[i].タイプ = "尋問";
+          Interrogation_DATAS[i].BGM = S_Input[0]._element.value;
+          Interrogation_DATAS[i].シーン名 = S_Input[1]._element.value;
+          Scene_name = Interrogation_DATAS[i].シーン名;
+          Interrogation_DATAS[i].人物 = S_Input[2]._element.value;
+          Interrogation_DATAS[i].人物名 = S_Input[3]._element.value;
+          Interrogation_DATAS[i].倍率 = S_Input[4]._element.value;
+          Interrogation_DATAS[i].証言 = S_Input[5]._element.value;
+          Interrogation_DATAS[i].待った移動場所 = S_Input[6]._element.value;
+          Interrogation_DATAS[i].前 = S_Input[7]._element.value;
+          Interrogation_DATAS[i].セーブ = S_Input[8]._element.value;
+          Interrogation_DATAS[i].次 = S_Input[9]._element.value;
+          Interrogation_DATAS[i].正解移動場所 = S_Input[10]._element.value;
+          Interrogation_DATAS[i].正解アイテム = S_Input[11]._element.value;
+          break;
       }
-      Scene_loads(S_Input[3]._element.value,false,false);
+      Scene_loads(Scene_name,false,false);
     });
 
     var M_Text = [];
@@ -3381,23 +3495,25 @@ function Game_load(width,height,private,Manager,make){
       Scene_loads(Moves,false,false);
     });
 
-    Background.addEventListener("enterframe",function(){
-      if(Background.opacity == 1 && Out>0){
-        game.popScene();
-        Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
-        Scene_loads(Moves,false,false);
-        game.pushScene(MoveScene(-10));
-        Scene_kazu++;
-        console.log("Scene数",Scene_kazu);
-      }
-      if(Background.opacity == 0 && Out<0){
-        game.fps = Setting_Flag[3];
-        game.popScene();
-        Scene_kazu--;
-        console.log("Scene数",Scene_kazu);
-      }
-    })
+    if(make==false){
+      Background.addEventListener("enterframe",function(){
+        if(Background.opacity == 1 && Out>0){
+          game.popScene();
+          Scene_kazu--;
+          console.log("Scene数",Scene_kazu);
+          Scene_loads(Moves,false,false);
+          game.pushScene(MoveScene(-10));
+          Scene_kazu++;
+          console.log("Scene数",Scene_kazu);
+        }
+        if(Background.opacity == 0 && Out<0){
+          game.fps = Setting_Flag[3];
+          game.popScene();
+          Scene_kazu--;
+          console.log("Scene数",Scene_kazu);
+        }
+      })
+    }
 
     return scene;
   };
@@ -3656,23 +3772,25 @@ function Game_load(width,height,private,Manager,make){
     Background.height = width/16*9;
     scene.addChild(Background);
 
-    var Character = new Entity();
-    Character._element = document.createElement("img");
-    Character._element.src = conversion_url(Datas[0],"画像");
-    Character.width = width/16*9;
-    Character.height = width/16*9;
-    if(Datas[9].split("→")[0]>0){
-      Character.width*=Datas[9].split("→")[0];
-      Character.height*=Datas[9].split("→")[0];
+    if(Datas[0]){
+      var Character = new Entity();
+      Character._element = document.createElement("img");
+      Character._element.src = conversion_url(Datas[0],"画像");
+      Character.width = width/16*9;
+      Character.height = width/16*9;
+      if(Datas[9].split("→")[0]>0){
+        Character.width*=Datas[9].split("→")[0];
+        Character.height*=Datas[9].split("→")[0];
+      }
+      else{
+        Character.width*=-Datas[9].split("→")[0];
+        Character.height*=-Datas[9].split("→")[0];
+        Character.scaleX = -1;
+      }
+      Character.x = (width-Character.width)/2;
+      if(Datas[9].split("→")[1]) Character.y =  Datas[9].split("→")[1]*(width/16/100);
+      scene.addChild(Character);//証人
     }
-    else{
-      Character.width*=-Datas[9].split("→")[0];
-      Character.height*=-Datas[9].split("→")[0];
-      Character.scaleX = -1;
-    }
-    Character.x = (width-Character.width)/2;
-    if(Datas[9].split("→")[1]) Character.y =  Datas[9].split("→")[1]*(width/16/100);
-    scene.addChild(Character);//証人
 
     var Speak_Character_image = 0;
 
@@ -3682,7 +3800,6 @@ function Game_load(width,height,private,Manager,make){
     Stand.width = width;
     Stand.height = width/16*9;
     scene.addChild(Stand);
-
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
@@ -4107,6 +4224,177 @@ function Game_load(width,height,private,Manager,make){
     Texts("自由1",S_Input5.y);
     Texts("自由2",S_Input6.y);
     Texts(",(カンマ)は使用できません。",width/3,width/20);
+
+    return scene;
+  };
+  var SceneSettingScene = function(Number){
+    var scene = new Scene();                                // 新しいシーンを作る
+
+    var Numbers = width/10+width/30;
+
+    var S_Input = new Entity();
+    S_Input.moveTo(width/4,Numbers);
+    S_Input.width = width/2;
+    S_Input.height = width/10;
+    S_Input._element = document.createElement("select");
+
+    var Option = [];
+    var Form = [
+      "メイン",
+      "選択",
+      "調べる",
+      "入手",
+      "尋問"
+    ];
+
+    for (var i = 0; i < Form.length; i++){
+      Option[i] = document.createElement("option");
+      Option[i].text = Form[i];
+      Option[i].value = Form[i];
+      S_Input._element.appendChild(Option[i]);
+    }
+    scene.addChild(S_Input);
+
+    Numbers += width/5;
+
+    var Button = new Entity();
+    Button.moveTo(width/4,Numbers);
+    Button.width = width/2;
+    Button.height = width/10;
+    Button._element = document.createElement('input');
+    Button._element.type = "submit";
+    Button._element.value = "新しいシーンの作成";
+    scene.addChild(Button);
+    Button.addEventListener('touchstart',function(e){
+      if(Button_push("セーブ")) return;
+      switch (S_Input._element.value) {
+        case "メイン":
+          var i = Main_DATAS.length;
+          Main_DATAS[i] = document.createElement("void");
+          Main_DATAS[i].タイプ = "メイン";
+          Main_DATAS[i].入手 = "";
+          Main_DATAS[i].BGM = "";
+          Main_DATAS[i].表示名 = "";
+          Main_DATAS[i].シーン名 = Number;
+          Main_DATAS[i].背景 = "";
+          Main_DATAS[i].左側の人物 = "";
+          Main_DATAS[i].左倍率 = 1;
+          Main_DATAS[i].真ん中の人物 = "";
+          Main_DATAS[i].中倍率 = 1;
+          Main_DATAS[i].右側の人物 = "";
+          Main_DATAS[i].右倍率 = 1;
+          Main_DATAS[i].人物名 = "人物名";
+          Main_DATAS[i].文章音 = "";
+          Main_DATAS[i].速度 = 10;
+          Main_DATAS[i].文章男 = "文章男";
+          Main_DATAS[i].文章女 = "文章女";
+          Main_DATAS[i].文章未設定 = "文章未設定";
+          Main_DATAS[i].前前 = "";
+          Main_DATAS[i].前 = "";
+          Main_DATAS[i].セーブ = Number;
+          Main_DATAS[i].次 = "";
+          Main_DATAS[i].次次 = "";
+          Main_DATAS[i].表示アイテムx座標 = "";
+          Main_DATAS[i].表示アイテムy座標 = "";
+          Main_DATAS[i].表示アイテムフェード = "";
+          Main_DATAS[i].表示アイテム画像 = "";
+          Main_DATAS[i].トロフィー = "";
+          break;
+        case "選択":
+          var i = Choice_DATAS.length;
+          Choice_DATAS[i] = document.createElement("void");
+          Choice_DATAS[i].タイプ = "選択";
+          Choice_DATAS[i].入手 = "";
+          Choice_DATAS[i].BGM = "";
+          Choice_DATAS[i].表示名 = "";
+          Choice_DATAS[i].シーン名 = Number;
+          Choice_DATAS[i].背景 = "";
+          Choice_DATAS[i].左側の人物 = "";
+          Choice_DATAS[i].左倍率 = 1;
+          Choice_DATAS[i].真ん中の人物 = "";
+          Choice_DATAS[i].中倍率 = 1;
+          Choice_DATAS[i].右側の人物 = "";
+          Choice_DATAS[i].右倍率 = 1;
+          Choice_DATAS[i].前前 = "";
+          Choice_DATAS[i].前 = "";
+          Choice_DATAS[i].セーブ = Number;
+          Choice_DATAS[i].選択肢1 = "";
+          Choice_DATAS[i].選択肢1移動先 = "";
+          Choice_DATAS[i].選択肢2 = "";
+          Choice_DATAS[i].選択肢2移動先 = "";
+          Choice_DATAS[i].選択肢3 = "";
+          Choice_DATAS[i].選択肢3移動先 = "";
+          Choice_DATAS[i].選択肢4 = "";
+          Choice_DATAS[i].選択肢4移動先 = "";
+          Choice_DATAS[i].選択肢5 = "";
+          Choice_DATAS[i].選択肢5移動先 = "";
+          Choice_DATAS[i].選択肢6 = "";
+          Choice_DATAS[i].選択肢6移動先 = "";
+          break;
+        case "入手":
+          var i = Item_get_DATAS.length;
+          Item_get_DATAS[i] = document.createElement("void");
+          Item_get_DATAS[i].タイプ = "入手";
+          Item_get_DATAS[i].入手 = "";
+          Item_get_DATAS[i].シーン名 = Number;
+          Item_get_DATAS[i].画像 = "";
+          Item_get_DATAS[i].文章 = "を手に入れた。";
+          Item_get_DATAS[i].次のシーン = "";
+          break;
+        case "調べる":
+          var i = Inspect_DATAS.length;
+          Inspect_DATAS[i] = document.createElement("void");
+          Inspect_DATAS[i].タイプ = "調べる";
+          Inspect_DATAS[i].シーン名 = Number;
+          Inspect_DATAS[i].背景 = "";
+          Inspect_DATAS[i].可視化 = true;
+          Inspect_DATAS[i].前のシーン = "";
+          Inspect_DATAS[i].x座標1 = "";
+          Inspect_DATAS[i].y座標1 = "";
+          Inspect_DATAS[i].幅1 = "";
+          Inspect_DATAS[i].高さ1 = "";
+          Inspect_DATAS[i].移動先1 = "";
+          Inspect_DATAS[i].x座標2 = "";
+          Inspect_DATAS[i].y座標2 = "";
+          Inspect_DATAS[i].幅2 = "";
+          Inspect_DATAS[i].高さ2 = "";
+          Inspect_DATAS[i].移動先2 = "";
+          Inspect_DATAS[i].x座標3 = "";
+          Inspect_DATAS[i].y座標3 = "";
+          Inspect_DATAS[i].幅3 = "";
+          Inspect_DATAS[i].高さ3 = "";
+          Inspect_DATAS[i].移動先3 = "";
+          Inspect_DATAS[i].x座標4 = "";
+          Inspect_DATAS[i].y座標4 = "";
+          Inspect_DATAS[i].幅4 = "";
+          Inspect_DATAS[i].高さ4 = "";
+          Inspect_DATAS[i].移動先4 = "";
+          Inspect_DATAS[i].x座標5 = "";
+          Inspect_DATAS[i].y座標5 = "";
+          Inspect_DATAS[i].幅5 = "";
+          Inspect_DATAS[i].高さ5 = "";
+          Inspect_DATAS[i].移動先5 = "";
+          break;
+        case "尋問":
+          var i = Interrogation_DATAS.length;
+          Interrogation_DATAS[i] = document.createElement("void");
+          Interrogation_DATAS[i].タイプ = "尋問";
+          Interrogation_DATAS[i].BGM = "";
+          Interrogation_DATAS[i].シーン名 = Number;
+          Interrogation_DATAS[i].人物 = "";
+          Interrogation_DATAS[i].人物名 = "証人";
+          Interrogation_DATAS[i].倍率 = "1";
+          Interrogation_DATAS[i].証言 = "";
+          Interrogation_DATAS[i].待った移動場所 = "";
+          Interrogation_DATAS[i].前 = "";
+          Interrogation_DATAS[i].セーブ = Number;
+          Interrogation_DATAS[i].次 = "";
+          Interrogation_DATAS[i].正解移動場所 = "";
+          Interrogation_DATAS[i].正解アイテム = "無し";
+          break;
+      }
+      Scene_loads(Number,false,false);
+    });
 
     return scene;
   };
