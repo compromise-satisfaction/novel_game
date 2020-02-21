@@ -1505,7 +1505,7 @@ function Game_load(width,height,private,Manager,make){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../画像/白.png";
+    Background._element.src = "../画像/半透明(赤).png";
     Background.x = width;
     Background.width = width;
     Background.height = height;
@@ -2625,6 +2625,13 @@ function Game_load(width,height,private,Manager,make){
       scene.addChild(Item);
     }//アイテム
 
+    var Speech_bubble_image = new Sprite();
+    Speech_bubble_image._element = document.createElement("img");
+    Speech_bubble_image._element.src = "../画像/透明.png";
+    Speech_bubble_image.width = width;
+    Speech_bubble_image.height = width/16*9;
+    scene.addChild(Speech_bubble_image);
+
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
     White_Background._element.src = "../画像/白.png";
@@ -2728,13 +2735,6 @@ function Game_load(width,height,private,Manager,make){
     Speak_Background2.height = height/5;
     Speak_Background2.y = width/16*9+width/8-height/5;
 
-    var Speech_bubble_image = new Sprite();
-    Speech_bubble_image._element = document.createElement("img");
-    Speech_bubble_image._element.src = "../画像/透明.png";
-    Speech_bubble_image.width = width;
-    Speech_bubble_image.height = width/16*9;
-    scene.addChild(Speech_bubble_image);
-
     if(Speak_Character==""&&Datas[7]){
       switch (Datas[7]){
         case Datas[1]:
@@ -2833,12 +2833,12 @@ function Game_load(width,height,private,Manager,make){
           break;
         case "↑":
           Time++;
-          if(Return==false){
-            var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
-            if(Image=="消滅") Speech_bubble_image._element.src = "../画像/透明.png";
-            else Speech_bubble_image._element.src = conversion_url(Image,"画像");
-            ksks++;
-          }
+          var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
+          if(Image.split("→")[1]) Speech_bubble_image.x = Image.split("→")[1]*1;
+          if(Image.split("→")[2]) Speech_bubble_image.y = Image.split("→")[2]*1;
+          if(Image.split("→")[0]=="消滅") Speech_bubble_image._element.src = "../画像/透明.png";
+          else Speech_bubble_image._element.src = conversion_url(Image.split("→")[0],"画像");
+          ksks++;
           T_D();
           return;
           break;
