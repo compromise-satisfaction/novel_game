@@ -1852,21 +1852,21 @@ function Game_load(width,height,private,Manager,make){
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
+        switch (make_data.タイプ) {
+          case "メイン":
+          case "選択":
+            Scene_name = Save_Scene.split(",")[3];
+            break;
+          case "調べる":
+            Scene_name = Save_Scene.split(",")[0];
+            break;
+          case "尋問":
+          case "入手":
+            Scene_name = Save_Scene.split(",")[1];
+            break;
+        }
+        Scene_loads(Scene_name,false,false);
       },);
-      switch (make_data.タイプ) {
-        case "メイン":
-        case "選択":
-          Scene_name = Save_Scene.Sprite(",")[3];
-          break;
-        case "調べる":
-          Scene_name = Save_Scene.Sprite(",")[0];
-          break;
-        case "尋問":
-        case "入手":
-          Scene_name = Save_Scene.Sprite(",")[1];
-          break;
-      }
-      Scene_loads(Scene_name,false,false);
     });
 
     var M_Text = [];
