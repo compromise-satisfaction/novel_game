@@ -99,7 +99,7 @@ $(function(){
   //余白部分をドラッグすることによるスクロールを無効にする
   //$("#base").on("touchstart",function(event){event.preventDefault();});
   //ゲームを実行する
-  Game_load(gameWidth,gameHeight,"11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k",false,true);
+  Game_load(gameWidth,gameHeight,"1FhhWkVhJxlvxWeTgN9e4jCKeP0ZSMDI1XSmAQofVnhc",false,true);
   //初回時のスクリーン設定
   orientationChange();
 });

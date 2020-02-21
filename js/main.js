@@ -2370,7 +2370,7 @@ function Game_load(width,height,private,Manager,make){
 
     Submit("最初から");
     Submit("続きから");
-    Submit("説明");
+    if(Title_DATAS[0].説明) Submit("説明");
     Submit("データ消去");
     if(Manager) Submit("テスト用");
     /*
