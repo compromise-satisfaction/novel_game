@@ -3394,134 +3394,133 @@ function Game_load(width,height,private,Manager,make){
         tk++;
       }
     }
-    if(Manager){
-      var Setting_mode1 = 0;
-      var Setting_mode2 = 0;
-      function management(){
-        if (game.input.up){
-          Setting_mode1--;
-          if(Datas[1]!=false){
-            Character1.y =  Setting_mode1*(width/16/100);
-          }
-          if(Datas[3]!=false){
-            Character2.y =  Setting_mode1*(width/16/100);
-          }
-          if(Datas[5]!=false){
-            Character3.y =  Setting_mode1*(width/16/100);
-          }
-          console.log(Setting_mode1);
+
+    var Setting_mode1 = 0;
+    var Setting_mode2 = 0;
+    function management(){
+      if (game.input.up){
+        Setting_mode1--;
+        if(Datas[1]!=false){
+          Character1.y =  Setting_mode1*(width/16/100);
         }
-        if (game.input.right){
-          Setting_mode2+=0.1;
-          if(Datas[1]!=false){
-            Character1.width = width/16*9;
-            Character1.height = width/16*9;
-            if(Setting_mode2>0){
-              Character1.width*=Setting_mode2;
-              Character1.height*=Setting_mode2;
-              Character1.scaleX = 1;
-            }
-            else{
-              Character1.width*=-Setting_mode2;
-              Character1.height*=-Setting_mode2;
-              Character1.scaleX = -1;
-            }
-            Character1.x = (width-Character1.width)/2-width/4;
-          }
-          if(Datas[3]!=false){
-            Character2.width = width/16*9;
-            Character2.height = width/16*9;
-            if(Setting_mode2>0){
-              Character2.width*=Setting_mode2;
-              Character2.height*=Setting_mode2;
-              Character2.scaleX = 1;
-            }
-            else{
-              Character2.width*=-Setting_mode2;
-              Character2.height*=-Setting_mode2;
-              Character2.scaleX = -1;
-            }
-            Character2.x = (width-Character2.width)/2;
-          }
-          if(Datas[5]!=false){
-            Character3.width = width/16*9;
-            Character3.height = width/16*9;
-            if(Setting_mode2>0){
-              Character3.width*=Setting_mode2;
-              Character3.height*=Setting_mode2;
-              Character3.scaleX = 1;
-            }
-            else{
-              Character3.width*=-Setting_mode2;
-              Character3.height*=-Setting_mode2;
-              Character3.scaleX = -1;
-            }
-            Character3.x = (width-Character3.width)/2+width/4;
-          }
-          console.log(Setting_mode2);
+        if(Datas[3]!=false){
+          Character2.y =  Setting_mode1*(width/16/100);
         }
-        if (game.input.left){
-          Setting_mode2-=0.1;
-          if(Datas[1]!=false){
-            Character1.width = width/16*9;
-            Character1.height = width/16*9;
-            if(Setting_mode2>0){
-              Character1.width*=Setting_mode2;
-              Character1.height*=Setting_mode2;
-              Character1.scaleX = 1;
-            }
-            else{
-              Character1.width*=-Setting_mode2;
-              Character1.height*=-Setting_mode2;
-              Character1.scaleX = -1;
-            }
-            Character1.x = (width-Character1.width)/2-width/4;
-          }
-          if(Datas[3]!=false){
-            Character2.width = width/16*9;
-            Character2.height = width/16*9;
-            if(Setting_mode2>0){
-              Character2.width*=Setting_mode2;
-              Character2.height*=Setting_mode2;
-              Character2.scaleX = 1;
-            }
-            else{
-              Character2.width*=-Setting_mode2;
-              Character2.height*=-Setting_mode2;
-              Character2.scaleX = -1;
-            }
-            Character2.x = (width-Character2.width)/2;
-          }
-          if(Datas[5]!=false){
-            Character3.width = width/16*9;
-            Character3.height = width/16*9;
-            if(Setting_mode2>0){
-              Character3.width*=Setting_mode2;
-              Character3.height*=Setting_mode2;
-              Character3.scaleX = 1;
-            }
-            else{
-              Character3.width*=-Setting_mode2;
-              Character3.height*=-Setting_mode2;
-              Character3.scaleX = -1;
-            }
-            Character3.x = (width-Character3.width)/2+width/4;
-          }
-          console.log(Setting_mode2);
+        if(Datas[5]!=false){
+          Character3.y =  Setting_mode1*(width/16/100);
         }
-        if (game.input.down){
-          Setting_mode1++;
-          if(Datas[1]!=false){
-            Character1.y =  Setting_mode1*(width/16/100);
+        console.log(Setting_mode1);
+      }
+      if (game.input.right){
+        Setting_mode2+=0.1;
+        if(Datas[1]!=false){
+          Character1.width = width/16*9;
+          Character1.height = width/16*9;
+          if(Setting_mode2>0){
+            Character1.width*=Setting_mode2;
+            Character1.height*=Setting_mode2;
+            Character1.scaleX = 1;
           }
-          if(Datas[3]!=false){
-            Character2.y =  Setting_mode1*(width/16/100);
+          else{
+            Character1.width*=-Setting_mode2;
+            Character1.height*=-Setting_mode2;
+            Character1.scaleX = -1;
           }
-          if(Datas[5]!=false){
-            Character3.y =  Setting_mode1*(width/16/100);
-          }
-          console.log(Setting_mode1);
+          Character1.x = (width-Character1.width)/2-width/4;
         }
+        if(Datas[3]!=false){
+          Character2.width = width/16*9;
+          Character2.height = width/16*9;
+          if(Setting_mode2>0){
+            Character2.width*=Setting_mode2;
+            Character2.height*=Setting_mode2;
+            Character2.scaleX = 1;
+          }
+          else{
+            Character2.width*=-Setting_mode2;
+            Character2.height*=-Setting_mode2;
+            Character2.scaleX = -1;
+          }
+          Character2.x = (width-Character2.width)/2;
+        }
+        if(Datas[5]!=false){
+          Character3.width = width/16*9;
+          Character3.height = width/16*9;
+          if(Setting_mode2>0){
+            Character3.width*=Setting_mode2;
+            Character3.height*=Setting_mode2;
+            Character3.scaleX = 1;
+          }
+          else{
+            Character3.width*=-Setting_mode2;
+            Character3.height*=-Setting_mode2;
+            Character3.scaleX = -1;
+          }
+          Character3.x = (width-Character3.width)/2+width/4;
+        }
+        console.log(Setting_mode2);
+      }
+      if (game.input.left){
+        Setting_mode2-=0.1;
+        if(Datas[1]!=false){
+          Character1.width = width/16*9;
+          Character1.height = width/16*9;
+          if(Setting_mode2>0){
+            Character1.width*=Setting_mode2;
+            Character1.height*=Setting_mode2;
+            Character1.scaleX = 1;
+          }
+          else{
+            Character1.width*=-Setting_mode2;
+            Character1.height*=-Setting_mode2;
+            Character1.scaleX = -1;
+          }
+          Character1.x = (width-Character1.width)/2-width/4;
+        }
+        if(Datas[3]!=false){
+          Character2.width = width/16*9;
+          Character2.height = width/16*9;
+          if(Setting_mode2>0){
+            Character2.width*=Setting_mode2;
+            Character2.height*=Setting_mode2;
+            Character2.scaleX = 1;
+          }
+          else{
+            Character2.width*=-Setting_mode2;
+            Character2.height*=-Setting_mode2;
+            Character2.scaleX = -1;
+          }
+          Character2.x = (width-Character2.width)/2;
+        }
+        if(Datas[5]!=false){
+          Character3.width = width/16*9;
+          Character3.height = width/16*9;
+          if(Setting_mode2>0){
+            Character3.width*=Setting_mode2;
+            Character3.height*=Setting_mode2;
+            Character3.scaleX = 1;
+          }
+          else{
+            Character3.width*=-Setting_mode2;
+            Character3.height*=-Setting_mode2;
+            Character3.scaleX = -1;
+          }
+          Character3.x = (width-Character3.width)/2+width/4;
+        }
+        console.log(Setting_mode2);
+      }
+      if (game.input.down){
+        Setting_mode1++;
+        if(Datas[1]!=false){
+          Character1.y =  Setting_mode1*(width/16/100);
+        }
+        if(Datas[3]!=false){
+          Character2.y =  Setting_mode1*(width/16/100);
+        }
+        if(Datas[5]!=false){
+          Character3.y =  Setting_mode1*(width/16/100);
+        }
+        console.log(Setting_mode1);
       }
     }
 
