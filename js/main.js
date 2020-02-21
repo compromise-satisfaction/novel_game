@@ -4097,9 +4097,9 @@ function Game_load(width,height,private,Manager,make){
 
     Submit("設定を閉じる");
     Numbers += (width/20)+(width/25)+(width/25);
-    if(make){
+    if(Manager){
       Numbers -= (width/20)+(width/25)+(width/25);
-      if(Manager) Submit("改造");
+      Submit("改造");
     }
     Submit("プレイヤー設定");
     Submit("サウンド設定");
