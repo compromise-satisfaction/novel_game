@@ -1830,11 +1830,43 @@ function Game_load(width,height,private,Manager,make){
     M_Button.height = width/20;
     M_Button._element = document.createElement('input');
     M_Button._element.type = "submit";
-    M_Button._element.value = "このシーンを保存したい";
+    M_Button._element.value = "このシーンを保存する";
     scene.addChild(M_Button);
     M_Button.addEventListener('touchstart',function(e){
       if(Button_push("セーブ")) return;
-
+      game.pushScene(LoadingScene("保存"));
+      Scene_kazu++;
+      console.log("Scene数",Scene_kazu);
+      var Save_Scene = "";
+      for (var i = 0; i < S_Input.length; i++) {
+        Save_Scene += S_Input[i]._element.value + ",";
+      }
+      fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+        {
+          method: 'POST',
+          body: "新設定(改行)"+make_data.タイプ+"(改行)"+Play_Sheet+"(改行)"+Save_Scene
+        }
+      )
+      .then(res => res.json())
+      .then(result => {
+        game.popScene();
+        Scene_kazu--;
+        console.log("Scene数",Scene_kazu);
+      },);
+      switch (make_data.タイプ) {
+        case "メイン":
+        case "選択":
+          Scene_name = Save_Scene.Sprite(",")[3];
+          break;
+        case "調べる":
+          Scene_name = Save_Scene.Sprite(",")[0];
+          break;
+        case "尋問":
+        case "入手":
+          Scene_name = Save_Scene.Sprite(",")[1];
+          break;
+      }
+      Scene_loads(Scene_name,false,false);
     });
 
     var M_Text = [];
@@ -2123,7 +2155,7 @@ function Game_load(width,height,private,Manager,make){
 
     return scene;
   };
-  var LoadingScene = function(){
+  var LoadingScene = function(a){
     var scene = new Scene();
 
     var Background = new Entity();
@@ -2131,15 +2163,28 @@ function Game_load(width,height,private,Manager,make){
     Background._element.src = "../画像/半透明(黒).png";
     Background.width = width;
     Background.height = height;
-    scene.addChild(Background);
 
-    var Loading = new Entity();
-    Loading._element = document.createElement("img");
-    Loading._element.src = "../画像/読み込み中.gif";
-    Loading.x = width/2-width/4;
-    Loading.y = height/2-width/20;
-    Loading.width = width/2;
-    Loading.height = width/10;
+    if(a=="保存"){
+      Background.width *= 2;
+      var Loading = new Entity();
+      Loading._element = document.createElement("img");
+      Loading._element.src = "../画像/保存中.gif";
+      Loading.x = width/2;
+      Loading.y = height/2-width/20;
+      Loading.width = width;
+      Loading.height = width/5;
+    }
+    else{
+      var Loading = new Entity();
+      Loading._element = document.createElement("img");
+      Loading._element.src = "../画像/読み込み中.gif";
+      Loading.x = width/2-width/4;
+      Loading.y = height/2-width/20;
+      Loading.width = width/2;
+      Loading.height = width/10;
+    }
+
+    scene.addChild(Background);
     scene.addChild(Loading);
 
     return scene;
@@ -4055,7 +4100,6 @@ function Game_load(width,height,private,Manager,make){
     if(make){
       Numbers -= (width/20)+(width/25)+(width/25);
       if(Manager) Submit("改造");
-      else Submit("シーンデータを保存");
     }
     Submit("プレイヤー設定");
     Submit("サウンド設定");
