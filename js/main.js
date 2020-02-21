@@ -3198,7 +3198,7 @@ function Game_load(width,height,private,Manager,make){
     }
 
     White_Background.addEventListener("enterframe",function(){
-      if(Manager) management();
+      if(make) management();
       if(Background.x==width/200){
         if(Datas[1]){
           Character1.x -= width/100;
