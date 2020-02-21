@@ -1657,15 +1657,15 @@ function Game_load(width,height,private,Manager,make){
     }
 
     var M_Button = new Entity();
-    M_Button.moveTo(width/4+width,Numbers);
+    M_Button.moveTo(width/2+width,Numbers);
     M_Button.width = width/2;
     M_Button.height = width/20;
     M_Button._element = document.createElement('input');
     M_Button._element.type = "submit";
-    M_Button._element.value = "決定";
+    M_Button._element.value = "確認";
     scene.addChild(M_Button);
     M_Button.addEventListener('touchstart',function(e){
-      if(Button_push("セーブ")) return;
+      if(Button_push("選択音")) return;
       switch (make_data.タイプ) {
         case "メイン":
           for (var i = 0; i < Main_DATAS.length; i++) {
@@ -1822,6 +1822,19 @@ function Game_load(width,height,private,Manager,make){
           break;
       }
       Scene_loads(Scene_name,false,false);
+    });
+
+    var M_Button = new Entity();
+    M_Button.moveTo(width,Numbers);
+    M_Button.width = width/2;
+    M_Button.height = width/20;
+    M_Button._element = document.createElement('input');
+    M_Button._element.type = "submit";
+    M_Button._element.value = "このシーンを保存したい";
+    scene.addChild(M_Button);
+    M_Button.addEventListener('touchstart',function(e){
+      if(Button_push("セーブ")) return;
+
     });
 
     var M_Text = [];
