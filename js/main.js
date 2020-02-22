@@ -1935,7 +1935,8 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].表示名 = S_Input[2]._element.value;
           Main_DATAS[i].シーン名 = S_Input[3]._element.value;
           Scene_name = Main_DATAS[i].シーン名;
-          Main_DATAS[i].背景 = S_Input[4]._element.value+"→"+Sub[0]._element.value+"→"+Subs[0]._element.value;
+          if(S_Input[4]._element.value=="変化無し") Main_DATAS[i].背景 = S_Input[4]._element.value;
+          else Main_DATAS[i].背景 = S_Input[4]._element.value+"→"+Sub[0]._element.value+"→"+Subs[0]._element.value;
           Main_DATAS[i].左側の人物 = S_Input[5]._element.value+Sub[1]._element.value+Subs[1]._element.value;
           Main_DATAS[i].左倍率 = S_Input[6]._element.value;
           Main_DATAS[i].真ん中の人物 = S_Input[7]._element.value+Sub[2]._element.value+Subs[2]._element.value;
@@ -1970,7 +1971,8 @@ function Game_load(width,height,private,Manager,make){
           Choice_DATAS[i].表示名 = S_Input[2]._element.value;
           Choice_DATAS[i].シーン名 = S_Input[3]._element.value;
           Scene_name = Choice_DATAS[i].シーン名;
-          Choice_DATAS[i].背景 = S_Input[4]._element.value+"→"+Sub[0]._element.value+"→"+Subs[0]._element.value;
+          if(S_Input[4]._element.value=="変化無し") Choice_DATAS[i].背景 = S_Input[4]._element.value;
+          else Choice_DATAS[i].背景 = S_Input[4]._element.value+"→"+Sub[0]._element.value+"→"+Subs[0]._element.value;
           Choice_DATAS[i].左側の人物 = S_Input[5]._element.value;
           Choice_DATAS[i].左倍率 = S_Input[6]._element.value;
           Choice_DATAS[i].真ん中の人物 = S_Input[7]._element.value;
