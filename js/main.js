@@ -1667,6 +1667,13 @@ function Game_load(width,height,private,Manager,make){
           Option[k].value = BGM_DATAS[k-1][2];
           if(Option[k].text!=Option[0].text) S_Input[i]._element.appendChild(Option[k]);
         }
+        if(Option[0].text!="変化無し"){
+          Option[k] = document.createElement("option");
+          Option[k].text = "変化無し";
+          Option[k].value = "変化無し";
+          S_Input[i]._element.appendChild(Option[k]);
+          k++;
+        }
         if(Option[0].text!=""){
           Option[k] = document.createElement("option");
           Option[k].text = "";
@@ -1829,6 +1836,13 @@ function Game_load(width,height,private,Manager,make){
           Option[k].text = Image_DATAS[k-1].名前;
           Option[k].value = Image_DATAS[k-1].名前;
           if(Option[k].text!=Option[0].text) S_Input[i]._element.appendChild(Option[k]);
+        }
+        if(Option[0].text!="変化無し"){
+          Option[k] = document.createElement("option");
+          Option[k].text = "変化無し";
+          Option[k].value = "変化無し";
+          S_Input[i]._element.appendChild(Option[k]);
+          k++;
         }
         if(Option[0].text!=""){
           Option[k] = document.createElement("option");
