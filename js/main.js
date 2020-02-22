@@ -1841,6 +1841,7 @@ function Game_load(width,height,private,Manager,make){
       for (var i = 0; i < S_Input.length; i++) {
         Save_Scene += S_Input[i]._element.value + ",";
       }
+      Save_Scene = Save_Scene.substring(0,Save_Scene.length-1);
       fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
         {
           method: 'POST',
@@ -4337,7 +4338,7 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].タイプ = "メイン";
           Main_DATAS[i].入手 = "";
           Main_DATAS[i].BGM = "";
-          Main_DATAS[i].表示名 = "";
+          Main_DATAS[i].表示名 = "(表示名好感度)";
           Main_DATAS[i].シーン名 = Number;
           Main_DATAS[i].背景 = "";
           Main_DATAS[i].左側の人物 = "";
@@ -4346,16 +4347,16 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].中倍率 = 1;
           Main_DATAS[i].右側の人物 = "";
           Main_DATAS[i].右倍率 = 1;
-          Main_DATAS[i].人物名 = "人物名";
-          Main_DATAS[i].文章音 = "";
+          Main_DATAS[i].人物名 = "(主人公名前)";
+          Main_DATAS[i].文章音 = "主人公";
           Main_DATAS[i].速度 = 10;
-          Main_DATAS[i].文章男 = "文章男";
-          Main_DATAS[i].文章女 = "文章女";
-          Main_DATAS[i].文章未設定 = "文章未設定";
+          Main_DATAS[i].文章男 = "「現在主人公の設定は男です。」";
+          Main_DATAS[i].文章女 = "「現在主人公の設定は女です。」";
+          Main_DATAS[i].文章未設定 = "「現在主人公の性別は未設定です」";
           Main_DATAS[i].前前 = "";
-          Main_DATAS[i].前 = "";
+          Main_DATAS[i].前 = Number*1-1;
           Main_DATAS[i].セーブ = Number;
-          Main_DATAS[i].次 = "";
+          Main_DATAS[i].次 = Number*1+1;
           Main_DATAS[i].次次 = "";
           Main_DATAS[i].表示アイテムx座標 = "";
           Main_DATAS[i].表示アイテムy座標 = "";
@@ -4379,7 +4380,7 @@ function Game_load(width,height,private,Manager,make){
           Choice_DATAS[i].右側の人物 = "";
           Choice_DATAS[i].右倍率 = 1;
           Choice_DATAS[i].前前 = "";
-          Choice_DATAS[i].前 = "";
+          Choice_DATAS[i].前 = Number*1-1;
           Choice_DATAS[i].セーブ = Number;
           Choice_DATAS[i].選択肢1 = "";
           Choice_DATAS[i].選択肢1移動先 = "";
