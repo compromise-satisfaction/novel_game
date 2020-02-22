@@ -1511,7 +1511,7 @@ function Game_load(width,height,private,Manager,make){
 
     var Background = new Entity();
     Background._element = document.createElement("img");
-    Background._element.src = "../画像/半透明(赤).png";
+    Background._element.src = "../画像/白.png";
     Background.x = width;
     Background.width = width;
     Background.height = height;
@@ -2979,6 +2979,7 @@ function Game_load(width,height,private,Manager,make){
         Text[i].x = width/20;
         Text[i].width = width-width/10;
       }
+      else Text[i].width = width;
       Text[i].y = Numbers;
       if(Datas[19]=="日付") Text[i]._style.color = "green";
       scene.addChild(Text[i]);
@@ -4171,7 +4172,9 @@ function Game_load(width,height,private,Manager,make){
       Text[i]._element = document.createElement("innerHTML");
       Text[i]._style.font  = width/20+"px monospace";
       Text[i]._element.textContent = a;
+      Text[i].x = width/20;
       Text[i].y = Numbers;
+      Text[i].width = width-width/10;
       Text[i]._style.color = "green";
       scene.addChild(Text[i]);
     }//証言
