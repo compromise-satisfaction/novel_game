@@ -2104,7 +2104,7 @@ function Game_load(width,height,private,Manager,make){
       fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
         {
           method: 'POST',
-          body: "新設定(改行)"+make_data.タイプ+"(改行)"+Play_Sheet+"(改行)"+Save_Scene
+          body: "新設定(改行)"+make_data.タイプ+"(改行)"+Play_Sheet+"(改行)"+Save_Scene+"(改行)"+Manager
         }
       )
       .then(res => res.json())
