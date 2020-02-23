@@ -1900,6 +1900,33 @@ function Game_load(width,height,private,Manager,make){
         scene.addChild(Subs[j]);
         j++;
       }
+      else if(Make_datas[i][1]=="表示アイテム"){
+        S_Input[i]._element = document.createElement("select");
+        var Option = [];
+        Option[0] = document.createElement("option");
+        Option[0].text = Make_datas[i][0].split("→")[0];
+        Option[0].value = Option[0].text;
+        S_Input[i]._element.appendChild(Option[0]);
+        for (var k = 1; k < Image_DATAS.length+1; k++){
+          Option[k] = document.createElement("option");
+          Option[k].text = Image_DATAS[k-1].名前;
+          Option[k].value = Image_DATAS[k-1].名前;
+          if(Option[k].text!=Option[0].text) S_Input[i]._element.appendChild(Option[k]);
+        }
+        if(Option[0].text!="デフォルト"){
+          Option[k] = document.createElement("option");
+          Option[k].text = "デフォルト";
+          Option[k].value = "デフォルト";
+          S_Input[i]._element.appendChild(Option[k]);
+          k++;
+        }
+        if(Option[0].text!=""){
+          Option[k] = document.createElement("option");
+          Option[k].text = "";
+          Option[k].value = "";
+          S_Input[i]._element.appendChild(Option[k]);
+        }
+      }
       else{
         S_Input[i]._element = document.createElement('input');
         S_Input[i]._element.value = Make_datas[i][0];
@@ -2323,6 +2350,77 @@ function Game_load(width,height,private,Manager,make){
               {
                 method: 'POST',
                 body: "データ消去"+Number+Title_Sheet
+              }
+            )
+            return;
+            break;
+          default:
+            return;
+            break;
+        }
+        switch(a){
+          case "戻る":
+            game.popScene();
+            game.popScene();
+            Scene_kazu--;
+            Scene_kazu--;
+            console.log("Scene数",Scene_kazu);
+            break;
+          default:
+            return;
+            break;
+        }
+      });
+      submits++;
+      Numbers += (width/20)+(width/25)+(width/25);
+    }
+
+    Submit("削除する");
+    Submit(Title_DATAS[Number-1].セーブデータ);
+    Numbers += (width/20)+(width/25)+(width/25);
+    Numbers += (width/20)+(width/25)+(width/25);
+    Numbers += (width/20)+(width/25)+(width/25);
+    Numbers += (width/20)+(width/25)+(width/25);
+    Submit("戻る");
+
+    return scene;
+  }
+  var CopyScene = function(Number){
+    var scene = new Scene();
+
+    var Background = new Entity();
+    Background._element = document.createElement("img");
+    Background._element.src = "../画像/メニュー背景.png";
+    Background.width = width;
+    Background.height = height;
+    scene.addChild(Background);
+
+    var Button = [];
+    var submits = 0;
+    var Numbers = (width/10)+(width/30);
+    function Submit(a){
+      Button[submits] = new Entity();
+      Button[submits].moveTo(width/2-width/1.2/2,Numbers);
+      Button[submits].width = width/1.2;
+      Button[submits].height = width/10;
+      Button[submits]._element = document.createElement('input');
+      Button[submits]._element.type = "submit";
+      Button[submits]._element.value = a;
+      Button[submits].ナンバー = submits;
+      scene.addChild(Button[submits]);
+      Button[submits].addEventListener('touchstart',function(e){
+        switch (a) {
+          case "戻る":
+            if(Button_push_title(Title_sound3)) return;
+            break;
+          case "コピーする":
+            if(Button_push_title(Title_sound6)) return;
+            Button[1]._element.value = "データ無し";
+            Title_DATAS[Number-1].セーブデータ = "データ無し";
+            fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+              {
+                method: 'POST',
+                body: "データコピー"+Number+Title_Sheet
               }
             )
             return;
