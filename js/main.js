@@ -1900,7 +1900,7 @@ function Game_load(width,height,private,Manager,make){
         scene.addChild(Subs[j]);
         j++;
       }
-      else if(Make_datas[i][1]=="表示アイテム"){
+      else if(Make_datas[i][1]=="表示アイテム画像"){
         S_Input[i]._element = document.createElement("select");
         var Option = [];
         Option[0] = document.createElement("option");
