@@ -1919,7 +1919,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button.height = width/20;
     M_Button._element = document.createElement('input');
     M_Button._element.type = "submit";
-    M_Button._element.value = "確認";
+    M_Button._element.value = "適用";
     scene.addChild(M_Button);
     M_Button.addEventListener('touchstart',function(e){
       if(Button_push("選択音")) return;
