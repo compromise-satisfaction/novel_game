@@ -73,7 +73,7 @@ $(function(){
   //ゲーム内の画面サイズ
   var gameWidth = 1072;
   var gameWidth = 1072/4;
-  var gameWidth = 405*2;
+  var gameWidth = 405*2.5;
   var gameHeight = 1560;
   var gameHeight = 1560/4;
   var gameHeight = 600;

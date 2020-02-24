@@ -12,7 +12,7 @@ var Button_time = Button_time_next;
 
 function Game_load(width,height,private,Manager,make){
   var game = new Game(width,height);
-  if(make) width/=2;
+  if(make) width/=2.5;
 
   game.fps = 10;
   game.onload = function(){
@@ -56,7 +56,7 @@ function Game_load(width,height,private,Manager,make){
     Data = Data.replace(/\(主人公名前\)/g,Setting_Flag[0]);
     Data = Data.replace(/\(一人称\)/g,Setting_Flag[16]);
     Data = Data.replace(/\(二人称\)/g,Setting_Flag[17]);
-    Data = Data.replace(/\n/g,"↓");
+    Data = Data.replace(/↓/g,"\n");
     for (var i = 0; i < Favorability_Flag.length; i++){
       var Favorability = "("+Favorability_Flag[i][0]+"好感度)";
       Data = Data.replace(Favorability,Favorability_Flag[i][1]);
@@ -866,8 +866,8 @@ function Game_load(width,height,private,Manager,make){
   }//アイテム関連
   function Get_ICFT2(DATAS){
     if(DATAS.入手!=false){
-      GET = DATAS.入手.replace(/\n/g,"↓");
-      GET = GET.split("↓");
+      GET = DATAS.入手.replace(/↓/g,"\n");
+      GET = GET.split("\n");
       for (var l = 0; l < GET.length; l++) {
         switch(GET[l]){
           case "フラグリセット":
@@ -908,7 +908,7 @@ function Game_load(width,height,private,Manager,make){
     if(Item){
       if(Item_image) Setting_Flag[15] = Item_image;
       if(Item_type) Number = [Number+"で"+Item+"を"+Do,Number+"で"+Item_type+"を"+Do];
-      else Number = [Number.split("↓")[0]+"で"+Item+"を"+Do,Number.split("↓")[1]];
+      else Number = [Number.split("\n")[0]+"で"+Item+"を"+Do,Number.split("\n")[1]];
       Item = Number[1];
       Number = Number[0];
       if(have(Number+"既読")){
@@ -1423,7 +1423,7 @@ function Game_load(width,height,private,Manager,make){
     Datas[5] = "";
     Datas[6] = "";
     Datas[7] = "";
-    Datas[8] = "ここから先は出来ていません。↓更新をお待ちください。";
+    Datas[8] = "ここから先は出来ていません。\n更新をお待ちください。";
     Datas[9] = "";
     Datas[10] = "";
     Datas[11] = "";
@@ -1537,7 +1537,7 @@ function Game_load(width,height,private,Manager,make){
 
     switch (make_data.タイプ) {
       case "メイン":
-        Make_datas[Make_datas.length] = [make_data.入手.replace(/\n/g,"↓"),"入手"];
+        Make_datas[Make_datas.length] = [make_data.入手.replace(/↓/g,"\n"),"入手"];
         Make_datas[Make_datas.length] = [make_data.BGM,"ミュージック"];
         Make_datas[Make_datas.length] = [make_data.表示名,"表示名"];
         Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
@@ -1551,9 +1551,9 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.人物名,"人物名"];
         Make_datas[Make_datas.length] = [make_data.文章音,"文章音"];
         Make_datas[Make_datas.length] = [make_data.速度,"速度"];
-        Make_datas[Make_datas.length] = [make_data.文章男.replace(/\n/g,"↓"),"文章男"];
-        Make_datas[Make_datas.length] = [make_data.文章女.replace(/\n/g,"↓"),"文章女"];
-        Make_datas[Make_datas.length] = [make_data.文章未設定.replace(/\n/g,"↓"),"文章未設定"];
+        Make_datas[Make_datas.length] = [make_data.文章男.replace(/↓/g,"\n"),"文章男"];
+        Make_datas[Make_datas.length] = [make_data.文章女.replace(/↓/g,"\n"),"文章女"];
+        Make_datas[Make_datas.length] = [make_data.文章未設定.replace(/↓/g,"\n"),"文章未設定"];
         Make_datas[Make_datas.length] = [make_data.前前,"前前"];
         Make_datas[Make_datas.length] = [make_data.前,"前"];
         Make_datas[Make_datas.length] = [make_data.セーブ,"セーブ"];
@@ -1566,7 +1566,7 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.トロフィー,"トロフィー"];
         break;
       case "移行":
-        Make_datas[Make_datas.length] = [make_data.入手.replace(/\n/g,"↓"),"入手"];
+        Make_datas[Make_datas.length] = [make_data.入手.replace(/↓/g,"\n"),"入手"];
         Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
         Make_datas[Make_datas.length] = [make_data.移動先,"移動先"];
         Make_datas[Make_datas.length] = [make_data.移動,"移動"];
@@ -1574,10 +1574,10 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.再生音声,"再生音声"];
         break;
       case "入手":
-        Make_datas[Make_datas.length] = [make_data.入手.replace(/\n/g,"↓"),"入手"];
+        Make_datas[Make_datas.length] = [make_data.入手.replace(/↓/g,"\n"),"入手"];
         Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
         Make_datas[Make_datas.length] = [make_data.画像,"画像"];
-        Make_datas[Make_datas.length] = [make_data.文章,"文章"];
+        Make_datas[Make_datas.length] = [make_data.文章.replace(/↓/g,"\n"),"文章"];
         Make_datas[Make_datas.length] = [make_data.次のシーン,"次のシーン"];
         break;
       case "調べる":
@@ -1612,7 +1612,7 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.移動先5,"移動先五"];
         break;
       case "選択":
-        Make_datas[Make_datas.length] = [make_data.入手.replace(/\n/g,"↓"),"入手"];
+        Make_datas[Make_datas.length] = [make_data.入手.replace(/↓/g,"\n"),"入手"];
         Make_datas[Make_datas.length] = [make_data.BGM,"ミュージック"];
         Make_datas[Make_datas.length] = [make_data.表示名,"表示名"];
         Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
@@ -1645,7 +1645,7 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.人物,"証人"];
         Make_datas[Make_datas.length] = [make_data.人物名,"証人名"];
         Make_datas[Make_datas.length] = [make_data.倍率,"倍率"];
-        Make_datas[Make_datas.length] = [make_data.証言,"証言"];
+        Make_datas[Make_datas.length] = [make_data.証言.replace(/↓/g,"\n"),"証言"];
         Make_datas[Make_datas.length] = [make_data.待った移動場所,"待った"];
         Make_datas[Make_datas.length] = [make_data.前,"前"];
         Make_datas[Make_datas.length] = [make_data.セーブ,"セーブ"];
@@ -1668,7 +1668,7 @@ function Game_load(width,height,private,Manager,make){
     function S_Inputs(i){
       S_Input[i] = new Entity();
       S_Input[i].moveTo(width/2+width,Numbers);
-      S_Input[i].width = width/2;
+      S_Input[i].width = width/20*13;
       S_Input[i].height = width/20;
       if(Make_datas[i][1]=="ミュージック"){
         S_Input[i]._element = document.createElement("select");
@@ -1781,8 +1781,8 @@ function Game_load(width,height,private,Manager,make){
           S_Input[i]._element.appendChild(Option[k]);
         }
         Sub[j] = new Entity();
-        Sub[j].moveTo(width/2+width+width/6,Numbers);
-        Sub[j].width = width/6;
+        Sub[j].moveTo(width/2+width+width/20*13/3,Numbers);
+        Sub[j].width = width/20*13/3;
         Sub[j].height = width/20;
         Sub[j]._element = document.createElement("select");
         if(Make_datas[i][0].split("in")[1]){
@@ -1829,8 +1829,8 @@ function Game_load(width,height,private,Manager,make){
         }
         scene.addChild(Sub[j]);
         Subs[j] = new Entity();
-        Subs[j].moveTo(width/2+width+width/3,Numbers);
-        Subs[j].width = width/6;
+        Subs[j].moveTo(width/2+width+width/20*13/3+width/20*13/3,Numbers);
+        Subs[j].width = width/20*13/3;
         Subs[j].height = width/20;
         Subs[j]._element = document.createElement("input");
         if(Make_datas[i][0].split("in")[1]) Subs[j]._element.value = Make_datas[i][0].split("in")[1];
@@ -1867,8 +1867,8 @@ function Game_load(width,height,private,Manager,make){
           S_Input[i]._element.appendChild(Option[k]);
         }
         Sub[j] = new Entity();
-        Sub[j].moveTo(width/2+width+width/6,Numbers);
-        Sub[j].width = width/6;
+        Sub[j].moveTo(width/2+width+width/20*13/3,Numbers);
+        Sub[j].width = width/20*13/3;
         Sub[j].height = width/20;
         Sub[j]._element = document.createElement("select");
         var Option = [];
@@ -1890,8 +1890,8 @@ function Game_load(width,height,private,Manager,make){
           Sub[j]._element.appendChild(Option[k]);
         }
         Subs[j] = new Entity();
-        Subs[j].moveTo(width/2+width+width/3,Numbers);
-        Subs[j].width = width/6;
+        Subs[j].moveTo(width/2+width+width/20*13/3+width/20*13/3,Numbers);
+        Subs[j].width = width/20*13/3;
         Subs[j].height = width/20;
         Subs[j]._element = document.createElement("select");
         var Option = [];
@@ -1958,7 +1958,7 @@ function Game_load(width,height,private,Manager,make){
 
     var M_Button = new Entity();
     M_Button.moveTo(width/2+width,Numbers);
-    M_Button.width = width/2;
+    M_Button.width = width/20*13;
     M_Button.height = width/20;
     M_Button._element = document.createElement('input');
     M_Button._element.type = "submit";
@@ -3372,7 +3372,7 @@ function Game_load(width,height,private,Manager,make){
           return;
           break;
         case "":
-        case "↓":
+        case "\n":
         case "…":
         case "‥":
         case "\"":
@@ -3460,7 +3460,7 @@ function Game_load(width,height,private,Manager,make){
           break;
       }
       Time++;
-      if(Datas[8].substring(Time-1,Time)=="↓"){
+      if(Datas[8].substring(Time-1,Time)=="\n"){
         k++;
         if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
           if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
@@ -4311,7 +4311,7 @@ function Game_load(width,height,private,Manager,make){
     }//証言
 
     var Text = [];
-    var Syougen = Datas[2].split("↓");
+    var Syougen = free(Datas[2]).split("\n");
 
     for (var i = 0; i < Syougen.length; i++) {
       Texts(Syougen[i]);
@@ -5125,6 +5125,7 @@ function Game_load(width,height,private,Manager,make){
     }
 
     var Text =[];
+    b = free(b);
 
     for (var i = 0; i < 6; i++) {
       Texts();
@@ -5136,7 +5137,7 @@ function Game_load(width,height,private,Manager,make){
 
     function T_D(){
       Time ++;
-      if(b.substring(Time-1,Time)=="↓"){
+      if(b.substring(Time-1,Time)=="\n"){
         k++;
       }
       else if(b.substring(Time-1,Time)!=""){
@@ -5230,7 +5231,7 @@ function Game_load(width,height,private,Manager,make){
       Data = Data.replace(/\(主人公名前\)/g,Setting_Flag[0]);
       Data = Data.replace(/\(一人称\)/g,Setting_Flag[16]);
       Data = Data.replace(/\(二人称\)/g,Setting_Flag[17]);
-      Data = Data.replace(/\n/g,"↓");
+      Data = Data.replace(/↓/g,"\n");
       for (var i = 0; i < Favorability_Flag.length; i++){
         var Favorability = "("+Favorability_Flag[i][0]+"好感度)";
         Data = Data.replace(Favorability,Favorability_Flag[i][1]);
@@ -5338,7 +5339,7 @@ function Game_load(width,height,private,Manager,make){
                 game.popScene();
                 Scene_kazu--;
                 console.log("Scene数",Scene_kazu);
-                Scene_loads(Number+"↓"+Button[3].詳細,false,Choice_Item,false,false,Button[3]._element.value);
+                Scene_loads(Number+"\n"+Button[3].詳細,false,Choice_Item,false,false,Button[3]._element.value);
               }
               else {
                 game.pushScene(DetailsScene(Button[3].詳細,0));
@@ -5384,8 +5385,8 @@ function Game_load(width,height,private,Manager,make){
               game.popScene();
               Scene_kazu--;
               console.log("Scene数",Scene_kazu);
-              for (var i = 0; i < Ig.split("↓").length; i++) {
-                if(Ig.split("↓")[i]==Choice_Item){
+              for (var i = 0; i < Ig.split("\n").length; i++) {
+                if(Ig.split("\n")[i]==Choice_Item){
                   Choice_Item = "正解アイテム";
                   break;
                 }
@@ -5405,7 +5406,7 @@ function Game_load(width,height,private,Manager,make){
             default:
               var I_text = free(f[1]);
               for (var i = 0; i < 5; i++) {
-                Text[i]._element.textContent = I_text.split("↓")[i];
+                Text[i]._element.textContent = I_text.split("\n")[i];
                 if(Text[i]._element.textContent==undefined) Text[i]._element.textContent = "";
               }
               for (var i = 0; i < submits; i++) {
@@ -5583,7 +5584,7 @@ function Game_load(width,height,private,Manager,make){
     var W_X_H = width/12;
     var W_Y_H = width/9;
 
-    var S_Text = free(Syousai).split("↓");
+    var S_Text = free(Syousai).split("\n");
     for (var i = 0; i < S_Text.length; i++) {
       Texts(S_Text[Pages+i]);
       if(Text[i]._element.textContent.substring(0,2)=="画像"){
@@ -5840,7 +5841,7 @@ function Game_load(width,height,private,Manager,make){
     Submit("");
     Submit("強欲な壺");
     Submit("強欲な壺");
-    Submit("チーター(強)に勝って貰った賞品。↓尋問時につきつけると先へ進める。↓その後強欲な壺が一つ無くなり↓強欲なカケラを入手する。");
+    Submit("チーター(強)に勝って貰った賞品。\n尋問時につきつけると先へ進める。\nその後強欲な壺が一つ無くなり\n強欲なカケラを入手する。");
     Submit("画像強欲な壺");
     Submit("実行する");
 
