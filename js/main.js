@@ -1651,7 +1651,7 @@ function Game_load(width,height,private,Manager,make){
         Make_datas[Make_datas.length] = [make_data.セーブ,"セーブ"];
         Make_datas[Make_datas.length] = [make_data.次,"次"];
         Make_datas[Make_datas.length] = [make_data.正解移動場所,"正解移動場所"];
-        Make_datas[Make_datas.length] = [make_data.正解アイテム,"正解アイテム"];
+        Make_datas[Make_datas.length] = [make_data.正解アイテム.replace(/↓/g,"\n"),"正解アイテム"];
         break
       default:
         console.log(make_data);
@@ -5385,6 +5385,7 @@ function Game_load(width,height,private,Manager,make){
               game.popScene();
               Scene_kazu--;
               console.log("Scene数",Scene_kazu);
+              Ig = free(Ig);
               for (var i = 0; i < Ig.split("\n").length; i++) {
                 if(Ig.split("\n")[i]==Choice_Item){
                   Choice_Item = "正解アイテム";
