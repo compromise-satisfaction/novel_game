@@ -1944,7 +1944,7 @@ function Game_load(width,height,private,Manager,make){
         }
       }
       else{
-        S_Input[i]._element = document.createElement('input');
+        S_Input[i]._element = document.createElement('textarea');
         S_Input[i]._element.value = Make_datas[i][0];
         S_Input[i]._element.placeholder = Make_datas[i][1]+"を入力";
       }
