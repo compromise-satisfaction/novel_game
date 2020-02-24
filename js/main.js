@@ -2189,6 +2189,14 @@ function Game_load(width,height,private,Manager,make){
     for (var i = 0; i < Make_datas.length; i++) {
       M_Texts(Make_datas[i][1],S_Input[i].y,i);
     }
+    M_Texts(game.fps+"fps",0,i);
+    M_Text[i].x = 0;
+    M_Text[i]._style.font  = width/10+"px monospace";
+    M_Text[i]._style.color  = "red";
+    M_Text[i].addEventListener("enterframe", function(){
+      M_Text[i]._element.textContent = game.fps+"fps";
+      return;
+    });
 
     return;
   }
@@ -3292,7 +3300,7 @@ function Game_load(width,height,private,Manager,make){
           break;
         case "↦":
           Time++;
-          if(Return==false) game.fps += 200;
+          if(Return==false) game.fps += 10;
           Setting_Flag[3] = game.fps;
           console.log(game.fps);
           T_D();
