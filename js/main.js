@@ -3113,7 +3113,8 @@ function Game_load(width,height,private,Manager,make){
     Speak_Background1._element.src = "../画像/吹き出し枠.png";
     Speak_Background1.width = width;
     Speak_Background1.height = height;
-    if(Datas[8].replace(/[^\「\(\)\」]/g,"")!="") scene.addChild(Speak_Background1);
+    if(Datas[8].substring(0,1)=="(") scene.addChild(Speak_Background1);
+    if(Datas[8].substring(0,1)=="「") scene.addChild(Speak_Background1);
 
     var Speak_Background2 = new Sprite();
     Speak_Background2._element = document.createElement("img");
