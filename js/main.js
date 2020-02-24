@@ -2127,7 +2127,11 @@ function Game_load(width,height,private,Manager,make){
       var S_T = "";
       for (var i = 0; i < S_Input.length; i++) {
         S_T = S_Input[i]._element.value;
-        if(i==4&&(make_data.タイプ=="メイン"||make_data.タイプ=="選択")) S_T += "→"+Sub[0]._element.value+"→"+Subs[0]._element.value;
+        if(i==4&&(make_data.タイプ=="メイン"||make_data.タイプ=="選択")){
+          S_T += "→"+Sub[0]._element.value+"→"+Subs[0]._element.value;
+          if(S_T.substring(S_T.length-1)=="→") S_T = S_T.substring(0,S_T.length-1);
+          if(S_T.substring(S_T.length-1)=="→") S_T = S_T.substring(0,S_T.length-1);
+        }
         if(make_data.タイプ=="メイン"){
           switch (i) {
             case 5:
@@ -2193,6 +2197,7 @@ function Game_load(width,height,private,Manager,make){
     M_Text[i].x = 0;
     M_Text[i]._style.font  = width/10+"px monospace";
     M_Text[i]._style.color  = "red";
+    M_Text[i].backgroundColor  = "white";
     M_Text[i].addEventListener("enterframe", function(){
       M_Text[i]._element.textContent = game.fps+"fps";
       return;
