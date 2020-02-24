@@ -11,13 +11,13 @@ var Button_time_next = 3;
 var Button_time = Button_time_next;
 
 function Game_load(width,height,private,Manager,make){
-  var game = new Game(width, height);
+  var game = new Game(width,height);
   if(make) width/=2;
 
   game.fps = 10;
   game.onload = function(){
 
-  game.addEventListener("enterframe", function(){
+  game.addEventListener("enterframe",function(){
     if(Button_time==Button_time_next) return;
     else if(game.fps==10) Button_time++;
     return;
@@ -26,6 +26,7 @@ function Game_load(width,height,private,Manager,make){
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
+  var Setting_Datas = ["","","","","","","","","","","","","",""];
   var Send_text = "選択シーンです。";
   var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
   //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,
@@ -1026,6 +1027,21 @@ function Game_load(width,height,private,Manager,make){
     Setting_Flag[3] = game.fps;
     for (var i = 0; i < Main_DATAS.length; i++) {
       if(Number==Main_DATAS[i].シーン名){
+        Setting_Datas = [];
+        Setting_Datas[0] = Main_DATAS[i].BGM;
+        Setting_Datas[1] = Main_DATAS[i].表示名;
+        Setting_Datas[2] = Main_DATAS[i].背景;
+        Setting_Datas[3] = Main_DATAS[i].左側の人物;
+        Setting_Datas[4] = Main_DATAS[i].左倍率;
+        Setting_Datas[5] = Main_DATAS[i].真ん中の人物;
+        Setting_Datas[6] = Main_DATAS[i].中倍率;
+        Setting_Datas[7] = Main_DATAS[i].右側の人物;
+        Setting_Datas[8] = Main_DATAS[i].右倍率;
+        Setting_Datas[9] = Main_DATAS[i].人物名;
+        Setting_Datas[10] = Main_DATAS[i].文章音;
+        Setting_Datas[11] = Main_DATAS[i].表示アイテムx座標;
+        Setting_Datas[12] = Main_DATAS[i].表示アイテムy座標;
+        Setting_Datas[13] = Main_DATAS[i].表示アイテム画像;
         if(make) M_M = Main_DATAS[i];
         if(Main_DATAS[i].表示名!="変化無し") Showing_name = free(Main_DATAS[i].表示名);
         if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
@@ -2198,7 +2214,7 @@ function Game_load(width,height,private,Manager,make){
     M_Text[i]._style.font  = width/10+"px monospace";
     M_Text[i]._style.color  = "red";
     M_Text[i].backgroundColor  = "white";
-    M_Text[i].addEventListener("enterframe", function(){
+    M_Text[i].addEventListener("enterframe",function(){
       M_Text[i]._element.textContent = game.fps+"fps";
       return;
     });
@@ -4723,18 +4739,18 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i] = document.createElement("void");
           Main_DATAS[i].タイプ = "メイン";
           Main_DATAS[i].入手 = "";
-          Main_DATAS[i].BGM = Setting_Flag[14];
-          Main_DATAS[i].表示名 = Showing_name;
+          Main_DATAS[i].BGM = Setting_Datas[0];
+          Main_DATAS[i].表示名 = Setting_Datas[1];
           Main_DATAS[i].シーン名 = Number;
-          Main_DATAS[i].背景 = Datas[0];
-          Main_DATAS[i].左側の人物 = Datas[1];
-          Main_DATAS[i].左倍率 = Datas[22];
-          Main_DATAS[i].真ん中の人物 = Datas[3];
-          Main_DATAS[i].中倍率 = Datas[23];
-          Main_DATAS[i].右側の人物 = Datas[5];
-          Main_DATAS[i].右倍率 = Datas[24];
-          Main_DATAS[i].人物名 = "(主人公名前)";
-          Main_DATAS[i].文章音 = "主人公";
+          Main_DATAS[i].背景 = Setting_Datas[2];
+          Main_DATAS[i].左側の人物 = Setting_Datas[3];
+          Main_DATAS[i].左倍率 = Setting_Datas[4];
+          Main_DATAS[i].真ん中の人物 = Setting_Datas[5];
+          Main_DATAS[i].中倍率 = Setting_Datas[6];
+          Main_DATAS[i].右側の人物 = Setting_Datas[7];
+          Main_DATAS[i].右倍率 = Setting_Datas[8];
+          Main_DATAS[i].人物名 = Setting_Datas[9];
+          Main_DATAS[i].文章音 = Setting_Datas[10];
           Main_DATAS[i].速度 = 10;
           Main_DATAS[i].文章男 = "「現在主人公の設定は男です。」";
           Main_DATAS[i].文章女 = "「現在主人公の設定は女です。」";
@@ -4744,10 +4760,10 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].セーブ = Number;
           Main_DATAS[i].次 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1+1);
           Main_DATAS[i].次次 = Number.replace(/\d/g,"")+"選択";
-          Main_DATAS[i].表示アイテムx座標 = Datas[14] ;
-          Main_DATAS[i].表示アイテムy座標 = Datas[20];
+          Main_DATAS[i].表示アイテムx座標 = Setting_Datas[11];
+          Main_DATAS[i].表示アイテムy座標 = Setting_Datas[12];
           Main_DATAS[i].表示アイテムフェード = 0;
-          Main_DATAS[i].表示アイテム画像 = Datas[15];
+          Main_DATAS[i].表示アイテム画像 = Setting_Datas[13];
           Main_DATAS[i].トロフィー = "";
           break;
         case "選択":
@@ -4755,16 +4771,16 @@ function Game_load(width,height,private,Manager,make){
           Choice_DATAS[i] = document.createElement("void");
           Choice_DATAS[i].タイプ = "選択";
           Choice_DATAS[i].入手 = "";
-          Choice_DATAS[i].BGM = Setting_Flag[14];
-          Choice_DATAS[i].表示名 = Showing_name;
+          Choice_DATAS[i].BGM = Setting_Datas[0];
+          Choice_DATAS[i].表示名 = Setting_Datas[1];
           Choice_DATAS[i].シーン名 = Number;
-          Choice_DATAS[i].背景 = Datas[0];
-          Choice_DATAS[i].左側の人物 = Datas[1];
-          Choice_DATAS[i].左倍率 = Datas[22];
-          Choice_DATAS[i].真ん中の人物 = Datas[3];
-          Choice_DATAS[i].中倍率 = Datas[23];
-          Choice_DATAS[i].右側の人物 = Datas[5];
-          Choice_DATAS[i].右倍率 = Datas[24];
+          Choice_DATAS[i].背景 = Setting_Datas[2];
+          Choice_DATAS[i].左側の人物 = Setting_Datas[3];
+          Choice_DATAS[i].左倍率 = Setting_Datas[4];
+          Choice_DATAS[i].真ん中の人物 = Setting_Datas[5];
+          Choice_DATAS[i].中倍率 = Setting_Datas[6];
+          Choice_DATAS[i].右側の人物 = Setting_Datas[7];
+          Choice_DATAS[i].右倍率 = Setting_Datas[8];
           Choice_DATAS[i].前前 = Number.replace(/\d/g,"")+1;
           Choice_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
           Choice_DATAS[i].セーブ = Number;
