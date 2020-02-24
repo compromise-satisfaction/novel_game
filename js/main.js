@@ -3088,7 +3088,7 @@ function Game_load(width,height,private,Manager,make){
       Text[i]._element = document.createElement("innerHTML");
       Text[i]._style.font  = width/20+"px monospace";
       Text[i]._element.textContent = "";
-      if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="("){
+      if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"){
         Text[i].x = width/20;
         Text[i].width = width-width/10;
       }
@@ -3116,7 +3116,7 @@ function Game_load(width,height,private,Manager,make){
     if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"){
       scene.addChild(Speak_Background1);
     }
-    
+
     var Speak_Background2 = new Sprite();
     Speak_Background2._element = document.createElement("img");
     Speak_Background2._element.src = "../画像/透明.png";
@@ -4723,16 +4723,16 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i] = document.createElement("void");
           Main_DATAS[i].タイプ = "メイン";
           Main_DATAS[i].入手 = "";
-          Main_DATAS[i].BGM = "";
-          Main_DATAS[i].表示名 = "(表示名好感度)";
+          Main_DATAS[i].BGM = Setting_Flag[14];
+          Main_DATAS[i].表示名 = Showing_name;
           Main_DATAS[i].シーン名 = Number;
-          Main_DATAS[i].背景 = "";
-          Main_DATAS[i].左側の人物 = "";
-          Main_DATAS[i].左倍率 = 1;
-          Main_DATAS[i].真ん中の人物 = "";
-          Main_DATAS[i].中倍率 = 1;
-          Main_DATAS[i].右側の人物 = "";
-          Main_DATAS[i].右倍率 = 1;
+          Main_DATAS[i].背景 = Datas[0];
+          Main_DATAS[i].左側の人物 = Datas[1];
+          Main_DATAS[i].左倍率 = Datas[22];
+          Main_DATAS[i].真ん中の人物 = Datas[3];
+          Main_DATAS[i].中倍率 = Datas[23];
+          Main_DATAS[i].右側の人物 = Datas[5];
+          Main_DATAS[i].右倍率 = Datas[24];
           Main_DATAS[i].人物名 = "(主人公名前)";
           Main_DATAS[i].文章音 = "主人公";
           Main_DATAS[i].速度 = 10;
@@ -4744,10 +4744,10 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].セーブ = Number;
           Main_DATAS[i].次 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1+1);
           Main_DATAS[i].次次 = Number.replace(/\d/g,"")+"選択";
-          Main_DATAS[i].表示アイテムx座標 = "";
-          Main_DATAS[i].表示アイテムy座標 = "";
-          Main_DATAS[i].表示アイテムフェード = "";
-          Main_DATAS[i].表示アイテム画像 = "";
+          Main_DATAS[i].表示アイテムx座標 = Datas[14] ;
+          Main_DATAS[i].表示アイテムy座標 = Datas[20];
+          Main_DATAS[i].表示アイテムフェード = 0;
+          Main_DATAS[i].表示アイテム画像 = Datas[15];
           Main_DATAS[i].トロフィー = "";
           break;
         case "選択":
@@ -4796,7 +4796,7 @@ function Game_load(width,height,private,Manager,make){
           Inspect_DATAS[i] = document.createElement("void");
           Inspect_DATAS[i].タイプ = "調べる";
           Inspect_DATAS[i].シーン名 = Number;
-          Inspect_DATAS[i].背景 = "";
+          Inspect_DATAS[i].背景 = Datas[0];
           Inspect_DATAS[i].可視化 = true;
           Inspect_DATAS[i].前のシーン = "";
           Inspect_DATAS[i].x座標1 = "";
