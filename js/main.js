@@ -3088,7 +3088,7 @@ function Game_load(width,height,private,Manager,make){
       Text[i]._element = document.createElement("innerHTML");
       Text[i]._style.font  = width/20+"px monospace";
       Text[i]._element.textContent = "";
-      if(Datas[8].replace(/[^\「\(\)\」]/g,"")!=""){
+      if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="("){
         Text[i].x = width/20;
         Text[i].width = width-width/10;
       }
@@ -3113,9 +3113,10 @@ function Game_load(width,height,private,Manager,make){
     Speak_Background1._element.src = "../画像/吹き出し枠.png";
     Speak_Background1.width = width;
     Speak_Background1.height = height;
-    if(Datas[8].substring(0,1)=="(") scene.addChild(Speak_Background1);
-    if(Datas[8].substring(0,1)=="「") scene.addChild(Speak_Background1);
-
+    if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"){
+      scene.addChild(Speak_Background1);
+    }
+    
     var Speak_Background2 = new Sprite();
     Speak_Background2._element = document.createElement("img");
     Speak_Background2._element.src = "../画像/透明.png";
