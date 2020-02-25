@@ -3310,7 +3310,7 @@ function Game_load(width,height,private,Manager,make){
           break;
         case "↦":
           Time++;
-          if(Return==false) game.fps += 10;
+          if(Return==false) game.fps = game.fps*1+10;
           Setting_Flag[3] = game.fps;
           console.log(game.fps);
           T_D();
