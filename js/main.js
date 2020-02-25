@@ -22,7 +22,7 @@ function Game_load(width,height,private,Manager,make){
     else if(game.fps==10) Button_time++;
     return;
   });
-  
+
   game.addEventListener("touchStart",function(e){
     console.log(e.x,e.y);
     return;
@@ -3679,16 +3679,16 @@ function Game_load(width,height,private,Manager,make){
         else Scene_loads(c,true,false);
       });
     }
-    if(Datas[9]!=false) Button(0,"◀ ◀",Datas[9]);//戻る1
-    if(Datas[10]!=false) Button(1,"◀",Datas[10]);//戻る2
+    if(Datas[9]!=false) Button(0,"早戻し",Datas[9]);//戻る1
+    if(Datas[10]!=false) Button(1,"前",Datas[10]);//戻る2
     if(Datas[11]!=false) Button(2,"アイテム",Datas[11]);//設定
-    if(Datas[12]!=false&&Play) Button(3,"▶",Datas[12]);//進む1
+    if(Datas[12]!=false&&Play) Button(3,"次",Datas[12]);//進む1
     if(Datas[13]!=false){
       if(have(Play_Sheet+Datas[13]+"プレイ済み")&&Datas[12]!=Datas[13]){
-        Button(4,"▶ ▶",Datas[13]);//進む2
+        Button(4,"スキップ",Datas[13]);//進む2
       }
       else{
-        if(Skip&&Skip!=Number&&Skip!=Datas[11]&&Skip!=Datas[12]&&Datas[12]!=Datas[13]) Button(4,"▶ ▶",Skip);//進む2
+        if(Skip&&Skip!=Number&&Skip!=Datas[11]&&Skip!=Datas[12]&&Datas[12]!=Datas[13]) Button(4,"スキップ",Skip);//進む2
       }
     }
 
@@ -3961,7 +3961,7 @@ function Game_load(width,height,private,Manager,make){
     Buttons.height = (width/5);
     Buttons._element = document.createElement('input');
     Buttons._element.type = "submit";
-    Buttons._element.value = "▶";
+    Buttons._element.value = "次";
     scene.addChild(Buttons);
 
     Buttons.addEventListener('touchstart',function(e){
@@ -4166,8 +4166,8 @@ function Game_load(width,height,private,Manager,make){
         else Scene_loads(c,true,false);
       });
     }
-    if(Datas[4]!=false) Button(0,"◀ ◀",Datas[4]);//戻る1
-    if(Datas[5]!=false) Button(1,"◀",Datas[5]);//戻る2
+    if(Datas[4]!=false) Button(0,"早戻し",Datas[4]);//戻る1
+    if(Datas[5]!=false) Button(1,"前",Datas[5]);//戻る2
     if(Datas[6]!=false&&Datas[6]!="ゲームオーバー") Button(2,"アイテム",Datas[6]);//設定
     if(make) makes(M_M,scene);
     return scene;
@@ -4355,9 +4355,9 @@ function Game_load(width,height,private,Manager,make){
       });
     }
     if(Datas[3]!=false) Button(0,"ゆさぶる",Datas[3]);//ゆさぶる
-    if(Datas[4]!=false) Button(1,"◀",Datas[4]);//戻る
+    if(Datas[4]!=false) Button(1,"前",Datas[4]);//戻る
     if(Datas[5]!=false) Button(2,"設定を開く",Datas[5]);//設定
-    if(Datas[6]!=false) Button(3,"▶",Datas[6]);//進む
+    if(Datas[6]!=false) Button(3,"次",Datas[6]);//進む
     if(Datas[7]!=false) Button(4,"つきつける",Datas[7]);//つきつける
     if(make) makes(M_M,scene);
     return scene;
@@ -5151,7 +5151,7 @@ function Game_load(width,height,private,Manager,make){
     Buttons.height = (width/5);
     Buttons._element = document.createElement('input');
     Buttons._element.type = "submit";
-    Buttons._element.value = "▶";
+    Buttons._element.value = "次";
     scene.addChild(Buttons);
 
     var Item = new Sprite();
@@ -5292,8 +5292,8 @@ function Game_load(width,height,private,Manager,make){
           case "戻る":
             var ooo = "戻る";
             break;
-          case "▶":
-          case "◀":
+          case "次":
+          case "前":
             var ooo ="メニュー移動";
             break;
           case "設定を開く":
@@ -5345,7 +5345,7 @@ function Game_load(width,height,private,Manager,make){
         }
         else{
           switch (this._element.value){
-            case "◀":
+            case "前":
               if(Setting_Flag[Pages]==0){
                 Setting_Flag[Pages] = Choice_Flag.length-Choice_Flag.length%5;
                 if(Choice_Flag.length%5==0) Setting_Flag[Pages]-=5;
@@ -5353,7 +5353,7 @@ function Game_load(width,height,private,Manager,make){
               else Setting_Flag[Pages]-=5;
               game.replaceScene(ItemScene(Number,Ig,Type,Do));
               break;
-            case "▶":
+            case "次":
               if(Setting_Flag[Pages] == Choice_Flag.length-Choice_Flag.length%5) Setting_Flag[Pages] = 0;
               else{
                 Setting_Flag[Pages]+=5;
@@ -5466,8 +5466,8 @@ function Game_load(width,height,private,Manager,make){
     }
 
     if(Choice_Flag.length>5){
-      Submit("◀",width/8,(width/4)+((width/20)+(width/25)*14),W_X_H,W_X_H);
-      Submit("▶",width/2.5,(width/4)+((width/20)+(width/25)*14),W_X_H,W_X_H);
+      Submit("前",width/8,(width/4)+((width/20)+(width/25)*14),W_X_H,W_X_H);
+      Submit("次",width/2.5,(width/4)+((width/20)+(width/25)*14),W_X_H,W_X_H);
     }
     else Setting_Flag[Pages] = 0;
 
