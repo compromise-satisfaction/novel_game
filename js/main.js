@@ -395,24 +395,12 @@ function Game_load(width,height,private,Manager,make){
       I_C_F_T_DATAS = result.フラグ類;
       Interrogation_DATAS = result.尋問;
       */
-      for (var i = 0; i < Image_DATAS.length; i++){
-        if(Image_DATAS[i].url.substring(0,4)!="http"){
-          if(Image_DATAS[i].画像=="テスト") Image_DATAS[i].url = "../../../../Desktop/テスト/" + Image_DATAS[i].url;
-          else Image_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/画像/" + Image_DATAS[i].url;
-        }
-        else if(Image_DATAS[i].url.substring(0,18)=="https://gyazo.com/"){
-          Image_DATAS[i].url = "https://i."+Image_DATAS[i].url.substring(8)+".png\")";
-        }
-      }
       BGM_DATAS = [];
       Sounds_urls = [];
       Voice_DATAS = [];
       Sound_effect_DATAS = [];
       SE = [];
       for (var i=0,k0=0,k1=0,k2=0,k3=0; i < Sounds_DATAS.length; i++){
-        if(Sounds_DATAS[i].url.substring(0,4)!="http"){
-          Sounds_DATAS[i].url = "https://raw.githubusercontent.com/compromise-satisfaction/Saved/master/音/" + Sounds_DATAS[i].url +".wav";
-        }
         switch (Sounds_DATAS[i].備考) {
           default:
             BGM_DATAS[k1] = [Sounds_DATAS[i].url,Sounds_DATAS[i].備考,Sounds_DATAS[i].名前];
