@@ -24,10 +24,11 @@ function Game_load(width,height,private,Manager,make){
   });
 
   $("#base").on("touchstart",function(event){
-    if(Button_time==Button_time_next){
-      Button_time = 0;
-    }
-    else event.preventDefault();
+    //if(Button_time==Button_time_next){
+      //Button_time = 0;
+  //  }
+    //else event.preventDefault();
+    event.preventDefault();
   });
 
   var Syougen_time = 0;
