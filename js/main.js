@@ -56,6 +56,7 @@ function Game_load(width,height,private,Manager,make){
     Data = Data.replace(/\(主人公名前\)/g,Setting_Flag[0]);
     Data = Data.replace(/\(一人称\)/g,Setting_Flag[16]);
     Data = Data.replace(/\(二人称\)/g,Setting_Flag[17]);
+    Data = Data.replace(/\(カンマ\)/g,",");
     Data = Data.replace(/↓/g,"\n");
     for (var i = 0; i < Favorability_Flag.length; i++){
       var Favorability = "("+Favorability_Flag[i][0]+"好感度)";
@@ -4623,7 +4624,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits].addEventListener('touchstart',function(e){
         if(Button_push("戻る")) return;
         if(S_Input1._element.value.replace(/[^,]/g,"")!=""||S_Input2._element.value.replace(/[^,]/g,"")!=""||S_Input3._element.value.replace(/[^,]/g,"")!=""||S_Input4._element.value.replace(/[^,]/g,"")!=""||S_Input5._element.value.replace(/[^,]/g,"")!=""){
-          scene.addChild(Text[7]);
+          scene.addChild(Text[6]);
         }
         else{
           Setting_Flag[1] = S_Input1._element.value;
@@ -5231,6 +5232,7 @@ function Game_load(width,height,private,Manager,make){
       Data = Data.replace(/\(主人公名前\)/g,Setting_Flag[0]);
       Data = Data.replace(/\(一人称\)/g,Setting_Flag[16]);
       Data = Data.replace(/\(二人称\)/g,Setting_Flag[17]);
+      Data = Data.replace(/\(カンマ\)/g,",");
       Data = Data.replace(/↓/g,"\n");
       for (var i = 0; i < Favorability_Flag.length; i++){
         var Favorability = "("+Favorability_Flag[i][0]+"好感度)";
