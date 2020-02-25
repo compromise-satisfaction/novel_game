@@ -28,6 +28,7 @@ function Game_load(width,height,private,Manager,make){
       Button_time = 0;
     }
     else event.preventDefault();
+    game.pushScene(PopScene("直前","異議あり！","主人公異議あり！"));
   });
 
   var Syougen_time = 0;
