@@ -4799,7 +4799,7 @@ function Game_load(width,height,private,Manager,make){
           Inspect_DATAS[i] = document.createElement("void");
           Inspect_DATAS[i].タイプ = "調べる";
           Inspect_DATAS[i].シーン名 = Number;
-          Inspect_DATAS[i].背景 = Datas[0];
+          Inspect_DATAS[i].背景 = Setting_Datas[2];
           Inspect_DATAS[i].可視化 = true;
           Inspect_DATAS[i].前のシーン = "";
           Inspect_DATAS[i].x座標1 = "";
