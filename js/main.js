@@ -29,6 +29,7 @@ function Game_load(width,height,private,Manager,make){
   //  }
     //else event.preventDefault();
     event.preventDefault();
+    console.log(event);
   });
 
   var Syougen_time = 0;
@@ -1524,7 +1525,7 @@ function Game_load(width,height,private,Manager,make){
     Background._element = document.createElement("img");
     Background._element.src = "../画像/白.png";
     Background.x = width;
-    Background.width = width;
+    Background.width = width*2;
     Background.height = height;
     scene.addChild(Background);
 
