@@ -26,9 +26,9 @@ function Game_load(width,height,private,Manager,make){
   $("#base").on("touchstart",function(event){
     if(Button_time==Button_time_next){
       Button_time = 0;
+      game.pushScene(PopScene("直前","異議あり！","主人公異議あり！"));
     }
     else event.preventDefault();
-    game.pushScene(PopScene("直前","異議あり！","主人公異議あり！"));
   });
 
   var Syougen_time = 0;
