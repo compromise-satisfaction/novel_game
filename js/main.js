@@ -654,29 +654,35 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    game.fps = 10;
-    switch (expression) {
-      case "音無し":
-        break;
-      default:
-        Sound_ON(expression);
-        break;
-      return(false);
+    if(Button_time==Button_time_next){
+      game.fps = 10;
+      switch (expression) {
+        case "音無し":
+          break;
+        default:
+          Sound_ON(expression);
+          break;
+        return(false);
+      }
     }
+    else return(true);
   }
   function Button_push_title(e){
-    game.fps = 10;
-    if(e==false) return;
-    if(Setting_Flag[10]){
-      var Volume = Setting_Flag[10] / 10;
-      e.volume = Volume;
-      if(e.paused) e.play();
-      else e.currentTime = 0;
+    if(Button_time==Button_time_next){
+      game.fps = 10;
+      if(e==false) return;
+      if(Setting_Flag[10]){
+        var Volume = Setting_Flag[10] / 10;
+        e.volume = Volume;
+        if(e.paused) e.play();
+        else e.currentTime = 0;
+      }
+      else{
+        if(e.paused==false) e.pause();
+      }
+      return(false);
     }
-    else{
-      if(e.paused==false) e.pause();
-    }
-    return(false);
+    else return(true);
   }
   function conversion_url(name,Type){
     switch (Type) {
