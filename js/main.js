@@ -7,7 +7,7 @@ BGM.addEventListener("ended",function(e){
   console.log(BGM.currentTime);
 });
 
-var Button_time_next = 3;
+var Button_time_next = 30;
 var Button_time = Button_time_next;
 
 function Game_load(width,height,private,Manager,make){
@@ -20,6 +20,10 @@ function Game_load(width,height,private,Manager,make){
   game.addEventListener("enterframe",function(){
     if(Button_time==Button_time_next) return;
     else if(game.fps==10) Button_time++;
+    return;
+  });
+  game.addEventListener("touchStart",function(e){
+    console.log(e.x,e.y);
     return;
   });
 
@@ -2193,7 +2197,6 @@ function Game_load(width,height,private,Manager,make){
       scene.addChild(M_Text[i]);
       i++;
     }
-
 
     for (var i = 0; i < Make_datas.length; i++) {
       M_Texts(Make_datas[i][1],S_Input[i].y,i);
