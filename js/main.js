@@ -654,7 +654,6 @@ function Game_load(width,height,private,Manager,make){
   function Button_push(expression){
     if(Button_time==Button_time_next){
       game.fps = 10;
-      Button_time = 0;
       switch (expression) {
         case "音無し":
           break;
@@ -669,7 +668,6 @@ function Game_load(width,height,private,Manager,make){
   function Button_push_title(e){
     if(Button_time==Button_time_next){
       game.fps = 10;
-      Button_time = 0;
       if(e==false) return;
       if(Setting_Flag[10]){
         var Volume = Setting_Flag[10] / 10;
