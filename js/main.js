@@ -30,7 +30,7 @@ function Game_load(width,height,private,Manager,make){
       fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
             {
               method: 'POST',
-              body: event + "(改行)event"
+              body: JSON.stringify(event) + "(改行)event"
             }
            )
       //game.pushScene(PopScene("直前","異議あり！","主人公異議あり！"));
