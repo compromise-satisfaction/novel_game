@@ -23,9 +23,11 @@ function Game_load(width,height,private,Manager,make){
     return;
   });
 
-  game.addEventListener("touchStart",function(e){
-    console.log(e.x,e.y);
-    return;
+  $("#base").on("touchstart",function(event){
+    if(Button_time==Button_time_next){
+      Button_time = 0;
+    }
+    else event.preventDefault();
   });
 
   var Syougen_time = 0;

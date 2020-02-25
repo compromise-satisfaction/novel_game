@@ -97,12 +97,7 @@ $(function(){
     orientationChange();
   });
   //余白部分をドラッグすることによるスクロールを無効にする
-  $("#base").on("touchstart",function(event){
-    if(Button_time==Button_time_next){
-      Button_time = 0;
-    }
-    else event.preventDefault();
-  });
+
   //ゲームを実行する
   Game_load(gameWidth,gameHeight,false,true,true);
   //初回時のスクリーン設定
