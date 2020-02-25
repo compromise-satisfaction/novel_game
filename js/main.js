@@ -7,7 +7,7 @@ BGM.addEventListener("ended",function(e){
   console.log(BGM.currentTime);
 });
 
-var Button_time_next = 30;
+var Button_time_next = 3;
 var Button_time = Button_time_next;
 
 function Game_load(width,height,private,Manager,make){
@@ -22,6 +22,7 @@ function Game_load(width,height,private,Manager,make){
     else if(game.fps==10) Button_time++;
     return;
   });
+  
   game.addEventListener("touchStart",function(e){
     console.log(e.x,e.y);
     return;
