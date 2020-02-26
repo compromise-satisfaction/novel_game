@@ -4753,7 +4753,7 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
           Main_DATAS[i].セーブ = Number;
           Main_DATAS[i].次 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1+1);
-          Main_DATAS[i].次次 = Number.replace(/\d/g,"")+"選択";
+          Main_DATAS[i].次次 = Number.replace(/\d/g,"")+"終了";
           Main_DATAS[i].表示アイテムx座標 = Setting_Datas[11];
           Main_DATAS[i].表示アイテムy座標 = Setting_Datas[12];
           Main_DATAS[i].表示アイテムフェード = 0;
