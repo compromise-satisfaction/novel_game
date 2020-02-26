@@ -25,6 +25,7 @@ function Game_load(width,height,private,Manager,make){
 
   $("#base").on("touchstart",function(event){
     if(Button_time==Button_time_next){
+      Button_time = 0;
       event.preventDefault();
     }
     else event.preventDefault();
@@ -94,9 +95,9 @@ function Game_load(width,height,private,Manager,make){
           for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
             switch (I_C_F_T_DATAS[i].タイプ) {
               case "アイテム":
-                if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("消滅")==-1){
+                if(I_C_F_T_DATAS[i].フラグ類名.indexOf("消滅")==-1){
                   Item_Flag[Item_Flag.length] = [
-                    I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
+                    I_C_F_T_DATAS[i].フラグ類名.split("→")[I_C_F_T_DATAS[i].フラグ類名.split("→").length-1],
                       I_C_F_T_DATAS[i].説明文,
                         I_C_F_T_DATAS[i].画像,
                           I_C_F_T_DATAS[i].詳細文,
@@ -106,9 +107,9 @@ function Game_load(width,height,private,Manager,make){
                 }
                 break;
               case "人物":
-                if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("消滅")==-1){
+                if(I_C_F_T_DATAS[i].フラグ類名.indexOf("消滅")==-1){
                   Character_Flag[Character_Flag.length] = [
-                    I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
+                    I_C_F_T_DATAS[i].フラグ類名.split("→")[I_C_F_T_DATAS[i].フラグ類名.split("→").length-1],
                       I_C_F_T_DATAS[i].説明文,
                         I_C_F_T_DATAS[i].画像,
                           I_C_F_T_DATAS[i].詳細文,
@@ -118,8 +119,8 @@ function Game_load(width,height,private,Manager,make){
                 }
                 break;
               case "フラグ":
-                if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("→")==-1){
-                  Flag[Flag.length] = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+                if(I_C_F_T_DATAS[i].フラグ類名.indexOf("→")==-1){
+                  Flag[Flag.length] = I_C_F_T_DATAS[i].フラグ類名;
                 }
                 break;
               default:
@@ -359,7 +360,7 @@ function Game_load(width,height,private,Manager,make){
             I_C_F_T_DATAS[k9] = document.createElement("void");
             I_C_F_T_DATAS[k9].入手 = result[i][0];
             I_C_F_T_DATAS[k9].タイプ = result[i][1];
-            I_C_F_T_DATAS[k9].アイテムor人物orフラグ名orトロフィー名 = result[i][2];
+            I_C_F_T_DATAS[k9].フラグ類名 = result[i][2];
             I_C_F_T_DATAS[k9].コード = result[i][3];
             I_C_F_T_DATAS[k9].説明文 = result[i][4];
             I_C_F_T_DATAS[k9].画像 = result[i][5];
@@ -449,9 +450,9 @@ function Game_load(width,height,private,Manager,make){
         for (var i = 0; i < I_C_F_T_DATAS.length; i++) {
           switch (I_C_F_T_DATAS[i].タイプ) {
             case "アイテム":
-              if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("消滅")==-1){
+              if(I_C_F_T_DATAS[i].フラグ類名.indexOf("消滅")==-1){
                 Item_Flag[Item_Flag.length] = [
-                  I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
+                  I_C_F_T_DATAS[i].フラグ類名.split("→")[I_C_F_T_DATAS[i].フラグ類名.split("→").length-1],
                     I_C_F_T_DATAS[i].説明文,
                       I_C_F_T_DATAS[i].画像,
                         I_C_F_T_DATAS[i].詳細文,
@@ -461,9 +462,9 @@ function Game_load(width,height,private,Manager,make){
               }
               break;
             case "人物":
-              if(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.indexOf("消滅")==-1){
+              if(I_C_F_T_DATAS[i].フラグ類名.indexOf("消滅")==-1){
                 Character_Flag[Character_Flag.length] = [
-                  I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→")[I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名.split("→").length-1],
+                  I_C_F_T_DATAS[i].フラグ類名.split("→")[I_C_F_T_DATAS[i].フラグ類名.split("→").length-1],
                     I_C_F_T_DATAS[i].説明文,
                       I_C_F_T_DATAS[i].画像,
                         I_C_F_T_DATAS[i].詳細文,
@@ -473,7 +474,7 @@ function Game_load(width,height,private,Manager,make){
               }
               break;
             case "フラグ":
-              Flag[Flag.length] = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+              Flag[Flag.length] = I_C_F_T_DATAS[i].フラグ類名;
               break;
             default:
               break;
@@ -887,7 +888,7 @@ function Game_load(width,height,private,Manager,make){
         }
         DATAS = [
           I_C_F_T_DATAS[k].タイプ,
-          I_C_F_T_DATAS[k].アイテムor人物orフラグ名orトロフィー名,
+          I_C_F_T_DATAS[k].フラグ類名,
             I_C_F_T_DATAS[k].説明文,
               I_C_F_T_DATAS[k].画像,
                 I_C_F_T_DATAS[k].詳細文,
@@ -3698,14 +3699,14 @@ function Game_load(width,height,private,Manager,make){
       }
       DATAS = [
         I_C_F_T_DATAS[i].タイプ,
-        I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名,
+        I_C_F_T_DATAS[i].フラグ類名,
           I_C_F_T_DATAS[i].説明文,
             I_C_F_T_DATAS[i].画像,
               I_C_F_T_DATAS[i].詳細文,
                 I_C_F_T_DATAS[i].詳細内容,
                   I_C_F_T_DATAS[i].コード
                   ];
-      if(have(I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名)==false){
+      if(have(I_C_F_T_DATAS[i].フラグ類名)==false){
         Get_ICFT(DATAS);
         var Trophy_Time = 0;
         var Trophy = new Sprite();
@@ -3734,7 +3735,7 @@ function Game_load(width,height,private,Manager,make){
         Trophy_text._element = document.createElement("innerHTML");
         Trophy_text._style.font  = width/40+"px monospace";
         Trophy_text._style.color = 'white';
-        Trophy_text._element.textContent = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+        Trophy_text._element.textContent = I_C_F_T_DATAS[i].フラグ類名;
         Trophy_text.x = width-width/5;
         Trophy_text.y = width/28+width/80;
         Trophy_text.opacity = 0;
@@ -5738,7 +5739,7 @@ function Game_load(width,height,private,Manager,make){
               }
               DATAS = [
                 I_C_F_T_DATAS[i].タイプ,
-                I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名,
+                I_C_F_T_DATAS[i].フラグ類名,
                   I_C_F_T_DATAS[i].説明文,
                     I_C_F_T_DATAS[i].画像,
                       I_C_F_T_DATAS[i].詳細文,
@@ -5865,7 +5866,7 @@ function Game_load(width,height,private,Manager,make){
 
     for (var i = 0; i < I_C_F_T_DATAS.length; i++){
       Option[i] = document.createElement("option");
-      Option[i].text = I_C_F_T_DATAS[i].アイテムor人物orフラグ名orトロフィー名;
+      Option[i].text = I_C_F_T_DATAS[i].フラグ類名;
       Option[i].value = I_C_F_T_DATAS[i].入手;
       Button[2]._element.appendChild(Option[i]);
     }
