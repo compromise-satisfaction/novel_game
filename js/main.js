@@ -5421,6 +5421,8 @@ function Game_load(width,height,private,Manager,make){
                 Item_image.y = width/4;
                 Item_image.height = Item_image.width;
               }
+              Item_image.y = width/4;
+              Item_image.height = Item_image.width;
               scene.addChild(Item_image);
               this.backgroundColor = "red";
               if(f[3]){
