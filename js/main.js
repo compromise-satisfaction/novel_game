@@ -64,6 +64,11 @@ function Game_load(width,height,private,Manager,make){
   if(Manager) var Title_Sheet = "170Ui3JDGJRt-VARJnWb19Drmy14gkp-pReAN-BTSjGI";
   else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
+
+  function W_S(){
+    if(make) return("../画像/半透明(白).png");
+    else return("../画像/白.png");
+  }
   function free(Data){
     for (var i = 0; i < Setting_Flag[19].split("→").length; i++) {
       var frees = "(自由"+(i+1)+")";
@@ -2502,7 +2507,7 @@ function Game_load(width,height,private,Manager,make){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../画像/白.png";
+    White_Background._element.src = W_S();
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -3041,7 +3046,7 @@ function Game_load(width,height,private,Manager,make){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../画像/白.png";
+    White_Background._element.src = W_S();
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -3961,7 +3966,7 @@ function Game_load(width,height,private,Manager,make){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../画像/白.png";
+    White_Background._element.src = W_S();
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height - width/16*9;
@@ -4103,7 +4108,7 @@ function Game_load(width,height,private,Manager,make){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../画像/白.png";
+    White_Background._element.src = W_S();
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -4287,7 +4292,7 @@ function Game_load(width,height,private,Manager,make){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../画像/白.png";
+    White_Background._element.src = W_S();
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -5110,7 +5115,7 @@ function Game_load(width,height,private,Manager,make){
 
     var White_Background = new Sprite();
     White_Background._element = document.createElement("img");
-    White_Background._element.src = "../画像/白.png";
+    White_Background._element.src = W_S();
     White_Background.y = width/16*9;
     White_Background.width = width;
     White_Background.height = height-width/16*9;
@@ -5274,7 +5279,7 @@ function Game_load(width,height,private,Manager,make){
 
     var Item_image = new Sprite();
     Item_image._element = document.createElement("img");
-    Item_image._element.src = "../画像/白.png";
+    Item_image._element.src = W_S();
     /*
     Item_image.width = width/4;
     Item_image.height = width/4;
