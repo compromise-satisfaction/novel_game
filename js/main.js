@@ -4,9 +4,10 @@ var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
   BGM.currentTime = BGM.id*1;
   BGM.play();
-  console.log(BGM.currentTime);
+  console.log("BGMを"+BGM.currentTime+"秒のところに移動。");
 });
 
+var Now = "今";
 var Button_time_next = 3;
 var Button_time = Button_time_next;
 
@@ -23,11 +24,12 @@ function Game_load(width,height,private,Manager,make){
     return;
   });
 
+  $("#base").on("touchstart",function(event){
+    Now = new Date().getTime();
+  });
+
   $("#base").on("touchend",function(event){
-    if(Button_time==Button_time_next){
-      Button_time = 0;
-    }
-    else event.preventDefault();
+    event.preventDefault();
   });
 
   var Syougen_time = 0;
@@ -654,7 +656,8 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    if(Button_time==Button_time_next){
+    //if(Button_time==Button_time_next){
+    if(true){
       game.fps = 10;
       switch (expression) {
         case "音無し":
@@ -668,7 +671,8 @@ function Game_load(width,height,private,Manager,make){
     else return(true);
   }
   function Button_push_title(e){
-    if(Button_time==Button_time_next){
+    //if(Button_time==Button_time_next){
+    if(true){
       game.fps = 10;
       if(e==false) return;
       if(Setting_Flag[10]){
