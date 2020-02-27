@@ -7,7 +7,7 @@ BGM.addEventListener("ended",function(e){
   console.log("BGMを"+BGM.currentTime+"秒のところに移動。");
 });
 
-var Now = "今";
+var Now = new Date().getTime();
 var Button_time_next = 3;
 var Button_time = Button_time_next;
 
@@ -1533,7 +1533,7 @@ function Game_load(width,height,private,Manager,make){
     return Math.floor(Math.random() * (n + 1));
   }
   function makes(make_data,scene){
-
+    console.log(Now);
     if(make_data==undefined) return;
 
     var Background = new Entity();
