@@ -26,6 +26,7 @@ function Game_load(width,height,private,Manager,make){
   $("#base").on("touchstart",function(event){
     if(Button_time==Button_time_next){
       Button_time = 0;
+      return;
       event.preventDefault();
       fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
         {
