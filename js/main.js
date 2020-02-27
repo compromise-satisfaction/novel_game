@@ -25,6 +25,10 @@ function Game_load(width,height,private,Manager,make){
   });
 
   $("#base").on("touchstart",function(event){
+    if(new Date().getTime()-Now<350){
+      event.preventDefault();
+      return;
+    }
     Now = new Date().getTime();
   });
 
