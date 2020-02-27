@@ -2569,7 +2569,7 @@ function Game_load(width,height,private,Manager,make){
     Background.height = height;
 
     if(a=="保存"){
-      Background.width *= 3;
+      Background.width *= 2.5;
       var Loading = new Entity();
       Loading._element = document.createElement("img");
       Loading._element.src = "../画像/保存中.gif";

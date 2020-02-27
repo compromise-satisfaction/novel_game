@@ -71,12 +71,8 @@ function resetScreen(gameWidth,gameHeight){
 $(function(){
 
   //ゲーム内の画面サイズ
-  var gameWidth = 1072;
-  var gameWidth = 1072/4;
-  var gameWidth = 405;
-  var gameHeight = 1560;
-  var gameHeight = 1560/4;
-  var gameHeight = 600;
+  var gameWidth = AAA;
+  var gameHeight = BBB;
   //回転時の処理
   var orientationChange = function(){
     //画面サイズ設定
@@ -99,7 +95,7 @@ $(function(){
   //余白部分をドラッグすることによるスクロールを無効にする
 
   //ゲームを実行する
-  Game_load(gameWidth,gameHeight,false,false);
+  Game_load(gameWidth,gameHeight,CCC,DDD,EEE);
   //初回時のスクリーン設定
   orientationChange();
 });

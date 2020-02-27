@@ -9,32 +9,22 @@
 <!--
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 -->
+<script type="text/javascript">
+  var AAA = 405;
+  var BBB = 600;
+  var CCC = "11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k";
+  var DDD = false;
+  var EEE = false;
+</script>
 <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/enchant.js"></script>
-<script type="text/javascript" src="../js/common_1.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 
-
-<script>
-  /* ピッチインピッチアウトによる拡大縮小を禁止 */
-  document.documentElement.addEventListener('touchstart', function (e) {
-  if (e.touches.length >= 2) {e.preventDefault();}
-  }, {passive: false});
-  /* ダブルタップによる拡大を禁止 */
-  var t = 0;
-  document.documentElement.addEventListener('touchend', function (e) {
-  var now = new Date().getTime();
-  if ((now - t) < 350){
-    e.preventDefault();
-  }
-  t = now;
-  }, false);
-</script>
 <style type="text/css">
-  body , input , textarea , select {
-    margin: 0;
-    font-size:17px;
-  }
+    body {
+        margin: 0;
+    }
 </style>
 </head>
 <body>
