@@ -1584,7 +1584,7 @@ function Game_load(width,height,private,Manager,make){
         break;
       case "調べる":
         Make_datas[Make_datas.length] = [make_data.シーン名,"シーン名"];
-        Make_datas[Make_datas.length] = [make_data.背景,"調べる背景"];
+        Make_datas[Make_datas.length] = [make_data.背景,"背景"];
         Make_datas[Make_datas.length] = [make_data.可視化,"可視化"];
         Make_datas[Make_datas.length] = [make_data.前のシーン,"前のシーン"];
         Make_datas[Make_datas.length] = [make_data.x座標1,"横座標一"];
