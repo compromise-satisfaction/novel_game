@@ -1,6 +1,6 @@
 body{
  margin: 0;
 }
-input[type=text],textarea[type=text],select[type=text]{
+input,textarea,select{
   font-size: 16px;
 }
