@@ -28,6 +28,10 @@ function Game_load(width,height,private,Manager,make){
     Now = new Date().getTime();
   });
 
+  $("#base").on("touchmove",function(event){
+    event.preventDefault();
+  });
+
   $("#base").on("touchend",function(event){
     event.preventDefault();
   });
