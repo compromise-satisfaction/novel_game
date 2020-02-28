@@ -36,6 +36,7 @@ function Game_load(width,height,private,Manager,make){
     event.preventDefault();
   });
 
+  var Wait_time = 1000;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
@@ -684,7 +685,7 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    if(new Date().getTime()-Now>350){
+    if(new Date().getTime()-Now>Wait_time){
       Now = new Date().getTime();
       game.fps = 10;
       switch (expression) {
@@ -699,7 +700,7 @@ function Game_load(width,height,private,Manager,make){
     else return(true);
   }
   function Button_push_title(e){
-    if(new Date().getTime()-Now>350){
+    if(new Date().getTime()-Now>Wait_time){
       Now = new Date().getTime();
       game.fps = 10;
       if(e==false) return;
