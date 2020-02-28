@@ -23,8 +23,9 @@ function Game_load(width,height,private,Manager,make){
           }
          )
   }
-
+  
   $("#base").on("touchstart",function(event){
+    {passive: false}
     Wait_time = 500;
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
           {
