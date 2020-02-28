@@ -15,6 +15,14 @@ function Game_load(width,height,private,Manager,make){
   game.onload = function(){
 
   var Now = new Date().getTime();
+  if(Manager==false){
+    fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+          {
+            method: 'POST',
+            body: "起動"
+          }
+         )
+  }
 
   $("#base").on("touchstart",function(event){
     event.preventDefault();
@@ -52,7 +60,26 @@ function Game_load(width,height,private,Manager,make){
   if(Manager) var Title_Sheet = "170Ui3JDGJRt-VARJnWb19Drmy14gkp-pReAN-BTSjGI";
   else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
-
+  function Conversion_Time(Time,Number){
+  var Month = Time.getMonth()+1;
+  var Dates = Time.getDate();
+  var Hour = Time.getHours();
+  var Minute = Time.getMinutes();
+  var Day = Time.getDay();
+  if(Month<10) Month = "0" + Month;
+  if(Dates<10) Dates = "0" + Dates;
+  if(Hour<10) Hour = "0" + Hour;
+  if(Minute<10) Minute = "0" + Minute;
+  if(Day == 0) Day = "日";
+  if(Day == 1) Day = "月";
+  if(Day == 2) Day = "火";
+  if(Day == 3) Day = "水";
+  if(Day == 4) Day = "木";
+  if(Day == 5) Day = "金";
+  if(Day == 6) Day = "土";
+  Time = Month + "月" + Dates + "日 (" + Day + ") "+ Hour + "時" + Minute + "分";
+  return(Time);
+}
   function W_S(){
     if(make) return("../画像/半透明(白).png");
     else return("../画像/白.png");
@@ -1505,7 +1532,7 @@ function Game_load(width,height,private,Manager,make){
     if(Trophy_Flag2==[]) Trophy_Flag2 = [[]+"(端)"]
     //ウインドウ.localStorage.setItem(Title_Sheet+"Trophy",Trophy_Flag2);
     //ウインドウ.localStorage.setItem(Title_Sheet+"syoken",false);
-    Title_DATAS[Save_Data_Number-1].セーブデータ = Showing_name + " " + Setting_Flag[1] + " " + Setting_Flag[0];
+    Title_DATAS[Save_Data_Number-1].セーブデータ = Showing_name + " " + Setting_Flag[1] + " " + Setting_Flag[0] + " " + Conversion_Time(new Date());
     var BoDy = Flag+"(改行)"+Number+"(改行)"+Log_Flag+"(改行)"+Play_Sheet+"(改行)"+Setting_Flag+"(改行)";
     BoDy += Item_Flag2+"(改行)"+Character_Flag2+"(改行)"+Favorability_Flag2+"(改行)"+Trophy_Flag2+"(改行)";
     BoDy += Title_Sheet+"(改行)"+Save_Data_Number+"(改行)"+Title_DATAS[Save_Data_Number-1].セーブデータ;
