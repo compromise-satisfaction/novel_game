@@ -37,7 +37,7 @@ function Game_load(width,height,private,Manager,make){
     event.preventDefault();
   });
 
-  var Wait_time = 0;
+  var Wait_time = 350;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
