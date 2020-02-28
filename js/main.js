@@ -1,16 +1,5 @@
 enchant();
 
-$("#base").on("touchstart",function(event){
-  fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
-        {
-          method: 'POST',
-          body: "起動"
-        }
-       )
-       event.preventDefault();
-       game.replaceScene(PopScene(Number,"異議あり！","主人公異議あり！"));
-});
-
 var BGM = document.createElement("audio");
 BGM.addEventListener("ended",function(e){
   BGM.currentTime = BGM.id*1;
