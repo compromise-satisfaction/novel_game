@@ -25,6 +25,7 @@ function Game_load(width,height,private,Manager,make){
   }
 
   $("#base").on("touchstart",function(event){
+    Wait_time = 500;
     event.preventDefault();
   });
 
@@ -36,7 +37,7 @@ function Game_load(width,height,private,Manager,make){
     event.preventDefault();
   });
 
-  var Wait_time = 1000;
+  var Wait_time = 0;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
