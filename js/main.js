@@ -32,14 +32,6 @@ function Game_load(width,height,private,Manager,make){
     }
   });
 
-  $("#base").on("touchmove",function(event){
-    event.preventDefault();
-  });
-
-  $("#base").on("touchend",function(event){
-    event.preventDefault();
-  });
-
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
