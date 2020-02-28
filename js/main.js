@@ -25,11 +25,11 @@ function Game_load(width,height,private,Manager,make){
   });
 
   $("#base").on("touchstart",function(event){
+    Now = new Date().getTime();
     event.preventDefault();
     if(new Date().getTime()-Now<3500){
       return;
     }
-    Now = new Date().getTime();
   });
 
   $("#base").on("touchmove",function(event){
