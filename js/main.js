@@ -24,6 +24,17 @@ function Game_load(width,height,private,Manager,make){
          )
   }
 
+  $("#base").on("touchstart",function(event){
+    event.preventDefault();
+    game.replaceScene(PopScene(Number,"異議あり！","主人公異議あり！"));
+    fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
+          {
+            method: 'POST',
+            body: "起動"
+          }
+         )
+  });
+
   var Wait_time = 350;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
