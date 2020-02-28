@@ -7,10 +7,6 @@ BGM.addEventListener("ended",function(e){
   console.log("BGMを"+BGM.currentTime+"秒のところに移動。");
 });
 
-var Now = new Date().getTime();
-var Button_time_next = 3;
-var Button_time = Button_time_next;
-
 function Game_load(width,height,private,Manager,make){
   var game = new Game(width,height);
   if(make) width/=2.5;
@@ -18,18 +14,10 @@ function Game_load(width,height,private,Manager,make){
   game.fps = 10;
   game.onload = function(){
 
-  game.addEventListener("enterframe",function(){
-    if(Button_time==Button_time_next) return;
-    else if(game.fps==10) Button_time++;
-    return;
-  });
+  var Now = new Date().getTime();
 
   $("#base").on("touchstart",function(event){
-    Now = new Date().getTime();
     event.preventDefault();
-    if(new Date().getTime()-Now<3500){
-      return;
-    }
   });
 
   var Syougen_time = 0;
@@ -661,8 +649,8 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    //if(Button_time==Button_time_next){
-    if(true){
+    if(new Date().getTime()-Now>350){
+      Now = new Date().getTime();
       game.fps = 10;
       switch (expression) {
         case "音無し":
@@ -676,8 +664,8 @@ function Game_load(width,height,private,Manager,make){
     else return(true);
   }
   function Button_push_title(e){
-    //if(Button_time==Button_time_next){
-    if(true){
+    if(new Date().getTime()-Now>350){
+      Now = new Date().getTime();
       game.fps = 10;
       if(e==false) return;
       if(Setting_Flag[10]){
@@ -1525,7 +1513,7 @@ function Game_load(width,height,private,Manager,make){
     return Math.floor(Math.random() * (n + 1));
   }
   function makes(make_data,scene){
-    console.log(Now);
+
     if(make_data==undefined) return;
 
     var Background = new Entity();
