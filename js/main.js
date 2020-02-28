@@ -20,6 +20,14 @@ function Game_load(width,height,private,Manager,make){
     event.preventDefault();
   });
 
+  $("#base").on("touchmove",function(event){
+    event.preventDefault();
+  });
+
+  $("#base").on("touchend",function(event){
+    event.preventDefault();
+  });
+
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
@@ -2199,13 +2207,13 @@ function Game_load(width,height,private,Manager,make){
     for (var i = 0; i < Make_datas.length; i++) {
       M_Texts(Make_datas[i][1],S_Input[i].y,i);
     }
-    M_Texts(game.fps+"fps "+Now,0,i);
+    M_Texts(game.fps+"fps "+Now+"t",0,i);
     M_Text[i].x = 0;
     M_Text[i]._style.font  = width/10+"px monospace";
     M_Text[i]._style.color  = "red";
     M_Text[i].backgroundColor  = "white";
     M_Text[i].addEventListener("enterframe",function(){
-      M_Text[i]._element.textContent = game.fps+"fps "+Now;
+      M_Text[i]._element.textContent = game.fps+"fps "+Now+"t";
       return;
     });
 
