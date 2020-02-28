@@ -23,26 +23,6 @@ function Game_load(width,height,private,Manager,make){
           }
          )
   }
-  
-  $("#base").on("touchstart",function(event){
-    {passive: false}
-    Wait_time = 500;
-    fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
-          {
-            method: 'POST',
-            body: "起動"
-          }
-         )
-    event.preventDefault();
-  });
-
-  $("#base").on("touchmove",function(event){
-    event.preventDefault();
-  });
-
-  $("#base").on("touchend",function(event){
-    event.preventDefault();
-  });
 
   var Wait_time = 350;
   var Syougen_time = 0;
