@@ -24,6 +24,12 @@ function Game_load(width,height,private,Manager,make){
          )
   }
 
+  $("#base").on("click",function(event){
+    console.log(event);
+    event.preventDefault();
+    game.replaceScene(PopScene(Number,"異議あり！","主人公異議あり！"));
+  });
+
   var Wait_time = 350;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
