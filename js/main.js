@@ -25,7 +25,7 @@ function Game_load(width,height,private,Manager,make){
   }
 
   $("#enchant-stage").on("touchstart",function(event){
-    event.preventDefault();
+    //event.preventDefault();
   });
 
   var Wait_time = 350;
