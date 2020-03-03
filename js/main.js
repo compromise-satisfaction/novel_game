@@ -26,14 +26,21 @@ function Game_load(width,height,private,Manager,make){
   }
 
   $("#enchant-stage").on("touchstart",function(event){
-    Wait_time = 350;
     if(new Date().getTime()-ttt>350){
       ttt = new Date().getTime();
     }
     else event.preventDefault();
   });
 
-  var Wait_time = 0;
+  $("#enchant-stage").on("touchmove",function(event){
+    event.preventDefault();
+  });
+
+  $("#enchant-stage").on("touchend",function(event){
+    event.preventDefault();
+  });
+
+  var Wait_time = 350;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
