@@ -1983,7 +1983,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button._element.type = "submit";
     M_Button._element.value = "適用";
     scene.addChild(M_Button);
-    M_Button.addEventListener('touchstart',function(e){
+    M_Button.addEventListener("touchend",function(e){
       if(Button_push("選択音")) return;
       switch (make_data.タイプ) {
         case "メイン":
@@ -2153,7 +2153,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button._element.type = "submit";
     M_Button._element.value = "このシーンを保存する";
     scene.addChild(M_Button);
-    M_Button.addEventListener('touchstart',function(e){
+    M_Button.addEventListener("touchend",function(e){
       if(Button_push("セーブ")) return;
       game.pushScene(LoadingScene("保存"));
       Scene_kazu++;
@@ -2262,7 +2262,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.value = a;
       Button[submits].ナンバー = submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "戻る":
             if(Button_push_title(Title_sound3)) return;
@@ -2384,7 +2384,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.value = a;
       Button[submits].ナンバー = submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "戻る":
             if(Button_push_title(Title_sound3)) return;
@@ -2455,7 +2455,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.value = a;
       Button[submits].ナンバー = submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "戻る":
             if(Button_push_title(Title_sound3)) return;
@@ -2532,7 +2532,7 @@ function Game_load(width,height,private,Manager,make){
       Text[submits]._element.type = "submit";
       Text[submits]._element.value = a;
       scene.addChild(Text[submits]);
-      Text[submits].addEventListener('touchstart',function(e){
+      Text[submits].addEventListener("touchend",function(e){
         if(b=="戻る"){
           if(Button_push_title(Title_sound3)) return;
           game.replaceScene(TitleScene());
@@ -2670,7 +2670,7 @@ function Game_load(width,height,private,Manager,make){
         }
         scene.addChild(Button[submits]);
         if(a=="入力したらこのボタンを押してね。"){
-          Button[0].addEventListener('touchstart',function(e){
+          Button[0].addEventListener("touchend",function(e){
             Datas_load(Button[1]._element.value,"タイトルデータ読み込み");
             return;
           });
@@ -2691,7 +2691,7 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = "家庭用";
         scene.addChild(Button[submits]);
-        Button[submits].addEventListener('touchstart',function(e){
+        Button[submits].addEventListener("touchend",function(e){
           Datas_load("11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k","タイトルデータ読み込み");
           return;
         });
@@ -2706,7 +2706,7 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = "共有用";
         scene.addChild(Button[submits]);
-        Button[submits].addEventListener('touchstart',function(e){
+        Button[submits].addEventListener("touchend",function(e){
           Datas_load("12-ESzeqaV3uEtLDAoCIDPVU18MahgfcB3IOInm0scj8","タイトルデータ読み込み");
           return;
         });
@@ -2744,7 +2744,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "データ消去":
             var ooo = Title_sound5;
@@ -2805,7 +2805,7 @@ function Game_load(width,height,private,Manager,make){
     Set_button.frame = 15;
     scene.addChild(Set_button);
 
-    Set_button.addEventListener('touchstart',function(e){
+    Set_button.addEventListener("touchend",function(e){
       console.log(Set_button);
       return;
       game.pushScene(ReversiScene());
@@ -3105,7 +3105,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons._element.type = "submit";
       Buttons._element.value = "決定";
       scene.addChild(Buttons);
-      Buttons.addEventListener('touchstart',function(e){
+      Buttons.addEventListener("touchend",function(e){
         if(Button_push("選択音")) return;
         Moves = S_Input1._element.value;
         game.pushScene(MoveScene(10));
@@ -3676,7 +3676,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       scene.addChild(Buttons[a]);
-      Buttons[a].addEventListener('touchstart',function(e){
+      Buttons[a].addEventListener("touchend",function(e){
         if(b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
         if(Button_push(ooo)) return;
@@ -3796,7 +3796,7 @@ function Game_load(width,height,private,Manager,make){
         Touch[tk].height = height_t*width/16*9/NaturalHeight;
         console.log(Touch[tk].x,Touch[tk].y,Touch[tk].width,Touch[tk].height,Number);
         scene.addChild(Touch[tk]);
-        Touch[tk].addEventListener('touchstart',function(e){
+        Touch[tk].addEventListener("touchend",function(e){
           Sound_ON("選択音");
           Scene_loads(Number,false,false);
           return;
@@ -3989,7 +3989,7 @@ function Game_load(width,height,private,Manager,make){
     Buttons._element.value = "次";
     scene.addChild(Buttons);
 
-    Buttons.addEventListener('touchstart',function(e){
+    Buttons.addEventListener("touchend",function(e){
       if(Button_push("進む")) return;
       game.popScene();
       Scene_kazu--;
@@ -4137,7 +4137,7 @@ function Game_load(width,height,private,Manager,make){
         Text[submits]._element.value += " ✓";
         Text[submits].backgroundColor = "red";
       }
-      Text[submits].addEventListener('touchstart',function(e){
+      Text[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "戻る":
           case "やめる":
@@ -4179,7 +4179,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       scene.addChild(Buttons[a]);
-      Buttons[a].addEventListener('touchstart',function(e){
+      Buttons[a].addEventListener("touchend",function(e){
         if(b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
         if(Button_push(ooo)) return;
@@ -4352,7 +4352,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       scene.addChild(Buttons[a]);
-      Buttons[a].addEventListener('touchstart',function(e){
+      Buttons[a].addEventListener("touchend",function(e){
         switch (b) {
           case "ゆさぶる":
             if(Button_push("音無し")) return;
@@ -4410,7 +4410,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.value = a;
       Button[submits].ナンバー　= submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "設定を閉じる":
             if(Button_push("戻る")) return;
@@ -4639,7 +4639,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         if(Button_push("戻る")) return;
         if(S_Input1._element.value.replace(/[^,]/g,"")!=""||S_Input2._element.value.replace(/[^,]/g,"")!=""||S_Input3._element.value.replace(/[^,]/g,"")!=""||S_Input4._element.value.replace(/[^,]/g,"")!=""||S_Input5._element.value.replace(/[^,]/g,"")!=""){
           scene.addChild(Text[6]);
@@ -4750,7 +4750,7 @@ function Game_load(width,height,private,Manager,make){
     Button._element.type = "submit";
     Button._element.value = "新しいシーンの作成";
     scene.addChild(Button);
-    Button.addEventListener('touchstart',function(e){
+    Button.addEventListener("touchend",function(e){
       if(Button_push("セーブ")) return;
       switch (S_Input._element.value) {
         case "メイン":
@@ -4905,7 +4905,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         if(Button_push("戻る")) return;
         game.popScene();
         Scene_kazu--;
@@ -4958,7 +4958,7 @@ function Game_load(width,height,private,Manager,make){
       Button2[submits]._element.type = "submit";
       Button2[submits]._element.value = c;
       scene.addChild(Button2[submits]);
-      Button2[submits].addEventListener('touchstart',function(e){
+      Button2[submits].addEventListener("touchend",function(e){
         if(Button_push("音無し")) return;
         switch (b) {
           case Text[10].y:
@@ -5020,7 +5020,7 @@ function Game_load(width,height,private,Manager,make){
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
-    Background.addEventListener('touchstart',function(e){
+    Background.addEventListener("touchend",function(e){
       if(can){
         Sound_ON("選択音");
         Scene_loads("調べる何もない",false,false);
@@ -5045,7 +5045,7 @@ function Game_load(width,height,private,Manager,make){
       Touch[k].height = height_t*width/16*9/NaturalHeight;
       console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
       scene.addChild(Touch[k]);
-      Touch[k].addEventListener('touchstart',function(e){
+      Touch[k].addEventListener("touchend",function(e){
         if(can){
           Sound_ON("選択音");
           Scene_loads(this.シーン,false,false);
@@ -5072,7 +5072,7 @@ function Game_load(width,height,private,Manager,make){
       Touch_Pointer.x = width/2-width/36/2;
       Touch_Pointer.y = width/16*9/2-width/36/2;
       scene.addChild(Touch_Pointer);
-      scene.addEventListener('touchstart',function(e){
+      scene.addEventListener("touchend",function(e){
         if(e.x<width&&e.y<width/16*9){
           Sound_ON("選択音");
           Touch_Pointer.x = e.x-width/36/2;
@@ -5088,7 +5088,7 @@ function Game_load(width,height,private,Manager,make){
       Kettei._element.type = "submit";
       Kettei._element.value = "決定";
       scene.addChild(Kettei);
-      Kettei.addEventListener('touchstart',function(e){
+      Kettei.addEventListener("touchend",function(e){
         for (var i = Touch.length-1; i >= 0; i--) {
           Sound_ON("選択音");
           if(Touch[i].intersect(Touch_Pointer)){
@@ -5110,7 +5110,7 @@ function Game_load(width,height,private,Manager,make){
       Modoru._element.type = "submit";
       Modoru._element.value = "戻る";
       scene.addChild(Modoru);
-      Modoru.addEventListener('touchstart',function(e){
+      Modoru.addEventListener("touchend",function(e){
         if(Button_push("戻る")) return;
         Scene_loads(Return,true,false);
       });
@@ -5207,7 +5207,7 @@ function Game_load(width,height,private,Manager,make){
       }
     })
 
-    Buttons.addEventListener('touchstart',function(e){
+    Buttons.addEventListener("touchend",function(e){
       if(Button_push("進む")) return;
       if(Text_defined){
         Text_defined = false;
@@ -5314,7 +5314,7 @@ function Game_load(width,height,private,Manager,make){
       if(a){
         if((a=="設定を開く"&&Ig)==false&&a!="詳細") scene.addChild(Button[submits]);
       }
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         switch (a) {
           case "戻る":
             var ooo = "戻る";
@@ -5538,7 +5538,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener('touchstart',function(e){
+      Button[submits].addEventListener("touchend",function(e){
         if(Button_push("戻る")) return;
         if(BGM.paused&&BGM.title!="無") BGM.play();
         game.popScene();
@@ -5585,7 +5585,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits2]._element.type = "submit";
       Button[submits2]._element.value = a;
       scene.addChild(Button[submits2]);
-      Button[submits2].addEventListener('touchstart',function(e){
+      Button[submits2].addEventListener("touchend",function(e){
         if(Button_push("ページ")) return;
         if(BGM.paused&&BGM.title!="無") BGM.play();
         switch (a) {
@@ -5634,7 +5634,7 @@ function Game_load(width,height,private,Manager,make){
           Photo.height = width*0.8/16*9;
         }
         if(Big){
-          Photo.addEventListener('touchstart',function(e){
+          Photo.addEventListener("touchend",function(e){
             Sound_ON("戻る");
             Scene_kazu--;
             console.log("Scene数",Scene_kazu);
@@ -5656,7 +5656,7 @@ function Game_load(width,height,private,Manager,make){
         Photo.x = width/10;
         Photo.y = width/10+width/30+width/5;
         scene.addChild(Photo);
-        Photo.addEventListener('touchstart',function(e){
+        Photo.addEventListener("touchend",function(e){
           Sound_ON("選択音");
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
@@ -5728,7 +5728,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
       if(a=="改造をやめる"){
-        Button[submits].addEventListener('touchstart',function(e){
+        Button[submits].addEventListener("touchend",function(e){
           if(Button_push("戻る")) return;
           if(Datakousin) return;
           if(Scene_kazu==2) game.replaceScene(ItemScene(Number,Ig,Type2,Do));
@@ -5740,7 +5740,7 @@ function Game_load(width,height,private,Manager,make){
         });
       }
       if(a=="実行する"){
-        Button[submits].addEventListener('touchstart',function(e){
+        Button[submits].addEventListener("touchend",function(e){
           if(Button_push("音無し")) return;
           for (var i = 3; i < 7; i++){
             if(Button[i]._element.value.replace(/[^,]/g,"")!=""){
