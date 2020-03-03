@@ -15,6 +15,7 @@ function Game_load(width,height,private,Manager,make){
   game.onload = function(){
 
   var Now = new Date().getTime();
+  var ttt = new Date().getTime();
   if(Manager==false){
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
           {
@@ -25,7 +26,10 @@ function Game_load(width,height,private,Manager,make){
   }
 
   $("#enchant-stage").on("touchstart",function(event){
-    //event.preventDefault();
+    if(new Date().getTime()-ttt>350){
+      ttt = new Date().getTime();
+    }
+    else event.preventDefault();
   });
 
   var Wait_time = 350;
@@ -677,8 +681,8 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    if(true){
-    //if(new Date().getTime()-Now>Wait_time){
+    //if(true){
+    if(new Date().getTime()-Now>Wait_time){
       Now = new Date().getTime();
       game.fps = 10;
       switch (expression) {
@@ -693,8 +697,8 @@ function Game_load(width,height,private,Manager,make){
     else return(true);
   }
   function Button_push_title(e){
-    if(true){
-    //if(new Date().getTime()-Now>Wait_time){
+    //if(true){
+    if(new Date().getTime()-Now>Wait_time){
       Now = new Date().getTime();
       game.fps = 10;
       if(e==false) return;
