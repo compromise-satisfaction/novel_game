@@ -677,7 +677,8 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    if(new Date().getTime()-Now>Wait_time){
+    if(true){
+    //if(new Date().getTime()-Now>Wait_time){
       Now = new Date().getTime();
       game.fps = 10;
       switch (expression) {
@@ -692,7 +693,8 @@ function Game_load(width,height,private,Manager,make){
     else return(true);
   }
   function Button_push_title(e){
-    if(new Date().getTime()-Now>Wait_time){
+    if(true){
+    //if(new Date().getTime()-Now>Wait_time){
       Now = new Date().getTime();
       game.fps = 10;
       if(e==false) return;
