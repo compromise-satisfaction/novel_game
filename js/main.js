@@ -3051,7 +3051,7 @@ function Game_load(width,height,private,Manager,make){
         else{
           if(Return!=true){
             Item.tl.fadeOut(Datas[21]*-1);
-            Sound_ON("アイテム表示音");
+            Sound_ON("アイテム消去音");
           }
           else Item.opacity = 0;
         }
