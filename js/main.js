@@ -40,7 +40,7 @@ function Game_load(width,height,private,Manager,make){
     event.preventDefault();
   });
 
-  var Wait_time = 350;
+  var Wait_time = 0;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
@@ -2009,7 +2009,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button._element.type = "submit";
     M_Button._element.value = "適用";
     scene.addChild(M_Button);
-    M_Button.addEventListener("touchend",function(e){
+    M_Button._element.onclick = function(e){
       if(Button_push("選択音")) return;
       switch (make_data.タイプ) {
         case "メイン":
@@ -2169,7 +2169,7 @@ function Game_load(width,height,private,Manager,make){
           break;
       }
       Scene_loads(Scene_name,false,false);
-    });
+    };
 
     var M_Button = new Entity();
     M_Button.moveTo(width,Numbers);
@@ -2179,7 +2179,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button._element.type = "submit";
     M_Button._element.value = "このシーンを保存する";
     scene.addChild(M_Button);
-    M_Button.addEventListener("touchend",function(e){
+    M_Button._element.onclick = function(e){
       if(Button_push("セーブ")) return;
       game.pushScene(LoadingScene("保存"));
       Scene_kazu++;
@@ -2235,7 +2235,7 @@ function Game_load(width,height,private,Manager,make){
         }
         Scene_loads(Scene_name,false,false);
       },);
-    });
+    };
 
     var M_Text = [];
 
@@ -2286,9 +2286,9 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
-      Button[submits].ナンバー = submits;
+      Button[submits]._element.ナンバー = submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         switch (a) {
           case "戻る":
             if(Button_push_title(Title_sound3)) return;
@@ -2320,7 +2320,7 @@ function Game_load(width,height,private,Manager,make){
               return;
             }
             for (var i = 0; i < Button.length; i++) {
-              if(Button[i]!=this){
+              if(Button[i]._element!=this){
                 scene.removeChild(Button[i]);
               }
             }
@@ -2374,7 +2374,7 @@ function Game_load(width,height,private,Manager,make){
             return;
             break;
         }
-      });
+      };
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
     }
@@ -2408,9 +2408,9 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
-      Button[submits].ナンバー = submits;
+      Button[submits]._element.ナンバー = submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         switch (a) {
           case "戻る":
             if(Button_push_title(Title_sound3)) return;
@@ -2443,7 +2443,7 @@ function Game_load(width,height,private,Manager,make){
             return;
             break;
         }
-      });
+      };
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
     }
@@ -2479,9 +2479,9 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
-      Button[submits].ナンバー = submits;
+      Button[submits]._element.ナンバー = submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         switch (a) {
           case "戻る":
             if(Button_push_title(Title_sound3)) return;
@@ -2514,7 +2514,7 @@ function Game_load(width,height,private,Manager,make){
             return;
             break;
         }
-      });
+      };
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
     }
@@ -2558,7 +2558,7 @@ function Game_load(width,height,private,Manager,make){
       Text[submits]._element.type = "submit";
       Text[submits]._element.value = a;
       scene.addChild(Text[submits]);
-      Text[submits].addEventListener("touchend",function(e){
+      Text[submits]._element.onclick = function(e){
         if(b=="戻る"){
           if(Button_push_title(Title_sound3)) return;
           game.replaceScene(TitleScene());
@@ -2566,14 +2566,14 @@ function Game_load(width,height,private,Manager,make){
         else{
           if(Button_push_title(Title_sound2)) return;
           for (var i = 0; i < Text.length; i++) {
-            if(Text[i]!=this){
+            if(Text[i]._element!=this){
               scene.removeChild(Text[i]);
             }
           }
           Datas_load(b,"シーンデータ読み込み",test);
         }
         return;
-      });
+      };
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
     }
@@ -2696,10 +2696,10 @@ function Game_load(width,height,private,Manager,make){
         }
         scene.addChild(Button[submits]);
         if(a=="入力したらこのボタンを押してね。"){
-          Button[0].addEventListener("touchend",function(e){
+          Button[0]._element.onclick = function(e){
             Datas_load(Button[1]._element.value,"タイトルデータ読み込み");
             return;
-          });
+          };
         }
         submits++;
         Numbers += (width/20)+(width/25)+(width/25);
@@ -2717,10 +2717,10 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = "家庭用";
         scene.addChild(Button[submits]);
-        Button[submits].addEventListener("touchend",function(e){
+        Button[submits]._element.onclick = function(e){
           Datas_load("11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k","タイトルデータ読み込み");
           return;
-        });
+        };
         submits++;
         Numbers += (width/20)+(width/25)+(width/25);
         Numbers += (width/20)+(width/25)+(width/25);
@@ -2732,10 +2732,10 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = "共有用";
         scene.addChild(Button[submits]);
-        Button[submits].addEventListener("touchend",function(e){
+        Button[submits]._element.onclick = function(e){
           Datas_load("12-ESzeqaV3uEtLDAoCIDPVU18MahgfcB3IOInm0scj8","タイトルデータ読み込み");
           return;
-        });
+        };
       }
     }
 
@@ -2770,7 +2770,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         switch (a) {
           case "データ消去":
             var ooo = Title_sound5;
@@ -2794,7 +2794,7 @@ function Game_load(width,height,private,Manager,make){
             break;
           case "説明":
             for (var i = 0; i < Button.length; i++) {
-              if(Button[i]!=this){
+              if(Button[i]._element!=this){
                 scene.removeChild(Button[i]);
               }
             }
@@ -2811,7 +2811,7 @@ function Game_load(width,height,private,Manager,make){
             game.pushScene(Save_ChoiceScene("削除"));
             break;
         }
-      });
+      };
       submits++;
     }
 
@@ -2831,13 +2831,13 @@ function Game_load(width,height,private,Manager,make){
     Set_button.frame = 15;
     scene.addChild(Set_button);
 
-    Set_button.addEventListener("touchend",function(e){
+    Set_button._element.onclick = function(e){
       console.log(Set_button);
       return;
       game.pushScene(ReversiScene());
       Scene_kazu++;
       console.log("Scene数",Scene_kazu);
-    });
+    };
     */
     return scene;
   };
@@ -3131,13 +3131,13 @@ function Game_load(width,height,private,Manager,make){
       Buttons._element.type = "submit";
       Buttons._element.value = "決定";
       scene.addChild(Buttons);
-      Buttons.addEventListener("touchend",function(e){
+      Buttons._element.onclick = function(e){
         if(Button_push("選択音")) return;
         Moves = S_Input1._element.value;
         game.pushScene(MoveScene(10));
         Scene_kazu++;
         console.log("Scene数",Scene_kazu);
-      });
+      };
     }
 
     var Numbers = width/16*9+width/20+width/25;
@@ -3702,7 +3702,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       scene.addChild(Buttons[a]);
-      Buttons[a].addEventListener("touchend",function(e){
+      Buttons[a]._element.onclick = function(e){
         if(b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
         if(Button_push(ooo)) return;
@@ -3728,7 +3728,7 @@ function Game_load(width,height,private,Manager,make){
           else Scene_loads(c,false,false);
         }
         else Scene_loads(c,true,false);
-      });
+      };
     }
     if(Datas[9]!=false) Button(0,"早戻し",Datas[9]);//戻る1
     if(Datas[10]!=false) Button(1,"前",Datas[10]);//戻る2
@@ -3822,11 +3822,11 @@ function Game_load(width,height,private,Manager,make){
         Touch[tk].height = height_t*width/16*9/NaturalHeight;
         console.log(Touch[tk].x,Touch[tk].y,Touch[tk].width,Touch[tk].height,Number);
         scene.addChild(Touch[tk]);
-        Touch[tk].addEventListener("touchend",function(e){
+        Touch[tk]._element.onclick = function(e){
           Sound_ON("選択音");
           Scene_loads(Number,false,false);
           return;
-        });
+        };
         return;
       }
 
@@ -4015,13 +4015,13 @@ function Game_load(width,height,private,Manager,make){
     Buttons._element.value = "次";
     scene.addChild(Buttons);
 
-    Buttons.addEventListener("touchend",function(e){
+    Buttons._element.onclick = function(e){
       if(Button_push("進む")) return;
       game.popScene();
       Scene_kazu--;
       console.log("Scene数",Scene_kazu);
       Scene_loads(Moves,false,false);
-    });
+    };
 
     Background.addEventListener("enterframe",function(){
         if(Background.opacity == 1 && Out>0){
@@ -4163,7 +4163,7 @@ function Game_load(width,height,private,Manager,make){
         Text[submits]._element.value += " ✓";
         Text[submits].backgroundColor = "red";
       }
-      Text[submits].addEventListener("touchend",function(e){
+      Text[submits]._element.onclick = function(e){
         switch (a) {
           case "戻る":
           case "やめる":
@@ -4184,7 +4184,7 @@ function Game_load(width,height,private,Manager,make){
           console.log("Scene数",Scene_kazu);
         }
         else Scene_loads(b,false,false);
-      });
+      };
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
     }
@@ -4205,7 +4205,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       scene.addChild(Buttons[a]);
-      Buttons[a].addEventListener("touchend",function(e){
+      Buttons[a]._element.onclick = function(e){
         if(b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
         if(Button_push(ooo)) return;
@@ -4215,7 +4215,7 @@ function Game_load(width,height,private,Manager,make){
           console.log("Scene数",Scene_kazu);
         }
         else Scene_loads(c,true,false);
-      });
+      };
     }
     if(Datas[4]!=false) Button(0,"早戻し",Datas[4]);//戻る1
     if(Datas[5]!=false) Button(1,"前",Datas[5]);//戻る2
@@ -4378,7 +4378,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       scene.addChild(Buttons[a]);
-      Buttons[a].addEventListener("touchend",function(e){
+      Buttons[a]._element.onclick = function(e){
         switch (b) {
           case "ゆさぶる":
             if(Button_push("音無し")) return;
@@ -4403,7 +4403,7 @@ function Game_load(width,height,private,Manager,make){
             Scene_loads(c,false,false);
             break;
         }
-      });
+      };
     }
     if(Datas[3]!=false) Button(0,"ゆさぶる",Datas[3]);//ゆさぶる
     if(Datas[4]!=false) Button(1,"前",Datas[4]);//戻る
@@ -4434,9 +4434,9 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
-      Button[submits].ナンバー　= submits;
+      Button[submits]._element.ナンバー　= submits;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         switch (a) {
           case "設定を閉じる":
             if(Button_push("戻る")) return;
@@ -4492,7 +4492,7 @@ function Game_load(width,height,private,Manager,make){
             break;
           case "セーブする":
             Save(Number);
-            this._element.value = "セーブしました。";
+            this.value = "セーブしました。";
             break;
           case "セーブ方法の切り替え":
             if(Setting_Flag[8]){
@@ -4512,11 +4512,11 @@ function Game_load(width,height,private,Manager,make){
           case "現在は演出をスキップしません。":
             if(Setting_Flag[18]){
               Setting_Flag[18] = false;
-              this._element.value = "現在は演出をスキップしません。";
+              this.value = "現在は演出をスキップしません。";
             }
             else{
               Setting_Flag[18] = true;
-              this._element.value = "現在は演出をスキップします。";
+              this.value = "現在は演出をスキップします。";
             }
             saves("設定");
             break;
@@ -4536,7 +4536,7 @@ function Game_load(width,height,private,Manager,make){
             Scene_loads("セーブ読み込み",false,false);
             break;
         }
-      });
+      };
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
     }
@@ -4665,7 +4665,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         if(Button_push("戻る")) return;
         if(S_Input1._element.value.replace(/[^,]/g,"")!=""||S_Input2._element.value.replace(/[^,]/g,"")!=""||S_Input3._element.value.replace(/[^,]/g,"")!=""||S_Input4._element.value.replace(/[^,]/g,"")!=""||S_Input5._element.value.replace(/[^,]/g,"")!=""){
           scene.addChild(Text[6]);
@@ -4704,7 +4704,7 @@ function Game_load(width,height,private,Manager,make){
           console.log("Scene数",Scene_kazu);
         }
         saves("設定");
-      });
+      };
       submits++;
     }
 
@@ -4776,7 +4776,7 @@ function Game_load(width,height,private,Manager,make){
     Button._element.type = "submit";
     Button._element.value = "新しいシーンの作成";
     scene.addChild(Button);
-    Button.addEventListener("touchend",function(e){
+    Button._element.onclick = function(e){
       if(Button_push("セーブ")) return;
       switch (S_Input._element.value) {
         case "メイン":
@@ -4905,7 +4905,7 @@ function Game_load(width,height,private,Manager,make){
           break;
       }
       Scene_loads(Number,false,false);
-    });
+    };
 
     return scene;
   };
@@ -4931,12 +4931,12 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         if(Button_push("戻る")) return;
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
-      });
+      };
       submits++;
     }
 
@@ -4984,7 +4984,7 @@ function Game_load(width,height,private,Manager,make){
       Button2[submits]._element.type = "submit";
       Button2[submits]._element.value = c;
       scene.addChild(Button2[submits]);
-      Button2[submits].addEventListener("touchend",function(e){
+      Button2[submits]._element.onclick = function(e){
         if(Button_push("音無し")) return;
         switch (b) {
           case Text[10].y:
@@ -5022,7 +5022,7 @@ function Game_load(width,height,private,Manager,make){
             break;
         }
         saves("設定");
-      });
+      };
       submits++;
     }
     Submit2(width/2,Text[10].y,"-");
@@ -5046,13 +5046,13 @@ function Game_load(width,height,private,Manager,make){
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
-    Background.addEventListener("touchend",function(e){
+    Background._element.onclick = function(e){
       if(can){
         Sound_ON("選択音");
         Scene_loads("調べる何もない",false,false);
       }
       return;
-    });
+    };
 
     if(Background._element.naturalWidth) var NaturalWidth = Background._element.naturalWidth;
     else var NaturalWidth = conversion_url(Inspect[0],"比率").split("×")[0];
@@ -5071,13 +5071,13 @@ function Game_load(width,height,private,Manager,make){
       Touch[k].height = height_t*width/16*9/NaturalHeight;
       console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
       scene.addChild(Touch[k]);
-      Touch[k].addEventListener("touchend",function(e){
+      Touch[k]._element.onclick = function(e){
         if(can){
           Sound_ON("選択音");
           Scene_loads(this.シーン,false,false);
         }
         return;
-      });
+      };
       return;
     }
 
@@ -5098,14 +5098,14 @@ function Game_load(width,height,private,Manager,make){
       Touch_Pointer.x = width/2-width/36/2;
       Touch_Pointer.y = width/16*9/2-width/36/2;
       scene.addChild(Touch_Pointer);
-      scene.addEventListener("touchend",function(e){
+      scene._element.onclick = function(e){
         if(e.x<width&&e.y<width/16*9){
           Sound_ON("選択音");
           Touch_Pointer.x = e.x-width/36/2;
           Touch_Pointer.y = e.y-width/36/2;
         }
         return;
-      });
+      };
       var Kettei = new Entity();
       Kettei.moveTo(width/4,width/16*9+(width/30)+width/5);
       Kettei.width = width/2;
@@ -5114,7 +5114,7 @@ function Game_load(width,height,private,Manager,make){
       Kettei._element.type = "submit";
       Kettei._element.value = "決定";
       scene.addChild(Kettei);
-      Kettei.addEventListener("touchend",function(e){
+      Kettei._element.onclick = function(e){
         for (var i = Touch.length-1; i >= 0; i--) {
           Sound_ON("選択音");
           if(Touch[i].intersect(Touch_Pointer)){
@@ -5124,7 +5124,7 @@ function Game_load(width,height,private,Manager,make){
         }
         Scene_loads("調べる何もない",false,false);
         return;
-      });
+      };
     }
 
     if(Return){
@@ -5136,10 +5136,10 @@ function Game_load(width,height,private,Manager,make){
       Modoru._element.type = "submit";
       Modoru._element.value = "戻る";
       scene.addChild(Modoru);
-      Modoru.addEventListener("touchend",function(e){
+      Modoru._element.onclick = function(e){
         if(Button_push("戻る")) return;
         Scene_loads(Return,true,false);
-      });
+      };
     }
     if(make) makes(M_M,scene);
     return scene;
@@ -5233,7 +5233,7 @@ function Game_load(width,height,private,Manager,make){
       }
     })
 
-    Buttons.addEventListener("touchend",function(e){
+    Buttons._element.onclick = function(e){
       if(Button_push("進む")) return;
       if(Text_defined){
         Text_defined = false;
@@ -5260,7 +5260,7 @@ function Game_load(width,height,private,Manager,make){
         }
         Scene_loads(c,false,false);
       }
-    });//進む
+    };//進む
     if(make) makes(M_M,scene);
     return scene;
   };
@@ -5340,7 +5340,7 @@ function Game_load(width,height,private,Manager,make){
       if(a){
         if((a=="設定を開く"&&Ig)==false&&a!="詳細") scene.addChild(Button[submits]);
       }
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         switch (a) {
           case "戻る":
             var ooo = "戻る";
@@ -5397,7 +5397,7 @@ function Game_load(width,height,private,Manager,make){
           }
         }
         else{
-          switch (this._element.value){
+          switch (this.value){
             case "前":
               if(Setting_Flag[Pages]==0){
                 Setting_Flag[Pages] = Choice_Flag.length-Choice_Flag.length%5;
@@ -5491,7 +5491,7 @@ function Game_load(width,height,private,Manager,make){
               break;
           }
         }
-      });
+      };
       submits++;
     }
     var S_X_H = (width-width/6)/3-width/12;
@@ -5564,13 +5564,13 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
-      Button[submits].addEventListener("touchend",function(e){
+      Button[submits]._element.onclick = function(e){
         if(Button_push("戻る")) return;
         if(BGM.paused&&BGM.title!="無") BGM.play();
         game.popScene();
         Scene_kazu--;
         console.log("Scene数",Scene_kazu);
-      });
+      };
       submits++;
     }
     Submit("戻る");
@@ -5611,7 +5611,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits2]._element.type = "submit";
       Button[submits2]._element.value = a;
       scene.addChild(Button[submits2]);
-      Button[submits2].addEventListener("touchend",function(e){
+      Button[submits2]._element.onclick = function(e){
         if(Button_push("ページ")) return;
         if(BGM.paused&&BGM.title!="無") BGM.play();
         switch (a) {
@@ -5626,7 +5626,7 @@ function Game_load(width,height,private,Manager,make){
             break;
         }
         game.replaceScene(DetailsScene(Syousai,Pages));
-      });
+      };
       submits2++;
     }
     var S_X_H = (width-width/6)/3;
@@ -5660,12 +5660,12 @@ function Game_load(width,height,private,Manager,make){
           Photo.height = width*0.8/16*9;
         }
         if(Big){
-          Photo.addEventListener("touchend",function(e){
+          Photo._element.onclick = function(e){
             Sound_ON("戻る");
             Scene_kazu--;
             console.log("Scene数",Scene_kazu);
             game.popScene();
-          });
+          };
         }
         scene.addChild(Photo);
       }
@@ -5682,12 +5682,12 @@ function Game_load(width,height,private,Manager,make){
         Photo.x = width/10;
         Photo.y = width/10+width/30+width/5;
         scene.addChild(Photo);
-        Photo.addEventListener("touchend",function(e){
+        Photo._element.onclick = function(e){
           Sound_ON("選択音");
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
           game.pushScene(DetailsScene(Big_Photo,0,true));
-        });
+        };
       }
       else if(Text[i]._element.textContent.substring(0,7)=="YOUTUBE"){
         if(BGM.paused==false) BGM.pause();
@@ -5754,7 +5754,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.value = a;
       scene.addChild(Button[submits]);
       if(a=="改造をやめる"){
-        Button[submits].addEventListener("touchend",function(e){
+        Button[submits]._element.onclick = function(e){
           if(Button_push("戻る")) return;
           if(Datakousin) return;
           if(Scene_kazu==2) game.replaceScene(ItemScene(Number,Ig,Type2,Do));
@@ -5763,10 +5763,10 @@ function Game_load(width,height,private,Manager,make){
             Scene_kazu--;
             console.log("Scene数",Scene_kazu);
           }
-        });
+        };
       }
       if(a=="実行する"){
-        Button[submits].addEventListener("touchend",function(e){
+        Button[submits]._element.onclick = function(e){
           if(Button_push("音無し")) return;
           for (var i = 3; i < 7; i++){
             if(Button[i]._element.value.replace(/[^,]/g,"")!=""){
@@ -5784,7 +5784,7 @@ function Game_load(width,height,private,Manager,make){
                 Button[6]._element.value,//詳細内容
                 Button[3]._element.value//コード
               ];
-              this._element.value = Button[3]._element.value + " 入手。";
+              this.value = Button[3]._element.value + " 入手。";
               Sound_ON("セーブ");
               break;
             case "フラグ類入手":
@@ -5801,7 +5801,7 @@ function Game_load(width,height,private,Manager,make){
                           I_C_F_T_DATAS[i].コード
                           ];
               Get_ICFT(DATAS);
-              this._element.value = Button[2]._element.value+" 入手。";
+              this.value = Button[2]._element.value+" 入手。";
               Sound_ON("セーブ");
               switch (I_C_F_T_DATAS[i].タイプ) {
                 case "フラグ":
@@ -5819,14 +5819,14 @@ function Game_load(width,height,private,Manager,make){
               for (var i = 0; i < Log_Flag.length; i++){
                 if(Log_Flag[i]==Button[3]._element.value){
                   Log_Flag.splice(i,1);
-                  this._element.value = Button[3]._element.value+" オフ。";
+                  this.value = Button[3]._element.value+" オフ。";
                   Sound_ON("セーブ");
                   console.log(Log_Flag);
                   return;
                 }
               }
               Log_Flag[Log_Flag.length] = Button[3]._element.value;
-              this._element.value = Button[3]._element.value+" オン。";
+              this.value = Button[3]._element.value+" オン。";
               Sound_ON("セーブ");
               console.log(Log_Flag);
               break;
@@ -5834,52 +5834,52 @@ function Game_load(width,height,private,Manager,make){
               for (var i = 0; i < Flag.length; i++){
                 if(Flag[i]==Button[3]._element.value){
                   Flag.splice(i,1);
-                  this._element.value = Button[3]._element.value+" オフ。";
+                  this.value = Button[3]._element.value+" オフ。";
                   Sound_ON("セーブ");
                   console.log(Flag);
                   return;
                 }
               }
               Flag[Flag.length] = Button[3]._element.value;
-              this._element.value = Button[3]._element.value+" オン。";
+              this.value = Button[3]._element.value+" オン。";
               Sound_ON("セーブ");
               console.log(Flag);
               break;
             case "フラグリセット":
               Flag = [];
-              this._element.value = Button[1]._element.value;
+              this.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
             case "アイテムリセット":
               Item_Flag = [];
-              this._element.value = Button[1]._element.value;
+              this.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
             case "人物リセット":
               Character_Flag = [];
-              this._element.value = Button[1]._element.value;
+              this.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
             case "トロフィーリセット":
               Trophy_Flag = [];
-              this._element.value = Button[1]._element.value;
+              this.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
             case "記録リセット":
               Log_Flag = [];
-              this._element.value = Button[1]._element.value;
+              this.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
             case "好感度消去":
               Favorability_Flag = [];
-              this._element.value = Button[1]._element.value;
+              this.value = Button[1]._element.value;
               Sound_ON("セーブ");
               break;
             default:
-              this._element.value = "することを選択してください。";
+              this.value = "することを選択してください。";
               break;
           }
-        });
+        };
       }
       submits++;
       Numbers += (width/20)+(width/25)+(width/25);
