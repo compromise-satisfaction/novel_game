@@ -33,11 +33,11 @@ function Game_load(width,height,private,Manager,make){
   });
 
   $("#enchant-stage").on("touchmove",function(event){
-    event.preventDefault();
+    //event.preventDefault();
   });
 
   $("#enchant-stage").on("touchend",function(event){
-    event.preventDefault();
+    //event.preventDefault();
   });
 
   var Wait_time = 0;
