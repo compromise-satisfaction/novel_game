@@ -236,6 +236,18 @@ function Game_load(width,height,private,Manager,make){
             Main_DATAS[k1].文章男 = result[i][14];
             Main_DATAS[k1].文章女 = result[i][15];
             Main_DATAS[k1].文章未設定 = result[i][16];
+            if(Main_DATAS[k1].文章男!=""){
+              if(Main_DATAS[k1].文章女=="") Main_DATAS[k1].文章女 = Main_DATAS[k1].文章男;
+              if(Main_DATAS[k1].文章未設定=="") Main_DATAS[k1].文章未設定 = Main_DATAS[k1].文章男;
+            }
+            if(Main_DATAS[k1].文章女!=""){
+              if(Main_DATAS[k1].文章男=="") Main_DATAS[k1].文章男 = Main_DATAS[k1].文章女;
+              if(Main_DATAS[k1].文章未設定=="") Main_DATAS[k1].文章未設定 = Main_DATAS[k1].文章女;
+            }
+            if(Main_DATAS[k1].文章未設定!=""){
+              if(Main_DATAS[k1].文章男=="") Main_DATAS[k1].文章男 = Main_DATAS[k1].文章未設定;
+              if(Main_DATAS[k1].文章女=="") Main_DATAS[k1].文章女 = Main_DATAS[k1].文章未設定;
+            }
             Main_DATAS[k1].前前 = result[i][17];
             Main_DATAS[k1].前 = result[i][18];
             Main_DATAS[k1].セーブ = result[i][19];
