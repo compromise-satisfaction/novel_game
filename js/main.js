@@ -87,6 +87,10 @@ function Game_load(width,height,private,Manager,make){
     if(make) return("../画像/半透明(白).png");
     else return("../画像/白.png");
   }
+  function W_S2(){
+    if(make) return("../画像/半透明(黒).png");
+    else return("../画像/透明.png");
+  }
   function free(Data){
     for (var i = 0; i < Setting_Flag[19].split("→").length; i++) {
       var frees = "(自由"+(i+1)+")";
@@ -2886,7 +2890,7 @@ function Game_load(width,height,private,Manager,make){
 
     var Explosion = new Sprite();
     Explosion._element = document.createElement("img");
-    Explosion._element.src = "../画像/透明.png";
+    Explosion._element.src = W_S2();
     Explosion.width = width/16*9;
     Explosion.height = width/16*9;
     scene.addChild(Explosion);
@@ -3067,7 +3071,7 @@ function Game_load(width,height,private,Manager,make){
 
     var Speech_bubble_image = new Sprite();
     Speech_bubble_image._element = document.createElement("img");
-    Speech_bubble_image._element.src = "../画像/透明.png";
+    Speech_bubble_image._element.src = W_S2();
     Speech_bubble_image.width = width;
     Speech_bubble_image.height = width/16*9;
     scene.addChild(Speech_bubble_image);
@@ -3173,7 +3177,7 @@ function Game_load(width,height,private,Manager,make){
 
     var Speak_Background2 = new Sprite();
     Speak_Background2._element = document.createElement("img");
-    Speak_Background2._element.src = "../画像/透明.png";
+    Speak_Background2._element.src = W_S2();
     Speak_Background2.width = width/4;
     Speak_Background2.height = height/5;
     Speak_Background2.y = width/16*9+width/8-height/5;
@@ -3279,7 +3283,7 @@ function Game_load(width,height,private,Manager,make){
           var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
           if(Image.split("→")[1]) Speech_bubble_image.x += Image.split("→")[1]*1;
           if(Image.split("→")[2]) Speech_bubble_image.y += Image.split("→")[2]*1;
-          if(Image.split("→")[0]=="消滅") Speech_bubble_image._element.src = "../画像/透明.png";
+          if(Image.split("→")[0]=="消滅") Speech_bubble_image._element.src = W_S2();
           else Speech_bubble_image._element.src = conversion_url(Image.split("→")[0],"画像");
           ksks++;
           T_D();
@@ -3356,7 +3360,7 @@ function Game_load(width,height,private,Manager,make){
               console.log("右のキャラを"+Datas[5]+"に変更");
             }
           }
-          Speak_Background2._element.src = "../画像/透明.png";
+          Speak_Background2._element.src = W_S2();
           return;
           break;
         case "↦":
@@ -3447,7 +3451,7 @@ function Game_load(width,height,private,Manager,make){
               console.log("右のキャラを"+Datas[5]+"に変更");
             }
           }
-          Speak_Background2._element.src = "../画像/透明.png";
+          Speak_Background2._element.src = W_S2();
           break;
         default:
           if(Text[k]._element.textContent.substring(0,1)=="「"||Text[k]._element.textContent.substring(0,1)=="　"){
@@ -3488,11 +3492,11 @@ function Game_load(width,height,private,Manager,make){
               default:
                 break;
             }
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し1.png";
           }
           else if(Text[k]._element.textContent.substring(0,1)=="("||Text[k]._element.textContent.substring(0,1)==" "){
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し2.png";
           }
           break;
@@ -3505,7 +3509,7 @@ function Game_load(width,height,private,Manager,make){
           else{
             Text[k]._element.textContent = " ";
             Text[k]._style.color = "blue";
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し2.png";
           }
         }
@@ -3515,7 +3519,7 @@ function Game_load(width,height,private,Manager,make){
             Text[k]._element.textContent = "　";
             Text[k]._style.color = "Black";
             Speak_Background2._element.src = "../画像/吹き出し1.png";
-            if(Speak_Character=="無し") Speak_Background2._element.src = "../画像/透明.png";
+            if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し1.png";
           }
         }
@@ -3547,7 +3551,7 @@ function Game_load(width,height,private,Manager,make){
             console.log("右のキャラを"+Datas[5]+"に変更");
           }
         }
-        Speak_Background2._element.src = "../画像/透明.png";
+        Speak_Background2._element.src = W_S2();
       }
       else{
         if(Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
@@ -3809,7 +3813,7 @@ function Game_load(width,height,private,Manager,make){
         Touch[tk] = new Sprite();
         Touch[tk]._element = document.createElement("img");
         if(can) Touch[tk]._element.src = "../画像/半透明(赤).png";
-        else Touch[tk]._element.src = "../画像/透明.png";
+        else Touch[tk]._element.src = W_S2();
         Touch[tk].x = x*width/NaturalWidth;
         Touch[tk].y = y*width/16*9/NaturalHeight;
         Touch[tk].width = width_t*width/NaturalWidth;
@@ -5057,7 +5061,7 @@ function Game_load(width,height,private,Manager,make){
       Touch[k] = new Sprite();
       Touch[k]._element = document.createElement("img");
       if(can) Touch[k]._element.src = "../画像/半透明(赤).png";
-      else Touch[k]._element.src = "../画像/透明.png";
+      else Touch[k]._element.src = W_S2();
       Touch[k]._element.シーン = Number;
       Touch[k].x = x*width/NaturalWidth;
       Touch[k].y = y*width/16*9/NaturalHeight;
