@@ -2006,6 +2006,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button._element = document.createElement('input');
     M_Button._element.type = "submit";
     M_Button._element.value = "適用";
+    M_Button.backgroundColor = "buttonface";
     scene.addChild(M_Button);
     M_Button._element.onclick = function(e){
       if(Button_push("選択音")) return;
@@ -2176,6 +2177,7 @@ function Game_load(width,height,private,Manager,make){
     M_Button._element = document.createElement('input');
     M_Button._element.type = "submit";
     M_Button._element.value = "このシーンを保存する";
+    M_Button.backgroundColor = "buttonface";
     scene.addChild(M_Button);
     M_Button._element.onclick = function(e){
       if(Button_push("セーブ")) return;
@@ -2285,6 +2287,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       Button[submits]._element.ナンバー = submits;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         switch (a) {
@@ -2407,6 +2410,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       Button[submits]._element.ナンバー = submits;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         switch (a) {
@@ -2478,6 +2482,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       Button[submits]._element.ナンバー = submits;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         switch (a) {
@@ -2555,6 +2560,7 @@ function Game_load(width,height,private,Manager,make){
       Text[submits]._element = document.createElement('input');
       Text[submits]._element.type = "submit";
       Text[submits]._element.value = a;
+      Text[submits].backgroundColor = "buttonface";
       scene.addChild(Text[submits]);
       Text[submits]._element.onclick = function(e){
         if(b=="戻る"){
@@ -2686,6 +2692,7 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element.value = a;
         if(a=="入力したらこのボタンを押してね。"){
           Button[submits]._element.type = "submit";
+          Button[submits].backgroundColor = "buttonface";
         }
         else {
           if(Title_Sheet!=null){
@@ -2714,6 +2721,7 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element = document.createElement('input');
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = "家庭用";
+        Button[submits].backgroundColor = "buttonface";
         scene.addChild(Button[submits]);
         Button[submits]._element.onclick = function(e){
           Datas_load("11xs4F0yXoqSGHuFGbhGjhefB_abcAqfkdtkWhBRHo4k","タイトルデータ読み込み");
@@ -2729,6 +2737,7 @@ function Game_load(width,height,private,Manager,make){
         Button[submits]._element = document.createElement('input');
         Button[submits]._element.type = "submit";
         Button[submits]._element.value = "共有用";
+        Button[submits].backgroundColor = "buttonface";
         scene.addChild(Button[submits]);
         Button[submits]._element.onclick = function(e){
           Datas_load("12-ESzeqaV3uEtLDAoCIDPVU18MahgfcB3IOInm0scj8","タイトルデータ読み込み");
@@ -2767,6 +2776,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         switch (a) {
@@ -3128,6 +3138,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons._element = document.createElement('input');
       Buttons._element.type = "submit";
       Buttons._element.value = "決定";
+      Buttons.backgroundColor = "buttonface";
       scene.addChild(Buttons);
       Buttons._element.onclick = function(e){
         if(Button_push("選択音")) return;
@@ -3699,6 +3710,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element = document.createElement('input');
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
+      Buttons[a].backgroundColor = "buttonface";
       scene.addChild(Buttons[a]);
       Buttons[a]._element.onclick = function(e){
         if(b=="アイテム") var ooo = "メニュー";
@@ -4011,6 +4023,7 @@ function Game_load(width,height,private,Manager,make){
     Buttons._element = document.createElement('input');
     Buttons._element.type = "submit";
     Buttons._element.value = "次";
+    Buttons.backgroundColor = "buttonface";
     scene.addChild(Buttons);
 
     Buttons._element.onclick = function(e){
@@ -4156,6 +4169,7 @@ function Game_load(width,height,private,Manager,make){
       Text[submits]._element = document.createElement('input');
       Text[submits]._element.type = "submit";
       Text[submits]._element.value = a;
+      Text[submits].backgroundColor = "buttonface";
       if(a) scene.addChild(Text[submits]);
       if(have(a)){
         Text[submits]._element.value += " ✓";
@@ -4202,6 +4216,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element = document.createElement('input');
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
+      Buttons[a].backgroundColor = "buttonface";
       scene.addChild(Buttons[a]);
       Buttons[a]._element.onclick = function(e){
         if(b=="アイテム") var ooo = "メニュー";
@@ -4375,6 +4390,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element = document.createElement('input');
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
+      Buttons[a].backgroundColor = "buttonface";
       scene.addChild(Buttons[a]);
       Buttons[a]._element.onclick = function(e){
         switch (b) {
@@ -4433,6 +4449,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
       Button[submits]._element.ナンバー　= submits;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         switch (a) {
@@ -4662,6 +4679,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         if(Button_push("戻る")) return;
@@ -4773,6 +4791,7 @@ function Game_load(width,height,private,Manager,make){
     Button._element = document.createElement('input');
     Button._element.type = "submit";
     Button._element.value = "新しいシーンの作成";
+    Button.backgroundColor = "buttonface";
     scene.addChild(Button);
     Button._element.onclick = function(e){
       if(Button_push("セーブ")) return;
@@ -4928,6 +4947,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         if(Button_push("戻る")) return;
@@ -4981,6 +5001,7 @@ function Game_load(width,height,private,Manager,make){
       Button2[submits]._element = document.createElement('input');
       Button2[submits]._element.type = "submit";
       Button2[submits]._element.value = c;
+      Button2[submits].backgroundColor = "buttonface";
       scene.addChild(Button2[submits]);
       Button2[submits]._element.onclick = function(e){
         if(Button_push("音無し")) return;
@@ -5062,20 +5083,20 @@ function Game_load(width,height,private,Manager,make){
       Touch[k]._element = document.createElement("img");
       if(can) Touch[k]._element.src = "../画像/半透明(赤).png";
       else Touch[k]._element.src = W_S2();
-      Touch[k]._element.シーン = Number;
+      Touch[k].シーン = Number;
       Touch[k].x = x*width/NaturalWidth;
       Touch[k].y = y*width/16*9/NaturalHeight;
       Touch[k].width = width_t*width/NaturalWidth;
       Touch[k].height = height_t*width/16*9/NaturalHeight;
       console.log(Touch[k].x,Touch[k].y,Touch[k].width,Touch[k].height,Number);
       scene.addChild(Touch[k]);
-      Touch[k]._element.onclick = function(e){
+      Touch[k].addEventListener("touchend",function(e){
         if(can){
           Sound_ON("選択音");
           Scene_loads(this.シーン,false,false);
         }
         return;
-      };
+      });
       return;
     }
 
@@ -5096,14 +5117,23 @@ function Game_load(width,height,private,Manager,make){
       Touch_Pointer.x = width/2-width/36/2;
       Touch_Pointer.y = width/16*9/2-width/36/2;
       scene.addChild(Touch_Pointer);
-      scene._element.onclick = function(e){
+      scene.addEventListener("touchend",function(e){
         if(e.x<width&&e.y<width/16*9){
           Sound_ON("選択音");
           Touch_Pointer.x = e.x-width/36/2;
           Touch_Pointer.y = e.y-width/36/2;
+          for (var t = 0; t < Touch.length; t++) {
+            if(Touch[t].intersect(Touch_Pointer)){
+              Kettei.backgroundColor = "red";
+              break;
+            }
+            else Kettei.backgroundColor = "buttonface";
+          }
+          scene.removeChild(Touch_Pointer);
+          scene.addChild(Touch_Pointer);
         }
         return;
-      };
+      });
       var Kettei = new Entity();
       Kettei.moveTo(width/4,width/16*9+(width/30)+width/5);
       Kettei.width = width/2;
@@ -5111,6 +5141,7 @@ function Game_load(width,height,private,Manager,make){
       Kettei._element = document.createElement('input');
       Kettei._element.type = "submit";
       Kettei._element.value = "決定";
+      Kettei.backgroundColor = "buttonface";
       scene.addChild(Kettei);
       Kettei._element.onclick = function(e){
         for (var i = Touch.length-1; i >= 0; i--) {
@@ -5120,6 +5151,7 @@ function Game_load(width,height,private,Manager,make){
             return;
           }
         }
+        Scene_loads("調べる何もない",false,false);
         return;
       };
     }
@@ -5132,6 +5164,7 @@ function Game_load(width,height,private,Manager,make){
       Modoru._element = document.createElement('input');
       Modoru._element.type = "submit";
       Modoru._element.value = "戻る";
+      Modoru.backgroundColor = "buttonface";
       scene.addChild(Modoru);
       Modoru._element.onclick = function(e){
         if(Button_push("戻る")) return;
@@ -5201,6 +5234,7 @@ function Game_load(width,height,private,Manager,make){
     Buttons._element = document.createElement('input');
     Buttons._element.type = "submit";
     Buttons._element.value = "次";
+    Buttons.backgroundColor = "buttonface";
     scene.addChild(Buttons);
 
     var Item = new Sprite();
@@ -5561,6 +5595,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
       Button[submits]._element.value = a;
+      Button[submits].backgroundColor = "buttonface";
       scene.addChild(Button[submits]);
       Button[submits]._element.onclick = function(e){
         if(Button_push("戻る")) return;
@@ -5608,6 +5643,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits2]._element = document.createElement('input');
       Button[submits2]._element.type = "submit";
       Button[submits2]._element.value = a;
+      Button[submits2].backgroundColor = "buttonface";
       scene.addChild(Button[submits2]);
       Button[submits2]._element.onclick = function(e){
         if(Button_push("ページ")) return;
@@ -5744,6 +5780,7 @@ function Game_load(width,height,private,Manager,make){
         case "実行する":
         case "改造をやめる":
           Button[submits]._element.type = "submit";
+          Button[submits].backgroundColor = "buttonface";
           break;
         default:
           Button[submits]._element.type = "text";
