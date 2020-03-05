@@ -5058,7 +5058,7 @@ function Game_load(width,height,private,Manager,make){
       Touch[k]._element = document.createElement("img");
       if(can) Touch[k]._element.src = "../画像/半透明(赤).png";
       else Touch[k]._element.src = "../画像/透明.png";
-      Touch[k].シーン = Number;
+      Touch[k]._element.シーン = Number;
       Touch[k].x = x*width/NaturalWidth;
       Touch[k].y = y*width/16*9/NaturalHeight;
       Touch[k].width = width_t*width/NaturalWidth;
@@ -5116,7 +5116,6 @@ function Game_load(width,height,private,Manager,make){
             return;
           }
         }
-        Scene_loads("調べる何もない",false,false);
         return;
       };
     }
