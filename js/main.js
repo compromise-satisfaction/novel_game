@@ -1277,8 +1277,8 @@ function Game_load(width,height,private,Manager,make){
     }
     for (var i = 0; i < Move_DATAS.length; i++) {
       if(Number==Move_DATAS[i].シーン名){
+        Get_ICFT2(Move_DATAS[i]);
         if(make) M_M = Move_DATAS[i];
-        if(Get) Get_ICFT2(Move_DATAS[i]);
         if(Setting_Flag[18]){
           Scene_loads(Move_DATAS[i].移動先,Return,false);
         }
