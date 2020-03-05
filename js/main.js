@@ -33,7 +33,7 @@ function Game_load(width,height,private,Manager,make){
   });
 
   $("#enchant-stage").on("touchmove",function(event){
-    //event.preventDefault();
+    event.preventDefault();
   });
 
   $("#enchant-stage").on("touchend",function(event){
@@ -5334,6 +5334,7 @@ function Game_load(width,height,private,Manager,make){
       Button[submits].height = e;
       Button[submits]._element = document.createElement('input');
       Button[submits]._element.type = "submit";
+      Button[submits]._element.ナンバー = submits;
       Button[submits].backgroundColor = "buttonface";
       a = free(a);
       Button[submits]._element.value = a;
@@ -5361,11 +5362,11 @@ function Game_load(width,height,private,Manager,make){
             var ooo ="選択音";
             break;
         }
-        if(this.backgroundColor=="red"){
+        if(Button[this.ナンバー].backgroundColor=="red"){
           var ooo ="戻る";
         }
         if(Button_push(ooo)) return;
-        if(this.backgroundColor=="red"){
+        if(Button[this.ナンバー].backgroundColor=="red"){
           game.replaceScene(ItemScene(Number,Ig,Type,Do));
         }
         if(a=="詳細"){
@@ -5476,7 +5477,7 @@ function Game_load(width,height,private,Manager,make){
               Item_image.y = width/4;
               Item_image.height = Item_image.width;
               scene.addChild(Item_image);
-              this.backgroundColor = "red";
+              Button[this.ナンバー].backgroundColor = "red";
               if(f[3]){
                 Button[3]._element.value = f[3];
                 Button[3].詳細 = f[4];
