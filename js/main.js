@@ -15,7 +15,6 @@ function Game_load(width,height,private,Manager,make){
   game.onload = function(){
 
   var Now = new Date().getTime();
-  var ttt = new Date().getTime();
   if(Manager==false){
     fetch("https://script.google.com/macros/s/AKfycbzbj_KkdrRMa-jmGW3D0lcRiRsu5Uz8wCsAS4LkHo_EHy1hTSA/exec",
           {
@@ -26,8 +25,8 @@ function Game_load(width,height,private,Manager,make){
   }
 
   $("#enchant-stage").on("touchstart",function(event){
-    if(new Date().getTime()-ttt>350){
-      ttt = new Date().getTime();
+    if(new Date().getTime()-Now>350){
+      Now = new Date().getTime();
     }
     else event.preventDefault();
   });
@@ -40,7 +39,6 @@ function Game_load(width,height,private,Manager,make){
     //event.preventDefault();
   });
 
-  var Wait_time = 0;
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
@@ -701,9 +699,7 @@ function Game_load(width,height,private,Manager,make){
   return(Number);
 }
   function Button_push(expression){
-    //if(true){
-    if(new Date().getTime()-Now>Wait_time){
-      Now = new Date().getTime();
+    if(true){
       game.fps = 10;
       switch (expression) {
         case "音無し":
@@ -717,9 +713,7 @@ function Game_load(width,height,private,Manager,make){
     else return(true);
   }
   function Button_push_title(e){
-    //if(true){
-    if(new Date().getTime()-Now>Wait_time){
-      Now = new Date().getTime();
+    if(true){
       game.fps = 10;
       if(e==false) return;
       if(Setting_Flag[10]){
