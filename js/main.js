@@ -238,7 +238,7 @@ function Game_load(width,height,private,Manager,make){
             Main_DATAS[k1].人物名 = result[i][11];
             Main_DATAS[k1].文章音 = result[i][12];
             Main_DATAS[k1].速度 = result[i][13];
-            if(Main_DATAS[k1].速度.replace(/\d/g,"")==""){
+            if(Main_DATAS[k1].速度.replace(/[^\d]/g,"")==""){
               Main_DATAS[k1].速度 = 10;
             }
             Main_DATAS[k1].文章男 = result[i][14];
