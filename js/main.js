@@ -3108,13 +3108,13 @@ function Game_load(width,height,private,Manager,make){
     T_time = new Sprite();
     T_time._element = document.createElement("innerHTML");
     T_time._style.font  = width/20+"px monospace";
-    T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+    T_time._element.textContent = Conversion_Time(new Date());
     T_time.x = width/3;
     T_time.y = width/16*9+width/25;
     scene.addChild(T_time);//時間表示(無駄)
 
     T_time.addEventListener("enterframe",function(){
-      T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+      T_time._element.textContent = Conversion_Time(new Date());
       return;
     });
 
@@ -4490,13 +4490,13 @@ function Game_load(width,height,private,Manager,make){
     T_time = new Sprite();
     T_time._element = document.createElement("innerHTML");
     T_time._style.font  = width/20+"px monospace";
-    T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+    T_time._element.textContent = Conversion_Time(new Date());
     T_time.x = width/3;
     T_time.y = width/16*9+width/25;
     scene.addChild(T_time);//時間表示(無駄)
 
     T_time.addEventListener("enterframe",function(){
-      T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+      T_time._element.textContent = Conversion_Time(new Date());
       return;
     });
 
