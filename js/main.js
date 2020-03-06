@@ -4354,6 +4354,13 @@ function Game_load(width,height,private,Manager,make){
 
     var Numbers = width/16*9+(width/20)+(width/25);
 
+    var Speak_Background = new Sprite();
+    Speak_Background._element = document.createElement("img");
+    Speak_Background._element.src = "../画像/吹き出し枠.png";
+    Speak_Background.width = width;
+    Speak_Background.height = height;
+    scene.addChild(Speak_Background);
+
     function Texts(a){
       Numbers += width/20+width/25;
       Text[i] = new Sprite();
