@@ -44,7 +44,7 @@ function Game_load(width,height,private,Manager,make){
   var Datas = [];
   var Setting_Datas = ["","","","","","","","","","","","","",""];
   var Send_text = "選択シーンです。";
-  var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
+  var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
   //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,
   //9BGM音量,10効果音音量,11音声音量,12調べる,13背景,14BGM,15表示アイテム,16一人称,17二人称,18演出スキップ,19自由,20自由];
   var Favorability_Flag = [];//好感度
@@ -590,7 +590,7 @@ function Game_load(width,height,private,Manager,make){
   Log_Flag.splice(i,Log_Flag.length);
   for (var i = 0; i < result.length; i++) {
     if(result[i].設定=="コマンド終了"){
-      if(i==0) Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
+      if(i==0) Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
       break;
     }
     Setting_Flag[i] = result[i].設定;
@@ -2341,7 +2341,7 @@ function Game_load(width,height,private,Manager,make){
               Trophy_Flag = [];//トロフィー
               Character_Flag = [];//人物
               Favorability_Flag = [];//好感度
-              Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","Black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
+              Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
               game.popScene();
               Scene_kazu--;
               console.log("Scene数",Scene_kazu);
@@ -2875,6 +2875,8 @@ function Game_load(width,height,private,Manager,make){
     Datas[8] = Datas[8].replace(/\(↑[^↑]+↑\)/g,"↑");
     var Text_sound = Datas[8].match(/\(¶[^¶]+¶\)/g);
     Datas[8] = Datas[8].replace(/\(¶[^¶]+¶\)/g,"¶");
+    var Text_Colors = Datas[8].match(/\(δ[^δ]+δ\)/g);
+    Datas[8] = Datas[8].replace(/\(δ[^δ]+δ\)/g,"δ");
 
     if(Datas[11]){
       if(Datas[11]=="無し"){
@@ -3171,18 +3173,14 @@ function Game_load(width,height,private,Manager,make){
     var Numbers = width/16*9+width/20+width/25;
 
     function Texts(){
-      Numbers += width/20+width/25;
+      if(i%18==0) Numbers += width/20+width/25;
       Text[i] = new Sprite();
       Text[i]._element = document.createElement("innerHTML");
       Text[i]._style.font  = width/20+"px monospace";
       Text[i]._element.textContent = "";
-      if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"){
-        Text[i].x = width/20;
-        Text[i].width = width-width/10;
-      }
-      else Text[i].width = width;
+      Text[i].x = width/20 + width/20*(i%18);
       Text[i].y = Numbers;
-      if(Datas[19]=="日付") Text[i]._style.color = "green";
+      Text[i]._style.color = "black";
       scene.addChild(Text[i]);
     }//会話文
 
@@ -3203,7 +3201,10 @@ function Game_load(width,height,private,Manager,make){
     Speak_Background1.height = height;
     if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"){
       scene.addChild(Speak_Background1);
+      var zi = false;
     }
+    else zi = true;
+    var Text_Color = "black";
 
     var Speak_Background2 = new Sprite();
     Speak_Background2._element = document.createElement("img");
@@ -3250,10 +3251,11 @@ function Game_load(width,height,private,Manager,make){
     var pcpc = 0;
     var ksks = 0;
     var vcvc = 0;
+    var caca = 0;
 
     var Text =[];
 
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 108; i++) {
       Texts();
     }
 
@@ -3275,7 +3277,16 @@ function Game_load(width,height,private,Manager,make){
       return;
     }
 
+    var T_T = 0;
+    var sikou = false;
+
     function T_D(){
+      if(T_T==108){
+        Text_defined = false;
+        game.fps = 10;
+        Setting_Flag[3] = game.fps;
+        return;
+      }
       var Itimozi = Datas[8].substring(Time,Time+1);
       scene.addChild(Speak_Background2);
       switch (Itimozi) {
@@ -3316,6 +3327,33 @@ function Game_load(width,height,private,Manager,make){
           if(Image.split("→")[0]=="消滅") Speech_bubble_image._element.src = W_S2();
           else Speech_bubble_image._element.src = conversion_url(Image.split("→")[0],"画像");
           ksks++;
+          T_D();
+          return;
+          break;
+        case "δ":
+          Time++;
+          Text_Color = Text_Colors[caca].substring(2,Text_Colors[caca].length-2);
+          switch (Text_Color) {
+            case "白":
+              Text_Color = "white";
+              break;
+            case "赤":
+              Text_Color = "red";
+              break;
+            case "緑":
+              Text_Color = "green";
+              break;
+            case "青":
+              Text_Color = "blue";
+              break;
+            case "紫":
+              Text_Color = "purple";
+              break;
+            default:
+              Text_Color = "black";
+              break;
+          }
+          caca++;
           T_D();
           return;
           break;
@@ -3451,6 +3489,8 @@ function Game_load(width,height,private,Manager,make){
         case "「":
         case "　":
         case "」":
+        case "（":
+        case "）":
         case "(":
         case " ":
         case ")":
@@ -3482,9 +3522,21 @@ function Game_load(width,height,private,Manager,make){
             }
           }
           Speak_Background2._element.src = W_S2();
+          if(Itimozi=="("){
+            sikou = true;
+            Text_Color = "blue";
+          }
+          if(Itimozi=="「"){
+            sikou = false;
+            Text_Color = "black";
+          }
           break;
         default:
-          if(Text[k]._element.textContent.substring(0,1)=="「"||Text[k]._element.textContent.substring(0,1)=="　"){
+          if(sikou){
+            if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
+            else Speak_Background2._element.src = "../画像/吹き出し2.png";
+          }
+          else{
             switch(Speak_Character){
               case "㊧":
                 if(Datas[1]){
@@ -3525,29 +3577,92 @@ function Game_load(width,height,private,Manager,make){
             if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し1.png";
           }
-          else if(Text[k]._element.textContent.substring(0,1)=="("||Text[k]._element.textContent.substring(0,1)==" "){
-            if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
-            else Speak_Background2._element.src = "../画像/吹き出し2.png";
-          }
           break;
       }
       Time++;
+      if(Itimozi=="\n"){
+        if(T_T%18) T_T += 18-T_T%18;
+        T_D();
+        return;
+      }
+      else if(Itimozi==""){
+        Text_defined = false;
+        game.fps = 10;
+        Setting_Flag[3] = game.fps;
+        if(Datas[1]){
+          if(Character1._element.title != Datas[1]){
+            Character1._element.title = Datas[1];
+            Character1._element.src = conversion_url(Datas[1],"画像");
+            console.log("左のキャラを"+Datas[1]+"に変更");
+          }
+        }
+        if(Datas[3]){
+          if(Character2._element.title != Datas[3]){
+            Character2._element.title = Datas[3];
+            Character2._element.src = conversion_url(Datas[3],"画像");
+            console.log("真ん中のキャラを"+Datas[3]+"に変更");
+          }
+        }
+        if(Datas[5]){
+          if(Character3._element.title != Datas[5]){
+            Character3._element.title = Datas[5];
+            Character3._element.src = conversion_url(Datas[5],"画像");
+            console.log("右のキャラを"+Datas[5]+"に変更");
+          }
+        }
+        Speak_Background2._element.src = W_S2();
+      }
+      else{
+        if(zi==false&&T_T%18==0){
+          if(Itimozi!="("&&Itimozi!="「") T_T++;
+        }
+        Text[T_T]._style.color = Text_Color;
+        Text[T_T]._element.textContent = Itimozi;
+        if(Return==false){
+          if(Datas[19]){
+            switch(Itimozi){
+                case "\"":
+                case "「":
+                case "　":
+                case "」":
+                case "（":
+                case "）":
+                case "(":
+                case " ":
+                case ")":
+                case "・":
+                case "!":
+                case "！":
+                  break;
+                default:
+                  Sound_ON(Datas[19]);
+                  break;
+              }
+          }
+        }
+        T_T++;
+      }
+      return;
       if(Datas[8].substring(Time-1,Time)=="\n"){
         k++;
-        if(Text[k-1]._element.textContent.substring(0,1)=="("||Text[k-1]._element.textContent.substring(0,1)==" "){
-          if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)==")") Text[k]._element.textContent = "";
+        if(Text[k-1]._element.textContent.substring(0,1)=="（"||Text_Color=="blue"){
+          if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)=="）"){
+            Text[k]._element.textContent = "";
+            Text_Color = "black";
+          }
           else{
-            Text[k]._element.textContent = " ";
+            Text[k]._element.textContent = "　";
             Text[k]._style.color = "blue";
+            Text_Color = "blue";
             if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し2.png";
           }
         }
         else{
           if(Text[k-1]._element.textContent.substring(Text[k-1]._element.textContent.length-1)=="」") Text[k]._element.textContent = "";
-          else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text[k-1]._element.textContent.substring(0,1)=="　"){
+          else if(Text[k-1]._element.textContent.substring(0,1)=="「"||Text_Color=="black"){
             Text[k]._element.textContent = "　";
-            Text[k]._style.color = "Black";
+            Text[k]._style.color = "black";
             Speak_Background2._element.src = "../画像/吹き出し1.png";
             if(Speak_Character=="無し") Speak_Background2._element.src = W_S2();
             else Speak_Background2._element.src = "../画像/吹き出し1.png";
@@ -3584,10 +3699,10 @@ function Game_load(width,height,private,Manager,make){
         Speak_Background2._element.src = W_S2();
       }
       else{
-        if(Text[k]._element.textContent.substring(0,1)==" ") Text[k]._style.color = "blue";
+        if(Text_Color=="blue") Text[k]._style.color = "blue";
         switch (Datas[8].substring(Time-1,Time)) {
-          case "(":
-            if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+" (";
+          case "（":
+            if(Text[k]._element.textContent=="") Text[k]._element.textContent = Text[k]._element.textContent+"（";
             else Text[k]._element.textContent = Text[k]._element.textContent+Datas[8].substring(Time-1,Time);
             break;
           default:
@@ -3657,6 +3772,8 @@ function Game_load(width,height,private,Manager,make){
                 case "「":
                 case "　":
                 case "」":
+                case "（":
+                case "）":
                 case "(":
                 case " ":
                 case ")":
@@ -3744,9 +3861,10 @@ function Game_load(width,height,private,Manager,make){
           if(Text_defined&&have(Play_Sheet+c+"プレイ済み")==false){
             Return = true;
             Text_defined = false;
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 108; i++) {
               Text[i]._element.textContent = "";
             }
+            T_T = 0;
             Time = 0;
             k = 0;
             pcpc = 0;
