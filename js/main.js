@@ -64,15 +64,18 @@ function Game_load(width,height,private,Manager,make){
   else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
   function Conversion_Time(Time,Number){
+  var Year = Time.getFullYear();
   var Month = Time.getMonth()+1;
   var Dates = Time.getDate();
   var Hour = Time.getHours();
   var Minute = Time.getMinutes();
+  var Seconds = Time.getSeconds();
   var Day = Time.getDay();
   if(Month<10) Month = "0" + Month;
   if(Dates<10) Dates = "0" + Dates;
   if(Hour<10) Hour = "0" + Hour;
   if(Minute<10) Minute = "0" + Minute;
+  if(Seconds<10) Seconds = "0" + Seconds;
   if(Day == 0) Day = "日";
   if(Day == 1) Day = "月";
   if(Day == 2) Day = "火";
@@ -80,7 +83,7 @@ function Game_load(width,height,private,Manager,make){
   if(Day == 4) Day = "木";
   if(Day == 5) Day = "金";
   if(Day == 6) Day = "土";
-  Time = Month + "月" + Dates + "日 (" + Day + ") "+ Hour + "時" + Minute + "分";
+  Time = Year + "/" + Month + "/" + Dates + " (" + Day + ") "+ Hour + ":" + Minute + ":" + Seconds;
   return(Time);
 }
   function W_S(){
@@ -2253,13 +2256,13 @@ function Game_load(width,height,private,Manager,make){
     for (var i = 0; i < Make_datas.length; i++) {
       M_Texts(Make_datas[i][1],S_Input[i].y,i);
     }
-    M_Texts(game.fps+"fps "+(new Date().getTime()-Now)+"t",0,i);
+    M_Texts(game.fps+"fps ",0,i);
     M_Text[i].x = 0;
     M_Text[i]._style.font  = width/10+"px monospace";
     M_Text[i]._style.color  = "red";
     M_Text[i].backgroundColor  = "white";
     M_Text[i].addEventListener("enterframe",function(){
-      M_Text[i]._element.textContent = game.fps+"fps "+(new Date().getTime()-Now)+"t";
+      M_Text[i]._element.textContent = game.fps+"fps ";
       return;
     });
 
@@ -3100,6 +3103,19 @@ function Game_load(width,height,private,Manager,make){
     C_name._element.textContent = "【" + Datas[7].replace(/[㊧㊥㊨]/,"") + "】";
     C_name.y = width/16*9+width/25;
     if(Datas[7]!="") scene.addChild(C_name);//キャラ名
+
+    T_time = new Sprite();
+    T_time._element = document.createElement("innerHTML");
+    T_time._style.font  = width/20+"px monospace";
+    T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+    T_time.x = width/3;
+    T_time.y = width/16*9+width/25;
+    scene.addChild(T_time);//時間表示(無駄)
+
+    T_time.addEventListener("enterframe",function(){
+      T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+      return;
+    });
 
     if(Number=="テスト"){
 
@@ -4351,6 +4367,19 @@ function Game_load(width,height,private,Manager,make){
     C_name._element.textContent = "【" + Datas[1] + "】";
     C_name.y = width/16*9+width/25;
     if(Datas[1]!="") scene.addChild(C_name);//証人名
+
+    T_time = new Sprite();
+    T_time._element = document.createElement("innerHTML");
+    T_time._style.font  = width/20+"px monospace";
+    T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+    T_time.x = width/3;
+    T_time.y = width/16*9+width/25;
+    scene.addChild(T_time);//時間表示(無駄)
+
+    T_time.addEventListener("enterframe",function(){
+      T_time._element.textContent = "【"+Conversion_Time(new Date())+"】";
+      return;
+    });
 
     var Numbers = width/16*9+(width/20)+(width/25);
 
