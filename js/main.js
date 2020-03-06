@@ -3109,7 +3109,7 @@ function Game_load(width,height,private,Manager,make){
     T_time._element = document.createElement("innerHTML");
     T_time._style.font  = width/20+"px monospace";
     T_time._element.textContent = Conversion_Time(new Date()).substring(5);
-    T_time.x = width/2;
+    T_time.x = width/2.5;
     T_time.y = width/16*9+width/25;
     scene.addChild(T_time);//時間表示(無駄)
 
@@ -4491,7 +4491,7 @@ function Game_load(width,height,private,Manager,make){
     T_time._element = document.createElement("innerHTML");
     T_time._style.font  = width/20+"px monospace";
     T_time._element.textContent = Conversion_Time(new Date()).substring(5);
-    T_time.x = width/2;
+    T_time.x = width/2.5;
     T_time.y = width/16*9+width/25;
     scene.addChild(T_time);//時間表示(無駄)
 
