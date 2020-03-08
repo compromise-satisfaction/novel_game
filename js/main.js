@@ -4970,7 +4970,7 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].文章男 = "「現在主人公の設定は男です。」";
           Main_DATAS[i].文章女 = "「現在主人公の設定は女です。」";
           Main_DATAS[i].文章未設定 = "「現在主人公の性別は未設定です」";
-          Main_DATAS[i].前前 = Setting_Datas[15];
+          Main_DATAS[i].前前 = Setting_Datas[14];
           if(Manager) Main_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-10);
           else Main_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
           Main_DATAS[i].セーブ = Number;
@@ -4998,8 +4998,9 @@ function Game_load(width,height,private,Manager,make){
           Choice_DATAS[i].中倍率 = Setting_Datas[6];
           Choice_DATAS[i].右側の人物 = Setting_Datas[7];
           Choice_DATAS[i].右倍率 = Setting_Datas[8];
-          Choice_DATAS[i].前前 = Number.replace(/\d/g,"")+1;
-          Choice_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
+          Choice_DATAS[i].前前 = Setting_Datas[14];
+          if(Manager) Choice_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-10);
+          else Choice_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
           Choice_DATAS[i].セーブ = Number;
           Choice_DATAS[i].選択肢1 = "";
           Choice_DATAS[i].選択肢1移動先 = "";
