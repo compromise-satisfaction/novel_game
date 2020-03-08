@@ -4747,7 +4747,6 @@ function Game_load(width,height,private,Manager,make){
     Gender.width = width/2;
     Gender.height = width/10;
     Gender._element = document.createElement("select");
-    console.log(Gender);
     Numbers += width/20+width/25+width/25;
 
     var Option = [];
