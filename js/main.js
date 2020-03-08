@@ -42,7 +42,7 @@ function Game_load(width,height,private,Manager,make){
   var Syougen_time = 0;
   var Syougen_time2 = 1;
   var Datas = [];
-  var Setting_Datas = ["","","","","","","","","","","","","","","前前","次次"];
+  var Setting_Datas = ["","","","","","","","","","","","","","","前前","次次","前"];
   var Send_text = "選択シーンです。";
   var Setting_Flag = ["名前","苗字","未設定",game.fps,"最初から",0,0,0,true,5,5,5,"最初から","black","","デフォルト","一人称","二人称",false,"自由1→自由2"];
   //[0名前,1苗字,2性別,3fps,4直前,5アイテムページ,6人物ページ,7トロフィーページ,8オートセーブ,
@@ -1085,6 +1085,7 @@ function Game_load(width,height,private,Manager,make){
         Setting_Datas[13] = Main_DATAS[i].表示アイテム画像;
         Setting_Datas[14] = Main_DATAS[i].前前;
         Setting_Datas[15] = Main_DATAS[i].次次;
+        Setting_Datas[16] = Main_DATAS[i].前;
         if(make) M_M = Main_DATAS[i];
         if(Main_DATAS[i].表示名!="変化無し") Showing_name = free(Main_DATAS[i].表示名);
         if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
@@ -4970,8 +4971,7 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].文章女 = "「現在主人公の設定は女です。」";
           Main_DATAS[i].文章未設定 = "「現在主人公の性別は未設定です」";
           Main_DATAS[i].前前 = Setting_Datas[14];
-          if(Manager) Main_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-10);
-          else Main_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
+          Main_DATAS[i].前 = Setting_Datas[16];
           Main_DATAS[i].セーブ = Number;
           if(Manager) Main_DATAS[i].次 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1+10);
           else Main_DATAS[i].次 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1+1);
@@ -4998,8 +4998,7 @@ function Game_load(width,height,private,Manager,make){
           Choice_DATAS[i].右側の人物 = Setting_Datas[7];
           Choice_DATAS[i].右倍率 = Setting_Datas[8];
           Choice_DATAS[i].前前 = Setting_Datas[14];
-          if(Manager) Choice_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-10);
-          else Choice_DATAS[i].前 = Number.replace(/\d/g,"")+(Number.replace(/[^\d]/g,"")*1-1);
+          Choice_DATAS[i].前 = Setting_Datas[16];
           Choice_DATAS[i].セーブ = Number;
           Choice_DATAS[i].選択肢1 = "";
           Choice_DATAS[i].選択肢1移動先 = "";
