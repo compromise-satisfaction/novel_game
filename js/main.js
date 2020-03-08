@@ -769,7 +769,7 @@ function Game_load(width,height,private,Manager,make){
       Volume /= 10;
       SE[i].volume = Volume;
       if(SE[i].paused) SE[i].play();
-      else SE[i].currentTime = 0;
+      //else SE[i].currentTime = 0;
     }
     else{
       if(SE[i].paused==false) SE[i].pause();
@@ -781,15 +781,11 @@ function Game_load(width,height,private,Manager,make){
       if(Sound_effect_DATAS[i]==Sound_Name){
         Sound_branch(Sound_Name,Setting_Flag[10]);
         return;
-        Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[10]);
-        return;
       }
     }
     for (var i = 0; i < Voice_DATAS.length; i++) {
       if(Voice_DATAS[i]==Sound_Name){
         Sound_branch(Sound_Name,Setting_Flag[11]);
-        return;
-        Sound_branch(conversion_url(Sound_Name,"サウンド"),Setting_Flag[11]);
         return;
       }
     }
