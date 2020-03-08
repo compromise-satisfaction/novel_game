@@ -1085,7 +1085,7 @@ function Game_load(width,height,private,Manager,make){
         Setting_Datas[13] = Main_DATAS[i].表示アイテム画像;
         Setting_Datas[14] = Main_DATAS[i].前前;
         Setting_Datas[15] = Main_DATAS[i].次次;
-        Setting_Datas[16] = Main_DATAS[i].前;
+        Setting_Datas[16] = Number;
         if(make) M_M = Main_DATAS[i];
         if(Main_DATAS[i].表示名!="変化無し") Showing_name = free(Main_DATAS[i].表示名);
         if(Main_DATAS[i].BGM=="変化無し") BGM_ON(Setting_Flag[14]);
