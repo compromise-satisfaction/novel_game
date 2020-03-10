@@ -861,7 +861,6 @@ function Game_load(width,height,private,Manager,make){
             Favorability_Flag[i][1] = DATAS[1].split("→")[1];
             break;
         }
-        console.log(Favorability_Flag);
         return;
         break;
       default:
@@ -4186,6 +4185,20 @@ function Game_load(width,height,private,Manager,make){
         }
   })
     if(make) makes(M_M,scene);
+
+    T_time = new Sprite();
+    T_time._element = document.createElement("innerHTML");
+    T_time._style.font  = width/20+"px monospace";
+    T_time._element.textContent = Conversion_Time(new Date()).substring(5);
+    T_time.x = width/2.5;
+    T_time.y = width/16*9+width/25;
+    scene.addChild(T_time);//時間表示(無駄)
+
+    T_time.addEventListener("enterframe",function(){
+      T_time._element.textContent = Conversion_Time(new Date()).substring(5);
+      return;
+    });
+
     return scene;
   };
   var ChoiceScene = function(Number){
@@ -5219,13 +5232,13 @@ function Game_load(width,height,private,Manager,make){
     Background.width = width;
     Background.height = width/16*9;
     scene.addChild(Background);
-    Background._element.onclick = function(e){
+    Background.addEventListener("touchend",function(e){
       if(can){
         Sound_ON("選択音");
         Scene_loads("調べる何もない",false,false);
       }
       return;
-    };
+    });
 
     if(Background._element.naturalWidth) var NaturalWidth = Background._element.naturalWidth;
     else var NaturalWidth = conversion_url(Inspect[0],"比率").split("×")[0];
@@ -5296,6 +5309,13 @@ function Game_load(width,height,private,Manager,make){
       Kettei._element.type = "submit";
       Kettei._element.value = "決定";
       Kettei.backgroundColor = "buttonface";
+      for (var t = 0; t < Touch.length; t++) {
+        if(Touch[t].intersect(Touch_Pointer)){
+          Kettei.backgroundColor = "red";
+          break;
+        }
+        else Kettei.backgroundColor = "buttonface";
+      }
       scene.addChild(Kettei);
       Kettei._element.onclick = function(e){
         for (var i = Touch.length-1; i >= 0; i--) {
