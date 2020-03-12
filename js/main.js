@@ -63,8 +63,8 @@ function Game_load(width,height,private,Manager,make){
   if(Manager) var Title_Sheet = "170Ui3JDGJRt-VARJnWb19Drmy14gkp-pReAN-BTSjGI";
   else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
-  function Conversion_Time(Time,Number){
-  var Year = Time.getFullYear();
+  function Conversion_Time(Time){
+  var Year = Time.getFullYear()-2000;
   var Month = Time.getMonth()+1;
   var Dates = Time.getDate();
   var Hour = Time.getHours();
@@ -76,14 +76,14 @@ function Game_load(width,height,private,Manager,make){
   if(Hour<10) Hour = "0" + Hour;
   if(Minute<10) Minute = "0" + Minute;
   if(Seconds<10) Seconds = "0" + Seconds;
-  if(Day == 0) Day = "日";
-  if(Day == 1) Day = "月";
-  if(Day == 2) Day = "火";
-  if(Day == 3) Day = "水";
-  if(Day == 4) Day = "木";
-  if(Day == 5) Day = "金";
-  if(Day == 6) Day = "土";
-  Time = Year + "/" + Month + "/" + Dates + " (" + Day + ") "+ Hour + ":" + Minute + ":" + Seconds;
+  if(Day == 0) Day = " (日) ";
+  if(Day == 1) Day = " (月) ";
+  if(Day == 2) Day = " (火) ";
+  if(Day == 3) Day = " (水) ";
+  if(Day == 4) Day = " (木) ";
+  if(Day == 5) Day = " (金) ";
+  if(Day == 6) Day = " (土) ";
+  Time = Year + "/" + Month + "/" + Dates + " " + Hour + ":" + Minute + ":" + Seconds;
   return(Time);
 }
   function W_S(){
@@ -3106,13 +3106,13 @@ function Game_load(width,height,private,Manager,make){
     T_time = new Sprite();
     T_time._element = document.createElement("innerHTML");
     T_time._style.font  = width/20+"px monospace";
-    T_time._element.textContent = Conversion_Time(new Date()).substring(5);
+    T_time._element.textContent = Conversion_Time(new Date());
     T_time.x = width/2.5;
     T_time.y = width/16*9+width/25;
     scene.addChild(T_time);//時間表示(無駄)
 
     T_time.addEventListener("enterframe",function(){
-      T_time._element.textContent = Conversion_Time(new Date()).substring(5);
+      T_time._element.textContent = Conversion_Time(new Date());
       return;
     });
 
@@ -4489,13 +4489,13 @@ function Game_load(width,height,private,Manager,make){
     T_time = new Sprite();
     T_time._element = document.createElement("innerHTML");
     T_time._style.font  = width/20+"px monospace";
-    T_time._element.textContent = Conversion_Time(new Date()).substring(5);
+    T_time._element.textContent = Conversion_Time(new Date());
     T_time.x = width/2.5;
     T_time.y = width/16*9+width/25;
     scene.addChild(T_time);//時間表示(無駄)
 
     T_time.addEventListener("enterframe",function(){
-      T_time._element.textContent = Conversion_Time(new Date()).substring(5);
+      T_time._element.textContent = Conversion_Time(new Date());
       return;
     });
 
