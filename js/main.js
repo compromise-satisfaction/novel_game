@@ -4978,7 +4978,7 @@ function Game_load(width,height,private,Manager,make){
           Main_DATAS[i].次次 = Setting_Datas[15];
           Main_DATAS[i].表示アイテムx座標 = Setting_Datas[11];
           Main_DATAS[i].表示アイテムy座標 = Setting_Datas[12];
-          Main_DATAS[i].表示アイテムフェード = 0;
+          Main_DATAS[i].表示アイテムフェード = "";
           Main_DATAS[i].表示アイテム画像 = Setting_Datas[13];
           Main_DATAS[i].トロフィー = "";
           break;
