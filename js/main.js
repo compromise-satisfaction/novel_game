@@ -3254,20 +3254,18 @@ function Game_load(width,height,private,Manager,make){
     }
 
     function gamenyurasi(){
-      if(Datas[1]){
-        Character1.x += width/200;
-        Character1.y += width/200;
-      }
-      if(Datas[3]){
-        Character2.x += width/200;
-        Character2.y += width/200;
-      }
-      if(Datas[5]){
-        Character3.x += width/200;
-        Character3.y += width/200;
-      }
-      Background.x += width/200;
-      Background.y += width/200;
+      if(Datas[1]) Character1.x += width/200;
+      if(Datas[1]) Character1.y += width/200;
+      if(Datas[3]) Character2.x += width/200;
+      if(Datas[3]) Character2.y += width/200;
+      if(Datas[5]) Character3.x += width/200;
+      if(Datas[5]) Character3.y += width/200;
+      if(Background) Background.x += width/200;
+      if(Background) Background.y += width/200;
+      if(Background2) Background2.x += width/200;
+      if(Background2) Background2.y += width/200;
+      if(Background3) Background3.x += width/200;
+      if(Background3) Background3.y += width/200;
       return;
     }
 
@@ -3790,36 +3788,32 @@ function Game_load(width,height,private,Manager,make){
     White_Background.addEventListener("enterframe",function(){
       if(make) management();
       if(Background.x==width/200){
-        if(Datas[1]){
-          Character1.x -= width/100;
-          Character1.y -= width/100;
-        }
-        if(Datas[3]){
-          Character2.x -= width/100;
-          Character2.y -= width/100;
-        }
-        if(Datas[5]){
-          Character3.x -= width/100;
-          Character3.y -= width/100;
-        }
-        Background.x -= width/100;
-        Background.y -= width/100;
+        if(Datas[1]) Character1.x -= width/100;
+        if(Datas[1]) Character1.y -= width/100;
+        if(Datas[3]) Character2.x -= width/100;
+        if(Datas[3]) Character2.y -= width/100;
+        if(Datas[5]) Character3.x -= width/100;
+        if(Datas[5]) Character3.y -= width/100;
+        if(Background) Background.x -= width/100;
+        if(Background) Background.y -= width/100;
+        if(Background2) Background2.x -= width/100;
+        if(Background2) Background2.y -= width/100;
+        if(Background3) Background3.x -= width/100;
+        if(Background3) Background3.y -= width/100;
       }
       else if(Background.x==-width/200){
-        if(Datas[1]){
-          Character1.x += width/200;
-          Character1.y += width/200;
-        }
-        if(Datas[3]){
-          Character2.x += width/200;
-          Character2.y += width/200;
-        }
-        if(Datas[5]){
-          Character3.x += width/200;
-          Character3.y += width/200;
-        }
-        Background.x += width/200;
-        Background.y += width/200;
+        if(Datas[1]) Character1.x += width/200;
+        if(Datas[1]) Character1.y += width/200;
+        if(Datas[3]) Character2.x += width/200;
+        if(Datas[3]) Character2.y += width/200;
+        if(Datas[5]) Character3.x += width/200;
+        if(Datas[5]) Character3.y += width/200;
+        if(Background) Background.x += width/200;
+        if(Background) Background.y += width/200;
+        if(Background2) Background2.x += width/200;
+        if(Background2) Background2.y += width/200;
+        if(Background3) Background3.x += width/200;
+        if(Background3) Background3.y += width/200;
       }
       if(Return!=true&&Text_defined){
         T_D();
