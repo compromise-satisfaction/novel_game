@@ -3335,6 +3335,9 @@ function Game_load(width,height,private,Manager,make){
             case "黒":
               Text_Color = "black";
               break;
+            case "無し":
+              Speak_Character=="無し";
+              break;
           }
           caca++;
           T_D();
@@ -5062,6 +5065,23 @@ function Game_load(width,height,private,Manager,make){
       }
       Scene_loads(Number,false,false);
     };
+
+    if(Manager){
+      var Button2 = new Entity();
+      Button2.moveTo(width/4,Numbers+width/5);
+      Button2.width = width/2;
+      Button2.height = width/10;
+      Button2._element = document.createElement('input');
+      Button2._element.type = "submit";
+      Button2._element.value = "シーンデータ更新";
+      Button2.backgroundColor = "Buttonface";
+      scene.addChild(Button2);
+      Button2._element.onclick = function(e){
+        if(Button_push("セーブ")) return;
+        Datas_load(false,"シーンデータ更新");
+        return;
+      };
+    }
 
     return scene;
   };
