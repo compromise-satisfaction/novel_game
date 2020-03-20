@@ -3336,7 +3336,7 @@ function Game_load(width,height,private,Manager,make){
               Text_Color = "black";
               break;
             case "無し":
-              Speak_Character=="無し";
+              Speak_Character = "無し";
               break;
           }
           caca++;
