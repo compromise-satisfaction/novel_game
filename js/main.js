@@ -5898,7 +5898,7 @@ function Game_load(width,height,private,Manager,make){
         Video._element = document.createElement('div');
         Video.x = width/10;
         Video.y = height/2-width/16*9*0.8/2;
-        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Video_url+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>'
+        Video._element.innerHTML = '<iframe src="https://www.youtube.com/embed/'+Video_url+'?enablejsapi=1&controls=0&showinfo=0&autoplay=0&rel=0&vq=small"  width="'+(width*0.8)+'" height="'+(width/16*9*0.8)+'" frameborder="0" id="player"></iframe>';
         scene.addChild(Video);
       }
       if(Text[i]._element.textContent=="前のページボタン") Submit2("前のページ",W_X_H,height-W_Y_H-W_Y_H,S_X_H,S_Y_H);
