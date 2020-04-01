@@ -5860,12 +5860,12 @@ function Game_load(width,height,private,Manager,make){
           Photo.height = width*0.8/16*9;
         }
         if(Big){
-          Photo._element.onclick = function(e){
+          Photo.addEventListener("touchend",function(e){
             Sound_ON("戻る");
             Scene_kazu--;
             console.log("Scene数",Scene_kazu);
             game.popScene();
-          };
+          });
         }
         scene.addChild(Photo);
       }
@@ -5882,12 +5882,12 @@ function Game_load(width,height,private,Manager,make){
         Photo.x = width/10;
         Photo.y = width/10+width/30+width/5;
         scene.addChild(Photo);
-        Photo._element.onclick = function(e){
+        Photo.addEventListener("touchend",function(e){
           Sound_ON("選択音");
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
           game.pushScene(DetailsScene(Big_Photo,0,true));
-        };
+        });
       }
       else if(Text[i]._element.textContent.substring(0,7)=="YOUTUBE"){
         if(BGM.paused==false) BGM.pause();
