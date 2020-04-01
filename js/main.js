@@ -3852,7 +3852,11 @@ function Game_load(width,height,private,Manager,make){
             T_T = 0;
             Time = 0;
             k = 0;
+            sese = 0;
             pcpc = 0;
+            ksks = 0;
+            vcvc = 0;
+            caca = 0;
             for (var i = 0; i < Datas[8].length+1; i++) {
               T_D();
             }
