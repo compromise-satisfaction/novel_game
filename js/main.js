@@ -916,10 +916,12 @@ function Game_load(width,height,private,Manager,make){
             break;
           case "アイテムリセット":
             Item_Flag = [];
+            Setting_Flag[5] = 0;
             continue;
             break;
           case "人物リセット":
             Character_Flag = [];
+            Setting_Flag[6] = 0;
             continue;
             break;
           default:
@@ -3184,9 +3186,9 @@ function Game_load(width,height,private,Manager,make){
     Speak_Background1._element.src = "../画像/吹き出し枠.png";
     Speak_Background1.width = width;
     Speak_Background1.height = height;
-    if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"||Datas[8].substring(0,1)=="±"){
-      if(Datas[8].substring(0,1)=="±"){
-        Datas[8] = Datas[8].substring(1);
+    if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"||Datas[8].indexOf("±")>=0){
+      if(Datas[8].indexOf("±")>=0){
+        Datas[8] = Datas[8].replace(/±/g,"");
         var Hukidasi = false;
       }
       else var Hukidasi = true;
