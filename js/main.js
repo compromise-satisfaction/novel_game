@@ -3965,11 +3965,11 @@ function Game_load(width,height,private,Manager,make){
         Touch[tk].height = height_t*width/16*9/NaturalHeight;
         console.log(Touch[tk].x,Touch[tk].y,Touch[tk].width,Touch[tk].height,Number);
         scene.addChild(Touch[tk]);
-        Touch[tk]._element.onclick = function(e){
+        Touch[tk].addEventListener("touchend",function(e){
           Sound_ON("選択音");
           Scene_loads(Number,false,false);
           return;
-        };
+        });
         return;
       }
 
