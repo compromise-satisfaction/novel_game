@@ -769,8 +769,7 @@ function Game_load(width,height,private,Manager,make){
       Volume /= 10;
       SE[i].volume = Volume;
       if(SE[i].paused) SE[i].play();
-      else SE[i].play();
-      //else SE[i].currentTime = 0;
+      else SE[i].currentTime = 0;
     }
     else{
       if(SE[i].paused==false) SE[i].pause();
@@ -3185,7 +3184,12 @@ function Game_load(width,height,private,Manager,make){
     Speak_Background1._element.src = "../画像/吹き出し枠.png";
     Speak_Background1.width = width;
     Speak_Background1.height = height;
-    if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"){
+    if(Datas[8].substring(0,1)=="("||Datas[8].substring(0,1)=="「"||Datas[8].substring(0,1)=="±"){
+      if(Datas[8].substring(0,1)=="±"){
+        Datas[8] = Datas[8].substring(1);
+        var Hukidasi = false;
+      }
+      else var Hukidasi = true;
       scene.addChild(Speak_Background1);
       var zi = false;
     }
@@ -3514,11 +3518,11 @@ function Game_load(width,height,private,Manager,make){
           Speak_Background2._element.src = "../画像/透明.png";
           if(Itimozi=="("){
             sikou = true;
-            Text_Color = "blue";
+            if(Hukidasi) Text_Color = "blue";
           }
           if(Itimozi=="「"){
             sikou = false;
-            Text_Color = "black";
+            if(Hukidasi) Text_Color = "black";
           }
           break;
         default:
