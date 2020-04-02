@@ -3312,8 +3312,8 @@ function Game_load(width,height,private,Manager,make){
         case "↑":
           Time++;
           var Image = Speech_bubble[ksks].substring(2,Speech_bubble[ksks].length-2);
-          if(Image.split("→")[1]) Speech_bubble_image.x += Image.split("→")[1]*1;
-          if(Image.split("→")[2]) Speech_bubble_image.y += Image.split("→")[2]*1;
+          if(Image.split("→")[1]) Speech_bubble_image.x += Image.split("→")[1]*(width/16/100);
+          if(Image.split("→")[2]) Speech_bubble_image.y += Image.split("→")[2]*(width/16/100);
           if(Image.split("→")[0]=="変化無し");
           else if(Image.split("→")[0]=="消滅") Speech_bubble_image._element.src = "../画像/透明.png";
           else Speech_bubble_image._element.src = conversion_url(Image.split("→")[0],"画像");
