@@ -769,7 +769,8 @@ function Game_load(width,height,private,Manager,make){
       Volume /= 10;
       SE[i].volume = Volume;
       if(SE[i].paused) SE[i].play();
-      else SE[i].currentTime = 0;
+      else SE[i].play();
+      //else SE[i].currentTime = 0;
     }
     else{
       if(SE[i].paused==false) SE[i].pause();
