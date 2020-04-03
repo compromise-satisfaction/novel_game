@@ -3365,9 +3365,6 @@ function Game_load(width,height,private,Manager,make){
         case "Φ":
           Time++;
           Button(5,"次",Datas[12]);
-          game.pushScene(ItemScene(Datas[11],"日常","アイテム",Datas[12]));
-          Scene_kazu++;
-          console.log("Scene数",Scene_kazu);
           return;
           break;
         case "Ψ":
