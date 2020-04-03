@@ -3362,6 +3362,11 @@ function Game_load(width,height,private,Manager,make){
           T_D();
           return;
           break;
+        case "Φ":
+          Time++;
+          Button(5,"次",Datas[12]);
+          return;
+          break;
         case "Ψ":
           Time++;
           var Pose = Pose_change[pcpc].substring(2,Pose_change[pcpc].length-2);
@@ -3832,7 +3837,8 @@ function Game_load(width,height,private,Manager,make){
 
     function Button(a,b,c){
       Buttons[a] = new Entity();
-      Buttons[a].moveTo((width/5)*a,height-(width/5));
+      if(a==5) Buttons[a].moveTo((width/5)*3,height-(width/5));
+      else Buttons[a].moveTo((width/5)*a,height-(width/5));
       Buttons[a].width = (width/5);
       Buttons[a].height = (width/5);
       Buttons[a]._element = document.createElement('input');
@@ -3841,7 +3847,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a].backgroundColor = "buttonface";
       scene.addChild(Buttons[a]);
       Buttons[a]._element.onclick = function(e){
-        if(b=="アイテム") var ooo = "メニュー";
+        if(a==5||b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
         if(Button_push(ooo)) return;
         if(a==2){
@@ -3869,6 +3875,11 @@ function Game_load(width,height,private,Manager,make){
             }
           }
           else Scene_loads(c,false,false);
+        }
+        else if(a==5){
+          game.pushScene(ItemScene(Datas[11],"日常","アイテム",Datas[12]));
+          Scene_kazu++;
+          console.log("Scene数",Scene_kazu);
         }
         else Scene_loads(c,true,false);
       };
