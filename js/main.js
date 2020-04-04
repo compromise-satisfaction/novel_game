@@ -3397,10 +3397,14 @@ function Game_load(width,height,private,Manager,make){
                 Character1._element.title = Datas[1];
                 Character1._element.src = conversion_url(Datas[1],"画像");
                 if(Pose.split("→")[1]>0){
+                  Character1.width = width/16*9;
+                  Character1.height = width/16*9;
                   Character1.width*=Pose.split("→")[1];
                   Character1.height*=Pose.split("→")[1];
                 }
                 else{
+                  Character1.width = width/16*9;
+                  Character1.height = width/16*9;
                   Character1.width*=-Pose.split("→")[1];
                   Character1.height*=-Pose.split("→")[1];
                   Character1.scaleX = -1;
@@ -3416,15 +3420,19 @@ function Game_load(width,height,private,Manager,make){
                 Character2._element.title = Datas[3];
                 Character2._element.src = conversion_url(Datas[3],"画像");
                 if(Pose.split("→")[1]>0){
+                  Character2.width = width/16*9;
+                  Character2.height = width/16*9;
                   Character2.width*=Pose.split("→")[1];
                   Character2.height*=Pose.split("→")[1];
                 }
                 else{
+                  Character2.width = width/16*9;
+                  Character2.height = width/16*9;
                   Character2.width*=-Pose.split("→")[1];
                   Character2.height*=-Pose.split("→")[1];
                   Character2.scaleX = -1;
                 }
-                Character2.x = (width-Character2.width)/2-width/4;
+                Character2.x = (width-Character2.width)/2;
                 if(Pose.split("→")[2]) Character2.y =  Pose.split("→")[2]*(width/16/100);
                 console.log("真ん中のキャラを"+Datas[3]+"に変更");
               }
@@ -3435,15 +3443,19 @@ function Game_load(width,height,private,Manager,make){
                 Character3._element.title = Datas[5];
                 Character3._element.src = conversion_url(Datas[5],"画像");
                 if(Pose.split("→")[1]>0){
+                  Character3.width = width/16*9;
+                  Character3.height = width/16*9;
                   Character3.width*=Pose.split("→")[1];
                   Character3.height*=Pose.split("→")[1];
                 }
                 else{
+                  Character3.width = width/16*9;
+                  Character3.height = width/16*9;
                   Character3.width*=-Pose.split("→")[1];
                   Character3.height*=-Pose.split("→")[1];
                   Character3.scaleX = -1;
                 }
-                Character3.x = (width-Character3.width)/2-width/4;
+                Character3.x = (width-Character3.width)/2+width/4;
                 if(Pose.split("→")[2]) Character3.y =  Pose.split("→")[2]*(width/16/100);
                 console.log("右のキャラを"+Datas[5]+"に変更");
               }
