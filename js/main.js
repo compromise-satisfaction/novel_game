@@ -4381,7 +4381,7 @@ function Game_load(width,height,private,Manager,make){
       Text[submits]._element.value = a;
       Text[submits].backgroundColor = "buttonface";
       if(a) scene.addChild(Text[submits]);
-      if(have(a)){
+      if(have(b)){
         Text[submits]._element.value += " ✓";
         Text[submits].backgroundColor = "red";
       }
