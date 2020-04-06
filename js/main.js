@@ -4392,13 +4392,11 @@ function Game_load(width,height,private,Manager,make){
           case "やめとく":
             var ooo = "戻る";
             break;
-          case "アイテム":
-            var ooo = "メニュー";
-            break;
           default:
             var ooo = "選択音";
             break;
         }
+        if(b == "アイテム") ooo = "メニュー";
         if(Button_push(ooo)) return;
         if (b == "アイテム"){
           game.pushScene(ItemScene(Datas[6],"日常","アイテム",a));
