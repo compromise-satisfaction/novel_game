@@ -5764,10 +5764,12 @@ function Game_load(width,height,private,Manager,make){
               Item_image.height = Item_image.width;
               scene.addChild(Item_image);
               Button[this.ナンバー].backgroundColor = "red";
-              if(f[3]&&Number!="調べる何もない"&&"移動"+Number!=f[4]){
+              if(f[3]&&"移動"+Number!=f[4]){
                 Button[3]._element.value = f[3];
                 Button[3].詳細 = f[4];
-                scene.addChild(Button[3]);
+                if(Number!="調べる何もない"||f[4].substring(0,2)!="移動"){
+                  scene.addChild(Button[3]);
+                }
               }
               else scene.removeChild(Button[3]);
               if(Ig){
