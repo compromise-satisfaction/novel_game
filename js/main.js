@@ -4399,7 +4399,8 @@ function Game_load(width,height,private,Manager,make){
         if(b == "アイテム") ooo = "メニュー";
         if(Button_push(ooo)) return;
         if (b == "アイテム"){
-          game.pushScene(ItemScene(Datas[6],"日常","アイテム",a));
+          if(Datas[6]) game.pushScene(ItemScene(Datas[6],"日常","アイテム",a));
+          else game.pushScene(ItemScene(Number,"日常","アイテム",a));
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
         }
@@ -5622,7 +5623,9 @@ function Game_load(width,height,private,Manager,make){
       a = free(a);
       Button[submits]._element.value = a;
       if(a){
-        if((a=="設定を開く"&&Ig)==false&&a!="詳細") scene.addChild(Button[submits]);
+        if((a=="設定を開く"&&Ig)==false&&a!="詳細"){
+          scene.addChild(Button[submits]);
+        }
       }
       Button[submits]._element.onclick = function(e){
         switch (a) {
@@ -5761,7 +5764,7 @@ function Game_load(width,height,private,Manager,make){
               Item_image.height = Item_image.width;
               scene.addChild(Item_image);
               Button[this.ナンバー].backgroundColor = "red";
-              if(f[3]){
+              if(f[3]&&Number!="調べる何もない"&&"移動"+Number!=f[4]){
                 Button[3]._element.value = f[3];
                 Button[3].詳細 = f[4];
                 scene.addChild(Button[3]);
