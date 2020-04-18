@@ -1064,8 +1064,6 @@ function Game_load(width,height,private,Manager,make){
       default:
         break;
     }
-    if(Datas[0]) var HAIKEI = true;
-    else var HAIKEI = false;
     Datas = [];
     game.fps = 10;
     Setting_Flag[3] = game.fps;
@@ -1289,10 +1287,15 @@ function Game_load(width,height,private,Manager,make){
         else{
           if(Move_DATAS[i].移動){
             Moves = Move_DATAS[i].移動先;
-            if(HAIKEI) game.pushScene(MoveScene(10));
-            else{
+            HAIKEI = Move_DATAS[i].移動
+            if(HAIKEI=="in"){
               Scene_loads(Moves,false,false);
               game.pushScene(MoveScene(-10));
+              Scene_kazu++;
+              console.log("Scene数",Scene_kazu);
+            }
+            else{
+              game.pushScene(MoveScene(10));
               Scene_kazu++;
               console.log("Scene数",Scene_kazu);
             }
@@ -4267,7 +4270,7 @@ function Game_load(width,height,private,Manager,make){
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
           Scene_loads(Moves,false,false);
-          if(Datas[0]){
+          if(HAIKEI=="out"){
             game.pushScene(MoveScene(-10));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
