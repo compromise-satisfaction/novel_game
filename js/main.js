@@ -1064,6 +1064,7 @@ function Game_load(width,height,private,Manager,make){
       default:
         break;
     }
+    HAIKEI = true;
     Datas = [];
     game.fps = 10;
     Setting_Flag[3] = game.fps;
