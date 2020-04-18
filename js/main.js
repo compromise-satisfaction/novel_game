@@ -4271,7 +4271,7 @@ function Game_load(width,height,private,Manager,make){
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
           Scene_loads(Moves,false,false);
-          if(HAIKEI=="out"){
+          if(HAIKEI!="out"){
             game.pushScene(MoveScene(-10));
             Scene_kazu++;
             console.log("Scene数",Scene_kazu);
