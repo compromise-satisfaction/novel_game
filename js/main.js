@@ -3908,6 +3908,7 @@ function Game_load(width,height,private,Manager,make){
     function Button(a,b,c){
       Buttons[a] = new Entity();
       if(a==5) Buttons[a].moveTo((width/5)*3,height-(width/5));
+      else if(a==6) Buttons[a].moveTo((width/5)*4,height-(width/5));
       else Buttons[a].moveTo((width/5)*a,height-(width/5));
       Buttons[a].width = (width/5);
       Buttons[a].height = (width/5);
@@ -3917,7 +3918,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a].backgroundColor = "buttonface";
       scene.addChild(Buttons[a]);
       Buttons[a]._element.onclick = function(e){
-        if(a==5||b=="アイテム") var ooo = "メニュー";
+        if(a==5||a==6||b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
         if(Button_push(ooo)) return;
         if(a==2){
@@ -3952,15 +3953,26 @@ function Game_load(width,height,private,Manager,make){
           Scene_kazu++;
           console.log("Scene数",Scene_kazu);
         }
+        else if(a==6){
+          game.pushScene(ItemScene(Datas[11],"日常","アイテム",c));
+          Scene_kazu++;
+          console.log("Scene数",Scene_kazu);
+        }
         else Scene_loads(c,true,false);
       };
     }
-    if(Datas[9]!=false) Button(0,"早戻し",Datas[9]);//戻る1
+    if(Datas[9]!=false){
+      if(Datas[9].split("→")[1]) Button(0,Datas[9].split("→")[0],Datas[9].split("→")[1]);//戻る1
+      else Button(0,"早戻し",Datas[9]);//戻る1
+    }
     if(Datas[10]!=false) Button(1,"前",Datas[10]);//戻る2
     if(Datas[11]!=false) Button(2,"アイテム",Datas[11]);//設定
     if(Datas[12]!=false&&Play) Button(3,"次",Datas[12]);//進む1
     if(Datas[13]!=false){
-      if(have(Play_Sheet+Datas[13]+"プレイ済み")&&Datas[12]!=Datas[13]){
+      if(Datas[13].split("アイテムを")[1]){
+        Button(6,Datas[13].split("アイテムを")[1],Datas[13].split("アイテムを")[1]);//戻る1
+      }
+      else if(have(Play_Sheet+Datas[13]+"プレイ済み")&&Datas[12]!=Datas[13]){
         Button(4,"スキップ",Datas[13]);//進む2
       }
       else{
