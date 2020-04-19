@@ -3114,7 +3114,7 @@ function Game_load(width,height,private,Manager,make){
     T_time._element.textContent = Conversion_Time(new Date());
     T_time.x = width/2.5;
     T_time.y = width/16*9+width/25;
-    scene.addChild(T_time);//時間表示(無駄)
+    if(Setting_Flag[19].indexOf("時間表示")>=0) scene.addChild(T_time);//時間表示(無駄)
 
     T_time.addEventListener("enterframe",function(){
       T_time._element.textContent = Conversion_Time(new Date());
