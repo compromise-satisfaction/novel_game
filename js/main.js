@@ -61,6 +61,7 @@ function Game_load(width,height,private,Manager,make){
   var Showing_name = "表示名";
   var Save_Data_Number = "";
   var M_M = 0;
+  HAIKEI = true;
   if(Manager) var Title_Sheet = "170Ui3JDGJRt-VARJnWb19Drmy14gkp-pReAN-BTSjGI";
   else var Title_Sheet = window.localStorage.getItem("Title_Sheet");//これはいい
 
@@ -4472,7 +4473,8 @@ function Game_load(width,height,private,Manager,make){
           game.popScene();
           Scene_kazu--;
           console.log("Scene数",Scene_kazu);
-          Scene_loads(Moves,false,false);
+          if(HAIKEI=="MAP") game.replaceScene(MapScene(-10));
+          else Scene_loads(Moves,false,false);
           if(HAIKEI!="out"){
             game.pushScene(MoveScene(-10));
             Scene_kazu++;
