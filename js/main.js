@@ -111,6 +111,10 @@ function Game_load(width,height,private,Manager,make){
   }
   function Datas_load(ID,Type,test){
     if(Type=="セーブデータ読み込み"){
+      if(Number.split("MAP→")[1]){
+        HAIKEI = "MAP";
+        Number = Number.split("MAP→")[1];
+      }
       if(Play_Sheet==Play_Sheet2){
         Moves = Number;
         game.pushScene(MoveScene(10));
@@ -1592,6 +1596,8 @@ function Game_load(width,height,private,Manager,make){
 
     var Make_datas = [];
 
+    if(HAIKEI!="MAP"){
+
     switch (make_data.タイプ) {
       case "メイン":
         Make_datas[Make_datas.length] = [make_data.入手.replace(/↓/g,"\n"),"入手"];
@@ -2267,7 +2273,17 @@ function Game_load(width,height,private,Manager,make){
     for (var i = 0; i < Make_datas.length; i++) {
       M_Texts(Make_datas[i][1],S_Input[i].y,i);
     }
-
+  }
+    else{
+      var S_Input = new Entity();
+      S_Input.moveTo(width,0);
+      S_Input._element = document.createElement('textarea');
+      S_Input._element.value = make_data;
+      S_Input._element.placeholder = "マップを入力";
+      S_Input.width = width;
+      S_Input.height = width;
+      scene.addChild(S_Input);
+    }
     return;
   }
   var MapScene = function(MAPDATAS){
@@ -2376,7 +2392,7 @@ function Game_load(width,height,private,Manager,make){
       [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1],
       [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1]
     ];
-    console.log(map.width);
+    M_M = map._data;
     var foregroundMap = new Map(16, 16);
     foregroundMap.image = game.assets['../画像/map1.gif'];
     foregroundMap.loadData(
@@ -2503,7 +2519,7 @@ function Game_load(width,height,private,Manager,make){
       Buttons[a]._element.type = "submit";
       Buttons[a]._element.value = b;
       Buttons[a].backgroundColor = "buttonface";
-      //scene.addChild(Buttons[a]);
+      scene.addChild(Buttons[a]);
       Buttons[a]._element.onclick = function(e){
         if(a==5||a==6||b=="アイテム") var ooo = "メニュー";
         else var ooo = "進む";
@@ -2548,8 +2564,8 @@ function Game_load(width,height,private,Manager,make){
         else Scene_loads(c,true,false);
       };
     }
-    Button(2,"アイテム","マップ01");//設定
-
+    Button(2,"アイテム","MAP→マップ01");//設定
+    if(make) makes(M_M,scene);
     return scene;
   };
   var Save_ChoiceScene = function(Load){
@@ -6075,7 +6091,7 @@ function Game_load(width,height,private,Manager,make){
               if(f[3]&&"移動"+Number!=f[4]){
                 Button[3]._element.value = f[3];
                 Button[3].詳細 = f[4];
-                if(Number!="調べる何もない"||f[4].substring(0,2)!="移動"){
+                if(HAIKEI!="MAP"&&(Number!="調べる何もない"||f[4].substring(0,2)!="移動")){
                   scene.addChild(Button[3]);
                 }
               }
